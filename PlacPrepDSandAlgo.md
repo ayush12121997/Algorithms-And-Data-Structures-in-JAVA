@@ -44,6 +44,7 @@ class Reader
     }
 }
 ```
+<a href="#top">Back to top</a>
 
 <a name="paragraph1"></a>
 ## Some paragraph
