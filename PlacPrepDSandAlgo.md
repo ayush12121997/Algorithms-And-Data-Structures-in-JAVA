@@ -1,5 +1,6 @@
 # Placement Preparation Data Structures and Algorithms
 
+<a name="Contents"></a>
 ## Table of contents
 1. [Reader Class](#ReaderClass)
 2. [Some paragraph](#paragraph1)
@@ -44,7 +45,7 @@ class Reader
     }
 }
 ```
-<a href="#top">Back to top</a>
+<a href="#Contents">Back to contents</a>
 
 <a name="paragraph1"></a>
 ## Some paragraph
