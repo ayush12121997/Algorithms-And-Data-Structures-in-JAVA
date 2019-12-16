@@ -8,21 +8,29 @@
 <a name="ReaderClass"></a>
 ## Reader Class for Java
 ```java
-class GfG
+class Reader
 {
-    void printPat(int n)
+    static BufferedReader reader;
+    static StringTokenizer tokenizer;
+    
+    static void init(InputStream input)
     {
-        for(int i = n; i > 0; i--)
+        reader = new BufferedReader(new InputStreamReader(input));
+        tokenizer = new StringTokenizer("");
+    }
+    
+    static String next() throws IOException
+    {
+        while(!tokenizer.hasMoreTokens())
         {
-            for(int j = n; j > 0; j--)
-            {
-                for(int k = 0; k< i; k++)
-                {
-                    System.out.print(j + " ");
-                }
-            }
-            System.out.print("$");
+            tokenizer  = new StringTokenizer(reader.readLine());
         }
+        return tokenizer.nextToken();
+    }
+    
+    static int nextInt() throws IOException
+    {
+        return Integer.parseInt(next());
     }
 }
 ```
@@ -34,24 +42,3 @@ The first paragraph text
 <a name="paragraph2"></a>
 ## Another paragraph
 The second paragraph text
-
-## Reader Class for Java
-```java
-class GfG
-{
-    void printPat(int n)
-    {
-        for(int i = n; i > 0; i--)
-        {
-            for(int j = n; j > 0; j--)
-            {
-                for(int k = 0; k< i; k++)
-                {
-                    System.out.print(j + " ");
-                }
-            }
-            System.out.print("$");
-        }
-    }
-}
-```
