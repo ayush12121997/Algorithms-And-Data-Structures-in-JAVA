@@ -23,7 +23,7 @@ class Reader
     {
         while(!tokenizer.hasMoreTokens())
         {
-            tokenizer  = new StringTokenizer(reader.readLine());
+            tokenizer = new StringTokenizer(reader.readLine());
         }
         return tokenizer.nextToken();
     }
@@ -31,6 +31,16 @@ class Reader
     static int nextInt() throws IOException
     {
         return Integer.parseInt(next());
+    }
+    
+    static long nextLong() throws IOException
+    {
+        return Long.parseLong(next());
+    }
+    
+    static double nextDouble() throws IOException
+    {
+        return Double.parseDouble(next());
     }
 }
 ```
