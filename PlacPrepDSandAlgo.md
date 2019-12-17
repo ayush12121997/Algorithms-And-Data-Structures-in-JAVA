@@ -3,7 +3,8 @@
 <a name="Contents"></a>
 ## Table of contents
 1. [Reader Class](#ReaderClass)
-2. [Square Root](#SquareRoot)
+2. [Import Statements](#Imports)
+3. [Square Root](#SquareRoot)
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -43,6 +44,15 @@ class Reader
         return Double.parseDouble(next());
     }
 }
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="Import"></a>
+## Import Statements
+```java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
 ```
 <a href="#Contents">Back to contents</a>
 
