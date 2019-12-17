@@ -47,7 +47,7 @@ class Reader
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="Import"></a>
+<a name="Imports"></a>
 ## Import Statements
 ```java
 import java.io.*;
