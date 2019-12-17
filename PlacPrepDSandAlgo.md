@@ -3,8 +3,7 @@
 <a name="Contents"></a>
 ## Table of contents
 1. [Reader Class](#ReaderClass)
-2. [Some paragraph](#paragraph1)
-3. [Another paragraph](#paragraph2)
+2. [Square Root](#SquareRoot)
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -47,10 +46,9 @@ class Reader
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="paragraph1"></a>
-## Some paragraph
-The first paragraph text
-
-<a name="paragraph2"></a>
-## Another paragraph
-The second paragraph text
+<a name="SquareRoot"></a>
+## Square Root
+```java
+Math.sqrt(n);
+```
+<a href="#Contents">Back to contents</a>
