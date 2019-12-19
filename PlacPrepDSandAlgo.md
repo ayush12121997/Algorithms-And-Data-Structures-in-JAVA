@@ -68,22 +68,23 @@ Math.sqrt(n);
 ## Sieve of Erastothenes
 Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N*log(log(N))).
 ```java
-void sieveOfEratosthenes(int n) 
-    { 
-     
-        boolean prime[] = new boolean[n+1]; 
-        for(int i=0;i<n;i++) 
+void sieveOfEratosthenes(int n)
+{
+    boolean prime[] = new boolean[n+1];
+    for(int i=0;i<n;i++) 
+    {
+        prime[i] = true;
+    }
+    for(int p = 2; p*p <=n; p++) 
+    {
+        if(prime[p] == true) 
+        {
+            for(int i = p*p; i <= n; i += p) 
             {
-            prime[i] = true; 
-          }
-        for(int p = 2; p*p <=n; p++) 
-        { 
-            if(prime[p] == true) 
-            { 
-             for(int i = p*p; i <= n; i += p) 
-                    prime[i] = false; 
+                prime[i] = false; 
             } 
         }
-    } 
+    }
+}
 ```
 <a href="#Contents">Back to contents</a>
