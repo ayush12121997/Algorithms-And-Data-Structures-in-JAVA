@@ -5,6 +5,7 @@
 1. [Reader Class](#ReaderClass)
 2. [Import Statements](#Imports)
 3. [Square Root](#SquareRoot)
+4. [Sieve of Eratosthenes](#SieveOfErast)
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -58,6 +59,14 @@ import java.util.*;
 
 <a name="SquareRoot"></a>
 ## Square Root
+```java
+Math.sqrt(n);
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="SieveOfErast"></a>
+## Sieve of Erastothenes
+Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N*log(log(N))).
 ```java
 Math.sqrt(n);
 ```
