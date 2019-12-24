@@ -6,7 +6,7 @@
 2. [Import Statements](#Imports)
 3. [Square Root](#SquareRoot)
 4. [Sieve of Eratosthenes](#SieveOfErast)
-5. [Properties of a Square](#Check if points form a square)
+5. [Properties of a Square](#CheckIfSquare)
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -90,7 +90,7 @@ void sieveOfEratosthenes(int n)
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="SieveOfErast"></a>
+<a name="CheckIfSquare"></a>
 ## Properties of a Square
 - All sides of a square are equal in length say, a.
 - The length of the diagonal of a square is sqrt(2)*a.
