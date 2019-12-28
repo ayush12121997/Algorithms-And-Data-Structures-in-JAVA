@@ -1,4 +1,4 @@
-# Placement Preparation Data Structures and Algorithms
+# Data Structures and Algorithms
 
 <a name="Contents"></a>
 ## Table of contents
