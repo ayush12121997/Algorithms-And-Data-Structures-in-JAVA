@@ -7,6 +7,7 @@
 3. [Square Root](#SquareRoot)
 4. [Sieve of Eratosthenes](#SieveOfErast)
 5. [Properties of a Square](#CheckIfSquare)
+6. [Finding single element in Array](#FindSingle)
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -96,4 +97,22 @@ void sieveOfEratosthenes(int n)
 - The length of the diagonal of a square is sqrt(2)*a.
 - The distance between two points is sqrt((x2-x1)^2 + (y2-y1)^2).
 
+<a href="#Contents">Back to contents</a>
+
+<a name="FindSingle"></a>
+## Find single element in Array where every other element comes twice
+- Use the XOR property of bit manipulation.
+- a XOR a = 0
+- 0 XOR a = a
+```java
+int check(int[] nums)
+{
+    int a = 0;
+    for(int i = 0; i < nums.length; i++)
+    {
+        a ^= nums[i];
+    }
+    return a;
+}
+```
 <a href="#Contents">Back to contents</a>
