@@ -94,7 +94,7 @@ void sieveOfEratosthenes(int n)
 <a name="CheckIfSquare"></a>
 ## Properties of a Square
 - All sides of a square are equal in length say, a.
-- The length of the diagonal of a square is sqrt(2)*a.
+- The length of the diagonal of a square is sqrt(2)*a  \sqrt{k}.
 - The distance between two points is <img src="DistanceBetweenPoints.PNG" height="30">
 
 <a href="#Contents">Back to contents</a>
