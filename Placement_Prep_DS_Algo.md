@@ -2,12 +2,12 @@
 
 <a name="Contents"></a>
 ## Table of contents
-1. [Reader Class](#ReaderClass)
-2. [Import Statements](#Imports)
-3. [Square Root](#SquareRoot)
-4. [Sieve of Eratosthenes](#SieveOfErast)
-5. [Properties of a Square](#CheckIfSquare)
-6. [Finding single element in Array](#FindSingle)
+1. [Reader class](#ReaderClass)
+2. [Import statements](#Imports)
+3. [Square root](#SquareRoot)
+4. [Sieve of eratosthenes](#SieveOfErast)
+5. [Properties of a square](#CheckIfSquare)
+6. [Finding single element in array of pairs](#FindSingle)
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -67,7 +67,7 @@ Math.sqrt(n);
 <a href="#Contents">Back to contents</a>
 
 <a name="SieveOfErast"></a>
-## Sieve of Erastothenes
+## Sieve of Erastothenes (Find prime numbers upto a given number)
 Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N*log(log(N))).
 ```java
 void sieveOfEratosthenes(int n)
@@ -100,7 +100,7 @@ void sieveOfEratosthenes(int n)
 <a href="#Contents">Back to contents</a>
 
 <a name="FindSingle"></a>
-## Find single element in Array where every other element comes twice
+## Find single element in an arrray where every other element comes twice
 - Use the XOR property of bit manipulation.
 - a XOR a = 0
 - 0 XOR a = a
