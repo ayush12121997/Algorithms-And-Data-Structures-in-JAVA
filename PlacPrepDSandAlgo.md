@@ -117,4 +117,4 @@ int check(int[] nums)
 ```
 <a href="#Contents">Back to contents</a>
 
-<img src="haha-facebook-facebook-haha-icon-115631286864te9fco2mv.png" width="100">
+<img src="haha-facebook-facebook-haha-icon-115631286864te9fco2mv.png" width="100" align="center">
