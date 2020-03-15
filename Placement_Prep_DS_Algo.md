@@ -9,7 +9,7 @@
 5. [Properties of a square](#CheckIfSquare)
 6. [Finding single element in array of pairs](#FindSingle)
 7. [Arrays](#Arrays)
-    - Basic Concepts (#Arrays_BasicConcepts)
+    - [Basic Concepts](#Arrays_BasicConcepts)
     - Sorting
 8. [Something]
 
