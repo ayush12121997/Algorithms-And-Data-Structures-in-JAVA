@@ -126,5 +126,8 @@ int check(int[] nums)
 ### Basic Concepts
 - Lookup : O(1)
 - Update : O(1)
-
+```java
+ArrayList<Integer> arr = new ArrayList<Integer>(); //Empty size
+ArrayList<Integer> arr = new ArrayList<Integer>(10); //10 size
+```
 <a href="#Contents">Back to contents</a>
