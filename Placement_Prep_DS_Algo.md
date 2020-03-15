@@ -129,5 +129,10 @@ int check(int[] nums)
 ```java
 ArrayList<Integer> arr = new ArrayList<Integer>(); //Empty size
 ArrayList<Integer> arr = new ArrayList<Integer>(10); //10 size
+arr.get(i); //Get value at index i in O(1)
+arr.set(i, value); //Set value at index i in O(1)
+arr.size(); //Get array size in O(1)
+arr.add(value); //Add value at end of array in O(1)
+arr.add(i, value); //Add value at index i in O(size - i)
 ```
 <a href="#Contents">Back to contents</a>
