@@ -123,6 +123,7 @@ int check(int[] nums)
 
 <a name="Arrays"></a>
 ## Arrays
+### Basic Concepts
 - Constant time lookup
 - Constant time update
 
