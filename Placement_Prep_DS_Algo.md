@@ -9,7 +9,7 @@
 5. [Properties of a square](#CheckIfSquare)
 6. [Finding single element in array of pairs](#FindSingle)
 7. [Arrays](#Arrays)
-    - Basic Concepts
+    - Basic Concepts (#Arrays_BasicConcepts)
     - Sorting
 8. [Something]
 
@@ -123,6 +123,7 @@ int check(int[] nums)
 
 <a name="Arrays"></a>
 ## Arrays
+<a name="Arrays_BasicConcepts"></a>
 ### Basic Concepts
 - Lookup : O(1)
 - Update : O(1)
