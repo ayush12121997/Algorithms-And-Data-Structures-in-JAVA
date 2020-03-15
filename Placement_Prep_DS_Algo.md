@@ -124,7 +124,7 @@ int check(int[] nums)
 <a name="Arrays"></a>
 ## Arrays
 ### Basic Concepts
-- Constant time lookup
-- Constant time update
+- Lookup : O(1)
+- Update : O(1)
 
 <a href="#Contents">Back to contents</a>
