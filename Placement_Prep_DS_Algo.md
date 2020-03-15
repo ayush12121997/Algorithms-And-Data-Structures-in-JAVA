@@ -9,8 +9,8 @@
 5. [Properties of a square](#CheckIfSquare)
 6. [Finding single element in array of pairs](#FindSingle)
 7. [Arrays](#Arrays)
-  - Basic Concepts
-  - Sorting
+    - Basic Concepts
+    - Sorting
 8. [Something]
 
 <a name="ReaderClass"></a>
@@ -125,4 +125,5 @@ int check(int[] nums)
 ## Arrays
 - Constant time lookup
 - Constant time update
+
 <a href="#Contents">Back to contents</a>
