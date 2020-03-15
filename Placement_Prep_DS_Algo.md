@@ -8,6 +8,10 @@
 4. [Sieve of eratosthenes](#SieveOfErast)
 5. [Properties of a square](#CheckIfSquare)
 6. [Finding single element in array of pairs](#FindSingle)
+7. [Arrays](#Arrays)
+  - Basic Concepts
+  - Sorting
+8. [Something]
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -115,4 +119,10 @@ int check(int[] nums)
     return a;
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Arrays"></a>
+## Arrays
+- Constant time lookup
+- Constant time update
 <a href="#Contents">Back to contents</a>
