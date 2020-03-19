@@ -10,7 +10,7 @@
 6. [Finding single element in array of pairs](#FindSingle)
 7. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
-    - Sorting
+    - [Bubble Sort](#Arrays_BubbleSort)
 8. [Something]
 
 <a name="ReaderClass"></a>
@@ -135,5 +135,35 @@ arr.set(i, value); //Set value at index i in O(1)
 arr.size(); //Get array size in O(1)
 arr.add(value); //Add value at end of array in O(1)
 arr.add(i, value); //Add value at index i in O(size - i)
+```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_BubbleSort"></a>
+### Bubble Sort
+- Best Case : O(n)
+- Average Case : O(n^2)
+- Worst Case : O(n^2)
+```java
+public int[] BubbleSort(int[] a)
+{
+    for(int i = 0; i < n - 1; i++)
+    {
+        boolean flag = false;
+        for(int j = 0; j < n - 1; j++)
+        {
+            if(a[j-1] > a[j])
+            {
+                int temp = a[j-1];
+                a[j-1] = a[j];
+                a[j] = temp;
+                flag = true;
+            }
+        }
+        if(!flag)
+        {
+            break;
+        }
+    }
+    return a;
+}
 ```
 <a href="#Contents">Back to contents</a>
