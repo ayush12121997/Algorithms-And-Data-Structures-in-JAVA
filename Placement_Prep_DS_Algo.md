@@ -10,6 +10,7 @@
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
+    - [Insertion Sort](#Arrays_InsertionSort)
 6. [Something]
 
 <a name="ReaderClass"></a>
@@ -187,6 +188,33 @@ public int[] SelectionSort(int[] a)
         a[i] = temp;
     }
     return a;
+}
+```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_InsertionSort"></a>
+### Insertion Sort
+- Best Case : O(n)
+- Average Case : O(n^2)
+- Worst Case : O(n^2)
+- Number of comparisons(Best case) : (n-1)(n)/2
+- Number of comparisons(Worst case) : (n-1)(n)/2
+- Space complexity : O(1)
+```java
+public int[] InsertionSort(int[] arr)
+{
+    int n = arr.length;
+    for (int i = 1; i < n; i++)
+    {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key)
+        {
+            arr[j+1] = arr[j];
+            j = j-1;
+        }
+        arr[j+1] = key;
+    }
+    return arr;
 }
 ```
 <a href="#Contents">Back to contents</a>
