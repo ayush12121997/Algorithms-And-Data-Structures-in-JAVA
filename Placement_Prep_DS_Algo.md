@@ -11,6 +11,7 @@
 7. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
+    - [selection Sort](#Arrays_SelectionSort)
 8. [Something]
 
 <a name="ReaderClass"></a>
@@ -166,6 +167,37 @@ public int[] BubbleSort(int[] a)
         {
             break;
         }
+    }
+    return a;
+}
+```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_SelectionSort"></a>
+### Selection Sort
+- Best Case : O(n)
+- Average Case : O(n^2)
+- Worst Case : O(n^2)
+- Number of comparisons(Best case) : (n-1)(n)/2
+- Number of comparisons(Worst case) : (n-1)(n)/2
+```java
+public int[] SelectionSort(int[] a)
+{
+    int n = a.length;
+    for(int i = 0; i < n- 1; i++)
+    {
+        int min_ind = i;
+        int min = a[i];
+        for(int j = i + 1; j < n; j++)
+        {
+            if(a[j] < min)
+            {
+                min = a[j];
+                min_ind = j;
+            }
+        }
+        int temp = a[min_ind];
+        a[min_ind] = a[i];
+        a[i] = temp;
     }
     return a;
 }
