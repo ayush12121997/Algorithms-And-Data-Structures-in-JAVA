@@ -145,6 +145,7 @@ arr.add(i, value); //Add value at index i in O(size - i)
 ```java
 public int[] BubbleSort(int[] a)
 {
+    int temp = 0;
     for(int i = 0; i < n - 1; i++)
     {
         boolean flag = false;
@@ -152,7 +153,7 @@ public int[] BubbleSort(int[] a)
         {
             if(a[j-1] > a[j])
             {
-                int temp = a[j-1];
+                temp = a[j-1];
                 a[j-1] = a[j];
                 a[j] = temp;
                 flag = true;
