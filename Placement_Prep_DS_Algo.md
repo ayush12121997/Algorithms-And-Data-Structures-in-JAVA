@@ -3,20 +3,21 @@
 <a name="Contents"></a>
 ## Table of contents
 1. [Reader class](#ReaderClass)
-2. [Import statements](#Imports)
-3. [Square root](#SquareRoot)
-4. [Sieve of eratosthenes](#SieveOfErast)
-5. [Properties of a square](#CheckIfSquare)
-6. [Finding single element in array of pairs](#FindSingle)
-7. [Arrays](#Arrays)
+2. [Sieve of eratosthenes](#SieveOfErast)
+3. [Properties of a square](#CheckIfSquare)
+4. [Finding single element in array of pairs](#FindSingle)
+5. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
-8. [Something]
+6. [Something]
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
 ```java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
 class Reader
 {
     static BufferedReader reader;
@@ -52,22 +53,6 @@ class Reader
         return Double.parseDouble(next());
     }
 }
-```
-<a href="#Contents">Back to contents</a>
-
-<a name="Imports"></a>
-## Import Statements
-```java
-import java.io.*;
-import java.lang.*;
-import java.util.*;
-```
-<a href="#Contents">Back to contents</a>
-
-<a name="SquareRoot"></a>
-## Square Root
-```java
-Math.sqrt(n);
 ```
 <a href="#Contents">Back to contents</a>
 
