@@ -11,7 +11,7 @@
 7. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
-    - [selection Sort](#Arrays_SelectionSort)
+    - [Selection Sort](#Arrays_SelectionSort)
 8. [Something]
 
 <a name="ReaderClass"></a>
@@ -145,6 +145,7 @@ arr.add(i, value); //Add value at index i in O(size - i)
 - Worst Case : O(n^2)
 - Number of comparisons(Best case) : n-1
 - Number of comparisons(Worst case) : (n-1)(n)/2
+- Space complexity : O(1)
 ```java
 public int[] BubbleSort(int[] a)
 {
@@ -179,6 +180,7 @@ public int[] BubbleSort(int[] a)
 - Worst Case : O(n^2)
 - Number of comparisons(Best case) : (n-1)(n)/2
 - Number of comparisons(Worst case) : (n-1)(n)/2
+- Space complexity : O(1)
 ```java
 public int[] SelectionSort(int[] a)
 {
