@@ -142,6 +142,8 @@ arr.add(i, value); //Add value at index i in O(size - i)
 - Best Case : O(n)
 - Average Case : O(n^2)
 - Worst Case : O(n^2)
+- Number of comparisons(Best case) : n-1
+- Number of comparisons(Worst case) : (n-1)(n)/2
 ```java
 public int[] BubbleSort(int[] a)
 {
