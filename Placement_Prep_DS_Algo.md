@@ -11,6 +11,7 @@
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
     - [Insertion Sort](#Arrays_InsertionSort)
+    - [Merge Sort](#Arrays_MergeSort)
 6. [Something]
 
 <a name="ReaderClass"></a>
@@ -215,6 +216,70 @@ public int[] InsertionSort(int[] arr)
         arr[j+1] = key;
     }
     return arr;
+}
+```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_MergeSort"></a>
+### Merge Sort
+- Best Case : O(nlog(n))
+- Average Case : O(nlog(n))
+- Worst Case : O(nlog(n))
+- Number of comparisons(Best case) : nlogn(n)
+- Number of comparisons(Worst case) : nlogn(n)
+- Space complexity : O(n)
+```java
+public void MergeSort(int[] arr, int start, int end)
+{
+    if(start>end)
+    {
+        int mid = (start + end)/2;
+        MergeSort(arr, start, mid);
+        MergeSort(arr, mid + 1, end);
+        Merge(arr, start, mid, end);
+    }
+}
+
+public Merge(int[] arr, int start, int mid, int end)
+{
+    int[] temp = new int[end - start + 1];
+    int i = start;
+    int j = mid + 1;
+    int k = 0;
+    while(i <= mid && j <= end)
+    {
+        if(arr[i] <= arr[j])
+        {
+            temp[k] = arr[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            temp[k] = arr[j];
+            k++;
+            j++;
+        }
+    }
+    
+    while(i <= mid)
+    {
+        temp[k] = arr[i];
+        k++;
+        i++;
+    }
+    
+    
+    while(j <= end)
+    {
+        temp[k] = arr[i];
+        k++;
+        i++;
+    }
+    
+    for(int m = start; m <= end; m++)
+    {
+        arr[m] = temp[m-start];
+    }
 }
 ```
 <a href="#Contents">Back to contents</a>
