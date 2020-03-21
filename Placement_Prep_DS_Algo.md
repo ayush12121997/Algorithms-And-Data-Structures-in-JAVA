@@ -295,7 +295,7 @@ public static int BinarySearch(int[] arr, int start, int end, int value)
 {
     if(start > end)
     {
-	    return -1;
+    	return -1;
 	}
 	int mid = (start + end)/2;
 	if(arr[mid] == value)
