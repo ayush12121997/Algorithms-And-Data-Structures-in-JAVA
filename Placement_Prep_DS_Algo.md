@@ -293,8 +293,8 @@ public Merge(int[] arr, int start, int mid, int end)
 ```java
 public static int BinarySearch(int[] arr, int start, int end, int value)
 {
-	if(start > end)
-	{
+    if(start > end)
+    {
 	    return -1;
 	}
 	int mid = (start + end)/2;
@@ -306,8 +306,8 @@ public static int BinarySearch(int[] arr, int start, int end, int value)
 	{
 	    return BinarySearch(arr, start, mid - 1, value);
 	}
-    	else
-    	{
+    else
+    {
 	    return BinarySearch(arr, mid + 1, end, value);
 	}
 }
