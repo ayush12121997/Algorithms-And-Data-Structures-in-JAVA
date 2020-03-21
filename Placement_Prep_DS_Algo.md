@@ -291,24 +291,24 @@ public Merge(int[] arr, int start, int mid, int end)
 - Worst Case : O(log(n))
 - Space complexity : O(1)
 ```java
-public static int BinarySearch(int[] arr, int start, int end, int value)
+public int BinarySearch(int[] arr, int start, int end, int value)
 {
-    if(start > end)
-    {
-    	return -1;
+	if(start > end)
+	{
+		return -1;
 	}
 	int mid = (start + end)/2;
 	if(arr[mid] == value)
 	{
-	    return mid;
+		return mid;
 	}
 	else if(arr[mid] > value)
 	{
-	    return BinarySearch(arr, start, mid - 1, value);
+		return BinarySearch(arr, start, mid - 1, value);
 	}
-    else
-    {
-	    return BinarySearch(arr, mid + 1, end, value);
+	else
+	{
+		return BinarySearch(arr, mid + 1, end, value);
 	}
 }
 ```
