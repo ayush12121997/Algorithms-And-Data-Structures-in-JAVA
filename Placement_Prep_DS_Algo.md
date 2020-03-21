@@ -306,8 +306,8 @@ public static int BinarySearch(int[] arr, int start, int end, int value)
 	{
 	    return BinarySearch(arr, start, mid - 1, value);
 	}
-    else
-    {
+    	else
+    	{
 	    return BinarySearch(arr, mid + 1, end, value);
 	}
 }
