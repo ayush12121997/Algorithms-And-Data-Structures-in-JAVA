@@ -12,6 +12,7 @@
     - [Selection Sort](#Arrays_SelectionSort)
     - [Insertion Sort](#Arrays_InsertionSort)
     - [Merge Sort](#Arrays_MergeSort)
+    - [Binary Search](#Arrays_BinarySearch)
 6. [Something]
 
 <a name="ReaderClass"></a>
@@ -280,6 +281,35 @@ public Merge(int[] arr, int start, int mid, int end)
     {
         arr[m] = temp[m-start];
     }
+}
+```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_BinarySearch"></a>
+### Bianry Search
+- Best Case : O(1)
+- Average Case : O(log(n))
+- Worst Case : O(log(n))
+- Space complexity : O(1)
+```java
+public static int BinarySearch(int[] arr, int start, int end, int value)
+{
+	if(start > end)
+	{
+	    return -1;
+	}
+	int mid = (start + end)/2;
+	if(arr[mid] == value)
+	{
+	    return mid;
+	}
+	else if(arr[mid] > value)
+	{
+	    return BinarySearch(arr, start, mid - 1, value);
+	}
+    else
+    {
+	    return BinarySearch(arr, mid + 1, end, value);
+	}
 }
 ```
 <a href="#Contents">Back to contents</a>
