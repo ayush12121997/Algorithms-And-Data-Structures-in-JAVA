@@ -293,16 +293,16 @@ public Merge(int[] arr, int start, int mid, int end)
 ```java
 public int BinarySearch(int[] arr, int start, int end, int value)
 {
-	if(start > end)
+	if (start > end)
 	{
 		return -1;
 	}
-	int mid = (start + end)/2;
-	if(arr[mid] == value)
+	int mid = (start + end) / 2;
+	if (arr[mid] == value)
 	{
 		return mid;
 	}
-	else if(arr[mid] > value)
+	else if (arr[mid] > value)
 	{
 		return BinarySearch(arr, start, mid - 1, value);
 	}
