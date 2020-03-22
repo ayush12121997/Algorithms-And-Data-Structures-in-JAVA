@@ -392,6 +392,6 @@ This works in all cases as:
     - Let the number at a particular index already be arr(index) + ((arr(other index)%value) * value).
     - Now, the mod of this number will always be equal to arr(index) itself as the number ((arr(other index)%value) * value) % value = 0.
 	- Hence, the problem then becomes similar to case where an unchanged value is moved to another unchanged value.
-- ***Note: Only changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to changed indexes.***
+***Note: Only changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to changed indexes.***
 
 <a href="#Contents">Back to contents</a>
