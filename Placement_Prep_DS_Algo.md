@@ -14,7 +14,7 @@
     - [Merge Sort](#Arrays_MergeSort)
     - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
-    - [Merge two sorted arrays in no extra space](#Arrays_MergeTwo)
+    - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
 6. [Something]
 
 <a name="ReaderClass"></a>
