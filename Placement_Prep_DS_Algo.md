@@ -3,8 +3,8 @@
 <a name="Contents"></a>
 ## Table of contents
 1. [Reader class](#ReaderClass)
-4. [Finding single element in array of pairs](#FindSingle)
-5. [Arrays](#Arrays)
+2. [Faster printing using String Builder]
+3. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
@@ -14,8 +14,9 @@
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
     - [In place operations](#Arrays_InPlace)
-    - [Sieve of eratosthenes (Find prime numbers upto a given number)](#SieveOfErast)
-6. [Faster printing using String Builder]
+    - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Arrays_SieveOfErast)
+    - [Finding single element in array of pairs](#Arrays_FindSingle)
+4. 
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -57,32 +58,6 @@ class Reader
     {
         return Double.parseDouble(next());
     }
-}
-```
-<a href="#Contents">Back to contents</a>
-
-<a name="CheckIfSquare"></a>
-## Properties of a Square
-- All sides of a square are equal in length say, a.
-- The length of the diagonal of a square is sqrt(2)*a.
-- The distance between two points is <img src="images/DistanceBetweenPoints.png" height="30">
-
-<a href="#Contents">Back to contents</a>
-
-<a name="FindSingle"></a>
-## Find single element in an arrray where every other element comes twice
-- Use the XOR property of bit manipulation.
-- a XOR a = 0
-- 0 XOR a = a
-```java
-int check(int[] nums)
-{
-    int a = 0;
-    for(int i = 0; i < nums.length; i++)
-    {
-        a ^= nums[i];
-    }
-    return a;
 }
 ```
 <a href="#Contents">Back to contents</a>
@@ -238,22 +213,18 @@ public Merge(int[] arr, int start, int mid, int end)
             j++;
         }
     }
-    
     while(i <= mid)
     {
         temp[k] = arr[i];
         k++;
         i++;
     }
-    
-    
     while(j <= end)
     {
         temp[k] = arr[i];
         k++;
         i++;
     }
-    
     for(int m = start; m <= end; m++)
     {
         arr[m] = temp[m-start];
@@ -370,9 +341,9 @@ This works in all cases as:
 ***Note: Only changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to changed indexes.***
 
 <a href="#Contents">Back to contents</a>
-<a name="SieveOfErast"></a>
+<a name="Arrays_SieveOfErast"></a>
 ### Sieve of Erastothenes (Find prime numbers upto a given number)
-Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N*log(log(N))).
+Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N * log(log(N))).
 ```java
 void sieveOfEratosthenes(int n)
 {
@@ -391,6 +362,23 @@ void sieveOfEratosthenes(int n)
             } 
         }
     }
+}
+```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_FindSingle"></a>
+### Find single element in an arrray where every other element comes twice
+- Use the XOR property of bit manipulation.
+- a XOR a = 0
+- 0 XOR a = a
+```java
+int check(int[] nums)
+{
+    int a = 0;
+    for(int i = 0; i < nums.length; i++)
+    {
+        a ^= nums[i];
+    }
+    return a;
 }
 ```
 <a href="#Contents">Back to contents</a>
