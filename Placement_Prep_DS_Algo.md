@@ -270,33 +270,33 @@ public int BinarySearch(int[] arr, int start, int end, int value)
 public int[] KadaneAlgo(int[] arr)
 {
     int n = arr.length();
-	int localsum = 0;
-	int globalsum = 0;
-	int start = 0;
-	int end = 0;
-	for(int i = 0; i < n; i++)
-	{
-	    int c = arr[i];
-		if(c + localsum >= c)
-		{
-			localsum += c;
-		}
-		else
-		{
-		    localsum = c;
-			start = i;
-		}
-		if(localsum > globalsum)
-		{
-			globalsum = localsum,
-			end = i;
-		}
-	}
-	int[] ans = new int[3];
-	ans[0] = start;
-	ans[1] = end;
-	ans[2] = sum;
-	return ans;
+    int localsum = 0;
+    int globalsum = 0;
+    int start = 0;
+    int end = 0;
+    for(int i = 0; i < n; i++)
+    {
+        int c = arr[i];
+        if(c + localsum >= c)
+        {
+            localsum += c;
+        }
+        else
+        {
+            localsum = c;
+            start = i;
+        }
+        if(localsum > globalsum)
+        {
+            globalsum = localsum,
+            end = i;
+        }
+    }
+    int[] ans = new int[3];
+    ans[0] = start;
+    ans[1] = end;
+    ans[2] = sum;
+    return ans;
 }
 ```
 <a href="#Contents">Back to contents</a>
