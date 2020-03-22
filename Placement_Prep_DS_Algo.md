@@ -15,6 +15,7 @@
     - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
+	- [In place operations](#Arrays_InPlace)
 6. [Faster printing using String Builder]
 
 <a name="ReaderClass"></a>
@@ -378,4 +379,12 @@ public void merge(int[] arr1, int[] arr2)
     System.out.println(sbf);
 }
 ```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_InPlace"></a>
+### In place operations
+- If the maximum element of an array is known, pick any value greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr(i)%value) * value) to the new index.
+- This works in all cases as:
+  1. For move involving unchanged values:
+    - As value > maximum element of array, initially all arr(i)%value = arr(i).
+	- 
 <a href="#Contents">Back to contents</a>
