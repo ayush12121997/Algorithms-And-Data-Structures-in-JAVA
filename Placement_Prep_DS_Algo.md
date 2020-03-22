@@ -3,8 +3,6 @@
 <a name="Contents"></a>
 ## Table of contents
 1. [Reader class](#ReaderClass)
-2. [Sieve of eratosthenes](#SieveOfErast)
-3. [Properties of a square](#CheckIfSquare)
 4. [Finding single element in array of pairs](#FindSingle)
 5. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
@@ -16,6 +14,7 @@
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
     - [In place operations](#Arrays_InPlace)
+    - [Sieve of eratosthenes (Find prime numbers upto a given number)](#SieveOfErast)
 6. [Faster printing using String Builder]
 
 <a name="ReaderClass"></a>
@@ -395,4 +394,28 @@ This works in all cases as:
 
 ***Note: Only changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to changed indexes.***
 
+<a href="#Contents">Back to contents</a>
+<a name="SieveOfErast"></a>
+### Sieve of Erastothenes (Find prime numbers upto a given number)
+Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N*log(log(N))).
+```java
+void sieveOfEratosthenes(int n)
+{
+    boolean prime[] = new boolean[n+1];
+    for(int i=0;i<n;i++) 
+    {
+        prime[i] = true;
+    }
+    for(int p = 2; p*p <=n; p++) 
+    {
+        if(prime[p] == true) 
+        {
+            for(int i = p*p; i <= n; i += p) 
+            {
+                prime[i] = false; 
+            } 
+        }
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
