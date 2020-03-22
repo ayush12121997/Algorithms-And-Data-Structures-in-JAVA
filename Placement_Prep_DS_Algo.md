@@ -61,31 +61,6 @@ class Reader
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="SieveOfErast"></a>
-## Sieve of Erastothenes (Find prime numbers upto a given number)
-Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N*log(log(N))).
-```java
-void sieveOfEratosthenes(int n)
-{
-    boolean prime[] = new boolean[n+1];
-    for(int i=0;i<n;i++) 
-    {
-        prime[i] = true;
-    }
-    for(int p = 2; p*p <=n; p++) 
-    {
-        if(prime[p] == true) 
-        {
-            for(int i = p*p; i <= n; i += p) 
-            {
-                prime[i] = false; 
-            } 
-        }
-    }
-}
-```
-<a href="#Contents">Back to contents</a>
-
 <a name="CheckIfSquare"></a>
 ## Properties of a Square
 - All sides of a square are equal in length say, a.
