@@ -269,7 +269,7 @@ public int BinarySearch(int[] arr, int start, int end, int value)
 ```java
 public int[] KadaneAlgo(int[] arr)
 {
-    int n = arr.length();
+    int n = arr.length;
     int localsum = 0;
     int globalsum = 0;
     int start = 0;
