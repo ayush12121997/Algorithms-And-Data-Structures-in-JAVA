@@ -14,9 +14,9 @@
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
     - [In place operations](#Arrays_InPlace)
-    - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Arrays_SieveOfErast)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
-4. 
+4. [Math](#Math)
+    - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
@@ -341,6 +341,26 @@ This works in all cases as:
 ***Note: Only changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to changed indexes.***
 
 <a href="#Contents">Back to contents</a>
+<a name="Arrays_FindSingle"></a>
+### Find single element in an arrray where every other element comes twice
+- Use the XOR property of bit manipulation.
+- a XOR a = 0
+- 0 XOR a = a
+```java
+int check(int[] nums)
+{
+    int a = 0;
+    for(int i = 0; i < nums.length; i++)
+    {
+        a ^= nums[i];
+    }
+    return a;
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="Arrays"></a>
+## Arrays
 <a name="Arrays_SieveOfErast"></a>
 ### Sieve of Erastothenes (Find prime numbers upto a given number)
 Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N * log(log(N))).
@@ -362,23 +382,6 @@ void sieveOfEratosthenes(int n)
             } 
         }
     }
-}
-```
-<a href="#Contents">Back to contents</a>
-<a name="Arrays_FindSingle"></a>
-### Find single element in an arrray where every other element comes twice
-- Use the XOR property of bit manipulation.
-- a XOR a = 0
-- 0 XOR a = a
-```java
-int check(int[] nums)
-{
-    int a = 0;
-    for(int i = 0; i < nums.length; i++)
-    {
-        a ^= nums[i];
-    }
-    return a;
 }
 ```
 <a href="#Contents">Back to contents</a>
