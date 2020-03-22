@@ -341,7 +341,7 @@ public void merge(int[] arr1, int[] arr2)
                         arr1[i + gap] = temp;
                     }
                 }
-				else
+                else
                 {
                     if (arr1[i] > arr2[(i + gap) - n])
                     {
@@ -350,23 +350,23 @@ public void merge(int[] arr1, int[] arr2)
                         arr2[(i + gap) - n] = temp;
                     }
                 }
-			}
-			else
-			{
+            }
+            else
+            {
                 if (arr2[i - n] > arr2[(i + gap) - n])
                 {
                     int temp = arr2[i - n];
                     arr2[i - n] = arr2[(i + gap) - n];
                     arr2[(i + gap) - n] = temp;
                 }
-			}
+            }
         }
         if (gap == 1)
         {
             break;
         }
         gap = (int) Math.ceil(((double) gap) / 2);
-	}
+    }
     for (int i = 0; i < n; i++)
     {
         sbf.append(arr1[i] + " ");
