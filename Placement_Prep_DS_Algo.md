@@ -13,6 +13,7 @@
     - [Insertion Sort](#Arrays_InsertionSort)
     - [Merge Sort](#Arrays_MergeSort)
     - [Binary Search](#Arrays_BinarySearch)
+    - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
 6. [Something]
 
 <a name="ReaderClass"></a>
