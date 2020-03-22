@@ -15,7 +15,7 @@
     - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
-	- [In place operations](#Arrays_InPlace)
+    - [In place operations](#Arrays_InPlace)
 6. [Faster printing using String Builder]
 
 <a name="ReaderClass"></a>
