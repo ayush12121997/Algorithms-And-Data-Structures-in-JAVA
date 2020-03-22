@@ -262,7 +262,43 @@ public int BinarySearch(int[] arr, int start, int end, int value)
 ```
 <a href="#Contents">Back to contents</a>
 <a name="Arrays_KadanesAlgo"></a>
-### Kadane's Algorithm
+### Kadane's Algorithm (Maximum sum contigous sub array)
+- To find the maximum sub contigous sub-array we maintain two variables, a local sum and a global sum.
+- Local sum is the max of current local sum + arr[i] and arr[i]. The global sum is the maximum of localsum and current global sum.
+- Return the list of indexes from where to where the sum is maximum. Also return the sum. Return (start index, end index, sum).
+```java
+public int[] KadaneAlgo(int[] arr)
+{
+    int n = arr.length();
+	int localsum = 0;
+	int globalsum = 0;
+	int start = 0;
+	int end = 0;
+	for(int i = 0; i < n; i++)
+	{
+	    int c = arr[i];
+		if(c + localsum >= c)
+		{
+			localsum += c;
+		}
+		else
+		{
+		    localsum = c;
+			start = i;
+		}
+		if(localsum > globalsum)
+		{
+			globalsum = localsum,
+			end = i;
+		}
+	}
+	int[] ans = new int[3];
+	ans[0] = start;
+	ans[1] = end;
+	ans[2] = sum;
+	return ans;
+}
+```
 <a href="#Contents">Back to contents</a>
 <a name="Arrays_MergeTwo"></a>
 ### Merge two sorted arrays in O(1) extra space
