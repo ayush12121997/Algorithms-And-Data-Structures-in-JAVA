@@ -288,14 +288,14 @@ public int[] KadaneAlgo(int[] arr)
         }
         if(localsum > globalsum)
         {
-            globalsum = localsum,
+            globalsum = localsum;
             end = i;
         }
     }
     int[] ans = new int[3];
     ans[0] = start;
     ans[1] = end;
-    ans[2] = sum;
+    ans[2] = globalsum;
     return ans;
 }
 ```
