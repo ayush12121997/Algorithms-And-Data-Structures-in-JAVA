@@ -384,11 +384,11 @@ public void merge(int[] arr1, int[] arr2)
 ### In place operations
 If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr(i)%value) * value) to the new index.
 This works in all cases as:
-    - For move involving an unchanged value to an unchanged value:
-        - As value maximum element of array, initially all arr(i) % value = arr(i).
-	    - Now at new index the number will be arr(new index) + (arr(i) * value).
-	    - If this index is now divided by the number value, it would give us the answer arr(i) as arr(new index)/value = 0 and (arr(i) * value) / value = arr(i).
-    - For a move involving a previously changed value to a unchanged value:
-	    - As 
+- For move involving an unchanged value to an unchanged value:
+    - As value maximum element of array, initially all arr(i) % value = arr(i).
+    - Now at new index the number will be arr(new index) + (arr(i) * value).
+    - If this index is now divided by the number value, it would give us the answer arr(i) as arr(new index)/value = 0 and (arr(i) * value) / value = arr(i).
+- For a move involving a previously changed value to a unchanged value:
+    - As 
     
 <a href="#Contents">Back to contents</a>
