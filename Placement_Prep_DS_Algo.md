@@ -287,7 +287,7 @@ public Merge(int[] arr, int start, int mid, int end)
 ```
 <a href="#Contents">Back to contents</a>
 <a name="Arrays_BinarySearch"></a>
-### Bianry Search
+### Binary Search
 - Best Case : O(1)
 - Average Case : O(log(n))
 - Worst Case : O(log(n))
@@ -314,4 +314,10 @@ public int BinarySearch(int[] arr, int start, int end, int value)
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_KadanesAlgo"></a>
+### Kadane's Algorithm
+<a href="#Contents">Back to contents</a>
+<a name="Arrays_MergeTwo"></a>
+### Merge two sorted arrays in O(1) extra space
 <a href="#Contents">Back to contents</a>
