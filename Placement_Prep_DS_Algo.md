@@ -320,4 +320,62 @@ public int BinarySearch(int[] arr, int start, int end, int value)
 <a href="#Contents">Back to contents</a>
 <a name="Arrays_MergeTwo"></a>
 ### Merge two sorted arrays in O(1) extra space
+```java
+public void merge(int[] arr1, int[] arr2)
+{
+	StringBuilder sbf = new StringBuilder();
+	int gap = n + m;
+	gap = (int) Math.ceil(((double) gap) / 2);
+	while (gap >= 1)
+	{
+		for (int i = 0; i + gap < n + m; i++)
+		{
+			if (i < n)
+			{
+				if (i + gap < n)
+				{
+					if (arr1[i] > arr1[i + gap])
+					{
+						int temp = arr1[i];
+						arr1[i] = arr1[i + gap];
+						arr1[i + gap] = temp;
+					}
+				}
+				else
+				{
+					if (arr1[i] > arr2[(i + gap) - n])
+					{
+						int temp = arr1[i];
+						arr1[i] = arr2[(i + gap) - n];
+						arr2[(i + gap) - n] = temp;
+					}
+				}
+			}
+			else
+			{
+				if (arr2[i - n] > arr2[(i + gap) - n])
+				{
+					int temp = arr2[i - n];
+					arr2[i - n] = arr2[(i + gap) - n];
+					arr2[(i + gap) - n] = temp;
+				}
+			}
+		}
+		if (gap == 1)
+		{
+			break;
+		}
+		gap = (int) Math.ceil(((double) gap) / 2);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		sbf.append(arr1[i] + " ");
+	}
+	for (int i = 0; i < m; i++)
+	{
+		sbf.append(arr2[i] + " ");
+	}
+	System.out.println(sbf);
+}
+```
 <a href="#Contents">Back to contents</a>
