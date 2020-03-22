@@ -15,7 +15,7 @@
     - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
-6. [Something]
+6. [Faster printing using String Builder]
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
