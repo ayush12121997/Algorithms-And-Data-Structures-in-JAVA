@@ -359,9 +359,9 @@ int check(int[] nums)
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="Arrays"></a>
-## Arrays
-<a name="Arrays_SieveOfErast"></a>
+<a name="Math"></a>
+## Math
+<a name="Math_SieveOfErast"></a>
 ### Sieve of Erastothenes (Find prime numbers upto a given number)
 Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N * log(log(N))).
 ```java
