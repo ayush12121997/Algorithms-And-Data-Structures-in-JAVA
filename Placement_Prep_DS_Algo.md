@@ -17,6 +17,8 @@
     - [Finding single element in array of pairs](#Arrays_FindSingle)
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
+5. [String]
+    - [Splitting a string in Java]
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
