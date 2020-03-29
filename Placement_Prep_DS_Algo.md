@@ -11,6 +11,8 @@
     - [Insertion Sort](#Arrays_InsertionSort)
     - [Merge Sort](#Arrays_MergeSort)
     - [Binary Search](#Arrays_BinarySearch)
+    - [Bucket Sort](#Arrays_BucketSort)
+    - [Count Sort](#Arrays_CountingSort)
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
     - [In place operations to store two values in single position](#Arrays_InPlace)
