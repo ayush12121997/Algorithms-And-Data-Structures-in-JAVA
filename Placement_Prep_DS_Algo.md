@@ -13,7 +13,7 @@
     - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
-    - [In place operations](#Arrays_InPlace)
+    - [In place operations to store two values in single position](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
@@ -364,7 +364,7 @@ public void merge(int[] arr1, int[] arr2)
 ```
 <a href="#Contents">Back to contents</a>
 <a name="Arrays_InPlace"></a>
-### In place operations
+### In place operations to store two values in single position
 If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr(i)%value) * value) to the new index.
 This works in all cases as:
 - For move involving an unchanged index to an unchanged index:
