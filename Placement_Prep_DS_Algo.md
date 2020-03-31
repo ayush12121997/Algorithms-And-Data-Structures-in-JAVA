@@ -21,6 +21,7 @@
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime or not]
     - [Finding all factors of a number]
+    - [Binary representation of a number]
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
