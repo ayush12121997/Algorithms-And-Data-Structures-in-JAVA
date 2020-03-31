@@ -26,6 +26,9 @@
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
+6. [Others]
+    - [Square root decomposition]
+    - [Segment trees]
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
