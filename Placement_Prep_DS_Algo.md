@@ -22,6 +22,7 @@
     - [Finding all factors of a number]
 5. [String]
     - [Splitting a string in Java]
+    - [Find all permutations of a String]
 
 <a name="ReaderClass"></a>
 ## Reader Class for Java
