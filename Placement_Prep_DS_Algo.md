@@ -19,6 +19,7 @@
     - [Finding single element in array of pairs](#Arrays_FindSingle)
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
+    - [Check if a number is prime or not]
     - [Finding all factors of a number]
 5. [String]
     - [Splitting a string in Java]
