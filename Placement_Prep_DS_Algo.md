@@ -23,6 +23,7 @@
     - [Finding all factors of a number]
     - [Binary representation of a number]
     - [Numbers of length N and value less than K]
+    - [Calculate GCD of two numbers]
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
