@@ -22,6 +22,7 @@
     - [Check if a number is prime or not]
     - [Finding all factors of a number]
     - [Binary representation of a number]
+    - [Numbers of length N and value less than K]
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
