@@ -412,7 +412,7 @@ Sieve of Erastothenes is used to find prime numbers upto a given number N. The t
 void sieveOfEratosthenes(int n)
 {
     boolean prime[] = new boolean[n+1];
-    for(int i=0;i<n;i++) 
+    for(int i = 0; i <= n; i++) 
     {
         prime[i] = true;
     }
