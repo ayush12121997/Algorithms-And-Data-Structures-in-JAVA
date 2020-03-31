@@ -34,6 +34,8 @@
     - [Divisibility by 9]
     - [Divisibility by 2,3 and 5]
     - [Numbers of length N and value less than K]
+    - [Binary to decimal conversion]
+    - [Decimal to binary conversion]
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
