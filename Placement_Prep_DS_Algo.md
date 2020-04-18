@@ -23,7 +23,7 @@
     - [Finding all factors of a number]
     - [Binary to decimal conversion]
     - [Decimal to binary conversion]
-    - [Any base conversion (EXample with 26)]
+    - [Any base conversion (Example with 26)]
     - [Calculate GCD of two numbers]
     - [Calculate LCM of two numbers]
     - [Calculate factorial of a number]
