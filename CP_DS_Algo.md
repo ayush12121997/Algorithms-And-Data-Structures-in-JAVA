@@ -15,7 +15,7 @@
     - [Count Sort]
     - [Kadane's Algorithm](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
-    - [In place operations to store two values in single position](#Arrays_InPlace)
+    - [Store two values in single position](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Prefix Sum]
     - [Scanline algorithm]
