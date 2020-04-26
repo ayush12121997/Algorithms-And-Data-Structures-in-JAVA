@@ -3,7 +3,7 @@
 <a name="Contents"></a>
 ## Table of contents
 1. [Reader class](#ReaderClass)
-2. [Faster printing using String Builder]
+2. [Faster printing using String Builder](#Printing)
 3. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
@@ -79,6 +79,16 @@ class Reader
         return Double.parseDouble(next());
     }
 }
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="Printing"></a>
+## Printing
+Faster printing which requires multiple print statements one after the anothers cab ne achieved through StringBuilder. Use StringBuilder to form a big string and then print that String. Saves time.
+```java
+StringBuilder sb = new StringBuilder();
+sb.append("Printing content");
+System.out.println(sb.toString());
 ```
 <a href="#Contents">Back to contents</a>
 
