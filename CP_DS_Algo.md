@@ -13,12 +13,12 @@
     - [Binary Search](#Arrays_BinarySearch)
     - [Bucket Sort]
     - [Count Sort]
-    - [Kadane's Algorithm (Maximum sum contigous sub array)](#Arrays_KadanesAlgo)
-    - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
+    - [Kadane's Algorithm](#Arrays_KadanesAlgo)
+    - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [In place operations to store two values in single position](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
-    - [Prefix Sum and applications]
-    - [Scanline algorithm and applications]
+    - [Prefix Sum]
+    - [Scanline algorithm]
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime or not]
