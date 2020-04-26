@@ -17,7 +17,8 @@
     - [Merge two sorted arrays in O(1) extra space](#Arrays_MergeTwo)
     - [In place operations to store two values in single position](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
-    - [Prefix Sum and applications See yt video on scanline also]
+    - [Prefix Sum and applications]
+    - [Scanline algorithm and applications]
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime or not]
