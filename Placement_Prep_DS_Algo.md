@@ -39,7 +39,7 @@
     - [Segment trees]
 
 <a name="ReaderClass"></a>
-## Reader Class for Java
+## Reader Class
 ```java
 import java.io.*;
 import java.lang.*;
@@ -83,7 +83,7 @@ class Reader
 <a href="#Contents">Back to contents</a>
 
 <a name="Printing"></a>
-## Printing
+## String Builder Printing
 Faster printing which requires multiple print statements one after the anothers cab ne achieved through StringBuilder. Use StringBuilder to form a big string and then print that String. Saves time.
 ```java
 StringBuilder sb = new StringBuilder();
