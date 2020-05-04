@@ -13,6 +13,7 @@
     - [Binary Search](#Arrays_BinarySearch)
     - [Bucket Sort]
     - [Count Sort]
+    - [Sorting using Comparator]
     - [Kadane's Algorithm](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Store two values in single position](#Arrays_InPlace)
@@ -21,7 +22,7 @@
     - [Scanline algorithm]
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
-    - [Check if a number is prime or not]
+    - [Check if a number is prime or not](#CheckPrime)
     - [Finding all factors of a number]
     - [Binary to decimal conversion]
     - [Decimal to binary conversion]
@@ -37,6 +38,7 @@
 6. [Others]
     - [Square root decomposition]
     - [Segment trees]
+    - [Priority Queues and Comparators]
 
 <a name="ReaderClass"></a>
 ## Reader Class
@@ -448,6 +450,36 @@ void sieveOfEratosthenes(int n)
             } 
         }
     }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+### Primality Check (School Method)
+- 0 and 1 are not prime nubmers
+- Prime numbers should be checked for disivibility only till sqrt(N) as no number greater than sqrt(N) would produce a factor that hasn't already been covered till sqrt(N).
+- Primes other than 2 and 3 are of the form 6k +- 1
+```java
+boolean isPrime(int n)
+{
+    if(n <= 1)
+    {
+    	return false;
+    }
+    else if(n == 2 || n == 3)
+    {
+    	return true;
+    }
+    else
+    {
+    	for(int i = 5; i < sqrt(n); i+= 6)
+	{
+	    if(n % i == 0 || n%(i+2) == 0)
+	    {
+	    	return false;
+	    }
+	}
+    }
+    return true;
 }
 ```
 <a href="#Contents">Back to contents</a>
