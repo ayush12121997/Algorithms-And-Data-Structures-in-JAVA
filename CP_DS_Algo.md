@@ -23,7 +23,7 @@
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
-    - [Finding all factors of a number]
+    - [Finding all factors of a number](#FindFactors)
     - [Binary to decimal conversion]
     - [Decimal to binary conversion]
     - [Any base conversion (Example with excel column numbers/names)]
@@ -481,6 +481,56 @@ boolean isPrime(int n)
 	}
     }
     return true;
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="FindFactors"></a>
+### Find factors of a number
+#### Find all factors
+- When calculating a facotr, if we check that whether or not a number divides another number, if it does, at the same time we have also found another factor that is the quoteint of the divsion.
+```java
+ArrayList<Integer> factorize(int n)
+{
+    ArrayList<Integer> arr = new ArrayList<Integer>();
+    for(int i = 1; i <= sqrt(n); i++)
+    {
+    	if(n%i == 0)
+	{
+	    arr.add(i);
+	    int c = n/i;
+	    if(c != i)
+	    {
+	    	arr.add(c);
+	    }
+	}
+    }
+    return arr.sort();
+}
+```
+#### Find all prime factors
+- When calculating a facotr, if we check that whether or not a number divides another number, if it does, at the same time we have also found another factor that is the quoteint of the divsion.
+```java
+ArrayList<Integer> factorize(int n)
+{
+    ArrayList<Integer> arr = new ArrayList<Integer>();
+    if(n == 2 || n == 3)
+    {
+    	arr.add(n);
+    }
+    while(n != 1)
+    {
+    	for(int i = 2; i <= sqrt(n); i++)
+	{
+	    if(n%i == 0)
+	    {
+	    	arr.add(i);
+		n = n/i;
+	    }
+	}
+	
+    }
+    return arr.sort();
 }
 ```
 <a href="#Contents">Back to contents</a>
