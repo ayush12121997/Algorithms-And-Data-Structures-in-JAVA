@@ -454,6 +454,7 @@ void sieveOfEratosthenes(int n)
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="CheckPrime"></a>
 ### Primality Check (School Method)
 - 0 and 1 are not prime nubmers
 - Prime numbers should be checked for disivibility only till sqrt(N) as no number greater than sqrt(N) would produce a factor that hasn't already been covered till sqrt(N).
