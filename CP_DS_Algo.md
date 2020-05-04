@@ -22,7 +22,7 @@
     - [Scanline algorithm]
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
-    - [Check if a number is prime or not](#CheckPrime)
+    - [Check if a number is prime](#CheckPrime)
     - [Finding all factors of a number]
     - [Binary to decimal conversion]
     - [Decimal to binary conversion]
