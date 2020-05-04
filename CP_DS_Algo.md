@@ -24,7 +24,7 @@
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
     - [Finding all factors of a number](#FindFactors)
-    - [Binary to decimal conversion]
+    - [Binary conversions](#BinaryToAndFro)
     - [Decimal to binary conversion]
     - [Any base conversion (Example with excel column numbers/names)]
     - [Calculate GCD of two numbers]
@@ -532,4 +532,9 @@ ArrayList<Integer> factorize(int n)
     return arr.sort();
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Binary Conversions"></a>
+### Binary Conversions to and from Decimal
+
 <a href="#Contents">Back to contents</a>
