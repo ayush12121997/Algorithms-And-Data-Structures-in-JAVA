@@ -488,7 +488,7 @@ boolean isPrime(int n)
 <a name="FindFactors"></a>
 ### Find factors of a number
 #### Find all factors
-- When calculating a facotr, if we check that whether or not a number divides another number, if it does, at the same time we have also found another factor that is the quoteint of the divsion.
+When calculating a factor, if we check that whether or not a number divides another number, if it does, at the same time we have also found another factor that is the quoteint of the divsion.
 ```java
 ArrayList<Integer> factorize(int n)
 {
@@ -509,7 +509,6 @@ ArrayList<Integer> factorize(int n)
 }
 ```
 #### Find all prime factors
-- When calculating a facotr, if we check that whether or not a number divides another number, if it does, at the same time we have also found another factor that is the quoteint of the divsion.
 ```java
 ArrayList<Integer> factorize(int n)
 {
