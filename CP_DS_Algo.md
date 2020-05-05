@@ -536,5 +536,37 @@ ArrayList<Integer> factorize(int n)
 
 <a name="Binary Conversions"></a>
 ### Binary Conversions to and from Decimal
+#### From decimal to binary
+We know that a dcimal number is converted into binary by dividing the number repeatedly by 2 until the qoutient becomes 0. The binary number is represented by adding the remainder at every step to the answer so far.
+```java
+String decToBin(long n, String s)
+{
+    if(n>1)
+    {
+    	s += decToBin(n/2, s);
+    }
+    s += (n%2);
+    return s;
+}
 
+// Call the function as decToBin(n, "");
+```
+#### From binary to decimal
+```java
+long binToDec(String s)
+{
+    long ans = 0;
+    int len = 0;
+    long start = 1;
+    while(len < s.length())
+    {
+    	if(s.charAt(len) == '1')
+	{
+	    ans += base;
+	}
+	base *= 2;
+	len++;
+    }
+    return ans;
+}
 <a href="#Contents">Back to contents</a>
