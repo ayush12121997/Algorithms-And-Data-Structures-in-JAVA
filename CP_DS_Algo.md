@@ -534,7 +534,7 @@ ArrayList<Integer> factorize(int n)
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="Binary Conversions"></a>
+<a name="BinaryToAndFro"></a>
 ### Binary Conversions to and from Decimal
 #### From decimal to binary
 We know that a dcimal number is converted into binary by dividing the number repeatedly by 2 until the qoutient becomes 0. The binary number is represented by adding the remainder at every step to the answer so far.
@@ -569,4 +569,5 @@ long binToDec(String s)
     }
     return ans;
 }
+```
 <a href="#Contents">Back to contents</a>
