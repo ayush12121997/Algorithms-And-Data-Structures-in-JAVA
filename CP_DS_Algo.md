@@ -25,7 +25,6 @@
     - [Check if a number is prime](#CheckPrime)
     - [Finding all factors of a number](#FindFactors)
     - [Binary conversions](#BinaryToAndFro)
-    - [Decimal to binary conversion]
     - [Any base conversion (Example with excel column numbers/names)]
     - [Calculate GCD of two numbers]
     - [Calculate LCM of two numbers]
