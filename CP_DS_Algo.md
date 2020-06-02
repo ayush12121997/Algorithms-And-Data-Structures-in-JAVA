@@ -5,7 +5,7 @@
 1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
 3. [Arrays](#Arrays)
-  - [Basic Concepts](#Arrays_BasicConcepts)
+    - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
     - [Insertion Sort](#Arrays_InsertionSort)
@@ -36,6 +36,7 @@
     - [Find all permutations of a String]
 6. [Dynamic Programming]
     - [Digit DP]
+        - [Works]
     - [Knapsack DP]
 7. [Others]
     - [Square root decomposition]
