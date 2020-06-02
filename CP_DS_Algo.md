@@ -36,7 +36,7 @@
     - [Find all permutations of a String]
 6. [Dynamic Programming]
     - [Digit DP]
-        - [Works]
+      - [Works]
     - [Knapsack DP]
 7. [Others]
     - [Square root decomposition]
