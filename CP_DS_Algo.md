@@ -34,6 +34,7 @@
     - [Splitting a string in Java]
     - [Find all permutations of a String]
 6. [Dynamic Programming](#DynamicProgramming)
+    - [Longest Integer Subsequence]
     - [Digit DP]
         - [Numbers of length N and value less than K]
     - [Knapsack DP]
