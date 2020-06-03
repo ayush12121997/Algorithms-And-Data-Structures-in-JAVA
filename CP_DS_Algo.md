@@ -616,6 +616,16 @@ Memoization is a top down approach where you directly calculate for the final va
 
 <a href="#Contents">Back to contents</a>
 
+<a name="DP_SolvingDP"></a>
+### Solving a DP Problem
+The DP question solving can be divided into further smaller tasks (Just like DP XD):
+1. State identification:
+asdsadasd
+2. Relations between states:
+123123123
+
+<a href="#Contents">Back to contents</a>
+
 <a name="DP_StandardProblems"></a>
 ### Standard Problems
 <a name="DP_LIS"></a>
