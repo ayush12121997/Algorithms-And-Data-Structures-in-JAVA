@@ -30,6 +30,7 @@
     - [Calculate LCM of two numbers]
     - [Calculate factorial of a number]
     - [Divisibility by 3, 4, 5, 6, 7, 8, 9 and (2, 3 and 5)]
+    - [Calculate nCr](#Math_NCR)
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
@@ -573,6 +574,12 @@ long binToDec(String s)
     return ans;
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Math_NCR"></a>
+### Calculate nCr
+To calculate nCr first, find factorial from r+1 to n. The divide by factorial from 1 to r. Always calculate using long.
+
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
