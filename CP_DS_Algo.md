@@ -16,7 +16,7 @@
     - [Sorting using Comparator]
     - [Kadane's Algorithm](#Arrays_KadanesAlgo)
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
-    - [Store two values in single position](#Arrays_InPlace)
+    - [Store two values in a single index](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Prefix Sum]
     - [Scanline algorithm]
@@ -416,6 +416,7 @@ This works in all cases as:
 ***Note: Only one time changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to changed indexes.***
 
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_FindSingle"></a>
 ### Find single element in an arrray where every other element comes twice
 - Use the XOR property of bit manipulation.
