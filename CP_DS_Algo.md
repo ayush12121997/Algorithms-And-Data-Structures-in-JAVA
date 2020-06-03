@@ -35,8 +35,11 @@
     - [Splitting a string in Java]
     - [Find all permutations of a String]
 6. [Dynamic Programming](#DynamicProgramming)
-    - [Longest Integer Subsequence](#DP_LIS)
-    - [Digit DP]
+    - [Overlapping Subproblems](#DP_OverlappingSubproblems)
+    - [Optimal Substructure](#DP_OptimalSubstructure)
+    - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
+    - [Standard Problems](#DP_StandardProblems)
+        - [Longest Integer Subsequence](#DP_LIS)
         - [Numbers of length N and value less than K]
     - [Knapsack DP]
 7. [Others]
@@ -590,23 +593,33 @@ To calculate nCr:
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
 Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
-#### Overlapping Subproblems
+
+<a name="DP_OverlappingSubproblems"></a>
+### Overlapping Subproblems
 Recursive solutions where various base cases call the already calculated subproblems again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping suproblems property in the question.
 
 One mehod to check this is to generally find a recurrence realation. A good point to ntoe is that it is not necessary to solve the recurrence relation at hand. If the recurrence relation, calls the function itself and forms a recrrence tree with common elements, the overlapping subproblems property is satisfied. An example is fib(n) = fib(n-1) + fib(n-2).
 
-#### Optimal Substructure
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_OptimalSubstructure"></a>
+### Optimal Substructure
 Optimal substructure property means that the results of the parents values should be directly computable ftome the optimal results of the child values. 
 
-#### Tabulation vs Memoization
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_TabulationVsMemoization"></a>
+### Tabulation vs Memoization
 Tabulation is when you follow a bottom's up approach to solving the problems. So for example if the recursion tree goes down to 15 levels so you start from the bottom calculating subproblems to build to the final answer. You generally do this by having an array say dp[n] and start from filling dp[0] -> dp[1] -> -> dp[n]. Used when it is necessary to solve all the possible subproblems for the final answer.
 
 Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap. Used when it is not necessary to solve all the subproblems for reaching the final answer.
 
 <a href="#Contents">Back to contents</a>
 
+<a name="DP_StandardProblems"></a>
+### Standard Problems
 <a name="DP_LIS"></a>
-### Longest Integer Subsequence
+#### Longest Integer Subsequence
 The longest integer subsequence problem requires you to find the length of the longest increasing integer subsequence in an array. For example for the array [5, 8, 3, 7, 9, 1] the answer would be 3 and the subequence would be [3, 7, 9]. Do note, the subsequence is not necessarily contigous.
 
 For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array called dp[]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i, dp[i] = 1 + Max(All dp[j] such that j < i and arr[j] is smaller than arr[i]).
