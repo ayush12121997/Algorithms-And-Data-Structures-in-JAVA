@@ -34,7 +34,8 @@
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
-6. [Dynamic Programming](#DynamicProgramming)
+6. [Backtracking]
+7. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -43,7 +44,7 @@
         - [Longest Integer Subsequence](#DP_LIS)
         - [Numbers of length N and value less than K]
     - [Knapsack DP]
-7. [Others]
+8. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
@@ -632,6 +633,8 @@ The DP question solving can be divided into further smaller tasks (Just like DP 
 1. State identification: A state in a DP problem can be defined as something that helps you identify at which subproblem have you reached in your dp. For example it can be dp[index], where index is used to identify the the current subproblem, that is the current level can be traced using the index. In a knapsack problem thsi would be the [index][weight] and hence the dp formed is of the type dp[index][weight]. Hence the state identifier should be a value or at max two that help you identify the current subproblem uniquely from others.
 2. Relations between states: Find the recursive relations which defines your state(n) in terms of previously calculated values like n-1, n-2, ... and so on.
 3. Choosing between tabulation and memoization: This choice should be made according to the differences explained in the above section.
+
+Majority of the DP problems can be categorized into t
 
 <a href="#Contents">Back to contents</a>
 
