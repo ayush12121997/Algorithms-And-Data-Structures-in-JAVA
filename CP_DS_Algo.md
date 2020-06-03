@@ -578,4 +578,7 @@ long binToDec(String s)
 ## Dynamic Programming
 Dynamic Programming solves complex problems that trnd to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
 #### Overlapping Subproblems
-Recursive solutions where various base cases call the already calculated values again andagain result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping suproblems property in the question.
+Recursive solutions where various base cases call the already calculated subproblems again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping suproblems property in the question.
+
+One mehod to check this is to generally find a recurrence realation. A good point to ntoe is that it is not necessary to solve the recurrence relation at hand. If the recurrence relation, calls the function itself and forms a recrrence tree with common elements, the overlapping subproblems property is satisfied. An example is fib(n) = fib(n-1) + fib(n-2).
+<a href="#Contents">Back to contents</a>
