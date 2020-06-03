@@ -576,3 +576,6 @@ long binToDec(String s)
 
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
+Dynamic Programming solves complex problems that trnd to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
+#### Overlapping Subproblems
+Recursive solutions where various base cases call the already calculated values again andagain result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping suproblems property in the question.
