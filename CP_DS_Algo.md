@@ -33,7 +33,7 @@
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
-6. [Dynamic Programming]
+6. [Dynamic Programming](#DynamicProgramming)
     - [Digit DP]
         - [Numbers of length N and value less than K]
     - [Knapsack DP]
@@ -573,3 +573,6 @@ long binToDec(String s)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
+<a name="DynamicProgramming"></a>
+## Dynamic Programming
