@@ -594,6 +594,7 @@ Memoization is a top down approach where you directly calculate for the final va
 <a name="DP_LIS"></a>
 ### Longest Integer Subsequence
 The longest integer subsequence problem requires you to find the length of the longest increasing integer subsequence in an array. For example for the array [5, 8, 3, 7, 9, 1] the answer would be 3 and the subequence would be [3, 7, 9]. Do note, the subsequence is not necessarily contigous.
+
 For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array called dp[]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i, dp[i] = 1 + Max(All dp[j] such that j < i and arr[j] is smaller than arr[i]]). 
 
 <a href="#Contents">Back to contents</a>
