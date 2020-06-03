@@ -589,7 +589,7 @@ To calculate nCr:
 
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
-Dynamic Programming solves complex problems that trnd to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
+Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
 #### Overlapping Subproblems
 Recursive solutions where various base cases call the already calculated subproblems again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping suproblems property in the question.
 
@@ -602,6 +602,8 @@ Optimal substructure property means that the results of the parents values shoul
 Tabulation is when you follow a bottom's up approach to solving the problems. So for example if the recursion tree goes down to 15 levels so you start from the bottom calculating subproblems to build to the final answer. You generally do this by having an array say dp[n] and start from filling dp[0] -> dp[1] -> -> dp[n]. Used when it is necessary to solve all the possible subproblems for the final answer.
 
 Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap. Used when it is not necessary to solve all the subproblems for reaching the final answer.
+
+<a href="#Contents">Back to contents</a>
 
 <a name="DP_LIS"></a>
 ### Longest Integer Subsequence
