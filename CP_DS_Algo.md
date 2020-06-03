@@ -1,4 +1,4 @@
-# Data Structures and Algorithms
+# Data Structures and Algorithms (JAVA)
 
 <a name="Contents"></a>
 ## Table of contents
