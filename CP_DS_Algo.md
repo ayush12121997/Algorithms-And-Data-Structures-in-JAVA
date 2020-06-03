@@ -34,7 +34,7 @@
     - [Splitting a string in Java]
     - [Find all permutations of a String]
 6. [Dynamic Programming](#DynamicProgramming)
-    - [Longest Integer Subsequence]
+    - [Longest Integer Subsequence](#DP_LIS)
     - [Digit DP]
         - [Numbers of length N and value less than K]
     - [Knapsack DP]
@@ -591,6 +591,7 @@ Tabulation is when you follow a bottom's up approach to solving the problems. So
 
 Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap. Used when it is not necessary to solve all the subproblems for reaching the final answer.
 
+<a name="DP_LIS"></a>
 ### Longest Integer Subsequence
 The longest integer subsequence problem requires you to find the length of the longest increasing integer subsequence in an array. For example for the array [5, 8, 3, 7, 9, 1] the answer would be 3 and the subequence would be [3, 7, 9]. Do note, the subsequence is not necessarily contigous.
 For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array called dp[]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i, dp[i] = 1 + Max(All dp[j] such that j < i and arr[j] is smaller than arr[i]]). 
