@@ -117,6 +117,7 @@ arr.add(value); //Add value at end of array in O(1)
 arr.add(i, value); //Add value at index i in O(size - i)
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_BubbleSort"></a>
 ### Bubble Sort
 - Best Case : O(n)
@@ -152,6 +153,7 @@ public int[] BubbleSort(int[] a)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_SelectionSort"></a>
 ### Selection Sort
 - Best Case : O(n)
@@ -184,6 +186,7 @@ public int[] SelectionSort(int[] a)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_InsertionSort"></a>
 ### Insertion Sort
 - Best Case : O(n)
@@ -211,6 +214,7 @@ public int[] InsertionSort(int[] arr)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_MergeSort"></a>
 ### Merge Sort
 - Best Case : O(nlog(n))
@@ -271,6 +275,7 @@ public Merge(int[] arr, int start, int mid, int end)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_BinarySearch"></a>
 ### Binary Search
 - Best Case : O(1)
@@ -300,6 +305,7 @@ public int BinarySearch(int[] arr, int start, int end, int value)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_KadanesAlgo"></a>
 ### Kadane's Algorithm (Maximum sum contigous sub array)
 - To find the maximum sub contigous sub-array we maintain two variables, a local sum and a global sum.
@@ -339,6 +345,7 @@ public int[] KadaneAlgo(int[] arr)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_MergeTwo"></a>
 ### Merge two sorted arrays in O(1) extra space
 ```java
@@ -400,20 +407,21 @@ public void merge(int[] arr1, int[] arr2)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
 <a name="Arrays_InPlace"></a>
 ### In place operations to store two values in single position
-If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr(i)%value) * value) to the new index.
+If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr[i]%value) * value) to the element, say at index j, where you want to put arr[i]. Note, it is not necessry to put arr[i] at the new index. Any element less than value can be added.
 This works in all cases as:
 - For move involving an unchanged index to an unchanged index:
-    - As value > maximum element of array, initially any arr(i) % value = arr(i).
-    - Now at new index the number will be arr(new index) + (arr(i) * value).
-    - If this index is now divided by the number value, it would give us the answer arr(i) as arr(new index)/value = 0 and (arr(i) * value) / value = arr(i).
-- For a move involving a previously changed index to a unchanged index:
-    - Let the number at a particular index already be arr(index) + ((arr(other index)%value) * value).
-    - Now, the mod of this number will always be equal to arr(index) itself as the number ((arr(other index)%value) * value) % value = 0.
-	- Hence, the problem then becomes similar to case where an unchanged value is moved to another unchanged value.
+    - As value > maximum element of the array, initially any arr[i] % value = arr[i].
+    - Now at new index, say index j, arr[j] = arr[j] + (arr[i] * value).
+    - If arr[j] is now divided by value, it would give us the answer arr[i] as arr[j]/value = 0 and (arr[i] * value) / value = arr[i].
+- For a move involving a previously changed index to an unchanged index:
+    - Let the number at a particular index i be, arr[i] = arr[i] + (arr[j] * value), where the value if index j has also been added.
+    - Now, the mod of arr[i] will always be equal to arr[i] itself as the number (arr[j] * value) % value = 0.
+    - Hence, now when arr[i]%value is calculated, the problem then becomes similar to case where an unchanged value is moved to another unchanged value.
 
-***Note: Only one time changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to changed indexes.***
+***Note: Only one time changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to already changed indexes.***
 
 <a href="#Contents">Back to contents</a>
 
