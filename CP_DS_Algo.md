@@ -39,6 +39,7 @@
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
+    - [DP with Backtracking](#DP_BacktrackDP)
     - [Solving a DP Problem](#DP_SolvingDP)
     - [Standard Problems](#DP_StandardProblems)
         - [Longest Integer Subsequence](#DP_LIS)
@@ -624,6 +625,21 @@ Optimal substructure property means that the results of the parents values shoul
 Tabulation is when you follow a bottom's up approach to solving the problems. So for example if the recursion tree goes down to 15 levels so you start from the bottom calculating subproblems to build to the final answer. You generally do this by having an array say dp[n] and start from filling dp[0] -> dp[1] -> -> dp[n]. Used when it is necessary to solve all the possible subproblems for the final answer.
 
 Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap. Used when it is not necessary to solve all the subproblems for reaching the final answer.
+
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_BacktrackDP"></a>
+### DP with Backtracking
+In certain situations we might need to solve a question with baktracking. Backtracking enables us to explore all outcomes and choose the best later on when directly going for a particular outcome or greedy solution wont work.
+
+Using recursion we might encounter the same problem again and again aking the time complexity of backtracking solutions exponential. Hence at this point DP comes into place.
+
+Steps to follow to define a backtracking recursive DP solution using memoization:
+1. Describe the problem as a recursive function.
+2. The function should necessarily have a return statement. The return statement in most cases will be selecting an optimal solution from a bunch of recursive subproblem calls.
+3. All non-local variables should be read only variables inside the function. ANy computations should be done using local variables only.
+4. Use memoization to  store and check values of smaller subproblems.
+5. Minimize the variables used in recursive calls as much as possible. Aim to calculate the values needed inside the function.
 
 <a href="#Contents">Back to contents</a>
 
