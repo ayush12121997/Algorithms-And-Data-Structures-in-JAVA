@@ -578,7 +578,12 @@ long binToDec(String s)
 
 <a name="Math_NCR"></a>
 ### Calculate nCr
-To calculate nCr first, find factorial from r+1 to n. The divide by factorial from 1 to r. Always calculate using long.
+To calculate nCr:
+1. Find maximum between (n-r,r). Let the max be R and other value be r.
+2. Calculate factorial from R+1 to n. Let this be F.
+3. Calculte factorial from 1 to r. Let this be f.
+4. Divide F by f. This is the answer.
+5. Always calculate using long.
 
 <a href="#Contents">Back to contents</a>
 
