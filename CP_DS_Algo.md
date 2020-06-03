@@ -410,7 +410,7 @@ public void merge(int[] arr1, int[] arr2)
 
 <a name="Arrays_InPlace"></a>
 ### In place operations to store two values in single position
-If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr[i]%value) * value) to the element, say at index j, where you want to put arr[i]. Note, it is not necessry to put arr[i] at the new index. Any element less than value can be added.
+If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr[i] % value) * value) to the element, say at index j, where you want to put arr[i]. Note, it is not necessry to put arr[i] at the new index. Any element less than value can be added.
 This works in all cases as:
 - For move involving an unchanged index to an unchanged index:
     - As value > maximum element of the array, initially any arr[i] % value = arr[i].
@@ -419,7 +419,7 @@ This works in all cases as:
 - For a move involving a previously changed index to an unchanged index:
     - Let the number at a particular index i be, arr[i] = arr[i] + (arr[j] * value), where the value if index j has also been added.
     - Now, the mod of arr[i] will always be equal to arr[i] itself as the number (arr[j] * value) % value = 0.
-    - Hence, now when arr[i]%value is calculated, the problem then becomes similar to case where an unchanged value is moved to another unchanged value.
+    - Hence, now when arr[i] % value is calculated, the problem then becomes similar to case where an unchanged value is moved to another unchanged value.
 
 ***Note: Only one time changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to already changed indexes.***
 
