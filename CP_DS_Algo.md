@@ -90,7 +90,7 @@ class Reader
 
 <a name="Printing"></a>
 ## String Builder Printing
-Faster printing which requires multiple print statements one after the anothers cab ne achieved through StringBuilder. Use StringBuilder to form a big string and then print that String. Saves time.
+Faster printing which requires multiple print statements one after the anothers can be achieved through StringBuilder. Use StringBuilder to form a big string and then print that String. Saves time.
 ```java
 StringBuilder sb = new StringBuilder();
 sb.append("Printing content");
