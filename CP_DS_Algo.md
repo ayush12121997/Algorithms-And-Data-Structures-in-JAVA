@@ -581,4 +581,13 @@ Dynamic Programming solves complex problems that trnd to take exponential time b
 Recursive solutions where various base cases call the already calculated subproblems again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping suproblems property in the question.
 
 One mehod to check this is to generally find a recurrence realation. A good point to ntoe is that it is not necessary to solve the recurrence relation at hand. If the recurrence relation, calls the function itself and forms a recrrence tree with common elements, the overlapping subproblems property is satisfied. An example is fib(n) = fib(n-1) + fib(n-2).
+
+#### Optimal Substructure
+Optimal substructure property means that the results of the parents values should be directly computable ftome the optimal results of the child values. 
+
+#### Tabulation vs Memoization
+Tabulation is when you follow a bottom's up approach to solving the problems. So for example if the recursion tree goes down to 15 levels so you start from the bottom calculating subproblems to build to the final answer. You generally do this by having an array say dp[n] and start from filling dp[0] -> dp[1] -> -> dp[n].
+
+Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap.
+
 <a href="#Contents">Back to contents</a>
