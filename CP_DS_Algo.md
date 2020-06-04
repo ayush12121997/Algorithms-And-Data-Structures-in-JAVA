@@ -643,9 +643,9 @@ Majority of the DP problems can be categorized into t
 
 <a name="DP_BacktrackDP"></a>
 ### DP with Backtracking
-In certain situations we might need to solve a question with baktracking. Backtracking enables us to explore all outcomes and choose the best later on when directly going for a particular outcome or greedy solution wont work.
+In certain situations we might need to solve a question with baktracking. Backtracking enables us to explore all outcomes and choose the best later on when directly going for a particular outcome or greedy solution wont work. Also backtracking might be requried to check whether or not certain outcome in the grid has been traversed before.
 
-Using recursion we might encounter the same problem again and again aking the time complexity of backtracking solutions exponential. Hence at this point DP comes into place.
+Using recursion we might encounter the same problem again and again making the time complexity of backtracking solutions exponential. Hence at this point DP comes into place.
 
 Steps to follow to define a backtracking recursive DP solution using memoization:
 1. Describe the problem as a recursive function.
@@ -663,19 +663,43 @@ The grid problems can be broadly classified into three subcategories:
 2. Find number of ways to reach and ending point from the starting point travelling only in specified directions.
 3. Find number of ways to reach and ending point from the starting point with obstructions.<br>
 We will discuss them one by one:
+
 #### Finding Minimum-Cost Path in a 2-D Matrix
-<ins>Problem</ins>: Given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.<br>
-Solution: <br>
+The problem statement is that given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
+
 The recurrence relation can be formed as: MinCost(i,j) = Math.min(MinCost(i-1,j), MinCost(i,j-1)) + cost[i][j] <br>
 The base conditions for this recurrence relation would be:
 1. MinCost(0,0) = cost[0][0]
-2. MinCost(0,j) = MinCost(0,j-1) + cost[0][j]
-3. MinCost(i,0) = MinCost(i-1,0) + cost[i][0]
+2. MinCost(0,j) = MinCost(0,j-1) + cost[0][j] (For cells in topmost row)
+3. MinCost(i,0) = MinCost(i-1,0) + cost[i][0] (For cells in leftmost column)
 
-As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach.
+As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
 
 #### Finding the number of ways to reach from a starting position to an ending position travelling in specified directions only
+You would be given a 2D matrix. The task is to find the number of ways to reach (i,j) from (0,0). Only movements allowed are right and down.
 
+The recurrence relation can be formed as: NumWays(i,j) = NumWays(i-1,j) + NumWays(i,j-1)<br>
+The base conditions for this recurrence relation would be:
+1. NumWays(0,0) = 1
+2. NumWays(0,j) = 1 (For cells in topmost row)
+3. NumWays(i,0) = 1 (For cells in leftmost column)
+
+As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
+
+<a href="#Contents">Back to contents</a>
+
+#### Finding the number of ways to reach a particular position in a grid from a starting position (given some cells which are blocked)
+You would be given a 2D matrix. The task is to find the number of ways to reach (i,j) from (0,0). Only movements allowed are right and down. The matrix has entries like 0 and 1. Every 0 cell is visitable and every 1 cell is blocked.
+
+The recurrence relation can be formed as:<br>
+NumWays(i,j) = NumWays(i-1,j) + NumWays(i,j-1), if (i,j) is unblocked<br>
+NumWays(i,j) = 0, if (i,j) is blocked<br>
+The base conditions for this recurrence relation would be:
+1. NumWays(0,0) = 1(if unblocked) else 0
+2. NumWays(0,j) = NumWays(0, j-1) (For cells in topmost row)
+3. NumWays(i,0) = NumWays(i-1, 0) (For cells in leftmost column)
+
+As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
 
 <a href="#Contents">Back to contents</a>
 
