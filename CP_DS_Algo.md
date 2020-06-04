@@ -628,6 +628,8 @@ Tabulation is when you follow a bottom's up approach to solving the problems. So
 
 Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap. Used when it is not necessary to solve all the subproblems for reaching the final answer.
 
+<a href="#Contents">Back to contents</a>
+
 <a name="DP_SolvingDP"></a>
 ### Solving a DP Problem
 The DP question solving can be divided into further smaller tasks (Just like DP XD):
@@ -685,8 +687,6 @@ The base conditions for this recurrence relation would be:
 3. NumWays(i,0) = 1 (For cells in leftmost column)
 
 As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
-
-<a href="#Contents">Back to contents</a>
 
 #### Finding the number of ways to reach a particular position in a grid from a starting position (given some cells which are blocked)
 You would be given a 2D matrix. The task is to find the number of ways to reach (i,j) from (0,0). Only movements allowed are right and down. The matrix has entries like 0 and 1. Every 0 cell is visitable and every 1 cell is blocked.
