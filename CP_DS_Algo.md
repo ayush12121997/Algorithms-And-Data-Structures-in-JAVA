@@ -667,8 +667,17 @@ We will discuss them one by one:
 #### Finding Minimum-Cost Path in a 2-D Matrix
 Problem: Given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
 
-Solution:
-asdasd
+Solution: <br>
+The recurrence relation can be formed as: MinCost(i,j) = Math.min(MinCost(i-1,j), MinCost(i,j-1)) + cost[i][j] <br>
+The base conditions for this recurrence relation would be:
+1. MinCost(0,0) = cost[0][0]
+2. MinCost(0,j) = MinCost(0,j-1) + cost[0][j]
+3. MinCost(i,0) = MinCost(i-1,0) + cost[i][0]
+
+As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach.
+
+#### Finding the number of ways to reach from a starting position to an ending position travelling in specified directions only
+
 
 <a href="#Contents">Back to contents</a>
 
