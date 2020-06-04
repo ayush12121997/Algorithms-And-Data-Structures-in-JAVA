@@ -667,7 +667,7 @@ We will discuss them one by one:
 #### Finding Minimum-Cost Path in a 2-D Matrix
 Problem: Given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
 
-Solution:<br>
+Solution:
 asdasd
 
 <a href="#Contents">Back to contents</a>
