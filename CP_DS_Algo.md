@@ -713,7 +713,7 @@ The longest integer subsequence problem requires you to find the length of the l
 For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array called dp[]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i, dp[i] = 1 + Max(All dp[j] such that j < i and arr[j] is smaller than arr[i]).
 
 ```java
-public int lis(final List<Integer> A)
+public int LIS(final List<Integer> A)
 {
     int n = A.size();
     if(n == 0)
