@@ -45,7 +45,8 @@
         - [Longest Integer Subsequence](#DP_LIS)
         - [Numbers of length N and value less than K]
     - [Knapsack DP]
-8. [Others]
+8. [Graphs]
+9. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
