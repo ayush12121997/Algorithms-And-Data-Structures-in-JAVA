@@ -39,8 +39,9 @@
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
-    - [DP with Backtracking](#DP_BacktrackDP)
     - [Solving a DP Problem](#DP_SolvingDP)
+    - [DP with Backtracking](#DP_BacktrackDP)
+    - [2 Dimensional DP - Grids](#DP_2DimensionalGrids)
     - [Standard Problems](#DP_StandardProblems)
         - [Longest Integer Subsequence](#DP_LIS)
         - [Numbers of length N and value less than K]
@@ -629,6 +630,17 @@ Memoization is a top down approach where you directly calculate for the final va
 
 <a href="#Contents">Back to contents</a>
 
+<a name="DP_SolvingDP"></a>
+### Solving a DP Problem
+The DP question solving can be divided into further smaller tasks (Just like DP XD):
+1. State identification: A state in a DP problem can be defined as something that helps you identify at which subproblem have you reached in your dp. For example it can be dp[index], where index is used to identify the the current subproblem, that is the current level can be traced using the index. In a knapsack problem thsi would be the [index][weight] and hence the dp formed is of the type dp[index][weight]. Hence the state identifier should be a value or at max two that help you identify the current subproblem uniquely from others.
+2. Relations between states: Find the recursive relations which defines your state(n) in terms of previously calculated values like n-1, n-2, ... and so on.
+3. Choosing between tabulation and memoization: This choice should be made according to the differences explained in the above section.
+
+Majority of the DP problems can be categorized into t
+
+<a href="#Contents">Back to contents</a>
+
 <a name="DP_BacktrackDP"></a>
 ### DP with Backtracking
 In certain situations we might need to solve a question with baktracking. Backtracking enables us to explore all outcomes and choose the best later on when directly going for a particular outcome or greedy solution wont work.
@@ -644,14 +656,19 @@ Steps to follow to define a backtracking recursive DP solution using memoization
 
 <a href="#Contents">Back to contents</a>
 
-<a name="DP_SolvingDP"></a>
-### Solving a DP Problem
-The DP question solving can be divided into further smaller tasks (Just like DP XD):
-1. State identification: A state in a DP problem can be defined as something that helps you identify at which subproblem have you reached in your dp. For example it can be dp[index], where index is used to identify the the current subproblem, that is the current level can be traced using the index. In a knapsack problem thsi would be the [index][weight] and hence the dp formed is of the type dp[index][weight]. Hence the state identifier should be a value or at max two that help you identify the current subproblem uniquely from others.
-2. Relations between states: Find the recursive relations which defines your state(n) in terms of previously calculated values like n-1, n-2, ... and so on.
-3. Choosing between tabulation and memoization: This choice should be made according to the differences explained in the above section.
+<a name="DP_2DimensionalGrids"></a>
+### 2 Dimensional DP - Grids
+The grid problems can be broadly classified into three subcategories:
+1. Find minimum cost path when a grid matrix is given.
+2. Find number of ways to reach and ending point from the starting point travelling only in specified directions.
+3. Find number of ways to reach and ending point from the starting point with obstructions.
 
-Majority of the DP problems can be categorized into t
+We will discuss them one by one:
+#### Finding Minimum-Cost Path in a 2-D Matrix
+Problem: Given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
+
+Solution:<br>
+asdasd
 
 <a href="#Contents">Back to contents</a>
 
