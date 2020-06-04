@@ -628,8 +628,6 @@ Tabulation is when you follow a bottom's up approach to solving the problems. So
 
 Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap. Used when it is not necessary to solve all the subproblems for reaching the final answer.
 
-<a href="#Contents">Back to contents</a>
-
 <a name="DP_SolvingDP"></a>
 ### Solving a DP Problem
 The DP question solving can be divided into further smaller tasks (Just like DP XD):
