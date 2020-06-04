@@ -712,6 +712,44 @@ The longest integer subsequence problem requires you to find the length of the l
 
 For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array called dp[]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i, dp[i] = 1 + Max(All dp[j] such that j < i and arr[j] is smaller than arr[i]).
 
+```java
+public int lis(final List<Integer> A)
+{
+    int n = A.size();
+    if(n == 0)
+    {
+        return 0;
+    }
+    if(n == 1)
+    {
+        return 1;
+    }
+    int[] dp = new int[n+1];
+    int ans = 0;
+    dp[0] = 1;
+    for(int i = 1; i < n; i++)
+    {
+        int max = 0;
+        for(int j = 0; j < i; j++)
+        {
+            if(A.get(j) < A.get(i))
+            {
+                if(dp[j] > max)
+                {
+                    max = dp[j];
+                }
+            }
+        }
+        dp[i] = 1 + max;
+        if(dp[i] > ans)
+        {
+            ans = dp[i];
+        }
+    }
+    return ans;
+}
+````
+
 The problem may have two variations as follows:
 1. Longest decreasing subsequence: Simply change the comaprison of getting values lesser than the current element so far to getting values greater than the current element so far.
 2. Longest increasing followed by decreasing subsequence: Calculate LIS from the beginning and also LIS from the end. The LIS from the end acts as a decreasing subsequence of elements ahead in the list. For example, LIS from the back would mean that for dp[i] the value is the longest decreasing subsequence from i -> n instead of from 0 -> i. Then calculate the max of (FrontLIS + BackLIS for all i).
