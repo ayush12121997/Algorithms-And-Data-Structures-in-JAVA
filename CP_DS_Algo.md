@@ -661,12 +661,10 @@ Steps to follow to define a backtracking recursive DP solution using memoization
 The grid problems can be broadly classified into three subcategories:
 1. Find minimum cost path when a grid matrix is given.
 2. Find number of ways to reach and ending point from the starting point travelling only in specified directions.
-3. Find number of ways to reach and ending point from the starting point with obstructions.
-
+3. Find number of ways to reach and ending point from the starting point with obstructions.<br>
 We will discuss them one by one:
 #### Finding Minimum-Cost Path in a 2-D Matrix
-Problem: Given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
-
+<ins>Problem</ins>: Given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.<br>
 Solution: <br>
 The recurrence relation can be formed as: MinCost(i,j) = Math.min(MinCost(i-1,j), MinCost(i,j-1)) + cost[i][j] <br>
 The base conditions for this recurrence relation would be:
