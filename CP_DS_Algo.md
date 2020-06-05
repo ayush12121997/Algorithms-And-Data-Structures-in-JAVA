@@ -42,7 +42,7 @@
     - [Solving a DP Problem](#DP_SolvingDP)
     - [DP with Backtracking](#DP_BacktrackDP)
     - [2 Dimensional DP - Grids](#DP_2DimensionalGrids)
-    - [DP on Strings](#DP_Strings)
+    - [DP on Merging Intervals](#DP_MergeIntervals)
     - [Standard Problems](#DP_StandardProblems)
         - [Longest Integer Subsequence](#DP_LIS)
         - [Numbers of length N and value less than K]
@@ -744,10 +744,27 @@ return dp[target]
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="DP_Strings"></a>
-### DP on Strings
-
-
+<a name="DP_MergeIntervals"></a>
+### DP on Merging Intervals
+Merging intervals DP questions will generally have a problem statement of the form, that, given a set of numbers find an optimal solution using the current number and the optimal values from the right and left sides. The problem statement might not always be direct. The standard recurrence relation for such type of a problem would be:
+```java
+dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]
+```
+The code looks like:
+```java
+for(int l = 1; l<n; l++)
+{
+    for(int i = 0; i<n-l; i++)
+    {
+        int j = i+l;
+        for(int k = i; k<j; k++)
+        {
+            dp[i][j] = max(dp[i][j], dp[i][k] + result[k] + dp[k+1][j]);
+        }
+    }
+}
+return dp[0][n-1]
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_StandardProblems"></a>
