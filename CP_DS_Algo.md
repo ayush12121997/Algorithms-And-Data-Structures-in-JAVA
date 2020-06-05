@@ -43,10 +43,11 @@
     - [DP with Backtracking](#DP_BacktrackDP)
     - [2 Dimensional DP - Grids](#DP_2DimensionalGrids)
     - [DP on Merging Intervals](#DP_MergeIntervals)
+    - [DP on Strings](#DP_Strings)
+    - [DP for decision making](#DP_Decision)
     - [Standard Problems](#DP_StandardProblems)
         - [Longest Integer Subsequence](#DP_LIS)
         - [Numbers of length N and value less than K]
-    - [Knapsack DP]
 8. [Graphs]
 9. [Others]
     - [Square root decomposition]
@@ -777,6 +778,31 @@ for(int l = 1; l<n; l++)
     }
 }
 return dp[0][n-1]
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_Strings"></a>
+### DP on Strings
+The general problem statement shared is given two or one string return some result. The result can be to find some subsequencesubstring according to a condition or find the count of certain possible subsequences/substrings.
+
+The common pattern followed for two string questions is:
+```java
+// i - indexing string s1
+// j - indexing string s2
+for (int i = 1; i <= n; ++i)
+{
+    for (int j = 1; j <= m; ++j)
+    {
+        if (s1[i-1] == s2[j-1])
+        {
+            dp[i][j] = /*code*/;
+        }
+        else
+        {
+            dp[i][j] = /*code*/;
+        }
+    }
+}
 ```
 <a href="#Contents">Back to contents</a>
 
