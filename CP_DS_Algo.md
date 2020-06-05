@@ -746,7 +746,12 @@ return dp[target]
 
 <a name="DP_MergeIntervals"></a>
 ### DP on Merging Intervals
-Merging intervals DP questions will generally have a problem statement of the form, that, given a set of numbers find an optimal solution using the current number and the optimal values from the right and left sides. The problem statement might not always be direct. The standard recurrence relation for such type of a problem would be:
+Merging intervals DP questions will generally have a problem statement of the form, that, given a set of numbers find an optimal solution using the current number and the optimal values from the right and left sides.
+
+The problem statement might not always be direct. It can be presented as a simple array with a traget to achieve. The catch is that to achieve the target we should be able to identify that every step some values of the array are merged together(that is used up to get a new value) and the size of te array reduces as we move ahead. So for example, let the operation be adding elements, we might figure that our process look like this:<br>
+[1, 2, 3, 4, 5] -> [1, 2, 3, 9] -> [3, 3, 9] -> [6, 9] -> [15]
+
+The standard recurrence relation for such type of a problem would be:
 ```java
 dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]
 // i and j are the starting and ending index of the intervals
