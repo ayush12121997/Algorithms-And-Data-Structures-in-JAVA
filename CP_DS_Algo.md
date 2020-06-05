@@ -677,6 +677,23 @@ The base conditions for this recurrence relation would be:
 
 As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
 
+The minimum cost path problem can have several variants for calculating the maximum/minimum costs, sums, values to reach a given target. The standard format for solving such questions can be:
+```java
+// cost[i] = min/max(cost[of all j's just one step before i]) + cost[i]
+
+for (int i = 1; i <= target; i++) // Build to target from the beginning
+{
+   for (int j = 0; j < CellsToReachI.size(); j++) // For every valid way to reach current cell
+   {
+       if (CellsToReachI[j] <= i) // For every valid way to reach current cell
+       {
+           dp[i] = min(dp[i], dp[i - NumWaysToReachI[j]] + cost); // Solve for the problem at hand
+       }
+   }
+}
+return dp[target]
+```
+
 #### Finding the number of ways to reach from a starting position to an ending position travelling in specified directions only
 You would be given a 2D matrix. The task is to find the number of ways to reach (i,j) from (0,0). Only movements allowed are right and down.
 
