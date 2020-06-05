@@ -681,18 +681,23 @@ The minimum cost path problem can have several variants for calculating the maxi
 ```java
 // cost[i] = min/max(cost[of all j's just one step before i]) + cost[i]
 
-for (int i = 1; i <= target; i++) // Build to target from the beginning
+// Build to target from the beginning
+for (int i = 1; i <= target; i++)
 {
-   for (int j = 0; j < CellsToReachI.size(); j++) // For every valid way to reach current cell
-   {
-       if (CellsToReachI[j] <= i) // For every valid way to reach current cell
-       {
-           dp[i] = min(dp[i], dp[i - NumWaysToReachI[j]] + cost); // Solve for the problem at hand
-       }
-   }
+    // For every valid way to reach current cell
+    for (int j = 0; j < CellsToReachI.size(); j++)
+    {
+        // For every valid way to reach current cell
+        if (CellsToReachI[j] <= i)
+        {
+            // Solve for the problem at hand
+            dp[i] = min(dp[i], dp[i - NumWaysToReachI[j]] + cost);
+        }
+    }
 }
 return dp[target]
 ```
+<a href="#Contents">Back to contents</a>
 
 #### Finding the number of ways to reach from a starting position to an ending position travelling in specified directions only
 You would be given a 2D matrix. The task is to find the number of ways to reach (i,j) from (0,0). Only movements allowed are right and down.
