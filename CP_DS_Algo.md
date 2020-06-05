@@ -42,6 +42,7 @@
     - [Solving a DP Problem](#DP_SolvingDP)
     - [DP with Backtracking](#DP_BacktrackDP)
     - [2 Dimensional DP - Grids](#DP_2DimensionalGrids)
+    - [DP on Strings](#DP_Strings)
     - [Standard Problems](#DP_StandardProblems)
         - [Longest Integer Subsequence](#DP_LIS)
         - [Numbers of length N and value less than K]
@@ -701,6 +702,12 @@ The base conditions for this recurrence relation would be:
 3. NumWays(i,0) = NumWays(i-1, 0) (For cells in leftmost column)
 
 As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
+
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_Strings"></a>
+### DP on Strings
+
 
 <a href="#Contents">Back to contents</a>
 
