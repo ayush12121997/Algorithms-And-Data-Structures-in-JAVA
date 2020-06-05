@@ -684,14 +684,14 @@ The minimum cost path problem can have several variants for calculating the maxi
 // Build to target from the beginning
 for (int i = 1; i <= target; i++)
 {
-    // For every valid way to reach current cell
+    // For every valid way to reach current cell or state
+    // CellsToReachI is of the format [i-1, i-2, i-3 and so on]
     for (int j = 0; j < CellsToReachI.size(); j++)
     {
-        // For every valid way to reach current cell
         if (CellsToReachI[j] <= i)
         {
             // Solve for the problem at hand
-            dp[i] = min(dp[i], dp[i - NumWaysToReachI[j]] + cost);
+            dp[i] = min(dp[i], dp[CellsToReachI[j]] + cost);
         }
     }
 }
@@ -711,10 +711,9 @@ The base conditions for this recurrence relation would be:
 
 As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
 
-#### Finding the number of ways to reach a particular position in a grid from a starting position (given some cells which are blocked)
-You would be given a 2D matrix. The task is to find the number of ways to reach (i,j) from (0,0). Only movements allowed are right and down. The matrix has entries like 0 and 1. Every 0 cell is visitable and every 1 cell is blocked.
+In case of obstacles(cells where you cannot go) being present, the input matrix has entries like 0 and 1. Every 0 cell is visitable and every 1 cell is blocked. Certain modifications to the above process would then be needed.
 
-The recurrence relation can be formed as:<br>
+The recurrence relation would be modified to:<br>
 NumWays(i,j) = NumWays(i-1,j) + NumWays(i,j-1), if (i,j) is unblocked<br>
 NumWays(i,j) = 0, if (i,j) is blocked<br>
 
@@ -723,8 +722,26 @@ The base conditions for this recurrence relation would be:
 2. NumWays(0,j) = NumWays(0, j-1) (For cells in topmost row)
 3. NumWays(i,0) = NumWays(i-1, 0) (For cells in leftmost column)
 
-As the problem requires every cell to be accounted for, that is all the cells that can be possibly visited need to be checked, tabulation method would work better than the topdown memoization approach. Start building from (0,0) and build to (i,j).
+This type of enumeration problem might have several variations like counting number of ways to achieve a sum, counting number of ways to achieve a target or rech a destination and so on. The standard method to solve such kinds off problems is as follows:
+```java
+// numWays[i] = numWays[i-1] + numWays[i-2] + .... + numWays[i-k]
 
+// Build to target from the beginning
+for (int i = 1; i <= target; ++i)
+{
+    // For every valid way to reach current cell or state
+    // CellsToReachI is of the format [i-1, i-2, i-3 and so on]
+    for (int j = 0; j < CellsToReachI.size(); ++j)
+    {
+        if (CellsToReachI[j] <= i)
+        {
+            // Solve for the problem at hand
+            dp[i] += dp[CellsToReachI[j]];
+        }
+    }
+}
+return dp[target]
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_Strings"></a>
