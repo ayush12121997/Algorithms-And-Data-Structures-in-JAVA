@@ -787,23 +787,56 @@ The general problem statement shared is given two or one string return some resu
 
 The common pattern followed for two string questions is:
 ```java
-// i - indexing string s1
-// j - indexing string s2
-for (int i = 1; i <= n; ++i)
+// The two strings are arranged in a character by character matrix s1 x s2.
+// i is for String 1
+// j is for String 2
+
+// For every character in String 1
+for (int i = 1; i <= n; i++)
 {
-    for (int j = 1; j <= m; ++j)
+    // For every character in String 2
+    for (int j = 1; j <= m; j++)
     {
         if (s1[i-1] == s2[j-1])
         {
-            dp[i][j] = /*code*/;
+            dp[i][j] = /*Condition to run*/;
         }
         else
         {
-            dp[i][j] = /*code*/;
+            dp[i][j] = /*Condition to run*/;
         }
     }
 }
 ```
+The common pattern followed for a single string questions is:
+```java
+// The same string is arraned in the s1 x s1 matrix.
+// The approach now is to check for length of substrings/subsequences. This forms a sliding window for length of substring/subsequence.
+
+// We begin from window of size 1 and increase till size of string.
+for (int l = 1; l < n; l++)
+{
+    // For all indexes from 0 to n - window size, we choose our starting index.
+    for (int i = 0; i < n-l; i++)
+    {
+        // Ending index is the starting index + window size.
+        int j = i + l;
+        if (s[i] == s[j])
+        {
+            dp[i][j] = /*Condition to run*/;
+        }
+        else
+        {
+            dp[i][j] = /*Condition to run*/;
+        }
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_Decision"></a>
+### DP for decision making
+
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_StandardProblems"></a>
