@@ -836,7 +836,27 @@ for (int l = 1; l < n; l++)
 
 <a name="DP_Decision"></a>
 ### DP for decision making
+The general statement for such type of problems is to decide the most optimal option from a given set. The task is to make an optimal choice from a given set at every instance or maybe just once. Sample problems can be Knapsack, Buy and Sell Stock, House Robber etc.
 
+The general approach is that given a choice, we have two options, to either make that choice or to ignore it. If we make that choice, we calculate the best between the current option and the previous time where we ignroed the choice, and vice verse, if we choose to ignroe the choice now, we calculate the best between the current option and the previous time we made the choice.
+
+```java
+// Let i be the set of values available to us
+// Let j be the set of choices available, that we may choose to take or ignore. The set of choices can be more than just simple binary choices like choose or leave. For example as seen in Knapsack.
+
+// For every value available
+for (int i = 1; i < n; i++)
+{
+    // For every choice available
+    for (int j = 1; j <= k; ++j)
+    {
+        // If we choose to select the choice
+        dp[i][j] = max({dp[i][j], dp[i-1][j] + arr[i], dp[i-1][j-1]});
+        // If we choose to ignore the choice
+        dp[i][j-1] = max({dp[i][j-1], dp[i-1][j-1] + arr[i], arr[i]});
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_StandardProblems"></a>
