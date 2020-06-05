@@ -749,14 +749,22 @@ return dp[target]
 Merging intervals DP questions will generally have a problem statement of the form, that, given a set of numbers find an optimal solution using the current number and the optimal values from the right and left sides. The problem statement might not always be direct. The standard recurrence relation for such type of a problem would be:
 ```java
 dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]
+// i and j are the starting and ending index of the intervals
+// The final answer hence would be dp[0][length of array - 1]
 ```
+The array result[] is in most cases a precalculated array that is decided on the basis of the problem statement. It can be anything ranging from the max/min value of the intervals, cost of the intervals, sum of the intervals or anything.
 The code looks like:
 ```java
+// Decide the window size ofthe interval. We build from window 1 to the entire array length as the window.
 for(int l = 1; l<n; l++)
 {
+    // Decide the starting index of the window. We move from 0 to the (n - window size) index.
     for(int i = 0; i<n-l; i++)
     {
+        // j becomes our ending index. This is always equal to i(starting index) + l(window size)
         int j = i+l;
+        // For every value k between our starting and ending index,
+        // we divide the interval into partitions i- > k, k, k -> j
         for(int k = i; k<j; k++)
         {
             dp[i][j] = max(dp[i][j], dp[i][k] + result[k] + dp[k+1][j]);
