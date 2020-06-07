@@ -656,7 +656,7 @@ Using recursion we might encounter the same problem again and again making the t
 Steps to follow to define a backtracking recursive DP solution using memoization:
 1. Describe the problem as a recursive function.
 2. The function should necessarily have a return statement. The return statement in most cases will be selecting an optimal solution from a bunch of recursive subproblem calls.
-3. All non-local variables should be read only variables inside the function. ANy computations should be done using local variables only.
+3. All non-local variables should be read only variables inside the function. Any computations should be done using local variables only.
 4. Use memoization to  store and check values of smaller subproblems.
 5. Minimize the variables used in recursive calls as much as possible. Aim to calculate the values needed inside the function.
 
