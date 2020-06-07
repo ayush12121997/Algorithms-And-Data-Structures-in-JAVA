@@ -103,10 +103,11 @@ class Reader
 
 <a name="Printing"></a>
 ## String Builder Printing
-Faster printing which requires multiple print statements one after the anothers can be achieved through StringBuilder. Use StringBuilder to form a big string and then print that String. Saves time.
+Certain questions which require multiple print statements one after the another, may result in a TLE just because of the printing delay. faster printing can be achieved through StringBuilder. Use StringBuilder to form a big string of input by constantly appending smaller outputs and then print the entire string once. Saves time.
 ```java
 StringBuilder sb = new StringBuilder();
 sb.append("Printing content");
+sb.append("Add a new line with backslash n \nlike this");
 System.out.println(sb.toString());
 ```
 <a href="#Contents">Back to contents</a>
