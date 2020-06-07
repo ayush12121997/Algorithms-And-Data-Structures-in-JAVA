@@ -34,8 +34,16 @@
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
-6. [Backtracking]
-7. [Dynamic Programming](#DynamicProgramming)
+6. [Linked Lists]
+    - [Singly Linked List Structure]
+        - [Insert Node]
+        - [Delete Node]
+        - [Reverse List]
+    - [Doubly Linked List Structure]
+        - [Insert Node]
+        - [Delete Node]
+7. [Backtracking]
+8. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -52,8 +60,8 @@
         - [Path in a Matrix]
         - [Coin change where repetitions matter and where repetitions dont matter(Difference is in loops calling)]
         - [Numbers of length N and value less than K]
-8. [Graphs]
-9. [Others]
+9. [Graphs]
+10. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
