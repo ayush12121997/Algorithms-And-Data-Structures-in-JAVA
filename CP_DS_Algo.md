@@ -50,6 +50,7 @@
         - [Longest Common Subsequence](#DP_LCS)
         - [Edit Distance]
         - [Path in a Matrix]
+        - [Coin change where repetitions matter and where repetitions dont matter]
         - [Numbers of length N and value less than K]
 8. [Graphs]
 9. [Others]
