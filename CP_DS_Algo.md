@@ -919,9 +919,11 @@ The longest common subsequence problem requires you to find the length of the lo
 As seen for strinf DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest comon subsequence until the s1[0..1] and s2[0..j] strings.
 
 The recurrence realtion can be defined as:
-dp[i][j] = 1 + dp[i-1][j-1] if the ith and jth characters in the strings are equal
-else dp[i][j] = max(dp[i][j-1], dp[i-1][j])
-
+```java
+dp[i][j] = 1 + dp[i-1][j-1] // if the ith and jth characters in the strings are equal
+dp[i][j] = max(dp[i][j-1], dp[i-1][j]) // otherwise
+```
+The code would be as follows:
 ```java
 for(int i = 0; i < n; i++)
 {
