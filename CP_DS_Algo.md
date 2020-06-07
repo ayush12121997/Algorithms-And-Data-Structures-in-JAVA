@@ -47,6 +47,7 @@
     - [DP for decision making](#DP_Decision)
     - [Standard Problems](#DP_StandardProblems)
         - [Longest Integer Subsequence](#DP_LIS)
+        - [Longest Common Subsequence](#DP_LCS)
         - [Numbers of length N and value less than K]
 8. [Graphs]
 9. [Others]
@@ -909,4 +910,32 @@ The problem may have two variations as follows:
 1. Longest decreasing subsequence: Simply change the comaprison of getting values lesser than the current element so far to getting values greater than the current element so far.
 2. Longest increasing followed by decreasing subsequence: Calculate LIS from the beginning and also LIS from the end. The LIS from the end acts as a decreasing subsequence of elements ahead in the list. For example, LIS from the back would mean that for dp[i] the value is the longest decreasing subsequence from i -> n instead of from 0 -> i. Then calculate the max of (FrontLIS + BackLIS for all i).
 
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_LCS"></a>
+#### Longest Common Subsequence
+The longest common subsequence problem requires you to find the length of the longest common subsequence between two given strings. For example for the inputs 'ABCDGH' and 'AEDFHR', the length would be 3, and the longest common subsequence would be 'ADH'.
+
+As seen for strinf DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest comon subsequence until the s1[0..1] and s2[0..j] strings.
+
+The recurrence realtion can be defined as:
+dp[i][j] = 1 + dp[i-1][j-1] if the ith and jth characters in the strings are equal
+else dp[i][j] = max(dp[i][j-1], dp[i-1][j])
+
+```java
+for(int i = 0; i < n; i++)
+{
+    for(int j = 0; j < m; j++)
+    {
+        if(s1arr[i] == s2arr[j])
+        {
+            dp[i+1][j+1] = 1 + dp[i][j];
+        }
+        else
+        {
+            dp[i+1][j+1] = Math.max(dp[i][j+1], dp[i+1][j]);
+        }
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
