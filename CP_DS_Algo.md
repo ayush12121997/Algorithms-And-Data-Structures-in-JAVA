@@ -61,6 +61,7 @@
         - [Edit Distance]
         - [Path in a Matrix]
         - [Coin change where repetitions matter and where repetitions dont matter(Difference is in loops calling)]
+        - [Distinct subsequences]
         - [Numbers of length N and value less than K]
 9. [Graphs]
 10. [Others]
