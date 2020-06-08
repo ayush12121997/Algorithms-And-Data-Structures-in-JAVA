@@ -32,6 +32,7 @@
     - [Calculate factorial of a number]
     - [Divisibility by 3, 4, 5, 6, 7, 8, 9 and (2, 3 and 5)]
     - [Calculate nCr](#Math_NCR)
+    - [Plaindrome Integer]
 5. [String]
     - [Splitting a string in Java]
     - [Find all permutations of a String]
