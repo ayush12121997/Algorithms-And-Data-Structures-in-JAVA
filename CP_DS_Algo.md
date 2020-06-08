@@ -20,6 +20,7 @@
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Prefix Sum]
     - [Scanline algorithm]
+    - [Boyer-Moore Voting Algorithm]
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
