@@ -915,7 +915,7 @@ The problem may have two variations as follows:
 #### Longest Common Subsequence
 The longest common subsequence problem requires you to find the length of the longest common subsequence between two given strings. For example for the inputs 'ABCDGH' and 'AEDFHR', the length would be 3, and the longest common subsequence would be 'ADH'.
 
-As seen for strinf DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest comon subsequence until the s1[0..1] and s2[0..j] strings.
+As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest comon subsequence until the s1[0..1] and s2[0..j] strings.
 
 The recurrence realtion can be defined as:
 ```java
