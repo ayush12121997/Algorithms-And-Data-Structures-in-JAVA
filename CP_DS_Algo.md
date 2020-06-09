@@ -15,6 +15,7 @@
     - [Count Sort]
     - [Sorting using Comparator]
     - [Kadane's Algorithm](#Arrays_KadanesAlgo)
+    - [Kadane's Algorithm for maximum product]
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Store two values in a single index](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
