@@ -59,15 +59,16 @@
         - [Longest Integer Subsequence](#DP_LIS)
         - [Longest Common Subsequence](#DP_LCS)
         - [Edit Distance]
-        - [Path in a Matrix]
         - [Coin change where repetitions matter and where repetitions dont matter(Difference is in loops calling)]
         - [Distinct subsequences]
+        - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
 9. [Graphs]
 10. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
+    - [Catalan Numbers]
 
 <a name="ReaderClass"></a>
 ## Reader Class
