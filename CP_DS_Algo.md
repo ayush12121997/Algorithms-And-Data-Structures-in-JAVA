@@ -4,9 +4,7 @@
 ## Table of contents
 1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
-3. <details>
-    <summary>[Arrays](#Arrays)</summary>
-    
+3. [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
@@ -25,8 +23,6 @@
     - [Prefix Sum]
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
-    </detials>
-    
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
