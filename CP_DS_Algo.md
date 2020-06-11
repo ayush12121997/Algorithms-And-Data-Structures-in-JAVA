@@ -4,7 +4,9 @@
 ## Table of contents
 1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
-3. [Arrays](#Arrays)
+3. <details>
+    <summary>[Arrays](#Arrays)</summary>
+    
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
@@ -23,6 +25,8 @@
     - [Prefix Sum]
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
+    </detials>
+    
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
@@ -47,7 +51,7 @@
         - [Insert Node]
         - [Delete Node]
 7. [Stacks and Queues]
-8. [Backtracking]
+8. [Recursion and Backtracking]
 9. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
@@ -67,7 +71,9 @@
         - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
 10. [Graphs]
-11. [Others]
+11. [Bit Manipulation]
+12. [Greedy Algorithms]
+14. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
