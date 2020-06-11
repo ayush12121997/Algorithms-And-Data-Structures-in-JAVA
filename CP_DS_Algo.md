@@ -49,8 +49,9 @@
 7. [Stacks and Queues]
 8. [Heaps and Maps]
 9. [Hashing]
-10. [Recursion and Backtracking]
-11. [Dynamic Programming](#DynamicProgramming)
+10. [Trees]
+11. [Recursion and Backtracking]
+12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -68,10 +69,10 @@
         - [Distinct subsequences]
         - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
-12. [Graphs]
-13. [Bit Manipulation]
-14. [Greedy Algorithms]
-15. [Others]
+13. [Graphs]
+14. [Bit Manipulation]
+15. [Greedy Algorithms]
+16. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
