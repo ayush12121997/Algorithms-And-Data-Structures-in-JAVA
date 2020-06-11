@@ -46,8 +46,9 @@
     - [Doubly Linked List Structure]
         - [Insert Node]
         - [Delete Node]
-7. [Backtracking]
-8. [Dynamic Programming](#DynamicProgramming)
+7. [Stacks and Queues]
+8. [Backtracking]
+9. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -65,8 +66,8 @@
         - [Distinct subsequences]
         - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
-9. [Graphs]
-10. [Others]
+10. [Graphs]
+11. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
