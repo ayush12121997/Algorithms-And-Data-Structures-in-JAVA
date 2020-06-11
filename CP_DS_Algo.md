@@ -10,10 +10,10 @@
     - [Selection Sort](#Arrays_SelectionSort)
     - [Insertion Sort](#Arrays_InsertionSort)
     - [Merge Sort](#Arrays_MergeSort)
-    - [Binary Search](#Arrays_BinarySearch)
     - [Bucket Sort]
     - [Count Sort]
     - [Sorting using Comparator]
+    - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm](#Arrays_KadanesAlgo)
     - [Kadane's Algorithm for maximum product]
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
