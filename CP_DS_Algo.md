@@ -4,10 +4,11 @@
 ## Table of contents
 1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
-3. ## [Arrays](#Arrays)
-    - [Basic Concepts](#Arrays_BasicConcepts)
-    - [Bubble Sort](#Arrays_BubbleSort)
-    - [Selection Sort](#Arrays_SelectionSort)
++ [Arrays](#Arrays)
+    * [Basic Concepts](#Arrays_BasicConcepts)
+    * [Bubble Sort](#Arrays_BubbleSort)
+    * [Selection Sort](#Arrays_SelectionSort)
+    
     - [Insertion Sort](#Arrays_InsertionSort)
     - [Merge Sort](#Arrays_MergeSort)
     - [Bucket Sort]
