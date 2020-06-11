@@ -2,9 +2,9 @@
 
 <a name="Contents"></a>
 ## Table of contents
-1. ## [Reader class](#ReaderClass)
+1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
-3. [Arrays](#Arrays)
+3. ## [Arrays](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
