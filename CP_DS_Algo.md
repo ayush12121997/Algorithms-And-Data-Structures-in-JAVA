@@ -38,7 +38,7 @@
 5. [String]
     - [Java String workarounds]
     - [Find all permutations of a String]
-6. [Linked Lists]
+6. [Linked Lists](#LinkedLists)
     - [Singly Linked List Structure]
         - [Insert Node]
         - [Delete Node]
@@ -629,6 +629,15 @@ To calculate nCr:
 3. Calculte factorial from 1 to r'. Let this be f'.
 4. Divide F by f'. This is the answer.
 5. Always calculate using long.
+
+<a href="#Contents">Back to contents</a>
+
+<a name="LinkedLists"></a>
+## Linked Lists
+A linked list is a data structure in which elements are not stored in contigous locations and are linked to each other using pointers. Linked lists consists of nodes which store the value for the node and the link to the next node to which it is connected. The lists can be single directed or double directed lists.
+
+<a name="LL_SinglyLinkedList"></a>
+### Singly Linked List
 
 <a href="#Contents">Back to contents</a>
 
