@@ -931,6 +931,7 @@ The recurrence realtion can be defined as:
 as we have got one extra common character. For this increase, we need the previous maximum value
 of the LCS where these characters were not included. */
 dp[i][j] = 1 + dp[i-1][j-1]
+
 /* If the ith and jth characters in the strings are not equal, then the length of LCS does not
 increase and remains the same as the previous maximum value. The previous maximum value will
 either be the maximum length LCS when character from string 1 is included and from string 2
