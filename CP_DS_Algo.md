@@ -39,13 +39,8 @@
     - [Java String workarounds]
     - [Find all permutations of a String]
 6. [Linked Lists](#LinkedLists)
-    - [Singly Linked List Structure]
-        - [Insert Node]
-        - [Delete Node]
-        - [Reverse List]
-    - [Doubly Linked List Structure]
-        - [Insert Node]
-        - [Delete Node]
+    - [Singly Linked List](#LL_SinglyLinkedList)
+    - [Doubly Linked List Structure](#LL_DoublyLinkedList)
 7. [Stacks and Queues]
 8. [Heaps and Maps]
 9. [Hashing]
