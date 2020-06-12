@@ -36,7 +36,7 @@
     - [Calculate nCr](#Math_NCR)
     - [Plaindrome Integer]
 5. [String]
-    - [Splitting a string in Java]
+    - [Java String workarounds]
     - [Find all permutations of a String]
 6. [Linked Lists]
     - [Singly Linked List Structure]
