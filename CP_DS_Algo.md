@@ -659,6 +659,21 @@ class Node
     }
 }
 ```
+#### Insert Element
+#### Delete Element
+#### Print List
+```java
+public void printList(Node head)
+{
+    StringBuilder sbf = new StringBuilder("");
+    while(head != null)
+    {
+        sbf.append(head.data + " ");
+        head = head.next;
+    }
+    System.out.print(sbf.toString());
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
