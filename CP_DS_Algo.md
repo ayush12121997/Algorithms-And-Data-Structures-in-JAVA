@@ -631,9 +631,34 @@ To calculate nCr:
 ## Linked Lists
 A linked list is a data structure in which elements are not stored in contigous locations and are linked to each other using pointers. Linked lists consists of nodes which store the value for the node and the link to the next node to which it is connected. The lists can be single directed or double directed lists.
 
+Linked lists generally have a head which is the only directly accessible element of the list. The structure looks like Head -> Node 1 -> Node 2 -> Node3
+
 <a name="LL_SinglyLinkedList"></a>
 ### Singly Linked List
+A singy linked list means that every element is linked with only the next element in the forward direction. Hence, you may access the next element of a node but not the previous one.
+```java
+class LinkedList
+{
+    Node head = null;
+}
 
+class Node
+{
+    int value = null;
+    Node next = null;
+    
+    public Node(int val, Node nex)
+    {
+        value = val;
+        next = nex;
+    }
+    
+    public Node(int val)
+    {
+        value = val;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
