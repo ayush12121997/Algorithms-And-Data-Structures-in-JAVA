@@ -927,9 +927,17 @@ As seen for string DP above, we store the two strings in character arrays say s1
 
 The recurrence realtion can be defined as:
 ```java
-// If the ith and jth characters in the strings are equal, then the length of LCS increases by 1 as we have got one extra common character. For this increase, we need the previous maximum value of the LCS where these characters were not included.
+/* If the ith and jth characters in the strings are equal, then the length of LCS increases by 1,
+as we have got one extra common character. For this increase, we need the previous maximum value
+of the LCS where these characters were not included. */
 dp[i][j] = 1 + dp[i-1][j-1]
-// If the ith and jth characters in the strings are not equal, then the length of LCS does not increase and remains the same as the previous maximum value. The previous maximum value will either be the maximum length LCS when character from string 1 is included and from string 2 isn't, or when character from string 2 is included and the one from string 1 isn't. For example, say if we have reached a point "ABCD" and "AEDF" in the two strings, the next characters would not be the same. Hence we will check for the maximum between, "ABCDG"-"AEDF" and "ABCD"-"AEDFH", that is values just before the new character was introduced.
+/* If the ith and jth characters in the strings are not equal, then the length of LCS does not
+increase and remains the same as the previous maximum value. The previous maximum value will
+either be the maximum length LCS when character from string 1 is included and from string 2
+isn't, or when character from string 2 is included and the one from string 1 isn't. For example,
+say if we have reached a point "ABCD" and "AEDF" in the two strings, the next characters would
+not be the same. Hence we will check for the maximum between, "ABCDG"-"AEDF" and "ABCD"-"AEDFH",
+that is values just before the new character was introduced. */
 dp[i][j] = max(dp[i][j-1], dp[i-1][j])
 ```
 Basic code:
