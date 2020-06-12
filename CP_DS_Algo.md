@@ -50,6 +50,7 @@
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
+    - [Traversal take from leetcode]
 11. [Recursion and Backtracking]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
