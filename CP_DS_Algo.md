@@ -663,6 +663,8 @@ class Node
 Linked list can have three types of insertions, namely, at the beginning, at the end and after a specific given node.
 ```java
 // These functions are supposed to be a part of the Linked List class
+
+// Swap current head with the new node. Link new node to prev head.
 void insertAtBeginning(int x)
 {
     Node temp = head;
@@ -670,6 +672,8 @@ void insertAtBeginning(int x)
     head.next = temp;
 }
 
+/* Iterate the list till the end. If the list is empty, make this node the head,
+else link the last node of the list to the new node. */
 void insertAtEnd(int x)
 {
     Node temp = head;
@@ -686,9 +690,19 @@ void insertAtEnd(int x)
     temp.next = newNode;
 }
 
+/* Iterate the list till the point the Node 'node' is reached. Link it to the new
+node. The previous next element of 'node' would now be linked to the new node.*/
 void insertAfter(Node node, int x)
 {
-    
+    Node temp = head;
+    while(temp != node)
+    {
+        temp = temp.next;
+    }
+    Node newNode = new Node(x);
+    Node temp2 = temp.next;
+    temp.next = newNode;
+    newNode.next = temp2;
 }
 ```
 <a href="#Contents">Back to contents</a>
