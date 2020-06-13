@@ -766,7 +766,34 @@ public void printList(Node head)
 
 <a name="LL_Cycle"></a>
 ### Detect Cycle in a Linked List
+Given a linked list head pointer, detect whether or not hte given linked list contains a cycle or not. A naive solution with O(n) space complexity and O(n) time complexity would be to use a HashMap to detect when a node is repeated. Instead we may use the two pointers method.
 
+**Two pointers method:** We keep two pointers, one pointing to the head(slow pointer) and one to head.next(fast pointer). The slow pointer would be moving one step at a time, that is, slowPointer = slowPointer.next, while the fast pointer would move two steps at a time, fastPointer = fastPointer.next.next. The idea is that if a cycle exists, the two pointers would meet at some point. Now three cases arise:
+1. N1 -> Fast -> Slow -> N2 : In this case in the next iteration Fast would meet slow.
+2. N1 -> Fast -> N2 -> Slow -> N3 : In this case in the next iteration, the condition becomes N1 -> Fast -> Slow -> N2 and hence similar to case 1.
+3. N1 -> Fast -> N2 -> N3 -> Slow -> N4 : In this case in the next iteration, the condition becomes N1 -> Fast -> N2 -> Slow -> N3 and hence similar to case 2.
+Thus in a maximum of 3 loops in constant space a cycle can be detected. If a cycly doesn't exist the fast pointer would reach null and end the loop.
+```java
+public boolean detectLoop(Node head)
+{
+    if(head == null || head.next == null)
+    {
+        return false;
+    }
+    Node pointer1 = head;
+    Node pointer2 = head.next;
+    while(pointer1 != pointer2)
+    {
+        if(pointer1 == null || pointer2 == null || pointer2.next == null)
+        {
+            return false;
+        }
+        pointer1 = pointer1.next;
+        pointer2 = pointer2.next.next;
+    }
+    return true;
+}
+```
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
 Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
