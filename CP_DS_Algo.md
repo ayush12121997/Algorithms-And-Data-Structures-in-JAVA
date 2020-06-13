@@ -41,7 +41,8 @@
 6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
-    - [Doubly Linked List Structure](#LL_DoublyLinkedList)
+    - [Doubly Linked List Structure]
+    - [Merge two sorted linked lists]
 7. [Stacks and Queues]
 8. [Heaps and Maps]
 9. [Hashing]
