@@ -772,6 +772,7 @@ Given a linked list head pointer, detect whether or not hte given linked list co
 1. N1 -> Fast -> Slow -> N2 : In this case in the next iteration Fast would meet slow.
 2. N1 -> Fast -> N2 -> Slow -> N3 : In this case in the next iteration, the condition becomes N1 -> Fast -> Slow -> N2 and hence similar to case 1.
 3. N1 -> Fast -> N2 -> N3 -> Slow -> N4 : In this case in the next iteration, the condition becomes N1 -> Fast -> N2 -> Slow -> N3 and hence similar to case 2.
+
 Thus in a maximum of 3 loops in constant space a cycle can be detected. If a cycly doesn't exist the fast pointer would reach null and end the loop.
 ```java
 public boolean detectLoop(Node head)
@@ -794,6 +795,8 @@ public boolean detectLoop(Node head)
     return true;
 }
 ```
+<a href="#Contents">Back to contents</a>
+
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
 Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
