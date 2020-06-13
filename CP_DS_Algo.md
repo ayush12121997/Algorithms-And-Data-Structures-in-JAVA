@@ -709,7 +709,42 @@ void insertAfter(Node node, int x)
 <a href="#Contents">Back to contents</a>
 
 #### Delete Element
+```java
+// These functions are supposed to be a part of the Linked List class
 
+/* This function deletes the node at position x. Only the head of the list
+is given. WE first check if head is valid or not. Then we check if the node
+to be deleted is the head. If yes, so we proceed by just changing the head.
+If not, so we then iterate to reach the node previous to the one that is to be
+deleted. Then link this current node to the next node of the node to be deleted.
+ALWAYS REMEMBER TO DELINK THE NODE TO BE DELETED. */
+Node deleteNodeAt(Node head, int x)
+{
+    Node temp = head;
+    if(temp == null)
+    {
+        return temp;
+    }
+    if(x == 1)
+    {
+        head = head.next;
+        return head;
+    }
+    int count = 1;
+    while(temp != null)
+    {
+        if(count == x-1)
+        {
+            temp.next = temp.next.next;
+            temp.next.next = null;
+            break;
+        }
+        count++;
+        temp = temp.next;
+    }
+    return head;
+}
+```
 <a href="#Contents">Back to contents</a>
 
 #### Print List
