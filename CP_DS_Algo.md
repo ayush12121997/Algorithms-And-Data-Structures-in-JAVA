@@ -40,6 +40,7 @@
     - [Find all permutations of a String]
 6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
+    - [Detect a cycle in a linked list](#LL_Cycle)
     - [Doubly Linked List Structure](#LL_DoublyLinkedList)
 7. [Stacks and Queues]
 8. [Heaps and Maps]
@@ -762,6 +763,9 @@ public void printList(Node head)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
+<a name="LL_Cycle"></a>
+### Detect Cycle in a Linked List
 
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
