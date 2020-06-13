@@ -727,7 +727,7 @@ Node deleteNodeAtX(Node head, int x)
     }
     if(x == 1)
     {
-        head = head.next;
+        head = temp.next;
         return head;
     }
     int count = 1;
