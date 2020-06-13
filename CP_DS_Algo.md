@@ -690,19 +690,20 @@ void insertAtEnd(int x)
     temp.next = newNode;
 }
 
-/* Iterate the list till the point the Node 'node' is reached. Link it to the new
-node. The previous next element of 'node' would now be linked to the new node.*/
+/* Link 'node' to the new node. The previous next element of 'node'
+would now be linked to the new node. In certain questions maybe the pointer
+to the node would not be given but the value be shared. Iterate the list
+to reach the node first and then follow the below process.*/
 void insertAfter(Node node, int x)
 {
-    Node temp = head;
-    while(temp != node)
+    if(node == null)
     {
-        temp = temp.next;
+        return;
     }
+    Node temp = node.next;
     Node newNode = new Node(x);
-    Node temp2 = temp.next;
-    temp.next = newNode;
-    newNode.next = temp2;
+    newNode.next = temp;
+    node.next = newNodee;
 }
 ```
 <a href="#Contents">Back to contents</a>
