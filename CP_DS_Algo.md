@@ -718,7 +718,7 @@ to be deleted is the head. If yes, so we proceed by just changing the head.
 If not, so we then iterate to reach the node previous to the one that is to be
 deleted. Then link this current node to the next node of the node to be deleted.
 ALWAYS REMEMBER TO DELINK THE NODE TO BE DELETED. */
-Node deleteNodeAt(Node head, int x)
+Node deleteNodeAtX(Node head, int x)
 {
     Node temp = head;
     if(temp == null)
