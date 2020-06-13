@@ -660,7 +660,43 @@ class Node
 }
 ```
 #### Insert Element
+Linked list can have three types of insertions, namely, at the beginning, at the end and after a specific given node.
+```java
+// These functions are supposed to be a part of the Linked List class
+void insertAtBeginning(int x)
+{
+    Node temp = head;
+    head = new Node(x);
+    head.next = temp;
+}
+
+void insertAtEnd(int x)
+{
+    Node temp = head;
+    if(temp == null)
+    {
+        head = new Node(x);
+        return;
+    }
+    while(temp.next!=null)
+    {
+        temp = temp.next;
+    }
+    Node newNode = new Node(x);
+    temp.next = newNode;
+}
+
+void insertAfter(Node node, int x)
+{
+    
+}
+```
+<a href="#Contents">Back to contents</a>
+
 #### Delete Element
+
+<a href="#Contents">Back to contents</a>
+
 #### Print List
 ```java
 public void printList(Node head)
