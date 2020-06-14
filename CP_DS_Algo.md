@@ -12,6 +12,7 @@
     - [Merge Sort](#Arrays_MergeSort)
     - [Bucket Sort]
     - [Count Sort]
+    - [Quick Sort]
     - [Sorting using Comparator]
     - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm](#Arrays_KadanesAlgo)
