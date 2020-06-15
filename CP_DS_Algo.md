@@ -46,7 +46,7 @@
     - [Find the middle element of a linked list]
     - [Merge two sorted linked lists]
     - [Sort a linked list in O(1) space]
-    - [Intersection of 2 linked lists]
+    - [Intersection of 2 linked lists](#LL_Intersect)
 7. [Stacks and Queues]
 8. [Heaps and Maps]
 9. [Hashing]
@@ -803,6 +803,49 @@ public boolean detectLoop(Node head)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
+<a name="LL_Intersect"></a>
+### Intersection of two linked lists
+Given 2 linked lists, your task would be to find the intersection point of the two lists if they intersect else the answer would be null.
+
+**Intuition:** If the two lists intersect then after the point of intersection, the length of the remaining list would be the same for both as the list would be common after that point. Hence any difference in length of the two lists, arises before the point of intersection. Let us assume this difference in length to be 'i'. Hence, if we remove this difference in length by starting the smaller list from the 1st node and the other list from the ith node, there will necessarily be an intersection at some point before the lists reach the end.
+
+The code would be as follows:
+```java
+public Node getIntersectionNode(Node headA, Node headB)
+{
+    if(headA == null || headB == null)
+    {
+        return null;
+    }
+    Node pointer1 = headA;
+    Node pointer2 = headB;
+    boolean check1 = false;
+    boolean check2 = false;
+    while(pointer1!=pointer2)
+    {
+        pointer1 = pointer1.next;
+        pointer2 = pointer2.next;
+        if(pointer1 == null)
+        {
+            if(!check1)
+            {
+                check1 = true;
+                pointer1 = headB;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        if(pointer2 == null)
+        {
+            pointer2 = headA;
+        }
+    }
+    return pointer1;
+}
+```
 
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
