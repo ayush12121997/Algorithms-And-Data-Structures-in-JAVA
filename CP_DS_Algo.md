@@ -79,6 +79,8 @@
     - [Segment trees]
     - [Priority Queues and Comparators]
     - [Catalan Numbers]
+    - [Line Sweep Algo]
+    - [Union Find]
 
 <a name="ReaderClass"></a>
 ## Reader Class
