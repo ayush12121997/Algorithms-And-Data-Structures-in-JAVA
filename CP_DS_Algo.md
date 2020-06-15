@@ -46,7 +46,7 @@
     - [Find the middle element of a linked list]
     - [Merge two sorted linked lists]
     - [Sort a linked list in O(1) space]
-    - [Linked lists space complexity tricks. Write about oddeven question that how pointers are only constant space complexity as long as new nodes are not created.]
+    - [Intersection of 2 linked lists]
 7. [Stacks and Queues]
 8. [Heaps and Maps]
 9. [Hashing]
