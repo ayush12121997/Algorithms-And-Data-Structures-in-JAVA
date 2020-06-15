@@ -850,6 +850,7 @@ public Node getIntersectionNode(Node headA, Node headB)
     return pointer1;
 }
 ```
+<a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
