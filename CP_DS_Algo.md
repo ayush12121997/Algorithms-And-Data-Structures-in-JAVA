@@ -810,6 +810,10 @@ Given 2 linked lists, your task would be to find the intersection point of the t
 
 **Intuition:** If the two lists intersect then after the point of intersection, the length of the remaining list would be the same for both as the list would be common after that point. Hence any difference in length of the two lists, arises before the point of intersection. Let us assume this difference in length to be 'i'. Hence, if we remove this difference in length by starting the smaller list from the 1st node and the other list from the ith node, there will necessarily be an intersection at some point before the lists reach the end.
 
+The task at hand now would be to identify this difference in length. So to do this we have the following two options:
+1. Iterate the lists till they reach the end. If lengths differ, one will reach the end faster. Count the nodes, the other list takes to reach the end from then onwards. This is difference in length.
+2. We actually would not need the difference in length in this question. What we actually need is to start iterating the longer list directly from the i'th node if i is the difference in length. Hence, as soon as the first pointer hits null, switch its value to point to the head of the other list. This way by the time the second pointer hits null, the first pointer would have iterated the longer list by i steps. Then point the second pointer to head of the smaller list and start comparing nodes.
+
 The code would be as follows:
 ```java
 public Node getIntersectionNode(Node headA, Node headB)
