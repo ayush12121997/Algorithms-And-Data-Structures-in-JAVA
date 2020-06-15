@@ -45,7 +45,7 @@
     - [Reverse a linked list]
     - [Find the middle element of a linked list]
     - [Merge two sorted linked lists]
-    - [Sort a linked list in O(1) space]
+    - [Sort a linked list]
     - [Intersection of 2 linked lists](#LL_Intersect)
 7. [Stacks and Queues]
 8. [Heaps and Maps]
