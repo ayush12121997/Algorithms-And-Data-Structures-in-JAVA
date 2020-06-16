@@ -812,42 +812,42 @@ An example would be as follows:<br>
 List1 : 2 -> 4 -> 8 -> null<br>
 List2 : 3 -> 6 -> 14 -> 17 -> null
 
-Step 1:<br>
+<ins>Step 1</ins>:<br>
 We compare 2 and 3.<br>
 List1 : **2** -> 4 -> 8 -> null<br>
 List2 : **3** -> 6 -> 14 -> 17 -> null<br>
 As 2 < 3, we add 2 to the final answer and move 2 to 4.<br>
 Answer: 2
 
-Step 2:<br>
+<ins>Step 2</ins>:<br>
 We compare 4 and 3.<br>
 List1 : **4** -> 8 -> null<br>
 List2 : **3** -> 6 -> 14 -> 17 -> null<br>
 As 3 < 4, we add 3 to the final answer and move 3 to 6.<br>
 Answer: 2 -> 3
 
-Step 3:<br>
+<ins>Step 3</ins>:<br>
 We compare 4 and 6.<br>
 List1 : **4** -> 8 -> null<br>
 List2 : **6** -> 14 -> 17 -> null<br>
 As 4 < 6, we add 4 to the final answer and move 4 to 8.<br>
 Answer: 2 -> 3 -> 4
 
-Step 4:<br>
+<ins>Step 4</ins>:<br>
 We compare 8 and 6.<br>
 List1 : **8** -> null<br>
 List2 : **6** -> 14 -> 17 -> null<br>
 As 6 < 8, we add 6 to the final answer and move 6 to 14.<br>
 Answer: 2 -> 3 -> 4 -> 6
 
-Step 5:<br>
+<ins>Step 5</ins>:<br>
 We compare 8 and 14.<br>
 List1 : **8** -> null<br>
 List2 : **14** -> 17 -> null<br>
 As 8 < 14, we add 8 to the final answer and reach end of list 1.<br>
 Answer: 2 -> 3 -> 4 -> 6 -> 8
 
-Step 6:<br>
+<ins>Step 6</ins>:<br>
 List1 : **null**<br>
 List2 : **14** -> 17 -> null<br>
 As we reach null in list1, we add all the nodes of list2 to answer directly<br>
