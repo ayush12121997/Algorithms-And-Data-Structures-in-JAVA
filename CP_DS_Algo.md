@@ -43,7 +43,7 @@
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
     - [Reverse a linked list](#LL_Reverse)
-    - [Find the middle element of a linked list]
+    - [Find the middle element of a linked list](#LL_FindMid)
     - [Merge two sorted linked lists](#LL_MergeSorted)
     - [Sort a linked list](#LL_Sort)
     - [Intersection of 2 linked lists](#LL_Intersect)
@@ -836,6 +836,33 @@ public ListNode reverseList(ListNode head)
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="LL_FindMid"></a>
+### Find middle in a linked list
+To find the middle element in a linked list simply use the two pointer appraoch. One pointer moves one step at a point, while the other moves two steps at a point. This way, when the fast pointer reaches the end, the slow reaches the middle.
+```java
+public Node findMid(Node head)
+{
+    // Routine check for empty list or single node list.
+    if(head == null || head.next == null)
+    {
+        return head;
+    }
+    
+    // Fast and slow pointer for splitting list in half.
+    ListNode fast = head;
+    ListNode slow = head;
+    
+    // We dont need to check for slow as fast is always ahead of it
+    while(fast!=null && fast.next!=null)
+    {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
+```
+<a href="#Contents">Back to contents</a>
+
 <a name="LL_MergeSorted"></a>
 ### Merge two sorted linked lists
 The idea is similar to merging two sorted arrays. The key is to remember that the two input lists are already sorted indivudally. We simply iterate both the lists and compare the node values one by one. If Node1 < Node2, then append Node1 to the final answer and we move Node1 to Node1.next. The same is done for Node2 if Node2 <= Node1. As soon as either of the list1 or list2 reaches null, we append all the remaining nodes of the other list directly to the final answer.
@@ -946,7 +973,7 @@ public Node sortList(Node head)
         return head;
     }
     
-    // Fast and slow pointer for pslitting list in half.
+    // Fast and slow pointer for splitting list in half.
     // A new pointer temp is introduced. Temp is used to store the
     // ending node of the first half of the list. As our aim is not
     // to just simply find the middle element, but to split the list
