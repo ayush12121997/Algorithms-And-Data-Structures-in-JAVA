@@ -903,6 +903,7 @@ public ListNode mergeTwoLists(Node l1, Node l2)
 <a href="#Contents">Back to contents</a>
 
 <a name="LL_Sort"></a>
+### Sort a linked list
 Given a linked list, the task is to sort it. The idea used is of MergeSort and is similar to how it works for the arrays in general. We divide the list into two halves. Each half is individually sorted and then merged together again. As we have dsicussed splitting the list into two halves and merging two sorted lists above, I would not be discussing them again here. We directly look at the code:
 ```java
 public Node sortList(Node head)
