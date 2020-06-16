@@ -42,7 +42,7 @@
 6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
-    - [Reverse a linked list]
+    - [Reverse a linked list](#LL_Reverse)
     - [Find the middle element of a linked list]
     - [Merge two sorted linked lists](#LL_MergeSorted)
     - [Sort a linked list](#LL_Sort)
@@ -800,6 +800,38 @@ public boolean detectLoop(Node head)
         pointer2 = pointer2.next.next;
     }
     return true;
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="LL_Reverse"></a>
+### Reverse a linked list
+To reverse a linked list, we start from the head and point it to null. The further links are modified in the following way:<br>
+For every link Node1 -> Node2, we modify to make it Node2 -> Node1. Hence, everytime we reach a new node, we need access to the previous node as well. Thus the two things needed would be:
+1. Point head to null.
+2. Point every new node to its previous node
+
+Also take note, that the final answer returned should be the new head of the reversed linked list, which is the last elelement of the original linked list.
+```java
+public ListNode reverseList(ListNode head)
+{
+    // Prev stores the previous node. This is null in case of head.
+    ListNode prev = null;
+    ListNode curr = head;
+    while(curr!=null)
+    {
+        // Store the next element of the current node first, before
+        // pointing the current node to it's previous element.
+        ListNode temp = curr.next;
+        curr.next = prev;
+        
+        // Set the new prev to the current element.
+        prev = curr;
+        
+        // Set the new current to the next element which was stored in temp.
+        curr = temp;
+    }
+    return prev;
 }
 ```
 <a href="#Contents">Back to contents</a>
