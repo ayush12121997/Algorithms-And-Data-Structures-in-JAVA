@@ -853,7 +853,53 @@ List2 : **14** -> 17 -> null<br>
 As we reach null in list1, we add all the nodes of list2 to answer directly<br>
 Answer: 2 -> 3 -> 4 -> 6 -> 8 -> 14 -> 17 -> null
 
-
+The code would be as folows:
+```java
+public ListNode mergeTwoLists(Node l1, Node l2)
+{
+    // temp1 and temp2 nodes to iterate list1 and list2 respectively.
+    Node temp1 = l1;
+    Node temp2 = l2;
+    
+    // We need a new node to store the final answer.
+    Node answer = new ListNode(-1);
+    
+    // We iterate the final asnwer list using ret. If we would have done
+    // this directly through the Node answer itself, we would have lost
+    // track of the head of the answer list. We need to keep track of the
+    // head to return it at the end.
+    Node ret = answer;
+    
+    while(temp1 != null && temp2!= null)
+    {
+        if(temp1.val < temp2.val)
+        {
+            ret.next = temp1;
+            temp1 = temp1.next;
+        }
+        else
+        {
+            ret.next = temp2;
+            temp2 = temp2.next;
+        }
+        ret = ret.next;
+    }
+    
+    if(temp1 != null)
+    {
+        ret.next = temp1;
+    }
+    
+    if(temp2 != null)
+    {
+        ret.next = temp2;
+    }
+    
+    // Return answer.next as answer is a dummy node with value 0 which
+    // is not a part of either of the input lists.
+    return answer.next;
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="LL_Intersect"></a>
