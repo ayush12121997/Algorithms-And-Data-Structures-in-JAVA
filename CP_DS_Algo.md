@@ -44,8 +44,8 @@
     - [Detect a cycle in a linked list](#LL_Cycle)
     - [Reverse a linked list]
     - [Find the middle element of a linked list]
-    - [Merge two sorted linked lists]
-    - [Sort a linked list]
+    - [Merge two sorted linked lists](#LL_MergeSorted)
+    - [Sort a linked list](#LL_Sort)
     - [Intersection of 2 linked lists](#LL_Intersect)
 7. [Stacks and Queues]
 8. [Heaps and Maps]
@@ -804,15 +804,70 @@ public boolean detectLoop(Node head)
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="LL_Merge"></a>
+### Merge two sorted linked lists
+The idea is similar to merging two sorted arrays. The key is to remember that the two input lists are already sorted indivudally. We simply iterate both the lists and compare the node values one by one. If Node1 < Node2, then append Node1 to the final answer and we move Node1 to Node1.next. The same is done for Node2 if Node2 <= Node1. As soon as either of the list1 or list2 reaches null, we append all the remaining nodes of the other list directly to the final answer.
+
+An example would be as follows:<br>
+List1 : 2 -> 4 -> 8 -> null<br>
+List2 : 3 -> 6 -> 14 -> 17 -> null
+
+Step 1:<br>
+We compare 2 and 3.<br>
+List1 : **2** -> 4 -> 8 -> null<br>
+List2 : **3** -> 6 -> 14 -> 17 -> null<br>
+As 2 < 3, we add 2 to the final answer and move 2 to 4.<br>
+Answer: 2
+
+Step 2:<br>
+We compare 4 and 3.<br>
+List1 : **4** -> 8 -> null<br>
+List2 : **3** -> 6 -> 14 -> 17 -> null<br>
+As 3 < 4, we add 3 to the final answer and move 3 to 6.<br>
+Answer: 2 -> 3
+
+Step 3:<br>
+We compare 4 and 6.<br>
+List1 : **4** -> 8 -> null<br>
+List2 : **6** -> 14 -> 17 -> null<br>
+As 4 < 6, we add 4 to the final answer and move 4 to 8.<br>
+Answer: 2 -> 3 -> 4
+
+Step 4:<br>
+We compare 8 and 6.<br>
+List1 : **8** -> null<br>
+List2 : **6** -> 14 -> 17 -> null<br>
+As 6 < 8, we add 6 to the final answer and move 6 to 14.<br>
+Answer: 2 -> 3 -> 4 -> 6
+
+Step 5:<br>
+We compare 8 and 14.<br>
+List1 : **8** -> null<br>
+List2 : **14** -> 17 -> null<br>
+As 8 < 14, we add 8 to the final answer and reach end of list 1.<br>
+Answer: 2 -> 3 -> 4 -> 6 -> 8
+
+Step 6:<br>
+List1 : **null**<br>
+List2 : **14** -> 17 -> null<br>
+As we reach null in list1, we add all the nodes of list2 to answer directly<br>
+Answer: 2 -> 3 -> 4 -> 6 -> 8 -> 14 -> 17 -> null
+
+
+<a href="#Contents">Back to contents</a>
+
 <a name="LL_Intersect"></a>
 ### Intersection of two linked lists
 Given 2 linked lists, your task would be to find the intersection point of the two lists if they intersect else the answer would be null.
 
-**Intuition:** If the two lists intersect then after the point of intersection, the length of the remaining list would be the same for both as the list would be common after that point. Hence any difference in length of the two lists, arises before the point of intersection. Let us assume this difference in length to be 'i'. Hence, if we remove this difference in length by starting the smaller list from the 1st node and the other list from the ith node, there will necessarily be an intersection at some point before the lists reach the end.
+**Intuition:** Try to understand the intuition point by point.
+1. If the two lists intersect then after the point of intersection, the length of the remaining lists would be the same for both as the list would be common after that point.
+2. Hence, any difference in length of the two lists, arises before the point of intersection.
+3. Let us assume this difference in length to be 'i'. If we remove this difference in length by starting the smaller list from the 1st node and starting the longer list from the ith node, and then compare the nodes of the list while iterating them one by one, if an intersection exists, we will definitely find it before reach the end.
 
-The task at hand now would be to identify this difference in length. So to do this we have the following two options:
-1. Iterate the lists till they reach the end. If lengths differ, one will reach the end faster. Count the nodes, the other list takes to reach the end from then onwards. This is difference in length.
-2. We actually would not need the difference in length in this question. What we actually need is to start iterating the longer list directly from the i'th node if i is the difference in length. Hence, as soon as the first pointer hits null, switch its value to point to the head of the other list. This way by the time the second pointer hits null, the first pointer would have iterated the longer list by i steps. Then point the second pointer to head of the smaller list and start comparing nodes.
+If you have understood the intuition, then task at hand now would be to identify this difference in length. So to do this we have the following two options:
+1. Iterate both the lists till they reach the end. If lengths differ, one will reach the end faster. Count the nodes, the longer list takes to reach the end from this point onwards. This is the difference in length.
+2. We actually would not need the difference in length in this question. What we actually need is to start iterating the longer list directly from the i'th node if 'i' is the difference in length. Hence, as soon as the pointer of the smaller list hits null, switch it's value to point to the head of the longer list. This way by the time the pointer of the longer list hits null, the first pointer would have iterated the longer list by 'i' steps. Then point the pointer of the longer list to head of the smaller list and start comparing nodes.
 
 The code would be as follows:
 ```java
