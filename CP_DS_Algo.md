@@ -1169,15 +1169,22 @@ As the problem requires every cell to be accounted for, that is all the cells th
 
 The minimum cost path problem can have several variants for calculating the maximum/minimum costs, sums, values to reach a given target. The standard format for solving such questions can be:
 ```java
+// PLEASE NOTE THIS IS A CODE DEPICTION OF THE PROCESS,
+// NOT THE PSEUDOCODE FOR THE CODE TO BE ACTUALLY WRITTEN
+
+// Cost function:
 // cost[i] = min/max(cost[of all j's just one step before i]) + cost[i]
 
-// Build to target from the beginning
+// Build upto target cell from the beginning
 for (int i = 1; i <= target; i++)
 {
-    // For every valid way to reach current cell or state
+    // Let CellsToReachI be the array having number of ways to reach Ith cell
     // CellsToReachI is of the format [i-1, i-2, i-3 and so on]
+    
+    // So for every way to reach cell i
     for (int j = 0; j < CellsToReachI.size(); j++)
     {
+        // If the question involves a validity constraint, use an if to check if cell is valid
         if (CellsToReachI[j] <= i)
         {
             // Solve for the problem at hand
@@ -1214,16 +1221,24 @@ The base conditions for this recurrence relation would be:
 
 This type of enumeration problem might have several variations like counting number of ways to achieve a sum, counting number of ways to achieve a target or rech a destination and so on. The standard method to solve such kinds off problems is as follows:
 ```java
+// PLEASE NOTE THIS IS A CODE DEPICTION OF THE PROCESS,
+// NOT THE PSEUDOCODE FOR THE CODE TO BE ACTUALLY WRITTEN
+
+// NumWay function:
 // numWays[i] = numWays[i-1] + numWays[i-2] + .... + numWays[i-k]
 
-// Build to target from the beginning
+// Build upto target cell from the beginning
 for (int i = 1; i <= target; ++i)
 {
-    // For every valid way to reach current cell or state
+    // Let CellsToReachI be the array having number of ways to reach Ith cell
     // CellsToReachI is of the format [i-1, i-2, i-3 and so on]
+    
+    // So for every way to reach cell i
     for (int j = 0; j < CellsToReachI.size(); ++j)
     {
-        if (CellsToReachI[j] <= i)
+        // If the question involves a validity constraint, use an if to check if cell is valid
+        // For this question the constraint is obstacles hence, if cells does not have obstacle
+        if (input[i] == 0)
         {
             // Solve for the problem at hand
             dp[i] += dp[CellsToReachI[j]];
