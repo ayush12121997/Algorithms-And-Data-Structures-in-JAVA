@@ -804,7 +804,7 @@ public boolean detectLoop(Node head)
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="LL_Merge"></a>
+<a name="LL_MergeSorted"></a>
 ### Merge two sorted linked lists
 The idea is similar to merging two sorted arrays. The key is to remember that the two input lists are already sorted indivudally. We simply iterate both the lists and compare the node values one by one. If Node1 < Node2, then append Node1 to the final answer and we move Node1 to Node1.next. The same is done for Node2 if Node2 <= Node1. As soon as either of the list1 or list2 reaches null, we append all the remaining nodes of the other list directly to the final answer.
 
