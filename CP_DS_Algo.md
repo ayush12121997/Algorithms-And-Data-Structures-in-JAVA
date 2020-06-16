@@ -724,9 +724,11 @@ void insertAfter(Node node, int x)
 is given. WE first check if head is valid or not. Then we check if the node
 to be deleted is the head. If yes, so we proceed by just changing the head.
 If not, so we then iterate to reach the node previous to the one that is to be
-deleted. Then link this current node to the next node of the node to be deleted.
-ALWAYS REMEMBER TO DELINK THE NODE TO BE DELETED. */
-Node deleteNodeAtX(Node head, int x)
+deleted. Then link this current node to the next node of the node to be deleted.*/
+
+//ALWAYS REMEMBER TO DELINK THE NODE TO BE DELETED.
+
+Node deleteNode(Node head, int x)
 {
     Node temp = head;
     if(temp == null)
@@ -735,20 +737,24 @@ Node deleteNodeAtX(Node head, int x)
     }
     if(x == 1)
     {
-        head = temp.next;
+        head = head.next;
         return head;
     }
-    int count = 1;
+    Node prev = temp;
+    temp = temp.next;
+    int count = 2;
     while(temp != null)
     {
-        if(count == x-1)
+        if(count == x)
         {
-            Node val = temp.next.next;
-            temp.next.next = null;
-            temp.next = val;
+            prev.next = temp.next;
+            // Delinking the node
+            temp.next = null;
+            temp = prev.next;
             break;
         }
         count++;
+        prev = temp;
         temp = temp.next;
     }
     return head;
