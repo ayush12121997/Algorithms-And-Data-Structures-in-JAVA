@@ -902,6 +902,82 @@ public ListNode mergeTwoLists(Node l1, Node l2)
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="LL_Sort"></a>
+Given a linked list, the task is to sort it. The idea used is of MergeSort and is similar to how it works for the arrays in general. We divide the list into two halves. Each half is individually sorted and then merged together again. As we have dsicussed splitting the list into two halves and merging two sorted lists above, I would not be discussing them again here. We directly look at the code:
+```java
+public Node sortList(Node head)
+{
+    // Routine check for empty list or single node list.
+    if(head == null || head.next == null)
+    {
+        return head;
+    }
+    
+    // Fast and slow pointer for pslitting list in half.
+    // A new pointer temp is introduced. Temp is used to store the
+    // ending node of the first half of the list. As our aim is not
+    // to just simply find the middle element, but to split the list
+    // into two. Hence the first half of the list would need an ending
+    // element and that would be temp.
+    ListNode fast = head;
+    ListNode slow = head;
+    ListNode temp = slow;
+    
+    while(fast!=null && fast.next!=null)
+    {
+        temp = slow;
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    
+    // Now temp.next is set to null as temp was the ending node of the first
+    // half. As soon as we set temp.next = null, we have two lists a our hands.
+    // One starts from head and ends at temp. The other starts from slow and
+    // ends at fast.
+    temp.next = null;
+    
+    // Individually sort the two lists.
+    Node front = sortList(head);
+    Node back = sortList(slow);
+    
+    // Merge the sorted lists.
+    return mergeTwoLists(front,back);
+}
+
+public Node mergeTwoLists(Node l1, Node l2)
+{
+    Node temp1 = l1;
+    Node temp2 = l2;
+    Node answer = new ListNode(-1);
+    Node ret = answer;
+    while(temp1 != null && temp2!= null)
+    {
+        if(temp1.val < temp2.val)
+        {
+            ret.next = temp1;
+            temp1 = temp1.next;
+        }
+        else
+        {
+            ret.next = temp2;
+            temp2 = temp2.next;
+        }
+        ret = ret.next;
+    }
+    if(temp1 != null)
+    {
+        ret.next = temp1;
+    }
+    if(temp2 != null)
+    {
+        ret.next = temp2;
+    }
+    return answer.next;
+}
+```
+
+<a href="#Contents">Back to contents</a>
+
 <a name="LL_Intersect"></a>
 ### Intersection of two linked lists
 Given 2 linked lists, your task would be to find the intersection point of the two lists if they intersect else the answer would be null.
