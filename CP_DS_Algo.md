@@ -1504,22 +1504,22 @@ PriorityQueue<Pair> pQueue = new PriorityQueue<Pair>(new Comparison());
 // Defining the comparator class for the queue
 class Comparison implements Comparator<Pair>
 {
-	@Override
-	public int compare(Pair p1, Pair p2)
-	{
-		if (p1.getValue() > p2.getValue())
-		{
-			return 1;
-		}
+    @Override
+    public int compare(Pair p1, Pair p2)
+    {
+        if (p1.getValue() > p2.getValue())
+        {
+            return 1;
+        }
         else if(p1.getValue() < p2.getValue())
         {
             return -1;
         }
-		else
-		{
-			return 0;
-		}
-	}
+        else
+        {
+            return 0;
+        }
+    }
 }
 
 class Pair
