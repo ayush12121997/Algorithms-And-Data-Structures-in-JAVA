@@ -1468,6 +1468,18 @@ class Queue
 ```
 <a href="#Contents">Back to contents</a>
 
+#### Inbuilt JAVA interface for queue
+All operation are O(1)
+```java
+Queue A = new LinkedList(); 
+A.add(new Integer(newElement));
+A.poll();
+A.isEmpty();
+A.size();
+A.peek();
+```
+<a href="#Contents">Back to contents</a>
+
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
 Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
