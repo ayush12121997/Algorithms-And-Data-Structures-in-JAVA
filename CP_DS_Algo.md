@@ -52,6 +52,7 @@
 7. [Stacks and Queues](#StackAndQueue)
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
+    - [Priority Queues](#SQ_PQ)
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
@@ -1480,9 +1481,63 @@ A.peek();
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="SQ_PQ"></a>
+### Priority Queues
+A prioirity queue is a type of a queue in which elements are removed on the basis of their priority. The item with the highest prioirty is the one which is always removed first. Prioirty queue can be directly implemented in java in the following way:
+```java
+PriorityQueue<Integer> A = new PriorityQueue<Integer>();
+A.add(new Integer(newElement)); //O(logN)
+A.poll(); //O(logN)
+A.isEmpty(); //O(1)
+A.size(); //O(1)
+A.peek(); //O(1)
+```
+<a href="#Contents">Back to contents</a>
+
+#### Priority Queue with comparator in JAVA
+A priority queue can be made for custom classes as well. An example for a class Pair would be as follows:
+```java
+// How to define a PriorityQueue for a custom class.
+PriorityQueue<Pair> pQueue = new PriorityQueue<Pair>(new Comparison());
+
+// Defining the comparator class for the queue
+class Comparison implements Comparator<Pair>
+{
+	@Override
+	public int compare(Pair p1, Pair p2)
+	{
+		if (p1.getValue() > p2.getValue())
+		{
+			return 1;
+		}
+        else if(p1.getValue() < p2.getValue())
+        {
+            return -1;
+        }
+		else
+		{
+			return 0;
+		}
+	}
+}
+
+class Pair
+{
+	public int key;
+	public int value;
+
+	public Pair(int k, int v)
+	{
+		key = k;
+		value = v;
+	}
+}
+```
+<a href="#Contents">Back to contents</a>
+
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
-Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
+Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values. 
 
 <a name="DP_OverlappingSubproblems"></a>
 ### Overlapping Subproblems
