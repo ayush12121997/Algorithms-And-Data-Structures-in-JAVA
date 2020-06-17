@@ -47,6 +47,7 @@
     - [Merge two sorted linked lists](#LL_MergeSorted)
     - [Sort a linked list](#LL_Sort)
     - [Intersection of 2 linked lists](#LL_Intersect)
+    - [Remove duplicates from a linked list](#LL_RemoveDuplicates)
 7. [Stacks and Queues]
 8. [Heaps and Maps]
 9. [Hashing]
@@ -1093,6 +1094,34 @@ public Node getIntersectionNode(Node headA, Node headB)
     return pointer1;
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="LL_RemoveDuplicates"></a>
+### Remove duplicates from a sorted list
+Removing duplicates from a linked list can be a two way question. One type can be to simply remove al duplicates and keep only one occurence for every element. This case is is similar to first searching for a duplicate and then simply deleteing every deuplicate node. This can be achieved by keeping a previous pointer, which at every point is compared to the current pointer, and if found equa in value, we link the previous pointer to the current.next element and move ahead. The pseudocode would be as follows:
+```java
+// Set value of prev node to anything other than head.val. Let us assume 0 at this point
+Node removeuplicates(Node head)
+{
+    Node prev = new Node(head.val + 1);
+    Node curr = head;
+    while(curr!=null)
+    {
+        if(curr.val == prev.val)
+        {
+            prev.next = curr.next;
+        }
+        else
+        {
+            prev = curr;
+        }
+        curr = curr.next;
+    }
+    return head;
+}
+```
+A modified version of the question can be when you are asked to remove all duplicate nodes and keep only unique nodes, meaning, that in the list 1 -> 1 -> 2 -> 3, the answer would be 2 -> 3 and not 1 -> 2 -> 3. This can act as a sliding window question where we maintain three pointer, previous, current and next. If previous != current and current != next, only then would the current element be unique. The code would need simple trivial changes from the code above to work.
+
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
