@@ -1307,9 +1307,28 @@ class Stack
 ```
 <a href="#Contents">Back to contents</a>
 
+#### Inbuilt JAVA class for Stacks
+All operations are O(1)
+```java
+ Stack<Integer> A = new Stack<Integer>();
+ A.push(new Integer(newElement));
+ A.pop();
+ A.empty();
+ A.size();
+ A.peek();
+```
+<a href="#Contents">Back to contents</a>
+
 <a name="SQ_Queue"></a>
 ### Queues
+A queue is very similar to a stack with the only difference being that the removal order is first in first out.
 
+A queue supports the following basic operations in O(1) time:
+1. Enqueue: To insert an element at the rear of the queue
+2. Dequeue: To remove the first element from the queue
+3. Front: To get the value of the first element of the queue
+4. Rear: To get the value of the last element of the queue
+5. isEmpty: To check if the stack is empty or not
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
