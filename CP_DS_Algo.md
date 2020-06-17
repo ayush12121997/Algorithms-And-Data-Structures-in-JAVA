@@ -48,6 +48,7 @@
     - [Sort a linked list](#LL_Sort)
     - [Intersection of 2 linked lists](#LL_Intersect)
     - [Remove duplicates from a linked list](#LL_RemoveDuplicates)
+    - [Doubly linked lists](#LL_Double)
 7. [Stacks and Queues]
 8. [Heaps and Maps]
 9. [Hashing]
@@ -1121,6 +1122,21 @@ Node removeuplicates(Node head)
 }
 ```
 A modified version of the question can be when you are asked to remove all duplicate nodes and keep only unique nodes, meaning, that in the list 1 -> 1 -> 2 -> 3, the answer would be 2 -> 3 and not 1 -> 2 -> 3. This can act as a sliding window question where we maintain three pointer, previous, current and next. If previous != current and current != next, only then would the current element be unique. The code would need simple trivial changes from the code above to work.
+
+<a href="#Contents">Back to contents</a>
+
+<a name="LL_Double"></a>
+### Doubly Linked Lists
+A doubly linked list is different from a singly linked list that it holds two pointers both to the front and the end of the list. The comparison between a doubly linked list vs a singly linked list as follows:
+1. Bidirectional traversal:<br> A doubly linked list due to presence of previous pointers can be traversed in reverse as well.
+
+2. Easy deletion:<br> Deletion is easy as you have access to previous and next of every node.
+
+3. Easy insertion before a node:<br> Again due to previous pointer, you can easily add a node in between.
+
+4. More space:<br> Consumes twice the sapce as a singly linked list.
+
+5. More complex operations:<br> The extra pointer is not always beneficial, as it makes simple operation complex as now you have to check two pointers at every instance for a list.
 
 <a href="#Contents">Back to contents</a>
 
