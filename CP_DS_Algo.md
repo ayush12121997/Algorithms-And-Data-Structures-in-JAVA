@@ -1323,12 +1323,149 @@ All operations are O(1)
 ### Queues
 A queue is very similar to a stack with the only difference being that the removal order is first in first out.
 
-A queue supports the following basic operations in O(1) time:
+A queue supports the following basic operations:
 1. Enqueue: To insert an element at the rear of the queue
 2. Dequeue: To remove the first element from the queue
 3. Front: To get the value of the first element of the queue
 4. Rear: To get the value of the last element of the queue
 5. isEmpty: To check if the stack is empty or not
+
+All the operations in a queue take place in O(1) time. A queue can be implemented either using arrays or linked lists.
+
+#### Array implementation of queue
+```java
+class Queue
+{
+	public int front;
+	public int rear;
+	public int size;
+	// Capacity is different from size as size in number of elements and capacity is
+	// maximum size
+	public int capacity;
+	public int array[];
+
+	public Queue(int cap)
+	{
+		capacity = cap;
+		front = size = 0;
+		rear = cap - 1;
+		array = new int[capacity];
+	}
+
+	public boolean isFull()
+	{
+		if (size == capacity)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	boolean isEmpty()
+	{
+		if (size == 0)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/* The enqueue and dequeue functions are to be written with care. Unlike stack
+	 * it is not the last element that has to be removed. The starting of the array has to be modified.
+	 * Hence insertion and deletion are %capacity.*/
+	public void enqueue(int item)
+	{
+		if (this.size == this.capacity)
+		{
+			return;
+		}
+		rear = (rear + 1) % capacity;
+		size++;
+		array[rear] = item;
+	}
+
+	public int dequeue()
+	{
+		if (size == 0)
+		{
+			return Integer.MIN_VALUE;
+		}
+		int item = array[front];
+		front = (front + 1) % this.capacity;
+		size--;
+		return item;
+	}
+
+	public int front()
+	{
+		if (size == 0)
+		{
+			return Integer.MIN_VALUE;
+		}
+		return array[front];
+	}
+
+	public int rear()
+	{
+		if (size == 0)
+		{
+			return Integer.MIN_VALUE;
+		}
+		return array[rear];
+	}
+}
+```
+<a href="#Contents">Back to contents</a>
+
+#### Linked list implementation of queue
+```java
+class Queue
+{
+	Node front, rear;
+
+	public Queue()
+	{
+		front = rear = null;
+	}
+
+	public void enqueue(int key)
+	{
+		Node temp = new Node(key);
+		if (rear == null)
+		{
+			front = rear = temp;
+			return;
+		}
+		rear.next = temp;
+		rear = temp;
+	}
+
+	public Node dequeue()
+	{
+		if (front == null)
+		{
+			return null;
+		}
+		Node temp = front;
+		front = front.next;
+		if (front == null)
+		{
+			rear = null;
+		}
+		return temp;
+	}
+	
+	public Node front()
+	{
+		return front;
+	}
+	
+	public Node rear()
+	{
+		return rear;
+	}
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
