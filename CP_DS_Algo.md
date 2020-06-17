@@ -50,6 +50,8 @@
     - [Remove duplicates from a linked list](#LL_RemoveDuplicates)
     - [Doubly linked lists](#LL_Double)
 7. [Stacks and Queues](#StackAndQueue)
+    - [Stacks](#SQ_Stack)
+    - [Queues](#SQ_Queue)
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
@@ -1142,6 +1144,171 @@ A doubly linked list is different from a singly linked list that it holds two po
 
 <a name="StackAndQueue"></a>
 ## Stacks and Queues
+
+<a name="SQ_Stack"></a>
+### Stacks
+A stack is a linear data structure which follows a LIFO(Last In First Out) pattern. What this means is that can be inserted again and again into the stack but the only data that can be retreived is the last element that has been inserted.
+
+A stacks supports the following basic operations:
+1. Push: To insert an element at the top of the stack
+2. Pop: To remove the top element from the stack
+3. Peek: To get the value of the top element of the stack
+4. isEmpty: To check if the stack is empty or not
+
+All the operations in a stack take place in O(1) time. A stack can be implemented either using arrays or linked lists.
+
+#### Array implementation of Stack
+Pros:
+1. Easy to implement
+2. Faster as no pointers
+
+Cons:
+1. Not dynamic in size
+```java
+class Stack
+{
+    // The stack can have a fixed maximum size as arrays are not dynamic
+    static final int SIZE = 1000;
+    // A pointer for the top value of the stack
+    int top;
+    int a[] = new int[SIZE];
+  
+    public Stack() 
+    { 
+        top = -1; 
+    }
+    
+    public boolean isEmpty()
+    {
+        if(top < 0)
+        {
+            return true;
+        } 
+    }
+    
+    public boolean push(int x) 
+    { 
+        if (top >= (SIZE - 1))
+        {
+            return false; 
+        }
+        else
+        {
+            top++;
+            a[top] = x; 
+            return true; 
+        } 
+    } 
+    
+    public int pop() 
+    { 
+        if (top < 0)
+        {
+            return Integer.MIN_VALUE;
+        } 
+        else
+        {
+            int x = a[top];
+            top--;
+            return x; 
+        }
+    }
+    
+    public int peek() 
+    {
+        if (top < 0)
+        { 
+            return Integer.MIN_VALUE;
+        }
+        else
+        {
+            int x = a[top]; 
+            return x; 
+        } 
+    } 
+} 
+```
+<a href="#Contents">Back to contents</a>
+
+#### Linked List implementation of Stack
+Pros:
+1. Dynamic in size, thus can expand
+
+Cons:
+1. Difficult to implement
+2. Takes more memory due to pointers
+```java
+class Node
+{
+    int data; 
+    Node next; 
+    
+    public Node(int data) 
+    { 
+        this.data = data; 
+    }
+}
+    
+class Stack
+{
+    Node root = null;
+  
+    public boolean isEmpty() 
+    { 
+        if (root == null)
+        { 
+            return true; 
+        } 
+        else
+        {
+            return false; 
+        }
+    } 
+  
+    public void push(int data) 
+    { 
+        Node newNode = new Node(data); 
+  
+        if (root == null)
+        { 
+            root = newNode; 
+        } 
+        else
+        { 
+            Node temp = root; 
+            root = newNode; 
+            newNode.next = temp; 
+        }
+    }
+    
+    public int pop() 
+    { 
+        int popped = Integer.MIN_VALUE; 
+        if (root != null)
+        {
+            popped = root.data; 
+            root = root.next; 
+        } 
+        return popped; 
+    }
+  
+    public int peek() 
+    { 
+        if (root == null)
+        { 
+            return Integer.MIN_VALUE; 
+        } 
+        else
+        { 
+            return root.data; 
+        } 
+    } 
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="SQ_Queue"></a>
+### Queues
 
 <a href="#Contents">Back to contents</a>
 
