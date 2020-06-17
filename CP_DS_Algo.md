@@ -1524,14 +1524,14 @@ class Comparison implements Comparator<Pair>
 
 class Pair
 {
-	public int key;
-	public int value;
-
-	public Pair(int k, int v)
-	{
-		key = k;
-		value = v;
-	}
+    public int key;
+    public int value;
+    
+    public Pair(int k, int v)
+    {
+        key = k;
+        value = v;
+    }
 }
 ```
 <a href="#Contents">Back to contents</a>
