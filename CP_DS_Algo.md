@@ -35,7 +35,7 @@
     - [Calculate factorial of a number]
     - [Divisibility by 3, 4, 5, 6, 7, 8, 9 and (2, 3 and 5)]
     - [Calculate nCr](#Math_NCR)
-    - [Plaindrome Integer]
+    - [Palindrome Integer]
 5. [String]
     - [Java String workarounds]
     - [Find all permutations of a String]
@@ -487,8 +487,9 @@ int check(int[] nums)
 <a name="Math"></a>
 ## Math
 <a name="Math_SieveOfErast"></a>
-### Sieve of Erastothenes (Find prime numbers upto a given number)
-Sieve of Erastothenes is used to find prime numbers upto a given number N. The time complexity is O(N * log(log(N))).
+
+### Sieve of Eratosthenes (Find prime numbers upto a given number)
+Sieve of Eratosthenes is used to find prime numbers upto a given number N. The time complexity is O(N * log(log(N))).
 ```java
 void sieveOfEratosthenes(int n)
 {
@@ -513,8 +514,8 @@ void sieveOfEratosthenes(int n)
 
 <a name="CheckPrime"></a>
 ### Primality Check (School Method)
-- 0 and 1 are not prime nubmers
-- Prime numbers should be checked for disivibility only till sqrt(N) as no number greater than sqrt(N) would produce a factor that hasn't already been covered till sqrt(N).
+- 0 and 1 are not prime numbers
+- Prime numbers should be checked for divisibility only till sqrt(N) as no number greater than sqrt(N) would produce a factor that hasn't already been covered till sqrt(N).
 - Primes other than 2 and 3 are of the form 6k +- 1
 ```java
 boolean isPrime(int n)
@@ -545,7 +546,7 @@ boolean isPrime(int n)
 <a name="FindFactors"></a>
 ### Find factors of a number
 #### Find all factors
-When calculating a factor, if we check that whether or not a number divides another number, if it does, at the same time we have also found another factor that is the quoteint of the divsion.
+When calculating a factor, if we check that whether or not a number divides another number, if it does, at the same time we have also found another factor that is the quotient of the division.
 ```java
 ArrayList<Integer> factorize(int n)
 {
@@ -594,7 +595,7 @@ ArrayList<Integer> factorize(int n)
 <a name="BinaryToAndFro"></a>
 ### Binary Conversions to and from Decimal
 #### From decimal to binary
-We know that a dcimal number is converted into binary by dividing the number repeatedly by 2 until the qoutient becomes 0. The binary number is represented by adding the remainder at every step to the answer so far.
+We know that a decimal number is converted into binary by dividing the number repeatedly by 2 until the quotient becomes 0. The binary number is represented by adding the remainder at every step to the answer so far.
 ```java
 String decToBin(long n, String s)
 {
@@ -634,7 +635,7 @@ long binToDec(String s)
 To calculate nCr:
 1. Find maximum between (n-r,r). Let the max be R and other value be r'.
 2. Calculate factorial from R+1 to n. Let this be F.
-3. Calculte factorial from 1 to r'. Let this be f'.
+3. Calculate factorial from 1 to r'. Let this be f'.
 4. Divide F by f'. This is the answer.
 5. Always calculate using long.
 
@@ -642,13 +643,13 @@ To calculate nCr:
 
 <a name="LinkedLists"></a>
 ## Linked Lists
-A linked list is a data structure in which elements are not stored in contigous locations and are linked to each other using pointers. Linked lists consists of nodes which store the value for the node and the link to the next node to which it is connected. The lists can be single directed or double directed lists.
+A linked list is a data structure in which elements are not stored in contiguous locations and are linked to each other using pointers. Linked lists consists of nodes which store the value for the node and the link to the next node to which it is connected. The lists can be single directed or double directed lists.
 
 Linked lists generally have a head which is the only directly accessible element of the list. The structure looks like Head -> Node 1 -> Node 2 -> Node3
 
 <a name="LL_SinglyLinkedList"></a>
 ### Singly Linked List
-A singy linked list means that every element is linked with only the next element in the forward direction. Hence, you may access the next element of a node but not the previous one.
+A singly linked list means that every element is linked with only the next element in the forward direction. Hence, you may access the next element of a node but not the previous one.
 ```java
 class LinkedList
 {
@@ -1148,7 +1149,7 @@ A doubly linked list is different from a singly linked list that it holds two po
 
 <a name="SQ_Stack"></a>
 ### Stacks
-A stack is a linear data structure which follows a LIFO(Last In First Out) pattern. What this means is that can be inserted again and again into the stack but the only data that can be retreived is the last element that has been inserted.
+A stack is a linear data structure which follows a LIFO(Last In First Out) pattern. What this means is that can be inserted again and again into the stack but the only data that can be retrieved is the last element that has been inserted.
 
 A stacks supports the following basic operations:
 1. Push: To insert an element at the top of the stack
@@ -1483,7 +1484,7 @@ A.peek();
 
 <a name="SQ_PQ"></a>
 ### Priority Queues
-A prioirity queue is a type of a queue in which elements are removed on the basis of their priority. The item with the highest prioirty is the one which is always removed first. Prioirty queue can be directly implemented in java in the following way:
+A priority queue is a type of a queue in which elements are removed on the basis of their priority. The item with the highest priority is the one which is always removed first. Priority queue can be directly implemented in java in the following way:
 ```java
 PriorityQueue<Integer> A = new PriorityQueue<Integer>();
 A.add(new Integer(newElement)); //O(logN)
@@ -1537,13 +1538,13 @@ class Pair
 
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
-Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values. 
+Dynamic Programming solves complex problems that tend to take exponential time by dividing them into smaller subproblems and storing their results for use later on to calculate larger values. 
 
 <a name="DP_OverlappingSubproblems"></a>
 ### Overlapping Subproblems
-Recursive solutions where various base cases call the already calculated subproblems again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping suproblems property in the question.
+Recursive solutions where various base cases call the already calculated subproblems again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping subproblems property in the question.
 
-One mehod to check this is to generally find a recurrence realation. A good point to ntoe is that it is not necessary to solve the recurrence relation at hand. If the recurrence relation, calls the function itself and forms a recrrence tree with common elements, the overlapping subproblems property is satisfied. An example is fib(n) = fib(n-1) + fib(n-2).
+One method to check this is to generally find a recurrence relation. A good point to note is that it is not necessary to solve the recurrence relation at hand. If the recurrence relation, calls the function itself and forms a recurrence tree with common elements, the overlapping subproblems property is satisfied. An example is fib(n) = fib(n-1) + fib(n-2).
 
 <a href="#Contents">Back to contents</a>
 
@@ -1574,7 +1575,7 @@ Majority of the DP problems can be categorized into t
 
 <a name="DP_BacktrackDP"></a>
 ### DP with Backtracking
-In certain situations we might need to solve a question with baktracking. Backtracking enables us to explore all outcomes and choose the best later on when directly going for a particular outcome or greedy solution wont work. Also backtracking might be requried to check whether or not certain outcome in the grid has been traversed before.
+In certain situations we might need to solve a question with backtracking. Backtracking enables us to explore all outcomes and choose the best later on when directly going for a particular outcome or greedy solution wont work. Also backtracking might be required to check whether or not certain outcome in the grid has been traversed before.
 
 Using recursion we might encounter the same problem again and again making the time complexity of backtracking solutions exponential. Hence at this point DP comes into place.
 
@@ -1596,7 +1597,7 @@ The grid problems can be broadly classified into three subcategories:
 We will discuss them one by one:
 
 #### Finding Minimum-Cost Path in a 2-D Matrix
-The problem statement is that given a cost matrix cost[][] where cost[i][j] is the cost of visitng the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
+The problem statement is that given a cost matrix cost[][] where cost[i][j] is the cost of visiting the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
 
 The recurrence relation can be formed as: MinCost(i,j) = Math.min(MinCost(i-1,j), MinCost(i,j-1)) + cost[i][j]
 
@@ -1659,7 +1660,7 @@ The base conditions for this recurrence relation would be:
 2. NumWays(0,j) = NumWays(0, j-1) (For cells in topmost row)
 3. NumWays(i,0) = NumWays(i-1, 0) (For cells in leftmost column)
 
-This type of enumeration problem might have several variations like counting number of ways to achieve a sum, counting number of ways to achieve a target or rech a destination and so on. The standard method to solve such kinds off problems is as follows:
+This type of enumeration problem might have several variations like counting number of ways to achieve a sum, counting number of ways to achieve a target or reach a destination and so on. The standard method to solve such kinds off problems is as follows:
 ```java
 // PLEASE NOTE THIS IS A CODE DEPICTION OF THE PROCESS,
 // NOT THE PSEUDOCODE FOR THE CODE TO BE ACTUALLY WRITTEN
@@ -1693,7 +1694,7 @@ return dp[target]
 ### DP on Merging Intervals
 Merging intervals DP questions will generally have a problem statement of the form, that, given a set of numbers find an optimal solution using the current number and the optimal values from the right and left sides.
 
-The problem statement might not always be direct. It can be presented as a simple array with a traget to achieve. The catch is that to achieve the target we should be able to identify that every step some values of the array are merged together(that is used up to get a new value) and the size of te array reduces as we move ahead. So for example, let the operation be adding elements, we might figure that our process look like this:<br>
+The problem statement might not always be direct. It can be presented as a simple array with a target to achieve. The catch is that to achieve the target we should be able to identify that every step some values of the array are merged together(that is used up to get a new value) and the size of te array reduces as we move ahead. So for example, let the operation be adding elements, we might figure that our process look like this:<br>
 [1, 2, 3, 4, 5] -> [1, 2, 3, 9] -> [3, 3, 9] -> [6, 9] -> [15]
 
 The standard recurrence relation for such type of a problem would be:
@@ -1704,6 +1705,7 @@ dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]
 ```
 The array result[] is in most cases a precalculated array that is decided on the basis of the problem statement. It can be anything ranging from the max/min value of the intervals, cost of the intervals, sum of the intervals or anything.
 The code looks like:
+
 ```java
 // Decide the window size ofthe interval. We build from window 1 to the entire array length as the window.
 for(int l = 1; l<n; l++)
@@ -1727,7 +1729,7 @@ return dp[0][n-1]
 
 <a name="DP_Strings"></a>
 ### DP on Strings
-The general problem statement shared is given two or one string return some result. The result can be to find some subsequencesubstring according to a condition or find the count of certain possible subsequences/substrings.
+The general problem statement shared is given two or one string return some result. The result can be to find some subsequence or substring according to a condition or find the count of certain possible subsequences/substrings.
 
 The common pattern followed for two string questions is:
 ```java
@@ -1782,7 +1784,7 @@ for (int l = 1; l < n; l++)
 ### DP for decision making
 The general statement for such type of problems is to decide the most optimal option from a given set. The task is to make an optimal choice from a given set at every instance or maybe just once. Sample problems can be Knapsack, Buy and Sell Stock, House Robber etc.
 
-The general approach is that given a choice, we have two options, to either make that choice or to ignore it. If we make that choice, we calculate the best between the current option and the previous time where we ignroed the choice, and vice verse, if we choose to ignroe the choice now, we calculate the best between the current option and the previous time we made the choice.
+The general approach is that given a choice, we have two options, to either make that choice or to ignore it. If we make that choice, we calculate the best between the current option and the previous time where we ignored the choice, and vice verse, if we choose to ignore the choice now, we calculate the best between the current option and the previous time we made the choice.
 
 ```java
 // Let i be the set of values available to us
@@ -1807,7 +1809,7 @@ for (int i = 1; i < n; i++)
 ### Standard Problems
 <a name="DP_LIS"></a>
 #### Longest Integer Subsequence
-The longest integer subsequence problem requires you to find the length of the longest increasing integer subsequence in an array. For example for the array [5, 8, 3, 7, 9, 1] the answer would be 3 and the subequence would be [3, 7, 9]. Do note, the subsequence is not necessarily contigous.
+The longest integer subsequence problem requires you to find the length of the longest increasing integer subsequence in an array. For example for the array [5, 8, 3, 7, 9, 1] the answer would be 3 and the subsequence would be [3, 7, 9]. Do note, the subsequence is not necessarily contiguous.
 
 For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array of the form dp[n+1]. The final answer would be the maximum of all dp[i]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i,
 ```java
@@ -1833,7 +1835,7 @@ for(int i = 1; i < n; i++)
 ````
 
 The problem may have two variations as follows:
-1. Longest decreasing subsequence: Simply change the comaprison of getting values lesser than the current element so far to getting values greater than the current element so far.
+1. Longest decreasing subsequence: Simply change the comparison of getting values lesser than the current element so far to getting values greater than the current element so far.
 2. Longest increasing followed by decreasing subsequence: Calculate LIS from the beginning and also LIS from the end. The LIS from the end acts as a decreasing subsequence of elements ahead in the list. For example, LIS from the back would mean that for dp[i] the value is the longest decreasing subsequence from i -> n instead of from 0 -> i. Then calculate the max of (FrontLIS + BackLIS for all i).
 
 <a href="#Contents">Back to contents</a>
@@ -1842,9 +1844,9 @@ The problem may have two variations as follows:
 #### Longest Common Subsequence
 The longest common subsequence problem requires you to find the length of the longest common subsequence between two given strings. For example for the inputs 'ABCDGH' and 'AEDFHR', the length would be 3, and the longest common subsequence would be 'ADH'.
 
-As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest comon subsequence until the s1[0..1] and s2[0..j] strings.
+As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest common subsequence until the s1[0..1] and s2[0..j] strings.
 
-The recurrence realtion can be defined as:
+The recurrence relation can be defined as:
 ```java
 /* If the ith and jth characters in the strings are equal, then the length of LCS increases by 1,
 as we have got one extra common character. For this increase, we need the previous maximum value
