@@ -49,7 +49,7 @@
     - [Intersection of 2 linked lists](#LL_Intersect)
     - [Remove duplicates from a linked list](#LL_RemoveDuplicates)
     - [Doubly linked lists](#LL_Double)
-7. [Stacks and Queues]
+7. [Stacks and Queues](#StackAndQueue)
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
@@ -1140,6 +1140,11 @@ A doubly linked list is different from a singly linked list that it holds two po
 
 <a href="#Contents">Back to contents</a>
 
+<a name="StackAndQueue"></a>
+## Stacks and Queues
+
+<a href="#Contents">Back to contents</a>
+
 <a name="DynamicProgramming"></a>
 ## Dynamic Programming
 Dynamic Programming solves complex problems that tend to take exponential time by divding them into smaller subproblems and storing their results for use later on to calculate larger values.
@@ -1188,7 +1193,7 @@ Steps to follow to define a backtracking recursive DP solution using memoization
 2. The function should necessarily have a return statement. The return statement in most cases will be selecting an optimal solution from a bunch of recursive subproblem calls.
 3. All non-local variables should be read only variables inside the function. Any computations should be done using local variables only.
 4. Use memoization to  store and check values of smaller subproblems.
-5. Minimize the variables used in recursive calls as much as possible. Aim to calculate the values needed inside the function.
+5. Minimize the variables used in recursive calls as much as possible. Aim to calculate the values needed inside the function instead of passing them as variables.
 
 <a href="#Contents">Back to contents</a>
 
