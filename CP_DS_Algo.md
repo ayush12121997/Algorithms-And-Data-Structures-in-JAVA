@@ -21,6 +21,7 @@
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Store two values in a single index](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
+    - [Merge intervals together]
     - [Prefix Sum]
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
