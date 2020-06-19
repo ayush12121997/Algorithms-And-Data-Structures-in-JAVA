@@ -543,6 +543,7 @@ In questions which require you to merge various intervals together, or find the 
 1. Make two seperate arrays, one with starting points of all intervals, one with ending points of all intervals.
 2. Sort the two arrays
 3. If end[i] > start[i+1], then an overlapping interval has been identified. The intervals may now be merged into one, that is start[i] to end[i+1] becomes one interval, or the count of overlapping intervals be increased.
+
 <a href="#Contents">Back to contents</a>
 
 <a name="Math"></a>
