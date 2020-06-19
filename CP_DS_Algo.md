@@ -335,6 +335,9 @@ arrayListName.toArray();
 
 // Array to ArrayList
 Arrays.asList(arrayName);
+
+// ArrayList of ArrayList into 2d array
+arrayListName.toArray(new int[size of outer parent array list][size of inner array lists]);
 ```
 #### Comparator Sort
 ```java
