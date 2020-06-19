@@ -21,7 +21,7 @@
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Store two values in a single index](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
-    - [Merge intervals together]
+    - [Merge intervals together](#Arrays_MergeIntervals)
     - [Prefix Sum]
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
@@ -535,6 +535,14 @@ int check(int[] nums)
     return a;
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Arrays_MergeIntervals"></a>
+### Merge Intervals in Arrays
+In questions which require you to merge various intervals together, or find the coutn of overlapping intervals, the general method followed is as follows:
+1. Make two seperate arrays, one with starting points of all intervals, one with ending points of all intervals.
+2. Sort the two arrays
+3. If end[i] > start[i+1], then an overlapping interval has been identified. The intervals may now be merged into one, that is start[i] to end[i+1] becomes one interval, or the count of overlapping intervals be increased.
 <a href="#Contents">Back to contents</a>
 
 <a name="Math"></a>
