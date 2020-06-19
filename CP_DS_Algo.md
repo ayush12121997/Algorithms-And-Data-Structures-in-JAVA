@@ -83,6 +83,7 @@
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
 16. [Others]
+    - [Tips and Tricks (Put multiplication here first)]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
