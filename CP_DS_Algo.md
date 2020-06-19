@@ -13,7 +13,7 @@
     - [Bucket Sort]
     - [Count Sort]
     - [Quick Sort]
-    - [Sorting using Comparator]
+    - [Array tips and tricks in JAVA](#Arrays_TipsAndTricks)
     - [Binary Search](#Arrays_BinarySearch)
     - [Kadane's Algorithm](#Arrays_KadanesAlgo)
     - [Kadane's Algorithm for maximum product]
@@ -315,6 +315,55 @@ public Merge(int[] arr, int start, int mid, int end)
         arr[m] = temp[m-start];
     }
 }
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="Arrays_TipsAndTricks"></a>
+### Tips and tricks for JAVA arrays
+#### Direct sorting
+```java
+// For array list
+Collections.sort(arrayListName);
+
+// For array
+Arrays.sort(arrayName);
+```
+#### Convert array to ArrayList and viceversa
+```java
+// ArrayList -> Array
+arrayListName.toArray();
+
+// Array to ArrayList
+Arrays.asList(arrayName);
+```
+#### Comparator Sort
+```java
+// For arraylist
+class myComparison implements Comparator<Object>
+{
+    @Override
+    public int compare(Object a, Object b)
+    {
+        if(a.val > b.val)
+        {
+            return 1;
+        }
+        else if(a.val < b.val)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+}
+Collections.sort(arrayListName, new myComparison());
+
+// For array (2D arrays)
+// Assume there is a 2D array of kind [[1,2], [2,3], [4,5], [5,6]]
+// To sort this on the basis of first number of every inner []
+Arrays.sort(arrayName, (i1, i2) -> Integers.compare(i1[0], i2[0]));
 ```
 <a href="#Contents">Back to contents</a>
 
