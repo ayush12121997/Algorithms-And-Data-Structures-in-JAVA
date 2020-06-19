@@ -73,6 +73,7 @@
         - [Longest Integer Subsequence](#DP_LIS)
         - [Longest Common Subsequence](#DP_LCS)
         - [Edit Distance]
+        - [Maximum Subarray]
         - [Coin change where repetitions matter and where repetitions dont matter(Difference is in loops calling)]
         - [Distinct subsequences]
         - [Number of ways to draw N non-intersecting chords in a circle]
