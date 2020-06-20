@@ -71,14 +71,16 @@
     - [Standard Problems](#DP_StandardProblems)
         - [Longest Integer Subsequence](#DP_LIS)
         - [Longest Common Subsequence](#DP_LCS)
+        - [Longest Common Substring]
         - [Edit Distance]
         - [Maximum Sum Subarray]
         - [Buy and Sell Stock (k transactions)]
         - [Coin change problem - cover both examples, and perfect squares]
         - [Number of distinct subsequences]
-        - [Word break - I]
+        - [Word break - 1]
         - [Decode ways]
-        - [Longest palindromic substring]
+        - [Longest Palindromic Substring]
+        - [Longest Palindromic Subsequence]
         - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
 13. [Graphs]
