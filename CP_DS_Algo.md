@@ -72,6 +72,8 @@
         - [Longest Integer Subsequence](#DP_LIS)
         - [Longest Common Subsequence](#DP_LCS)
         - [Longest Common Substring]
+        - [Longest Palindromic Subsequence]
+        - [Longest Palindromic Substring]
         - [Edit Distance]
         - [Maximum Sum Subarray]
         - [Buy and Sell Stock (k transactions)]
@@ -79,9 +81,6 @@
         - [Number of distinct subsequences]
         - [Word break - 1]
         - [Decode ways]
-        - [Longest Palindromic Substring]
-        - [Longest Palindromic Subsequence]
-        - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
 13. [Graphs]
 14. [Bit Manipulation]
