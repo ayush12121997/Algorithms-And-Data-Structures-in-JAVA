@@ -15,8 +15,8 @@
     - [Quick Sort]
     - [Array tips and tricks in JAVA](#Arrays_TipsAndTricks)
     - [Binary Search](#Arrays_BinarySearch)
-    - [Kadane's Algorithm](#Arrays_KadanesAlgo)
-    - [Kadane's Algorithm for maximum product]
+    - [Kadane's Algorithm (Maximum sum subarray)](#Arrays_KadanesAlgo)
+    - [Kadane's Algorithm for maximum product (Maximum product subarray)]
     - [Merge two sorted arrays in O(n1+n2) time]
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Store two values in a single index](#Arrays_InPlace)
@@ -36,10 +36,9 @@
     - [Calculate factorial of a number]
     - [Divisibility by 3, 4, 5, 6, 7, 8, 9 and (2, 3 and 5)]
     - [Calculate nCr](#Math_NCR)
-    - [Palindrome Integer]
+    - [Palindrome Number]
 5. [String]
     - [Java String workarounds]
-    - [Find all permutations of a String]
 6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
@@ -73,10 +72,10 @@
         - [Longest Integer Subsequence](#DP_LIS)
         - [Longest Common Subsequence](#DP_LCS)
         - [Edit Distance]
-        - [Maximum Subarray]
-        - [Buy and Sell Stock]
-        - [Coin change where repetitions matter and where repetitions dont matter(Difference is in loops calling)]
-        - [Distinct subsequences]
+        - [Maximum Sum Subarray]
+        - [Buy and Sell Stock (k transactions)]
+        - [Coin change problem - cover both examples]
+        - [Number of distinct subsequences]
         - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
 13. [Graphs]
