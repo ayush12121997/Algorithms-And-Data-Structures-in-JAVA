@@ -76,6 +76,7 @@
         - [Buy and Sell Stock (k transactions)]
         - [Coin change problem - cover both examples, and perfect squares]
         - [Number of distinct subsequences]
+        - [Word break - I]
         - [Number of ways to draw N non-intersecting chords in a circle]
         - [Numbers of length N and value less than K]
 13. [Graphs]
