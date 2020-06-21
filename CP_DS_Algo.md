@@ -83,7 +83,6 @@
         - [Decode ways]
         - [Number of distinct subsequences]
         - [Longest Artihmetic Sequence]
-        - [Numbers of length N and value less than K]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
