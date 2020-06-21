@@ -38,7 +38,8 @@
     - [Calculate nCr](#Math_NCR)
     - [Palindrome Number]
 5. [String]
-    - [Java String workarounds]
+    - [Java String workarounds (Substring, toCharArray, charAt)]
+    - [Learn KMP]
 6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
@@ -81,6 +82,7 @@
         - [Word break - 1]
         - [Decode ways]
         - [Number of distinct subsequences]
+        - [Longest Artihmetic Sequence]
         - [Numbers of length N and value less than K]
 13. [Graphs]
 14. [Bit Manipulation]
