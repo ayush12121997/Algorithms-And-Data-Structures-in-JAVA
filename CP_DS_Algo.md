@@ -1619,10 +1619,10 @@ The three key concepts of backtracking are:
 2. <ins>Constraints</ins>: Those choices are restricted on the basis of the question, and those conditions decide the validity of our choices.
 3. <ins>Goal</ins>: Final target, maybe solve a maze, solve soduko, find minimum path or anything of this sort.
 
-On the basis of these keys to backtracking, we can divide our process into three steps as follows:
-1. <ins>Identify, make a call a change</ins>:<br>What this basically means is that when we start with a base condition for our recursion, we need to change certain parameters and then call the function once again to calculate for that changed and modified value. This way at every step until and unless we believe we have reached the goal state, we keep on modifying the original values in similar ways to call the function on new values.
-2. <ins>Recurse</ins>:<br>Keep on calling the changes again and again.
-3. <ins>Return/Undo the call</ins>:<br>If the changed call has reached the end state or the goal state then we return true or whatever value was expected to be returned at the goal state. In case due to the constrains of the question we believe that the path/choice chosen is invalid, we end the calls for that choice there and go back to the step where we made that choice. Once we revert back to that step, we make a different choice if available, or return the expected answer in case of absence of new alternative choices.
+On the basis of these keys to backtracking, we can divide our process into steps as follows:
+1. <ins>Identify, make and call a change</ins>:<br>What this basically means is that when we start with a decision base, we need to choose a decision to take and then change certain parameters wrt that decision.
+2. <ins>Validate and/or recurse</ins>:<br>Once the decision has been taken, on the basis of the constraints provided by the question, we need to validate our decision. This validation can be on the basis of further recursive calls, or different 'if conditions' depending on the questions. Once validated, if needed, we recurse further to obtain an answer for this decision. In case due to the constrains of the question we believe that the path/choice chosen is invalid, we end the calls for that choice and go back to the step where we made that choice. Once we revert back to that step, we make a different choice if available, or return the expected answer in case of absence of new alternative choices.
+3. <ins>Return/Undo the call</ins>:<br>The third key of backtracking as stated above is the goal. The goal is what helps us define the base conditions for our recursion function. If the call has reached the end state or the goal state then we return whatever value was expected to be returned at that state.
 
 <a href="#Contents">Back to contents</a>
 
