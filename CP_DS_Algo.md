@@ -88,6 +88,7 @@
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
+    - [Jump Game - I and II]
 16. [Others]
     - [Tips and Tricks (Multiply takes time, Use string to chararrray instead of charat)]
     - [Square root decomposition]
