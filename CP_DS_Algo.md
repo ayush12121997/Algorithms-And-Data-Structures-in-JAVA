@@ -1664,7 +1664,7 @@ Majority of the DP problems can be categorized into t
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_BacktrackDP"></a>
-### DP with Backtracking(Top-down approach)
+### DP with Backtracking (Top-down approach)
 In certain situations we might need to solve a question with backtracking. Backtracking has been explained in detail in the section before DP(<a href="#Backtracking">Backtracking</a>). Backtracking enables us to explore all outcomes and choose the best afterwards when directly going for a particular outcome or greedy/iterative solutions won't work.
 
 Using recursion we might encounter the same problem again and again making the time complexity of backtracking solutions exponential. Hence, we combine backtracking with DP, which in general cases is known as the top down recursive approach.
