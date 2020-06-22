@@ -59,7 +59,7 @@
 10. [Trees]
     - [Traversal take from leetcode]
 11. [Recursion and Backtracking](#Backtracking)
-    - [Three keys to backtracking](#R_BT_ThreeKeys)
+    - [Keys to backtracking](#R_BT_Keys)
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
@@ -1612,8 +1612,8 @@ class Pair
 ## Recursion and Backtracking
 Backtracking is basically using recursion to solve problems that can have a divide and conquer approach applied to them. They key is that backtracking isn't just simple recursion but it is more of a trial and error recursion wherein solutions that fail are removed and those that work/pass are built further upon. For example, as we may see in a maze, that we might take certain routes which may not lead to the correct end point so we backtrack on that route to a certain point in time and then try a different route. We need not restart the entire process again and again.
 
-<a name="R_BT_ThreeKeys"></a>
-### Three Keys to backtracking
+<a name="R_BT_Keys"></a>
+### Keys to backtracking
 The three key concepts of backtracking are:
 1. <ins>Choice</ins>: Decsisions to make, that is to make choices.
 2. <ins>Constraints</ins>: Those choices are restricted on the basis of the question, and those conditions decide the validity of our choices.
@@ -1664,17 +1664,15 @@ Majority of the DP problems can be categorized into t
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_BacktrackDP"></a>
-### DP with Backtracking
-In certain situations we might need to solve a question with backtracking. Backtracking enables us to explore all outcomes and choose the best later on when directly going for a particular outcome or greedy solution wont work. Also backtracking might be required to check whether or not certain outcome in the grid has been traversed before.
+### DP with Backtracking(Top-down approach)
+In certain situations we might need to solve a question with backtracking. Backtracking has been explained in detail in the section before DP(<a href="#Backtracking">Backtracking</a>). Backtracking enables us to explore all outcomes and choose the best afterwards when directly going for a particular outcome or greedy/iterative solutions won't work.
 
-Using recursion we might encounter the same problem again and again making the time complexity of backtracking solutions exponential. Hence at this point DP comes into place.
+Using recursion we might encounter the same problem again and again making the time complexity of backtracking solutions exponential. Hence, we combine backtracking with DP, which in general cases is known as the top down recursive approach.
 
-Steps to follow to define a backtracking recursive DP solution using memoization:
-1. Describe the problem as a recursive function.
-2. The function should necessarily have a return statement. The return statement in most cases will be selecting an optimal solution from a bunch of recursive subproblem calls.
-3. All non-local variables should be read only variables inside the function. Any computations should be done using local variables only.
-4. Use memoization to  store and check values of smaller subproblems.
-5. Minimize the variables used in recursive calls as much as possible. Aim to calculate the values needed inside the function instead of passing them as variables.
+Steps to follow to define a backtracking recursive DP solution:
+1. Describe the problem as a recursive function. Steps to help decide the flow of the fucntion are explained in the backtracking section.
+2. Try to maximize the use of local variables and minimize the use of global variables. What this means is that we should try to pass as minimum as possible values in every recursive call and try to calculate the values needed with minimum information in every call seperately. Recursive calls tend to cover up large amounts of stack space in very short time.
+3. Use memoization to  store and check values of smaller subproblems to avoid exponential time complexity.
 
 <a href="#Contents">Back to contents</a>
 
