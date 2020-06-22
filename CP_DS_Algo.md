@@ -59,7 +59,7 @@
 10. [Trees]
     - [Traversal take from leetcode]
 11. [Recursion and Backtracking](#Backtracking)
-    -[Three keys to backtracking](#R_BT_ThreeKeys)
+    - [Three keys to backtracking](#R_BT_ThreeKeys)
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
