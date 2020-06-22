@@ -39,7 +39,7 @@
     - [Palindrome Number]
 5. [String]
     - [Java String workarounds (Substring, toCharArray, charAt)]
-    - [Learn KMP]
+    - [Learn KMP robin karp and stuff]
 6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
@@ -84,7 +84,6 @@
         - [Number of distinct subsequences]
         - [Longest Artihmetic Sequence]
         - [Interleaving Strings]
-        - [Jump Game - II]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
