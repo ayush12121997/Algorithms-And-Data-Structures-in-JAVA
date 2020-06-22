@@ -59,6 +59,7 @@
 10. [Trees]
     - [Traversal take from leetcode]
 11. [Recursion and Backtracking](#Backtracking)
+    -[Three keys to backtracking](#R_BT_ThreeKeys)
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
@@ -1608,8 +1609,20 @@ class Pair
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
-## Backtracking
-Backtracking is basically using recursion
+## Recursion and Backtracking
+Backtracking is basically using recursion to solve problems that can have a divide and conquer approach applied to them. They key is that backtracking isn't just simple recursion but it is more of a trial and error recursion wherein solutions that fail are removed and those that work/pass are built further upon. For example, as we may see in a maze, that we might take certain routes which may not lead to the correct end point so we backtrack on that route to a certain point in time and then try a different route. We need not restart the entire process again and again.
+
+<a name="R_BT_ThreeKeys"></a>
+### Three Keys to backtracking
+The three key concepts of backtracking are:
+1. <ins>Choice</ins>: Decsisions to make, that is to make choices.
+2. <ins>Constraints</ins>: Those choices are restricted on the basis of the question, and those conditions decide the validity of our choices.
+3. <ins>Goal</ins>: Final target, maybe solve a maze, solve soduko, find minimum path or anything of this sort.
+
+On the basis of these keys to backtracking, we can divide our process into three steps as follows:
+1. <ins>Identify, make a call a change</ins>:<br>What this basically means is that when we start with a base condition for our recursion, we need to change certain parameters and then call the function once again to calculate for that changed and modified value. This way at every step until and unless we believe we have reached the goal state, we keep on modifying the original values in similar ways to call the function on new values.
+2. <ins>Recurse</ins>:<br>Keep on calling the changes again and again.
+3. <ins>Return/Undo the call</ins>:<br>If the changed call has reached the end state or the goal state then we return true or whatever value was expected to be returned at the goal state. In case due to the constrains of the question we believe that the path/choice chosen is invalid, we end the calls for that choice there and go back to the step where we made that choice. Once we revert back to that step, we make a different choice if available, or return the expected answer in case of absence of new alternative choices.
 
 <a href="#Contents">Back to contents</a>
 
