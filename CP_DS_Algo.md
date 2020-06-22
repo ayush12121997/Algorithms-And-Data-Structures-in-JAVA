@@ -58,7 +58,7 @@
 9. [Hashing]
 10. [Trees]
     - [Traversal take from leetcode]
-11. [Recursion and Backtracking]
+11. [Recursion and Backtracking](#Backtracking)
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
@@ -1605,6 +1605,12 @@ class Pair
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Backtracking"></a>
+## Backtracking
+Backtracking is basically using recursion
+
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
