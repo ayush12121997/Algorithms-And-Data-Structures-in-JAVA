@@ -13,16 +13,17 @@
     - [Bucket Sort]
     - [Count Sort]
     - [Quick Sort]
+    - [Prefix Sum](#Arrays_PrefixSum)
     - [Array tips and tricks in JAVA](#Arrays_TipsAndTricks)
     - [Binary Search](#Arrays_BinarySearch)
+    - [Store two values in a single index](#Arrays_InPlace)
     - [Kadane's Algorithm (Maximum sum subarray)](#Arrays_KadanesAlgo)
     - [Kadane's Algorithm for maximum product (Maximum product subarray)]
     - [Merge two sorted arrays in O(n1+n2) time]
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
-    - [Store two values in a single index](#Arrays_InPlace)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Merge intervals together](#Arrays_MergeIntervals)
-    - [Prefix Sum]
+    - [Range Sum Query](#Arrays_RangeSumQuery)
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 4. [Math](#Math)
@@ -328,6 +329,30 @@ public Merge(int[] arr, int start, int mid, int end)
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="Arrays_PrefixSum"></a>
+### Prefix Sum
+Prefix sum is a method in which you calculate the sum of elements of an array upto a given index and store it in a different array. This process is done for all the indexes of the array.
+```java
+// Let input array be arr[] of size n
+
+int[] prefixSum = new int[n];
+prefixSum[0] = arr[0]; 
+for(int i = 1; i < n; i++)
+{
+    prefixSum[i] = prefixSum[i-1] + arr[i];
+}
+
+// Now the prefix sum array has sum of elemnts of the array upto that index.
+```
+This method can be used in a variety of questions such as:
+1. Range sum queries
+2. Equilibrium index of an array
+3. Range update queries
+
+We will cover these problems later if needed.
+
+<a href="#Contents">Back to contents</a>
+
 <a name="Arrays_TipsAndTricks"></a>
 ### Tips and tricks for JAVA arrays
 #### Direct sorting
@@ -408,6 +433,23 @@ public int BinarySearch(int[] arr, int start, int end, int value)
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Arrays_InPlace"></a>
+### In place operations to store two values in single position
+If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr[i] % value) * value) to the element, say at index j, where you want to put arr[i]. Note, it is not necessry to put arr[i] at the new index. Any element less than value can be added.
+This works in all cases as:
+- For move involving an unchanged index to an unchanged index:
+    - As value > maximum element of the array, initially any arr[i] % value = arr[i].
+    - Now at new index, say index j, arr[j] = arr[j] + (arr[i] * value).
+    - If arr[j] is now divided by value, it would give us the answer arr[i] as arr[j]/value = 0 and (arr[i] * value) / value = arr[i].
+- For a move involving a previously changed index to an unchanged index:
+    - Let the number at a particular index i be, arr[i] = arr[i] + (arr[j] * value), where the value if index j has also been added.
+    - Now, the mod of arr[i] will always be equal to arr[i] itself as the number (arr[j] * value) % value = 0.
+    - Hence, now when arr[i] % value is calculated, the problem then becomes similar to case where an unchanged value is moved to another unchanged value.
+
+***Note: Only one time changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to already changed indexes.***
+
 <a href="#Contents">Back to contents</a>
 
 <a name="Arrays_KadanesAlgo"></a>
@@ -510,23 +552,6 @@ public void merge(int[] arr1, int[] arr2)
     System.out.println(sbf);
 }
 ```
-<a href="#Contents">Back to contents</a>
-
-<a name="Arrays_InPlace"></a>
-### In place operations to store two values in single position
-If the maximum element of an array is known, pick any number, say value, greater than this maximum element. Now in order to make in place swaps, without the use of a temp variable, just add ((arr[i] % value) * value) to the element, say at index j, where you want to put arr[i]. Note, it is not necessry to put arr[i] at the new index. Any element less than value can be added.
-This works in all cases as:
-- For move involving an unchanged index to an unchanged index:
-    - As value > maximum element of the array, initially any arr[i] % value = arr[i].
-    - Now at new index, say index j, arr[j] = arr[j] + (arr[i] * value).
-    - If arr[j] is now divided by value, it would give us the answer arr[i] as arr[j]/value = 0 and (arr[i] * value) / value = arr[i].
-- For a move involving a previously changed index to an unchanged index:
-    - Let the number at a particular index i be, arr[i] = arr[i] + (arr[j] * value), where the value if index j has also been added.
-    - Now, the mod of arr[i] will always be equal to arr[i] itself as the number (arr[j] * value) % value = 0.
-    - Hence, now when arr[i] % value is calculated, the problem then becomes similar to case where an unchanged value is moved to another unchanged value.
-
-***Note: Only one time changed/unchanged indexes can be moved to unchanged indexes. No movements can be made to already changed indexes.***
-
 <a href="#Contents">Back to contents</a>
 
 <a name="Arrays_FindSingle"></a>
