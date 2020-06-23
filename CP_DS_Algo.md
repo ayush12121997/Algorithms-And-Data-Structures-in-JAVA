@@ -87,7 +87,7 @@
     - [Longest Artihmetic Sequence]
     - [Interleaving Strings]
     - [Egg Drop Puzzle]
-    - [Max Sum of Rectangle No Larger Than K]
+    - [Max Sum of Rectangle, Normal and No Larger than K]
     - [Maximal Rectangle containing only 1s]
 13. [Graphs]
 14. [Bit Manipulation]
