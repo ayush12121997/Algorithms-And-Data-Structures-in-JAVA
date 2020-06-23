@@ -23,7 +23,7 @@
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Merge intervals together](#Arrays_MergeIntervals)
-    - [Range Sum Query-Update](#Arrays_RSQueryUpdate)
+    - [Range Sum Query](#Arrays_RSQuery)
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 4. [Math](#Math)
@@ -579,6 +579,31 @@ In questions which require you to merge various intervals together, or find the 
 2. Sort the two arrays
 3. If end[i] > start[i+1], then an overlapping interval has been identified. The intervals may now be merged into one, that is start[i] to end[i+1] becomes one interval, or the count of overlapping intervals be increased.
 
+<a href="#Contents">Back to contents</a>
+
+<a name="Arrays_RSQuery"></a>
+### Range sum query
+The problem statement would be "Given an integer array nums, find the sum of the elements between indices i and j". A naive solution can be to calculate the sum in O(n) time for every time a query is given. This works fine in small number of queries. But what if, number of queries is also ~n. In that case for n queries total complexity would be O(n^2). This can be reduced to O(n) using prefix sum method.
+```java
+class NumArray
+{
+    int[] prefixSum = null;
+    public NumArray(int[] nums)
+    {
+        int n = nums.length;
+        prefixSum = new int[n+1];
+        for(int i = 1; i <= n; i++)
+        {
+            prefixSum[i] = prefixSum[i-1] + nums[i-1];
+        }
+    }
+    
+    public int sumRange(int i, int j)
+    {
+        return prefixSum[j+1] - prefixSum[i];
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="Math"></a>
