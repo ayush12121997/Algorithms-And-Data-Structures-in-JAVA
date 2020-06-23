@@ -63,6 +63,7 @@
     - [Traversal take from leetcode]
 11. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
+    - [Generate paranthesis]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
