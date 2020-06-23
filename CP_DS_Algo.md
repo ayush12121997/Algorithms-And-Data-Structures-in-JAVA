@@ -1613,12 +1613,13 @@ class Pair
 ## Recursion and Backtracking
 Backtracking is basically using recursion to solve problems that can have a divide and conquer approach applied to them. They key is that backtracking isn't just simple recursion but it is more of a trial and error recursion wherein solutions that fail are removed and those that work/pass are built further upon. For example, as we may see in a maze, that we might take certain routes which may not lead to the correct end point so we backtrack on that route to a certain point in time and then try a different route. We need not restart the entire process again and again.
 
-***Note:*** Backtracking problems can generally be identified by words like
-1. "Compute all/total .... where .... ",
-2. "Find all/total .... where .... ",
-3. "Generate all/total .... where .... ",
-4. "Print all/total .... where .... ",
-5. "Count all/total .... where .... ",<br>
+Backtracking problems can generally be identified by words like
+1. "Compute all/total .... where .... "
+2. "Find all/total .... where .... "
+3. "Generate all/total .... where .... "
+4. "Print all/total .... where .... "
+5. "Count all/total .... where .... "
+
 that is, whenever the question demands you to exhaust all the possibilities under certain conditions, in almost all the cases a backtracking solution will exist. The solution might not garuantee the optimal answer, but will definitely exist with bcaktracking. 
 
 <a name="R_BT_Keys"></a>
