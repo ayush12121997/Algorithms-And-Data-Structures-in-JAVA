@@ -93,6 +93,7 @@
     - [Max Sum of Rectangle, Normal and No Larger than K]
     - [Maximal square containing only 1s]
     - [Maximal Rectangle containing only 1s, needs maximum rectangle in histogram as prereq]
+    - [Number of Unique binary search trees]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
@@ -102,9 +103,9 @@
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
-    - [Catalan Numbers]
     - [Line Sweep Algo]
     - [Union Find]
+    - [Catalan Number]
     - [Tree sets an usage, like maximum sum subarray with sum less than equal to k]
 
 <a name="ReaderClass"></a>
