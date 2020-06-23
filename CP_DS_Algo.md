@@ -19,6 +19,7 @@
     - [Store two values in a single index](#Arrays_InPlace)
     - [Kadane's Algorithm (Maximum sum subarray)](#Arrays_KadanesAlgo)
     - [Kadane's Algorithm for maximum product (Maximum product subarray)]
+    - [Maximum sum subarray having sum less than or equal to k]
     - [Merge two sorted arrays in O(n1+n2) time]
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Find closest number in sorted array]
@@ -56,6 +57,7 @@
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
     - [Priority Queues](#SQ_PQ)
+    - [Largest rectangle possible in histogram]
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
@@ -86,9 +88,11 @@
     - [Number of Distinct Subsequences]
     - [Longest Artihmetic Sequence]
     - [Interleaving Strings]
+    - [Jumo game - II]
     - [Egg Drop Puzzle]
     - [Max Sum of Rectangle, Normal and No Larger than K]
-    - [Maximal Rectangle containing only 1s]
+    - [Maximal square containing only 1s]
+    - [Maximal Rectangle containing only 1s, needs maximum rectangle in histogram as prereq]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
