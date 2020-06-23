@@ -70,22 +70,21 @@
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
     - [DP for decision making](#DP_Decision)
-    - [Standard Problems](#DP_StandardProblems)
-        - [Longest Integer Subsequence](#DP_LIS)
-        - [Longest Common Subsequence](#DP_LCS)
-        - [Longest Common Substring]
-        - [Longest Palindromic Subsequence]
-        - [Longest Palindromic Substring]
-        - [Edit Distance]
-        - [Maximum Sum Subarray]
-        - [Buy and Sell Stock (k transactions)]
-        - [Coin Change problem - cover both examples, and perfect squares]
-        - [Word break - 1]
-        - [Decode ways]
-        - [Number of Distinct Subsequences]
-        - [Longest Artihmetic Sequence]
-        - [Interleaving Strings]
-        - [Egg Drop Puzzle]
+    - [Longest Integer Subsequence](#DP_LIS)
+    - [Longest Common Subsequence](#DP_LCS)
+    - [Longest Common Substring]
+    - [Longest Palindromic Subsequence]
+    - [Longest Palindromic Substring]
+    - [Edit Distance]
+    - [Maximum Sum Subarray]
+    - [Buy and Sell Stock (k transactions)]
+    - [Coin Change problem - cover both examples, and perfect squares]
+    - [Word break - 1]
+    - [Decode ways]
+    - [Number of Distinct Subsequences]
+    - [Longest Artihmetic Sequence]
+    - [Interleaving Strings]
+    - [Egg Drop Puzzle]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
@@ -1903,10 +1902,8 @@ for (int i = 1; i < n; i++)
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="DP_StandardProblems"></a>
-### Standard Problems
 <a name="DP_LIS"></a>
-#### Longest Integer Subsequence
+### Longest Integer Subsequence
 The longest integer subsequence problem requires you to find the length of the longest increasing integer subsequence in an array. For example for the array [5, 8, 3, 7, 9, 1] the answer would be 3 and the subsequence would be [3, 7, 9]. Do note, the subsequence is not necessarily contiguous.
 
 For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array of the form dp[n+1]. The final answer would be the maximum of all dp[i]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i,
@@ -1939,7 +1936,7 @@ The problem may have two variations as follows:
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_LCS"></a>
-#### Longest Common Subsequence
+### Longest Common Subsequence
 The longest common subsequence problem requires you to find the length of the longest common subsequence between two given strings. For example for the inputs 'ABCDGH' and 'AEDFHR', the length would be 3, and the longest common subsequence would be 'ADH'.
 
 As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest common subsequence until the s1[0..1] and s2[0..j] strings.
