@@ -19,7 +19,6 @@
     - [Store two values in a single index](#Arrays_InPlace)
     - [Kadane's Algorithm (Maximum sum subarray)](#Arrays_KadanesAlgo)
     - [Kadane's Algorithm for maximum product (Maximum product subarray)]
-    - [Maximum sum subarray having sum less than or equal to k]
     - [Merge two sorted arrays in O(n1+n2) time]
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Find closest number in sorted array]
