@@ -23,7 +23,7 @@
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Merge intervals together](#Arrays_MergeIntervals)
-    - [Range Sum Query](#Arrays_RangeSumQuery)
+    - [Range Sum Query-Update](#Arrays_RSQueryUpdate)
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 4. [Math](#Math)
