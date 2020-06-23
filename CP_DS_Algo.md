@@ -79,7 +79,7 @@
     - [Longest Palindromic Subsequence]
     - [Longest Palindromic Substring]
     - [Edit Distance]
-    - [Maximum Sum Subarray]
+    - [Maximum Sum Subarray, also include without adjacent elements]
     - [Buy and Sell Stock (k transactions)]
     - [Coin Change problem - cover both examples, and perfect squares]
     - [Word break - 1]
