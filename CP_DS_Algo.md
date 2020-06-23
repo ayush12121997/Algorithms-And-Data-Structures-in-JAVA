@@ -86,6 +86,8 @@
     - [Longest Artihmetic Sequence]
     - [Interleaving Strings]
     - [Egg Drop Puzzle]
+    - [Max Sum of Rectangle No Larger Than K]
+    - [Maximal Rectangle containing only 1s]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
@@ -454,7 +456,7 @@ This works in all cases as:
 
 <a name="Arrays_KadanesAlgo"></a>
 ### Kadane's Algorithm (Maximum sum contigous sub array)
-- To find the maximum sub contigous sub-array we maintain two variables, a local sum and a global sum.
+- To find the maximum sum contigous sub-array we maintain two variables, a local sum and a global sum.
 - Local sum is the max of current local sum + arr[i] and arr[i]. The global sum is the maximum of localsum and current global sum.
 - Return the list of indexes from where to where the sum is maximum. Also return the sum. Return (start index, end index, sum).
 ```java
