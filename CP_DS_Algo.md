@@ -64,6 +64,8 @@
 11. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Generate paranthesis]
+    - [Permutations - I and II]
+    - [Next Permutation]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
@@ -99,7 +101,6 @@
 15. [Greedy Algorithms]
     - [Jump Game - I and II]
 16. [Others]
-    - [Tips and Tricks (Multiply takes time, Use string to chararrray instead of charat)]
     - [Square root decomposition]
     - [Segment trees]
     - [Priority Queues and Comparators]
