@@ -66,6 +66,7 @@
     - [Generate paranthesis]
     - [Permutations - I and II]
     - [Next Permutation]
+    - [Subsets - I and II]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
