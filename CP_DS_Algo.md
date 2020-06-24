@@ -67,6 +67,7 @@
     - [Permutations - I and II]
     - [Next Permutation]
     - [Subsets - I and II]
+    - [Combination sum - I and II, similar to coin change printing]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
