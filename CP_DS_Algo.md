@@ -72,6 +72,7 @@
     - [Palindrome Partitioning - II]
     - [Partition into k equal sum subsets]
     - [N Queens problem]
+    - [Restore IP Addresses]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
