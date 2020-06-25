@@ -70,6 +70,7 @@
     - [Combination sum - I and II, similar to coin change printing]
     - [Palindrome Partitioning]
     - [Palindrome Partitioning - II]
+    - [Partition into k equal sum subsets]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
