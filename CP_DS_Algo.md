@@ -68,6 +68,8 @@
     - [Next Permutation]
     - [Subsets - I and II]
     - [Combination sum - I and II, similar to coin change printing]
+    - [Palindrome Partitioning]
+    - [Palindrome Partitioning - II]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
@@ -98,6 +100,7 @@
     - [Maximal square containing only 1s]
     - [Maximal Rectangle containing only 1s, needs maximum rectangle in histogram as prereq]
     - [Number of Unique binary search trees]
+    - [Palindrome Partitioning - II]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
