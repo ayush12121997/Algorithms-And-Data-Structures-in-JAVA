@@ -117,6 +117,7 @@
     - [Union Find]
     - [Catalan Number]
     - [Tree sets an usage, like maximum sum subarray with sum less than equal to k]
+    - [Add char to int and int to char and ascii shiz]
 
 <a name="ReaderClass"></a>
 ## Reader Class
