@@ -109,6 +109,8 @@
     - [Maximal Rectangle containing only 1s, needs maximum rectangle in histogram as prereq]
     - [Number of Unique binary search trees]
     - [Palindrome Partitioning - II]
+    - [Regular expression mathcing]
+    - [Wildcard matching]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
