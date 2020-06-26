@@ -63,6 +63,7 @@
     - [Traversal take from leetcode]
 11. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
+    - [Standard structure for backtracking problems]
     - [Generate paranthesis]
     - [Permutations - I and II]
     - [Next Permutation]
