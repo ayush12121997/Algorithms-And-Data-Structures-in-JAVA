@@ -2058,7 +2058,7 @@ from string 1 is included and from string 2 isn't, or when character from
 string 2 is included and the one from string 1 isn't. For example, say if we
 have reached a point "G" and "H" in the two strings, these characters would
 not be the same. Hence we will check for the maximum between, "ABCDG"-"AEDF"
-and "ABCD"-"AEDFH", that is values just before the new characters were introduced.
+and "ABCD"-"AEDFH", that is values before the new characters were introduced.
 */
 dp[i][j] = max(dp[i][j-1], dp[i-1][j])
 ```
