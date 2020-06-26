@@ -1755,8 +1755,8 @@ Using recursion we might encounter the same problem again and again making the t
 
 Steps to follow to define a backtracking recursive DP solution:
 1. Describe the problem as a recursive function. Steps to help decide the flow of the fucntion are explained in the backtracking section.
-2. Try to maximize the use of local variables and minimize the use of global variables. What this means is that we should try to pass as minimum as possible values in every recursive call and try to calculate the values needed with minimum information in every call seperately. Recursive calls tend to cover up large amounts of stack space in very short time.
-3. Use memoization to  store and check values of smaller subproblems to avoid exponential time complexity.
+2. Try to maximize the use of local variables and minimize the use of global variables. What this means is that we should try to use minimum size possible table for the memoization. Instead of identifying a particular state using all the variables available, we should try to minimize the number of variables needed to identify a state uniquely from others.
+3. Once state varibles are decided, use memoization to store and check values of smaller subproblems to avoid exponential time complexity.
 
 <a href="#Contents">Back to contents</a>
 
