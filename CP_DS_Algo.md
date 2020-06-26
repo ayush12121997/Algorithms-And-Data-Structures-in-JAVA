@@ -1987,7 +1987,7 @@ for (int i = 1; i < n; i++)
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_Decision"></a>
-### DP for decision making
+### DP for decision making (Knapsack)
 The general statement for such type of problems is to decide the most optimal option from a given set. The task is to make an optimal choice from a given set at every instance or maybe just once.
 
 The general approach is that given a choice, we have two options, to either make that choice or to ignore it.
@@ -1995,24 +1995,9 @@ The general approach is that given a choice, we have two options, to either make
 2. If we choose to ignore the choice now, we just choose the value from the previous time we made the choice.
 
 Sample problems can be Knapsack, Buy and Sell Stock, House Robber etc.
-```java
-/*
-Let i be the set of values available to us and j be the set of choices available.
-For every value, we may choose to make a choice based on our choice set.
-These choice sets are generaly to take or ignore the valuestake or ignore it. For example as seen in Knapsack.
 
-// For every value available
-for (int i = 1; i < n; i++)
-{
-    // For every choice available
-    for (int j = 1; j <= k; ++j)
-    {
-        // If we choose to select the choice
-        dp[i][j] = max({dp[i][j], dp[i-1][j] + arr[i], dp[i-1][j-1]});
-        // If we choose to ignore the choice
-        dp[i][j-1] = max({dp[i][j-1], dp[i-1][j-1] + arr[i], arr[i]});
-    }
-}
+```java
+// KNAPSACK AND RELATED PROBLEMS TO BE ADDED HERE
 ```
 <a href="#Contents">Back to contents</a>
 
@@ -2057,18 +2042,24 @@ As seen for string DP above, we store the two strings in character arrays say s1
 
 The recurrence relation can be defined as:
 ```java
-/* If the ith and jth characters in the strings are equal, then the length of LCS increases by 1,
-as we have got one extra common character. For this increase, we need the previous maximum value
-of the LCS where these characters were not included. */
+/*
+If the ith and jth characters in the strings are equal, then the length
+of LCS increases by 1, as we have got one extra common character.
+For this increase, we need the previous maximum value of the LCS where
+these characters were not included.
+*/
 dp[i][j] = 1 + dp[i-1][j-1]
 
-/* If the ith and jth characters in the strings are not equal, then the length of LCS does not
-increase and remains the same as the previous maximum value. The previous maximum value will
-either be the maximum length LCS when character from string 1 is included and from string 2
-isn't, or when character from string 2 is included and the one from string 1 isn't. For example,
-say if we have reached a point "ABCD" and "AEDF" in the two strings, the next characters would
-not be the same. Hence we will check for the maximum between, "ABCDG"-"AEDF" and "ABCD"-"AEDFH",
-that is values just before the new character was introduced. */
+/*
+If the ith and jth characters in the strings are not equal, then the length
+of LCS does not increase and remains the same as the previous maximum value.
+The previous maximum value will either be the maximum length LCS when character
+from string 1 is included and from string 2 isn't, or when character from
+string 2 is included and the one from string 1 isn't. For example, say if we
+have reached a point "G" and "H" in the two strings, these characters would
+not be the same. Hence we will check for the maximum between, "ABCDG"-"AEDF"
+and "ABCD"-"AEDFH", that is values just before the new characters were introduced.
+*/
 dp[i][j] = max(dp[i][j-1], dp[i-1][j])
 ```
 Basic code:
