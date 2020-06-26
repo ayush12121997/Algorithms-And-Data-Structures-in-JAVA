@@ -71,10 +71,11 @@
     - [Combination sum - I and II, similar to coin change printing]
     - [Palindrome Partitioning]
     - [Palindrome Partitioning - II]
-    - [Partition into k equal sum subsets]
+    - [Partition into k equal sum subsets and for subset equal sum k = 2]
     - [N Queens problem]
     - [Restore IP Addresses]
     - [Sudoku Solver]
+    - [Letter combinations of a Phone Number]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
@@ -113,12 +114,13 @@
 16. [Others]
     - [Square root decomposition]
     - [Segment trees]
-    - [Priority Queues and Comparators]
-    - [Line Sweep Algo]
+    - [Trie]
     - [Union Find]
+    - [Tree sets and usage, like maximum sum subarray with sum less than equal to k]
+    - [Line Sweep Algo]
     - [Catalan Number]
-    - [Tree sets an usage, like maximum sum subarray with sum less than equal to k]
     - [Add char to int and int to char and ascii shiz]
+    - [Stable marriage]
 
 <a name="ReaderClass"></a>
 ## Reader Class
