@@ -1246,7 +1246,8 @@ public Node getIntersectionNode(Node headA, Node headB)
 ### Remove duplicates from a sorted list
 Removing duplicates from a linked list can be a two way question. One type can be to simply remove al duplicates and keep only one occurence for every element. This case is is similar to first searching for a duplicate and then simply deleteing every deuplicate node. This can be achieved by keeping a previous pointer, which at every point is compared to the current pointer, and if found equa in value, we link the previous pointer to the current.next element and move ahead. The pseudocode would be as follows:
 ```java
-// Set value of prev node to anything other than head.val. Let us assume 0 at this point
+// Set value of prev node to anything other than head.val.
+// Let us assume 0 at this point
 Node removeuplicates(Node head)
 {
     Node prev = new Node(head.val + 1);
@@ -1482,8 +1483,8 @@ class Queue
 	public int front;
 	public int rear;
 	public int size;
-	// Capacity is different from size as size in number of elements and capacity is
-	// maximum size
+	// Capacity is different from size as size is number of elements
+    // and capacity is the maximum size possible
 	public int capacity;
 	public int array[];
 
@@ -1513,9 +1514,12 @@ class Queue
 		return false;
 	}
 
-	/* The enqueue and dequeue functions are to be written with care. Unlike stack
-	 * it is not the last element that has to be removed. The starting of the array has to be modified.
-	 * Hence insertion and deletion are %capacity.*/
+	/*
+    The enqueue and dequeue functions are to be written with care. Unlike
+    stack it is not the last element that has to be removed. The starting
+    of the array has to be modified.
+    Hence insertion and deletion are %capacity.
+    */
 	public void enqueue(int item)
 	{
 		if (this.size == this.capacity)
@@ -1791,7 +1795,8 @@ for (int i = 1; i <= target; i++)
     // So for every way to reach cell i
     for (int j = 0; j < CellsToReachI.size(); j++)
     {
-        // If the question involves a validity constraint, use an if to check if cell is valid
+        // If the question involves a validity constraint,
+        // use an if to check if cell is valid
         if (CellsToReachI[j] <= i)
         {
             // Solve for the problem at hand
@@ -1843,8 +1848,11 @@ for (int i = 1; i <= target; ++i)
     // So for every way to reach cell i
     for (int j = 0; j < CellsToReachI.size(); ++j)
     {
-        // If the question involves a validity constraint, use an if to check if cell is valid
-        // For this question the constraint is obstacles hence, if cells does not have obstacle
+        // If the question involves a validity constraint,
+        // use an if to check if cell is valid
+        
+        // For this question the constraint is obstacles hence,
+        // we check if cell does not have an obstacle
         if (input[i] == 0)
         {
             // Solve for the problem at hand
@@ -1873,16 +1881,34 @@ The array result[] is in most cases a precalculated array that is decided on the
 The code looks like:
 
 ```java
-// Decide the window size ofthe interval. We build from window 1 to the entire array length as the window.
+/*
+Decide the window size of the interval. We build from window size 1 to the
+entire array length as our window size.
+*/
 for(int l = 1; l<n; l++)
 {
-    // Decide the starting index of the window. We move from 0 to the (n - window size) index.
+    /*
+    For the chosen window size, we need to traverse the entire array in
+    chunks of that size. For example if window size is 3, in an array of
+    length 5, we move like:
+    [0,2] -> [1,3] -> [2,4] -> [3,5]
+    Therefore, we need to decide starting and ending indexes.
+    For the starting index, we move from 0 to (n - window size).
+    */
     for(int i = 0; i<n-l; i++)
     {
-        // j becomes our ending index. This is always equal to i(starting index) + l(window size)
+        /*
+        j becomes our ending index. This is always equal to i + l.
+        j(ending index) = i(starting index) + l(window size)
+        */
         int j = i+l;
-        // For every value k between our starting and ending index,
-        // we divide the interval into partitions i- > k, k, k -> j
+        
+        /*
+        For every value k between our starting and ending index,
+        we divide the interval into partitions [i -> k-1], [k], [k+1 -> j].
+        The partition may also be divded as [i -> k][k+1 -> j]. The
+        partitioning strategy depends on the question.
+        */
         for(int k = i; k<j; k++)
         {
             dp[i][j] = max(dp[i][j], dp[i][k] + result[k] + dp[k+1][j]);
@@ -1899,9 +1925,12 @@ The general problem statement shared is given two or one string return some resu
 
 The common pattern followed for two string questions is:
 ```java
-// The two strings are arranged in a character by character matrix s1 x s2.
-// i is for String 1
-// j is for String 2
+/*
+The two strings are arranged in a character by character matrix s1 x s2.
+i is for String 1
+j is for String 2
+We move ahead by comparing the two string character by character.
+*/
 
 // For every character in String 1
 for (int i = 1; i <= n; i++)
@@ -1911,35 +1940,46 @@ for (int i = 1; i <= n; i++)
     {
         if (s1[i-1] == s2[j-1])
         {
-            dp[i][j] = /*Condition to run*/;
+            dp[i][j] = /*Implement required changes here*/;
         }
         else
         {
-            dp[i][j] = /*Condition to run*/;
+            dp[i][j] = /*Implement required changes here*/;
         }
     }
 }
 ```
 The common pattern followed for a single string questions is:
 ```java
-// The same string is arraned in the s1 x s1 matrix.
-// The approach now is to check for length of substrings/subsequences. This forms a sliding window for length of substring/subsequence.
+/*
+The same string is arraned in the s1 x s1 matrix. The approach now
+is to check the required conditions/validations for every
+subsequence/substring of the string. To check for every substring,
+we move the end point of our substring from 1 -> length of string,
+and consider every starting point possible for each end point. Hence,
+the substrings for string "abcde" would look like:
+For end point a: a
+For end point b: a->b, b
+For end point c: a->c, b->c, c
+For end point d: a->d, b->d, c->d, d
+For end point e: a->e, b->e, c->e, d->e, e
+*/
 
-// We begin from window of size 1 and increase till size of string.
-for (int l = 1; l < n; l++)
+// We begin by choosing the end point
+// Ranges from 1 to size of string.
+for (int i = 1; i < n; i++)
 {
-    // For all indexes from 0 to n - window size, we choose our starting index.
-    for (int i = 0; i < n-l; i++)
+    // Choose the starting point for the substring
+    // Ranges from 0 to (end point - 1)
+    for (int j = 0; i <= i; j++)
     {
-        // Ending index is the starting index + window size.
-        int j = i + l;
         if (s[i] == s[j])
         {
-            dp[i][j] = /*Condition to run*/;
+            dp[i][j] = /*Implement required changes here*/;
         }
         else
         {
-            dp[i][j] = /*Condition to run*/;
+            dp[i][j] = /*Implement required changes here*/;
         }
     }
 }
@@ -1948,13 +1988,18 @@ for (int l = 1; l < n; l++)
 
 <a name="DP_Decision"></a>
 ### DP for decision making
-The general statement for such type of problems is to decide the most optimal option from a given set. The task is to make an optimal choice from a given set at every instance or maybe just once. Sample problems can be Knapsack, Buy and Sell Stock, House Robber etc.
+The general statement for such type of problems is to decide the most optimal option from a given set. The task is to make an optimal choice from a given set at every instance or maybe just once.
 
-The general approach is that given a choice, we have two options, to either make that choice or to ignore it. If we make that choice, we calculate the best between the current option and the previous time where we ignored the choice, and vice verse, if we choose to ignore the choice now, we calculate the best between the current option and the previous time we made the choice.
+The general approach is that given a choice, we have two options, to either make that choice or to ignore it.
+1. If we make that choice, we calculate the best between the current option and the previous time where we ignored the choice
+2. If we choose to ignore the choice now, we just choose the value from the previous time we made the choice.
 
+Sample problems can be Knapsack, Buy and Sell Stock, House Robber etc.
 ```java
-// Let i be the set of values available to us
-// Let j be the set of choices available, that we may choose to take or ignore. The set of choices can be more than just simple binary choices like choose or leave. For example as seen in Knapsack.
+/*
+Let i be the set of values available to us and j be the set of choices available.
+For every value, we may choose to make a choice based on our choice set.
+These choice sets are generaly to take or ignore the valuestake or ignore it. For example as seen in Knapsack.
 
 // For every value available
 for (int i = 1; i < n; i++)
