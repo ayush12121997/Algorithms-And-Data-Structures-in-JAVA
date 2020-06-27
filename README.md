@@ -12,4 +12,4 @@ I have kept the repository public as my goal is to create a question bank to hel
 
 All the best for your preparation!
 
-Ayush Shrivastava
+![Ayush Shrivastava](/Signature/Sign.png)
