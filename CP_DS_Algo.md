@@ -77,6 +77,7 @@
     - [Restore IP Addresses]
     - [Sudoku Solver]
     - [Letter combinations of a Phone Number]
+    - [Word search]
 12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
