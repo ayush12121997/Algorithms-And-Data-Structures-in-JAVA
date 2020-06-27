@@ -63,7 +63,7 @@
     - [Traversal take from leetcode]
 11. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
-    - [Standard structure for backtracking problems]
+    - [Standard structure for backtracking problems - Listing and counting]
     - [Generate paranthesis]
     - [Permutations - I and II]
     - [Next Permutation]
@@ -72,7 +72,8 @@
     - [Palindrome Partitioning]
     - [Palindrome Partitioning - II]
     - [Partition into k equal sum subsets and for subset equal sum k = 2]
-    - [N Queens problem]
+    - [N Queens]
+    - [N Queens - II]
     - [Restore IP Addresses]
     - [Sudoku Solver]
     - [Letter combinations of a Phone Number]
