@@ -14,7 +14,7 @@
     - [Count Sort]
     - [Quick Sort]
     - [Prefix Sum](#Arrays_PrefixSum)
-    - [Array tips and tricks in JAVA](#Arrays_TipsAndTricks)
+    - [Array tips and tricks in JAVA, multiplication, char_arr and String, substring hashmap, stringbuilder](#Arrays_TipsAndTricks)
     - [Binary Search](#Arrays_BinarySearch)
     - [Store two values in a single index](#Arrays_InPlace)
     - [Kadane's Algorithm (Maximum sum subarray)](#Arrays_KadanesAlgo)
