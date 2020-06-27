@@ -4,7 +4,7 @@ I have tried to cover majority of the important coding algorithms and data struc
 
 Completng the list of questions and topics in this repository does not gaurantee selection in the interview, but surely will make you better prepared for it.
 
-In case of suggested modification, or topics someone would like to suggest that should be covered, please mail to:<br>
+In case of suggestions to modify or add topics, please mail to:<br>
 ayush.academics.1212@gmail.com<br>
 ayush16024@iiitd.ac.in
 
