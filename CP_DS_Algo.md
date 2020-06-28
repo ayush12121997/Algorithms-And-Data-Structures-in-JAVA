@@ -87,7 +87,7 @@
     - [2 Dimensional DP - Grids](#DP_2DimensionalGrids)
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
-    - [DP for decision making](#DP_Decision)
+    - [DP for decision making (Knapsack)](#DP_Decision)
     - [Longest Integer Subsequence](#DP_LIS)
     - [Longest Common Subsequence](#DP_LCS)
     - [Unique Paths in a grid]
