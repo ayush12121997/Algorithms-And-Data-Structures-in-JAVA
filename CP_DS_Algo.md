@@ -105,7 +105,7 @@
     - [Number of Distinct Subsequences]
     - [Longest Artihmetic Sequence]
     - [Interleaving Strings]
-    - [Jump game - II]
+    - [Jump game - I and II]
     - [Egg Drop Puzzle]
     - [Max Sum of Rectangle, Normal and No Larger than K and printing the answer]
     - [Maximal square containing only 1s]
