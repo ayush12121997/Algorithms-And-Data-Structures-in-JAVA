@@ -23,6 +23,7 @@
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
     - [Find closest number in sorted array]
     - [Finding single element in array of pairs](#Arrays_FindSingle)
+    - [Generalization of above if available]
     - [Merge intervals together](#Arrays_MergeIntervals)
     - [Range Sum Query](#Arrays_RSQuery)
     - [Scanline algorithm]
