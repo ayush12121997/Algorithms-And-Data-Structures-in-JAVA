@@ -89,7 +89,7 @@
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
     - [DP for decision making (Knapsack)](#DP_Decision)
-    - [Add knapsack description to the above link]
+    - [Add knapsack description to the above link, 0/1 knapsack, bounded-unbounded difference and code]
     - [Longest Integer Subsequence](#DP_LIS)
     - [Longest Common Subsequence](#DP_LCS)
     - [Unique Paths in a grid]
@@ -119,6 +119,8 @@
     - [Wildcard matching]
     - [Minimum cost tree from leaf values]
     - [Partition into two equal subset problem]
+    - [Partition into two subsets with minimum difference]
+    - [Last stone weight 2]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
