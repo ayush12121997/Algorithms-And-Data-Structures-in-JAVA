@@ -1285,7 +1285,49 @@ Node removeuplicates(Node head)
     return head;
 }
 ```
-A modified version of the question can be when you are asked to remove all duplicate nodes and keep only unique nodes, meaning, that in the list 1 -> 1 -> 2 -> 3, the answer would be 2 -> 3 and not 1 -> 2 -> 3. This can act as a sliding window question where we maintain three pointer, previous, current and next. If previous != current and current != next, only then would the current element be unique. The code would need simple trivial changes from the code above to work.
+A modified version of the question can be when you are asked to remove all duplicate nodes and keep only unique nodes, meaning, that in the list 1 -> 1 -> 2 -> 3, the answer would be 2 -> 3 and not 1 -> 2 -> 3. This can act as a sliding window question where we maintain three pointer, previous, current and next. If previous != current and current != next, only then would the current element be unique. The code would need simple trivial changes from the code above to work as follows:
+```java
+public ListNode deleteDuplicates(ListNode head)
+{
+    if(head == null || head.next == null)
+    {
+        return head;
+    }
+    ListNode answer = new ListNode(0);
+    if(head.val == 0)
+    {
+        answer.val = 1;
+    }
+    ListNode ret = answer;
+    ListNode prev = answer;
+    ListNode curr = head;
+    ListNode next = head.next;
+    
+    while(curr!=null && curr.next!=null)
+    {
+        if(prev.val != curr.val)
+        {
+            if(curr.val != curr.next.val)
+            {
+                ret.next = curr;
+                ret = ret.next;
+            }
+        }
+        prev = curr;
+        curr = curr.next;
+    }
+    
+    if(prev.val != curr.val)
+    {
+        ret.next = curr;
+    }
+    else
+    {
+        ret.next = null;
+    }
+    return answer.next;
+}
+```
 
 <a href="#Contents">Back to contents</a>
 
