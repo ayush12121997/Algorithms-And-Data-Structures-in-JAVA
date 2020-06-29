@@ -48,11 +48,14 @@
     - [Detect a cycle in a linked list](#LL_Cycle)
     - [Reverse a linked list](#LL_Reverse)
     - [Find the middle element of a linked list](#LL_FindMid)
+    - [Palindrome Linked List]
     - [Merge two sorted linked lists](#LL_MergeSorted)
     - [Sort a linked list](#LL_Sort)
     - [Intersection of 2 linked lists](#LL_Intersect)
     - [Remove duplicates from a linked list](#LL_RemoveDuplicates)
     - [Doubly linked lists](#LL_Double)
+    - [Odd even linked lists]
+    - [Remove nth Node from end]
 7. [Stacks and Queues](#StackAndQueue)
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
