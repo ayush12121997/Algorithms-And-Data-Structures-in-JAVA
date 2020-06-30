@@ -60,7 +60,6 @@
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
     - [Priority Queues](#SQ_PQ)
-    - [Largest rectangle possible in histogram]
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
