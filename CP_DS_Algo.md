@@ -93,7 +93,7 @@
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
     - [DP for decision making (Knapsack)](#DP_Decision)
-    - [Add knapsack description to the above link, 0/1 knapsack, bounded-unbounded difference and code]
+    - [Add knapsack description to the above link, 0/1 knapsack, bounded-unbounded difference and code, see first discussion of coin change 2]
     - [Longest Integer Subsequence](#DP_LIS)
     - [Longest Common Subsequence](#DP_LCS)
     - [Unique Paths in a grid]
@@ -105,7 +105,7 @@
     - [Maximum Sum Subarray and print it too]
     - [Maximum sum subarray without adjacent elements]
     - [Buy and Sell Stock (k transactions)]
-    - [Coin Change problem - cover both examples, and perfect squares and printint similar to combination sum]
+    - [Coin Change problem - cover both examples, and perfect squares and printint similar to combination sum, see first discussion of coin change 2]
     - [Word break - I, also add the version where you need to tell which words were selcted out of the dictionary]
     - [Word Break - II]
     - [Decode ways and print all]
