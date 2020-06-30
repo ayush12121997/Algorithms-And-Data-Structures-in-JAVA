@@ -126,6 +126,7 @@
     - [Partition into two equal subset problem]
     - [Partition into two subsets with minimum difference]
     - [Last stone weight 2, normal knapsack and coin change 2 as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
+    - [Flip array]
 13. [Graphs]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
