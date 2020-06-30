@@ -1526,6 +1526,7 @@ All operations are O(1)
  A.empty();
  A.size();
  A.peek();
+ A.search(); // O(n) time
 ```
 <a href="#Contents">Back to contents</a>
 
