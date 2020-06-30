@@ -1704,6 +1704,7 @@ A.poll(); //O(logN)
 A.isEmpty(); //O(1)
 A.size(); //O(1)
 A.peek(); //O(1)
+A.remove(Onject); //O(n)
 ```
 <a href="#Contents">Back to contents</a>
 
@@ -1719,11 +1720,11 @@ class Comparison implements Comparator<Pair>
     @Override
     public int compare(Pair p1, Pair p2)
     {
-        if (p1.getValue() > p2.getValue())
+        if (p1.value() > p2.value())
         {
             return 1;
         }
-        else if(p1.getValue() < p2.getValue())
+        else if(p1.value() < p2.value())
         {
             return -1;
         }
