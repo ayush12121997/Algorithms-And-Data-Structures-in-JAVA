@@ -60,6 +60,8 @@
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
     - [Priority Queues](#SQ_PQ)
+    - [Next greater element - I]
+    - [Next greater element - II]
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
