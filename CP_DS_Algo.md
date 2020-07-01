@@ -1944,8 +1944,7 @@ dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]
 // i and j are the starting and ending index of the intervals
 // The final answer hence would be dp[0][length of array - 1]
 ```
-The array result[] is in most cases a precalculated array that is decided on the basis of the problem statement. It can be anything ranging from the max/min value of the intervals, cost of the intervals, sum of the intervals or anything.
-The code looks like:
+The standard method to code dp problems by merging up intervals looks like:
 
 ```java
 /*
@@ -1973,12 +1972,17 @@ for(int l = 1; l<n; l++)
         /*
         For every value k between our starting and ending index,
         we divide the interval into partitions [i -> k-1], [k], [k+1 -> j].
-        The partition may also be divded as [i -> k][k+1 -> j]. The
-        partitioning strategy depends on the question.
+        The partition may also be divded as [i -> k][k+1 -> j].
+        */
+        /*
+        The partitioning strategy depends on the question. What this means
+        is that to decide what to with the partitions and to decide where
+        to make the partitions varries from question to question. In this
+        example we assume we add the value from an array doSomething[].
         */
         for(int k = i; k<j; k++)
         {
-            dp[i][j] = max(dp[i][j], dp[i][k] + result[k] + dp[k+1][j]);
+            dp[i][j] = max(dp[i][j], dp[i][k] + doSomething[k] + dp[k+1][j]);
         }
     }
 }
