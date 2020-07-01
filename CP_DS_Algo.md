@@ -1982,7 +1982,7 @@ for(int l = 1; l<n; l++)
         */
         for(int k = i; k<j; k++)
         {
-            dp[i][j] = max(dp[i][j], dp[i][k] + doSomething[k] + dp[k+1][j]);
+            dp[i][j] = max(dp[i][j], dp[i][k] + doSomethingArrayWhichIsTooLong[k] + dp[k+1][j]);
         }
     }
 }
