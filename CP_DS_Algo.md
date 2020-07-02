@@ -60,12 +60,18 @@
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
     - [Priority Queues](#SQ_PQ)
+    - [Monotonous increasing/decreasing stacks, use for previous smaller, next smaller, previous greater, next greater]
     - [Next greater element - I]
     - [Next greater element - II]
     - [Implement stack using queue]
     - [Implement queue using stack]
     - [Min Stack]
     - [Score of Parentheses]
+    - [Minimum removals to make valid parentheses]
+    - [Minimum additions to make valid parentheses]
+    - [Online stock span]
+    - [Daily temperatures]
+    - [Sum of all subarray minimums]
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
