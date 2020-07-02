@@ -62,6 +62,10 @@
     - [Priority Queues](#SQ_PQ)
     - [Next greater element - I]
     - [Next greater element - II]
+    - [Implement stack using queue]
+    - [Implement queue using stack]
+    - [Min Stack]
+    - [Score of Parentheses]
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees]
