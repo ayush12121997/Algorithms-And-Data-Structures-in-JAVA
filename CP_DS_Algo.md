@@ -795,16 +795,16 @@ String decToBin(long n, String s)
 long binToDec(String s)
 {
     long ans = 0;
-    int len = 0;
+    int len = s.length() - 1;
     long base = 1;
-    while(len < s.length())
+    while(len >= 0)
     {
     	if(s.charAt(len) == '1')
         {
             ans += base;
         }
         base *= 2;
-        len++;
+        len--;
     }
     return ans;
 }
