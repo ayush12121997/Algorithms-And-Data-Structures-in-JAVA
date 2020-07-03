@@ -76,6 +76,7 @@
     - [Trapping rain water]
     - [Binary Tree Traversls - Inorder, Postorder and Preorder]
     - [Binary tree zigzag traversal]
+    - [Binary tree level order traversal]
 8. [Heaps and Maps]
 9. [Hashing]
 10. [Trees and Graphs]
