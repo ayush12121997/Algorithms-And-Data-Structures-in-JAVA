@@ -79,10 +79,11 @@
     - [Binary tree level order traversal]
 8. [Heaps and Maps]
 9. [Hashing]
-10. [Trees and Graphs]
+10. [Trees]
     - [Traversals take from leetcode]
     - [Binary tree zigzag traversal, level order traversal]
-11. [Recursion and Backtracking](#Backtracking)
+11. Graphs
+12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting]
     - [Generate paranthesis]
@@ -100,7 +101,7 @@
     - [Letter combinations of a Phone Number]
     - [Word search - I and II]
     - [Combinations]
-12. [Dynamic Programming](#DynamicProgramming)
+13. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -145,10 +146,10 @@
     - [Last stone weight 2, normal knapsack and coin change 2 as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
     - [Flip array]
     - [Trapping rain water]
-13. [Bit Manipulation]
-14. [Greedy Algorithms]
+14. [Bit Manipulation]
+15. [Greedy Algorithms]
     - [Jump Game - I and II]
-15. [Others]
+16. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Trie]
