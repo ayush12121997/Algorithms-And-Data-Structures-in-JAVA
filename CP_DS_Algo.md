@@ -778,17 +778,16 @@ ArrayList<Integer> factorize(int n)
 #### From decimal to binary
 We know that a decimal number is converted into binary by dividing the number repeatedly by 2 until the quotient becomes 0. The binary number is represented by adding the remainder at every step to the answer so far.
 ```java
-String decToBin(long n, String s)
+String decToBin(long n)
 {
-    if(n>1)
+    StringBuilder str = new StringBuilder("");
+    while(n > 0)
     {
-    	s += decToBin(n/2, s);
+        str.insert(0, n%2);
+        n /= 2;
     }
-    s += (n%2);
-    return s;
+    return str.toString();
 }
-
-// Call the function as decToBin(n, "");
 ```
 #### From binary to decimal
 ```java
