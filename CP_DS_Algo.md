@@ -796,15 +796,15 @@ long binToDec(String s)
 {
     long ans = 0;
     int len = 0;
-    long start = 1;
+    long base = 1;
     while(len < s.length())
     {
     	if(s.charAt(len) == '1')
-	{
-	    ans += base;
-	}
-	base *= 2;
-	len++;
+        {
+            ans += base;
+        }
+        base *= 2;
+        len++;
     }
     return ans;
 }
