@@ -55,7 +55,7 @@
     - [Remove duplicates from a linked list](#LL_RemoveDuplicates)
     - [Doubly linked lists](#LL_Double)
     - [Odd even linked lists]
-    - [Remove nth Node from end]
+    - [Remove N'th Node from end]
 7. [Stacks and Queues](#StackAndQueue)
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
@@ -86,6 +86,8 @@
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
+    - [Reverse a graph](#GP_Reverse)
+    - [Strongly connected components - Kosaraju’s algorithm](#GP_SCC)
 12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting]
@@ -2043,6 +2045,47 @@ class Graph
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_Reverse"></a>
+### Reverse a graph
+Reversing a graph is simple. All you need to do is for every edge from u to v create an edge from v to u. Reversing a graph can be used to reverse the sinks of a graph. A sink is a point from where you cannot reach any other vertex of the graph.
+```java
+class Graph
+{
+    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    
+    // Reverse a graph
+    public Graph getReverse() 
+    { 
+        Graph g = new Graph(V); 
+        for (int v = 0; v < V; v++) 
+        { 
+            // Recur for all the vertices adjacent to this vertex 
+            for(int i = 0; i < adj.get(v).size(); i++)
+            {
+                int c = adj.get(v).get(i);
+                g.adj.get(c).add(v); 
+            }
+        } 
+        return g; 
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_SCC"></a>
+### Strongly Connected Components - Kosaraju's Algorithm
+A directed graph is strongly connected if there is a path between all pairs of vertices. A strongly connected component (SCC) of a directed graph is a maximal strongly connected subgraph. This means that within a strongly connected directed graph, if we can partition the graph in such a way that every partition in itself is strongly connected and that adding even a single node to any of these component graphs would result in making it not strongly connected.
+
+The steps for the algorithm would be as follows:
+1. Run DFS on the graph and as and when every node is completed, add it to a stack. When we do this, the node that gets completed first, gets added to the stack first. Hence, the node at the very bottom gets added first, that is all the sinks get added to stack first. 
+2. Now we have a stack, the bottom of which is the node which gets completed first, and top is the node which gets completed last. Note, by a node getting completed we mean, DFS running for all its children.
+3. Now we reverse the graph and create a transpose of the graph. Creating a transpose reverses the order of sinks and heads in the graph. The nodes that were sinks before, are now the heads and vice versa.
+4. On the graph reversed, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
+
+As DFS and reversing a graph have bee covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
+
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
