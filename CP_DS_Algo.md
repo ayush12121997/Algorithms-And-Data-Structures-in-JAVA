@@ -1981,6 +1981,68 @@ class Graph
 
 <a name="GP_DFS"></a>
 ### Depth First Traversal
+DFS is also a searching algorithm which differs from BFS in the way that it searchs to the deepest level possible for a node first, before moving on to searching in the other children of the node. BFS searches all the children first and then proceeds to process children seperately. DFS instead processes the children to the deepst level first, then recurses back to proceed to other children.
+
+Just like BFS, we use a wrapper function with a visted array to accomodate for disconnected components of a graph.
+```java
+class Graph
+{
+    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    
+    // Wrapper function for DFS
+    public void DFS_Util()
+    {
+        /*
+        Construct a visted array to avoid infinite loops
+        and to accomodate for disconnected components of
+        the graph. Always remember to mark a node as
+        visited as soon as you reach it.
+        */
+        boolean visited[] = new boolean[visited];
+        
+        /*
+        Call the DFS function for every unvisted node
+        present in the graph
+        */
+        for(int i = 0; i < adj.size(); i++)
+        {
+            if(!visited[adj.get(i)])
+            {
+                DFS(adj.get(i), visited);
+            }
+        }
+    }
+    
+    // Depth first traversal
+    public void BFS(int start, boolean[] visited)
+    {
+        /*
+        We begin by marking the starting node as
+        visited.
+        */
+        visited[start] = true;
+        
+        // Process the node as you like. Here we print.
+        System.out.println(start);
+        
+        /*
+        The following loop runs for all the children of
+        the node. For every unvisited child, we run the DFS
+        function on it, to reach the deepest level first
+        before processing the other children. The adjacency
+        list for node 'start' can be used for iteration.
+        */
+        for(int i = 0; i < adj.get(start).size(); i++)
+        {
+            int c = adj.get(start).get(i);
+            if(!visited[c])
+            {
+                DFS(c, visited);
+            }
+        }
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
