@@ -1826,6 +1826,9 @@ class Graph
 
 <a name="GP_BFS"></a>
 ### Breadth First Traversal
+The BFS on a graph is very similar to the BFS on a tree. For those who haven't completed the section on trees above, BFS is a searching technique which helps you search through various nodes of a tree or a graph level by level. We begin with a starting index, root in case of trees, and then traverse all the nodes that can be reached from in one step and and add them in a queue. Then for all the nodes present in the queue we repeat the process, until the queue becomes empty. Why use a queue? The aim of a BFS search is to first visit all direct children of the node and then proceed with each child seperately. This can be achieved by maintaining a queue which follows a FIFO order and hence only when the processing of parents at the starting of the queue is completed, the subequent children are proccessed.
+
+The difference between the BFS of a tree and that of a graph is that in graphs we need to maintain a visited array, to store the nodes which have been visited before. This is needed because unlike trees, graphs may contain cycles and without a visited array the search might end up in an infinite loop. We further build our graph class by adding the BFS functionality to it.
 ```java
 class Graph
 {
@@ -1892,6 +1895,113 @@ class Graph
             
             // Process the node as you like. Here we print.
             System.out.println(st + " ");
+            
+            /*
+            For all the nodes connected to 'st' add them
+            to the queue so that they can be proccessed in
+            the next level of te BFS iteration. Every node
+            added to the queue. necessarily needs them to
+            be marked as visited in the visited array. The
+            adjacency list for node 'st' can be used to add
+            the adjacent nodes of 'st' to queue.
+            */
+            for(int i = 0; i < adj.get(st).size(); i++)
+            {
+                int c = adj.get(st).get(i);
+                if(!visited[c])
+                {
+                    visited[c] = true;
+                    queue.add(c);
+                }
+            }
+        }
+    }
+}
+```
+The above code for BFS only works in the case when no disconnected components are present. Disconnected components of a graph exist, when the entire graph is not reachable from a vertex. For example, 1 -> 2 -> 3 and 4 -> 5 -> 6 are two disconnected components of the same graph and if we call BFS only on node 1 then we would never know about the existence of nodes 4,5 and 6. To tackle this problem, we modify our BFS function by making a wrapper function which calls our inner BFS function for every unvisited node yet. For this, we also need to move our visited array to the wrapper class and send it as an argument to the main BFS function as now we also need to check visted nodes outside the main BFS function to call BFS on remaining unvisted nodes. We add a BFS_Util function and modify the BFS function to accomodate these cahnges.
+```java
+class Graph
+{
+    // Adjacency list which is list of list
+    ArrayList<ArrayList<Integer>> adj = null;
+    // Number of vertices
+    int V = 0;
+    
+    // Initialise the graph
+    public Graph(int v)
+    {
+        // Input the number of vertices
+        V = v;
+        // Initialise adj for those many vertices
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < v; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+    
+    // Add an edge from v to u
+    public void addEdge(int v, int u)
+    {
+        adj.get(v).add(u);
+        // For undirected graphs, add reverse edge too
+        adj.get(u).add(v);
+    }
+    
+    // Wrapper function for BFS
+    public void BFS_Util()
+    {
+        /*
+        Construct a visted array to avoid infinite loops
+        and to accomodate for disconnected components of
+        the graph. Always remember to mark a node as
+        visited as soon as you reach it.
+        */
+        boolean visited[] = new boolean[visited];
+        
+        /*
+        Call the BFS function for every unvisted node
+        present in the graph
+        */
+        for(int i = 0; i < adj.size(); i++)
+        {
+            if(!visited[adj.get(i)])
+            {
+                BFS(adj.get(i), visited);
+            }
+        }
+    }
+    
+    // Breadth first traversal
+    public void BFS(int start, boolean[] visited)
+    {
+        /*
+        Construct a queue to store incoming
+        vertices for further processing
+        */
+        Queue<Integer> queue = new LinkedList<Integer>();
+        
+        /*
+        We begin by adding the starting node
+        to the queue and process the queue
+        till it becomes empty, that is all nodes
+        have been exhausted.
+        */
+        queue.add(start);
+        visited[start] = true;
+        int st = 0;
+        
+        /*
+        The following loop runs till the queue becomes empty,
+        that is till all of the nodes have been visted.
+        */
+        while(!queue.isEmpty())
+        {
+            // Remove the queue top, i.e the node to process
+            st = queue.poll();
+            
+            // Process the node as you like. Here we print.
+            System.out.println(st);
             
             /*
             For all the nodes connected to 'st' add them
