@@ -82,7 +82,10 @@
 10. [Trees]
     - [Traversals take from leetcode]
     - [Binary tree zigzag traversal, level order traversal]
-11. Graphs
+11. [Graphs](#Graphs)
+    - [Representing a graph](#GP_Representaations)
+    - [Breadth First Traversal](#GP_BFS)
+    - [Depth First Traversal](#GP_DFS)
 12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting]
@@ -1764,6 +1767,158 @@ class Pair
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Graphs"></a>
+## Graphs
+A graphs is a 2D data structure which consists of nodes and edges. The nodes are the vertices of the graph and the edges are the lines/path connecting these vertices. The nodes in the graphs can be classes in themselves, containting information more than simply a single vaue, and the edges might represent connections between the structures.
+
+Other than understanding concepts and solving questions based on graphs, we will also build a standard graph class which would support all the standard graph queries. We will build this class step by step as various subsections proceed.
+
+<a name ="GP_Representations"></a>
+### Representing a graph
+A graph maybe represented as an adjaceny list or as an adjacency matrix.
+
+#### Adjacency Matrix
+The adjacency matrix represtation of the graph represetns the graph through a matrix. The matrix is of size V x V where V is the number of vertices. Each cell, (i,j) represents that whether a connection between the vertices, i and j exists or not. The adjacency matrix for an undirected graph will always be symmetrics. An undrected graph is a graph where movement on every edge is allowed in both directions. If the graph is weighted, the adjacency matrix, instead of keeping 1's and 0,s to denote presence or absence of edges, can instead use the weights of edges as entries to denote presence.
+
+Adjacency matrix is used when the number of vertices are small and the task is related to identifying that whether or not an edge exists in a given graph. Seeing if an edge exists takes O(1) time, if the vertices to check between are known already.
+
+The graph is represented usign a 2D array like int[][] graph.
+
+#### Adjacency List
+The adjacency list concept is different from the adjacency matrix in the way that it only stores the edges present, and does not have any storage to represent a non existent edge. As the name suggests, we store a list of nodes that a node is connected to, formign a list of list. The outer list, also known as the parent list, represents the starting vertices, and the inner list at every index 'i' of the outer list, represesnts the nodes that the node 'i' is connected to.
+
+The structure is represtend like a ArrayList<ArrayList<Integer>> adj, where adj.get(i) is list of nodes connected to node 'i'.
+
+Most of the remaining concepts covered are bsed on the adjacency list representation of graphs and hence we will now look at how to build an adjacency list represtation from scratch:
+```java
+class Graph
+{
+    // Adjacency list which is list of list
+    ArrayList<ArrayList<Integer>> adj = null;
+    // Number of vertices
+    int V = 0;
+    
+    // Initialise the graph
+    public Graph(int v)
+    {
+        // Input the number of vertices
+        V = v;
+        // Initialise adj for those many vertices
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < v; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+    
+    // Add an edge from v to u
+    public void addEdge(int v, int u)
+    {
+        adj.get(v).add(u);
+        // For undirected graphs, add reverse edge too
+        adj.get(u).add(v);
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_BFS"></a>
+### Breadth First Traversal
+```java
+class Graph
+{
+    // Adjacency list which is list of list
+    ArrayList<ArrayList<Integer>> adj = null;
+    // Number of vertices
+    int V = 0;
+    
+    // Initialise the graph
+    public Graph(int v)
+    {
+        // Input the number of vertices
+        V = v;
+        // Initialise adj for those many vertices
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < v; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+    
+    // Add an edge from v to u
+    public void addEdge(int v, int u)
+    {
+        adj.get(v).add(u);
+        // For undirected graphs, add reverse edge too
+        adj.get(u).add(v);
+    }
+    
+    // Breadth first traversal
+    public void BFS(int start)
+    {
+        /*
+        Construct a visted array to avoid infinite loops
+        Always remember to mark a node as visited as soon
+        as you reach it.
+        */
+        boolean visited[] = new boolean[visited];
+        
+        /*
+        Construct a queue to store incoming
+        vertices for further processing
+        */
+        Queue<Integer> queue = new LinkedList<Integer>();
+        
+        /*
+        We begin by adding the starting node
+        to the queue and process the queue
+        till it becomes empty, that is all nodes
+        have been exhausted.
+        */
+        queue.add(start);
+        visited[start] = true;
+        int st = 0;
+        
+        /*
+        The following loop runs till the queue becomes empty,
+        that is till all of the nodes have been visted.
+        */
+        while(!queue.isEmpty())
+        {
+            // Remove the queue top, i.e the node to process
+            st = queue.poll();
+            
+            // Process the node as you like. Here we print.
+            System.out.println(st + " ");
+            
+            /*
+            For all the nodes connected to 'st' add them
+            to the queue so that they can be proccessed in
+            the next level of te BFS iteration. Every node
+            added to the queue. necessarily needs them to
+            be marked as visited in the visited array. The
+            adjacency list for node 'st' can be used to add
+            the adjacent nodes of 'st' to queue.
+            */
+            for(int i = 0; i < adj.get(st).size(); i++)
+            {
+                int c = adj.get(st).get(i);
+                if(!visited[c])
+                {
+                    visited[c] = true;
+                    queue.add(c);
+                }
+            }
+        }
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_DFS"></a>
+### Depth First Traversal
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
