@@ -1,7 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
 <a name="Contents"></a>
-## Table of contents
+## <p align="center"> Table of contents </p>
 1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
 3. [Arrays](#Arrays)
@@ -164,7 +164,7 @@
     - [Stable marriage]
 
 <a name="ReaderClass"></a>
-## Reader Class
+## <p align="center"> Reader Class </p>
 ```java
 import java.io.*;
 import java.lang.*;
@@ -208,7 +208,7 @@ class Reader
 <a href="#Contents">Back to contents</a>
 
 <a name="Printing"></a>
-## String Builder Printing
+## <p align="center"> String Builder Printing </p>
 Certain questions which require multiple print statements one after the another, may result in a TLE just because of the printing delay. faster printing can be achieved through StringBuilder. Use StringBuilder to form a big string of input by constantly appending smaller outputs and then print the entire string once. Saves time.
 ```java
 StringBuilder sb = new StringBuilder();
@@ -219,7 +219,7 @@ System.out.println(sb.toString());
 <a href="#Contents">Back to contents</a>
 
 <a name="Arrays"></a>
-## Arrays
+## <p align="center"> Arrays </p>
 <a name="Arrays_BasicConcepts"></a>
 ### Basic Concepts
 - Lookup : O(1)
