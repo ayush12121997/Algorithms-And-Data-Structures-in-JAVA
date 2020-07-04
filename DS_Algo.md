@@ -83,6 +83,7 @@
     - [Traversals take from leetcode]
     - [Binary tree zigzag traversal, level order traversal]
 11. [Graphs](#Graphs)
+
 General Graphs and BFS/DFS/Coloring
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
@@ -96,6 +97,7 @@ General Graphs and BFS/DFS/Coloring
     - [Minimum number of saps required to sort an array]
     - [Minimum operations needed to convert x into y]
     - [Minimum number of colors required to color a graph]
+
 Shortest path algorithms:
     - [Dijkstra's Algorithm]
     - [Printing paths in Dijsktra’s Algorithm]
@@ -103,6 +105,7 @@ Shortest path algorithms:
     - [Floyd Warshall Algorithm]
     - [Shortest Path in Directed Acyclic Graph]
     - [Minimum Cost Path with Left, Right, Bottom and Up moves allowed]
+
 Cycle detection algorithms:
     - [Detect a cycle in an undirected graph]
     - [Detect a cycle in an directed graph]
