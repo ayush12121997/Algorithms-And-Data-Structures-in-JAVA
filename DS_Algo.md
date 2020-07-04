@@ -83,15 +83,15 @@
     - [Traversals take from leetcode]
     - [Binary tree zigzag traversal, level order traversal]
 11. [Graphs](#Graphs)
-    - **General Graphs and BFS/DFS/Coloring**
+    - **General Graphs and BFS/DFS and backtracking**
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
     - [Reverse a graph](#GP_Reverse)
     - [Strongly connected components - Kosaraju’s algorithm](#GP_SCC)
     - [Find a mother vertex](#GP_FindMother)
-    - [Count all paths between a source and destination](#GP_CountAllSourceDestination)
-    - [Print all paths between a source and destination](#GP_PrintAllSourceDestination)
+    - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
+    - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
     - [Minimum steps to reach target by Knight](#GP_KnightProblem)
     - [Minimum number of saps required to sort an array]
     - [Minimum operations needed to convert x into y]
@@ -2131,12 +2131,15 @@ As the code requires just slight modifications to the code for the DFS traversal
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_CountAllSourceDestination"></a>
-### Count all paths from source to destination
+### Count all paths from source to destination in a graph
+Counting all paths between two vertices is a backtracking problem on graphs. The methodoly is to follow the DFS pattern to reach the destination vertex, and every time you reach the destination, increase the count of number of ways and then track back and traverse a different path. The code is as follows:
+```java
 
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_PrintAllSourceDestination"></a>
-### Print all paths from source to destination
+### Print all paths from source to destination in a graph
 
 <a href="#Contents">Back to contents</a>
 
