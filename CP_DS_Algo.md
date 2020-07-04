@@ -1832,32 +1832,8 @@ The difference between the BFS of a tree and that of a graph is that in graphs w
 ```java
 class Graph
 {
-    // Adjacency list which is list of list
-    ArrayList<ArrayList<Integer>> adj = null;
-    // Number of vertices
-    int V = 0;
-    
-    // Initialise the graph
-    public Graph(int v)
-    {
-        // Input the number of vertices
-        V = v;
-        // Initialise adj for those many vertices
-        adj = new ArrayList<ArrayList<Integer>>();
-        for(int i = 0; i < v; i++)
-        {
-            adj.add(new ArrayList<Integer>());
-        }
-    }
-    
-    // Add an edge from v to u
-    public void addEdge(int v, int u)
-    {
-        adj.get(v).add(u);
-        // For undirected graphs, add reverse edge too
-        adj.get(u).add(v);
-    }
-    
+    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+        
     // Breadth first traversal
     public void BFS(int start)
     {
@@ -1922,31 +1898,7 @@ The above code for BFS only works in the case when no disconnected components ar
 ```java
 class Graph
 {
-    // Adjacency list which is list of list
-    ArrayList<ArrayList<Integer>> adj = null;
-    // Number of vertices
-    int V = 0;
-    
-    // Initialise the graph
-    public Graph(int v)
-    {
-        // Input the number of vertices
-        V = v;
-        // Initialise adj for those many vertices
-        adj = new ArrayList<ArrayList<Integer>>();
-        for(int i = 0; i < v; i++)
-        {
-            adj.add(new ArrayList<Integer>());
-        }
-    }
-    
-    // Add an edge from v to u
-    public void addEdge(int v, int u)
-    {
-        adj.get(v).add(u);
-        // For undirected graphs, add reverse edge too
-        adj.get(u).add(v);
-    }
+    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
     
     // Wrapper function for BFS
     public void BFS_Util()
