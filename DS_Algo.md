@@ -83,30 +83,30 @@
     - [Traversals take from leetcode]
     - [Binary tree zigzag traversal, level order traversal]
 11. [Graphs](#Graphs)
-    - General Graphs and BFS/DFS/Coloring
-        - [Representing a graph](#GP_Representaations)
-        - [Breadth First Traversal](#GP_BFS)
-        - [Depth First Traversal](#GP_DFS)
-        - [Reverse a graph](#GP_Reverse)
-        - [Strongly connected components - Kosaraju’s algorithm](#GP_SCC)
-        - [Find a mother vertex](#GP_FindMother)
-        - [Count all paths between a source and destination](#GP_CountAllSourceDestination)
-        - [Print all paths between a source and destination](#GP_PrintAllSourceDestination)
-        - [Minimum steps to reach target by Knight](#GP_KnightProblem)
-        - [Minimum number of saps required to sort an array]
-        - [Minimum operations needed to convert x into y]
-        - [Minimum number of colors required to color a graph]
-    - Shortest path algorithms:
-        - [Dijkstra's Algorithm]
-        - [Printing paths in Dijsktra’s Algorithm]
-        - [Bellman–Ford Algorithm]
-        - [Floyd Warshall Algorithm]
-        - [Shortest Path in Directed Acyclic Graph]
-        - [Minimum Cost Path with Left, Right, Bottom and Up moves allowed]
-    - Cycle detection algorithms:
-        - [Detect a cycle in an undirected graph]
-        - [Detect a cycle in an directed graph]
-        - [Disjoint Union Find - Rank and Path Compression]
+General Graphs and BFS/DFS/Coloring
+    - [Representing a graph](#GP_Representaations)
+    - [Breadth First Traversal](#GP_BFS)
+    - [Depth First Traversal](#GP_DFS)
+    - [Reverse a graph](#GP_Reverse)
+    - [Strongly connected components - Kosaraju’s algorithm](#GP_SCC)
+    - [Find a mother vertex](#GP_FindMother)
+    - [Count all paths between a source and destination](#GP_CountAllSourceDestination)
+    - [Print all paths between a source and destination](#GP_PrintAllSourceDestination)
+    - [Minimum steps to reach target by Knight](#GP_KnightProblem)
+    - [Minimum number of saps required to sort an array]
+    - [Minimum operations needed to convert x into y]
+    - [Minimum number of colors required to color a graph]
+Shortest path algorithms:
+    - [Dijkstra's Algorithm]
+    - [Printing paths in Dijsktra’s Algorithm]
+    - [Bellman–Ford Algorithm]
+    - [Floyd Warshall Algorithm]
+    - [Shortest Path in Directed Acyclic Graph]
+    - [Minimum Cost Path with Left, Right, Bottom and Up moves allowed]
+Cycle detection algorithms:
+    - [Detect a cycle in an undirected graph]
+    - [Detect a cycle in an directed graph]
+    - [Disjoint Union Find - Rank and Path Compression]
     - [Detect negative cycle]
 12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
