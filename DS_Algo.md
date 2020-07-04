@@ -671,7 +671,7 @@ class NumArray
 <a href="#Contents">Back to contents</a>
 
 <a name="Math"></a>
-## Math
+## <p align="center"> Math </p>
 <a name="Math_SieveOfErast"></a>
 
 ### Sieve of Eratosthenes (Find prime numbers upto a given number)
@@ -827,7 +827,7 @@ To calculate nCr:
 <a href="#Contents">Back to contents</a>
 
 <a name="LinkedLists"></a>
-## Linked Lists
+## <p align="center"> Linked Lists </p>
 A linked list is a data structure in which elements are not stored in contiguous locations and are linked to each other using pointers. Linked lists consists of nodes which store the value for the node and the link to the next node to which it is connected. The lists can be single directed or double directed lists.
 
 Linked lists generally have a head which is the only directly accessible element of the list. The structure looks like Head -> Node 1 -> Node 2 -> Node3
@@ -1373,7 +1373,7 @@ A doubly linked list is different from a singly linked list that it holds two po
 <a href="#Contents">Back to contents</a>
 
 <a name="StackAndQueue"></a>
-## Stacks and Queues
+## <p align="center"> Stacks and Queues </p>
 
 <a name="SQ_Stack"></a>
 ### Stacks
@@ -1770,7 +1770,7 @@ class Pair
 <a href="#Contents">Back to contents</a>
 
 <a name="Graphs"></a>
-## Graphs
+## <p align="center"> Graphs </p>
 A graphs is a 2D data structure which consists of nodes and edges. The nodes are the vertices of the graph and the edges are the lines/path connecting these vertices. The nodes in the graphs can be classes in themselves, containting information more than simply a single vaue, and the edges might represent connections between the structures.
 
 Other than understanding concepts and solving questions based on graphs, we will also build a standard graph class which would support all the standard graph queries. We will build this class step by step as various subsections proceed.
@@ -2046,7 +2046,7 @@ class Graph
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
-## Recursion and Backtracking
+## <p align="center"> Recursion and Backtracking </p>
 Backtracking is basically using recursion to solve problems that can have a divide and conquer approach applied to them. They key is that backtracking isn't just simple recursion but it is more of a trial and error recursion wherein solutions that fail are removed and those that work/pass are built further upon. For example, as we may see in a maze, that we might take certain routes which may not lead to the correct end point so we backtrack on that route to a certain point in time and then try a different route. We need not restart the entire process again and again.
 
 Backtracking problems can generally be identified by words like
@@ -2073,7 +2073,7 @@ On the basis of these keys to backtracking, we can divide our process into steps
 <a href="#Contents">Back to contents</a>
 
 <a name="DynamicProgramming"></a>
-## Dynamic Programming
+## <p align="center"> Dynamic Programming </p>
 Dynamic Programming solves complex problems that tend to take exponential time by dividing them into smaller subproblems and storing their results for use later on to calculate larger values. 
 
 <a name="DP_OverlappingSubproblems"></a>
