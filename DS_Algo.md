@@ -1,4 +1,4 @@
-# <center> Data Structures and Algorithms (JAVA) </center>
+# <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
 <a name="Contents"></a>
 ## Table of contents
