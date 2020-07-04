@@ -108,6 +108,8 @@
     - [Detect a cycle in an directed graph]
     - [Disjoint Union Find - Rank and Path Compression]
     - [Detect negative cycle]
+    - **Others**
+    - [Stable marriage]
 12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting]
@@ -183,7 +185,6 @@
     - [Line Sweep Algo]
     - [Catalan Number]
     - [Add char to int and int to char and ascii shiz]
-    - [Stable marriage]
 
 <a name="ReaderClass"></a>
 ## <p align="center"> Reader Class </p>
@@ -2105,6 +2106,37 @@ The steps for the algorithm would be as follows:
 4. On the graph reversed, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
 
 As DFS and reversing a graph have bee covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_FindMother"></a>
+### Find mother vertex
+A mother vertex is defined as the vertex in the graph from which all other vertices in the graph can be reached. There may exist more than one mother vertices, and the aim is to find any one of them. Three cases arise for the graph:
+1. Disconnected graphs: No mother vertex exists
+2. Connected undirected graphs: All vertices are mother vertices
+3. Connected directed graphs: To be found
+
+One method can be to perform BFS/DFS on all vertices one by one to check that from which can we reach all end points. Time compexity would be O(Num vertices x Time for DFS/BFS) = O(V(V+E)).
+
+Another way to solve the problem can be using the concept similar to finding strongly connected components. We run DFS from a given node in the graph and store in a stack the last finished nodes. Hence, the top of the stack would point to the node that finishes last. The node that finishes last will necessarily have to be the mother vertex if one exists, as had it not been a mother vertex, so it would have acted as a sink during the DFS traversal and ended before the mother vertex.
+
+Using this concept, to check the existence of a mother vertex, we run DFS with storing nodes in stack as and when each node is completed. The top of the stack is then checked to be the mother vertex. Thsi is done using DFS on the top node. If DFS travels to all nodes, then it is the mother vertex else mother vertex does not exist.
+
+To check during DFS that all nodes have been visited or not, we can apply either of the following two methods:
+1. As a visted aray is maintained, once nodes are visited they are marked as true. Hence after one iteration of DFS from the top node in the stack, break and check whether or not all nodes are visited. If yes then it is the mother vertex, else it is not.
+2. As the visisted array prevents us from visiting the same node once again, we can keep count of every time we reach a new node. When we reach a new node we do count++. This way if end count equals number of vertices then it is the mother vertex else it is not.
+
+As the code requires just slight modifications to the code for the DFS traversal of a graph, we do not cover the code for this question here due to triviality.
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_CountAllSourceDestination"></a>
+### Count all paths from source to destination
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_PrintAllSourceDestination"></a>
+### Print all paths from source to destination
 
 <a href="#Contents">Back to contents</a>
 
