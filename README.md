@@ -1,4 +1,4 @@
-## Algorithms And Data Structures in JAVA
+## Algorithms and Data Structures in JAVA
 
 I have tried to cover majority of the important coding algorithms and data structures from a technical interview point of view in this repository. I will try to keep updating the repository as and when time permits. The up-to-date parts would be accessible through the links in the contents, and the parts planned to be added are visible as plain text in the contents table.
 
