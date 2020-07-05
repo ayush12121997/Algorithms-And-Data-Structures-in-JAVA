@@ -83,36 +83,34 @@
     - [Traversals take from leetcode]
     - [Binary tree zigzag traversal, level order traversal]
 11. [Graphs](#Graphs)
-    - **General Graphs and BFS/DFS and backtracking**
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
     - [Reverse a graph](#GP_Reverse)
-    - [Strongly connected components - Kosaraju’s algorithm](#GP_SCC)
+    - [Find all strongly connected components - Kosaraju’s algorithm](#GP_SCC)
     - [Find a mother vertex](#GP_FindMother)
-    - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
-    - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
-    - [Minimum steps to reach target by Knight](#GP_KnightProblem)
-    - [Minimum number of saps required to sort an array]
-    - [Minimum operations needed to convert x into y]
-    - [Minimum number of colors required to color a graph]
-    - **Shortest path**
+    - [Check if  graph is strongly connected]
     - [Dijkstra's Algorithm]
     - [Printing paths in Dijsktra’s Algorithm]
     - [Bellman–Ford Algorithm]
     - [Floyd Warshall Algorithm]
-    - [Shortest Path in Directed Acyclic Graph]
-    - [Minimum Cost Path with Left, Right, Bottom and Up moves allowed]
-    - **Cycle detection algorithms**
+    - [Shortest path in an unweighted graph]
+    - [Shortest path in a Directed Acyclic Graph]
     - [Detect a cycle in an undirected graph]
     - [Detect a cycle in an directed graph]
+    - [Detect a negative cycle]
     - [Disjoint Union Find - Rank and Path Compression]
-    - [Detect negative cycle]
-    - **Others**
+    - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
+    - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
+    - [Minimum Cost Path with Left, Right, Bottom and Up moves allowed]
+    - [Minimum steps to reach target by Knight](#GP_KnightProblem)
+    - [Minimum number of swaps required to sort an array](#GP_MinSwapsToSort)
+    - [Minimum operations needed to convert x into y](#GP_MinOpsToConvert)
+    - [Minimum number of colors required to color a graph]
     - [Stable marriage]
 12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
-    - [Standard structure for backtracking problems - Listing and counting]
+    - [Standard structure for backtracking problems - Listing and counting and string concatenation strats]
     - [Generate paranthesis]
     - [Permutations - I and II]
     - [Next Permutation]
@@ -2066,6 +2064,8 @@ class Graph
     }
 }
 ```
+***NOTE: A key point to remember can be that in DFS, the node is marked as visited inside the loop that is once it has been reached and is being processed, on the other hand in BFS a node is marked as visited when it is being added to the queue for further processing.***
+
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_Reverse"></a>
@@ -2132,14 +2132,337 @@ As the code requires just slight modifications to the code for the DFS traversal
 
 <a name="GP_CountAllSourceDestination"></a>
 ### Count all paths from source to destination in a graph
-Counting all paths between two vertices is a backtracking problem on graphs. The methodoly is to follow the DFS pattern to reach the destination vertex, and every time you reach the destination, increase the count of number of ways and then track back and traverse a different path. The code is as follows:
-```java
+Counting all paths between two vertices is a backtracking problem on graphs. The methodoly is to follow the DFS pattern to reach the destination vertex, and every time you reach the destination, increase the count of number of ways.
 
+Please note that this method works only for graphs which do not have cycles. If a graph has a cycle then infinite number of paths can be formed from source to destination as the cycle can be looped around infinite number of times. Hence, the input is valid only if it does not have any cycles, and hence this method of a modified DFS, does not require you to make checks for visited.
+
+The code is as follows:
+```java
+class Graph
+{
+    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    
+    // Consider a global variable count to maintain count of paths
+    int count = 0;
+    
+    // The wrapper function to call the recursive function
+    public int countAll(int start, int dest)
+    {
+        countAll_Util(int s, int d);
+        return count;
+    }
+    
+    // Recursive function to count paths
+    public void countAll_Util(int start, int dest)
+    {
+        // If current node meets the destination
+        // Then increase count
+        if(start == dest)
+        {
+            count++;
+        }
+        else
+        {
+            // For all the adjacent nodes of the current node
+            // Call the recursive function again
+            for(int i = 0; i < adj.get(start).size(); i++)
+            {
+                countAll_Util(adj.get(start).get(i), dest);
+            }
+        }
+    }
+}
 ```
+For a graph containing a cycle, a modification can be that count all the paths to reach the destination, such that in a path, a node is encountered at most once. In this scenario, even after the presence of cycles, the question can be solved by maintaining a simple visited array to check when a node has been visited in a path. We illustrate this concept through the next question.
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_PrintAllSourceDestination"></a>
 ### Print all paths from source to destination in a graph
+Please complete the above section first and then proceed with this. We use the same DFS inspired algortihm to print the paths as well, by possibly storing all the paths in a List. Moreover, we consider that the graph may contain cycles, hence, we have a limit that the same node cannot be visited twice in any path. The code would be as follows:
+```java
+class Graph
+{
+    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    
+    // The wrapper function to call the recursive function
+    public List<List<Integer>> countAll(int start, int dest)
+    {
+        // The list that will hold the final asnwer
+        List<List<Integer>> ans = new ArrayList<>();
+        
+        // A boolean visited list to check nodes visited in a path
+        boolean[] visited = new boolean[V];
+        
+        // The new ArrayList<Integer>() is the list for each
+        // individual path
+        countAll_Util(int s, int d, ans, new ArrayList<Integer>(), visited);
+        return ans;
+    }
+    
+    // Recursive function to store paths
+    public void countAll_Util(int start, int dest, List<List<Integer>> ans, ArrayList<Integer> arr, boolean[] visited)
+    {
+        /*
+        Mark the current node as visited and add it to the
+        current path so far.
+        */
+        visited[start] = true;
+        arr.add(start);
+        
+        // If current node meets the destination
+        // then add the arr to ans
+        if(start == dest)
+        {
+            ans.add(new ArrayList<>(arr));
+        }
+        else
+        {
+            /*
+            For all the adjacent nodes of the current node
+            which have not been visited yet, call the function
+            on them again.
+            */
+            for(int i = 0; i < adj.get(start).size(); i++)
+            {
+                if(!visited[adj.get(start).get(i)])
+                {
+                    countAll_Util(adj.get(start).get(i), dest);
+                }
+            }
+        }
+        /*
+        Mark the current node as not visited and remove
+        it from the current path so far. This is done because
+        now the current node has been completed and all the paths
+        from this node have already been added to the asnwer.
+        */
+        visited[start] = false;
+        arr.remove(arr.size() - 1);
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_KnightProblem"></a>
+### Minimum steps to reach target by Knight
+The question statement is as follows:<br>
+Given a M x N board, a position at which a Knight(Chess piece) has been placed. Find the minimum number of steps the Knight need to reach a given destination.
+
+This problem can be consdiered as a variation of the shortest path in an undirected graph. The only difference would be, that instead of actually having adjacent nodes as an input in the graph, we would need to calculate them ourselves according to the rules of chess for a Knight's movement. Hence, the only movements allowed will be two steps up,down,right or left and then then one step perpendicular to it.
+
+Running the BFS with these movements in mind, as we traverse level by level. At all times, the nodes on a level so far will have covered the same distance from the source. Hence, as soon as the destination is reached for the first time, the distance so far to the destination will be minimum and our search can end. The code is as follows:
+```java
+/*
+Create a class cell to identify the position
+of a cell and the distance from the source
+*/
+class cell
+{
+    int x;
+    int y;
+    int dis;
+    
+    public cell(int X, int Y, int Dis)
+    {
+        x = X;
+        y = Y;
+        dis = Dis;
+    } 
+} 
+
+class Solution
+{
+    /*
+    A method to validate that whether or not a cell
+    lies inside the board. Hecne we check that the
+    cell's cordinates should be within board limits.
+    */
+    public boolean isInside(int x, int y, int N)
+    {
+        if (x < 0 && x >= N && y < 0 && y >= N)
+        {
+            return false;
+        }
+        return true; 
+    } 
+
+    // Main method
+    public int minStepToReachTarget(int start_x, int start_y, int dest_x, int dest_y, int N)
+    {
+        /*
+        As we will have to select 8 different possible moves
+        for the night, insetad of having 8 different if conditions,
+        we can make two arrays, corresponding to the eight
+        possible movement pairs. Hence, calling the next move
+        can be like (start_x + dx[i], start_y + dy[i])
+        */
+        int dx[] = { -2, -1, 1, 2, -2, -1, 1, 2 };
+        int dy[] = { -1, -2, -2, -1, 1, 2, 2, 1 };
+
+        // The BFS queue
+        Queue<cell> queue = new LinkedList<>();
+        // The visited array to avoid visiting the same path in loops
+        boolean visit[][] = new boolean[N][N]; 
+
+        /*
+        Add the starting cell to queue and mark it visited
+        The starting cells is (start_x, start_y) with a distance
+        of 0 from the source.
+        */
+        queue.add(new cell(start_x, start_y, 0));
+        visit[start_x][start_y] = true;
+
+        // Arbitrary node to be accessed inside loop
+        Cell node = null;
+        // Run loop till queue has elements
+        while (!queue.isEmpty())
+        {
+            // Get topmost element from queue
+            node = queue.poll();
+            // if this is destination so return distance
+            if (node.x == dest_x && node.y == dest_y)
+            {
+                return node.dis;
+            }
+            
+            // Add all possible next destination to queue
+            for (int i = 0; i < 8; i++)
+            {
+                // Next x and y cordinates
+                int next_x = node.x + dx[i];
+                int next_y = node.y + dy[i];
+                
+                /*
+                Check for validity of the next cordinates
+                and that they must not have been visited yet
+                */
+                if (isInside(next_x, next_y, N) && !visit[next_x][next_y])
+                {
+                    // Mark as visited
+                    visit[x][y] = true;
+                    /*
+                    Add to queue. The new distance will be the distance of
+                    current element that is the node, plus 1.
+                    */
+                    queue.add(new cell(next_x, next_y, node.dis + 1));
+                }
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="#GP_MinSwapsToSort"></a>
+### Minimum swaps required to sort an array
+The question requires you to find the minimum number of swaps needed to sort a given array. We use the process of cyclic swapping here. Let us look at the following example:
+
+Original Array:<br>
+7 1 0 5 4<br>
+Sorted Array:<br>
+0 1 4 5 7
+
+We can notice that the minimum number of swaps needed would be 2. We may swap 7-4 and then 4-0, or we may swap 0-4 and then 7-0 or we may swap 7-0 and then 7-4. In all three possibilities, the maximum number of swaps needed is 2. To put this visualization on pen and paper, we can see the in the actual sorted array, the following connections are needed:
+1. Element at index 0, goes to element at index 4.
+2. Element at index 4, goes to element at index 2.
+3. Element at index 2, goes to element at index 0.
+
+This forms a cycle of swaps. It can be noticed that in a cycle of swaps of length k, the actual number of swaps needed will always be k-1, because as the swaps are cyclic, the last swap would have been performed in within the previous k-1 swaps.
+
+Another example to illustrate the idea would be:
+
+Original Array:<br>
+2 4 3 1 8 5<br>
+Sorted Array:<br>
+1 2 3 4 5 8
+
+Cycle 1:
+1. Element at index 0, goes to element at index 1.
+2. Element at index 1, goes to element at index 3.
+3. Element at index 3, goes to element at index 0.
+
+Cycle 2:
+1. Element at index 2, goes to element at index 2.
+
+Cycle 3:
+1. Element at index 4, goes to element at index 5.
+2. Element at index 5, goes to element at index 4.
+
+Hence there are three cycles, which make (3-1) + (1-1) + (2-1) total swaps, that is 3 total swaps are needed.
+
+To apply this idea we create a graph between the indexes where the elements are currently and the index where they should be at. And then calculate the summation of (cycle lengths - 1). The code is as follows:
+```java
+class Solution
+{
+    public int minSwaps(int[] arr, int N)
+	{
+	    Graph g = new Graph(N);
+	    HashMap<Integer, Integer> hMap = new HashMap<Integer, Integer>();
+	    for(int i = 0; i < N; i++)
+	    {
+	        hMap.put(arr[i], i);
+	    }
+	    Arrays.sort(arr);
+	    for(int i = 0; i < N; i++)
+	    {
+	        g.addEdge(i, hMap.get(arr[i]));
+	    }
+	    return g.minSwapsNeeded();
+	}
+}
+
+class Graph
+{
+    static ArrayList<ArrayList<Integer>> adj = null;
+    static int V = 0;
+    
+    public Graph(int v)
+    {
+        V = v;
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < V; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+    
+    public void addEdge(int u, int v)
+    {
+        adj.get(u).add(v);
+    }
+    
+    public int minSwapsNeeded()
+    {
+        int count = 0;
+        boolean[] visited = new boolean[V];
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i])
+            {
+                count += getCycleLength(i, visited);
+            }
+        }
+        return count;
+    }
+    
+    public static int getCycleLength(int curr, boolean[] visited)
+    {
+        int c = -1;
+        while(!visited[curr])
+        {
+            visited[curr] = true;
+            curr = adj.get(curr).get(0);
+            c++;
+        }
+        return c;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="#GP_MinOpsToConvert"></a>
+### Minimum operations needed to convert x into y
 
 <a href="#Contents">Back to contents</a>
 
@@ -2324,6 +2647,8 @@ for (int i = 1; i <= target; ++i)
 }
 return dp[target]
 ```
+***NOTE: THE DP APPROACH TO SOLVING GRID QUESTIONS WORKS ONLY WHEN THE ANSWER FOR A CELL IN THE DP TABLE CAN BE EASILY CALCULATED USING THE PRECOMPUTED VALUES. HENCE, EVEN A SMALL MODIFICATION SUCH AS ALLOWING MOVEMENTS IN ALL 4 DIRECTIONS WOULD REQUIRE US TO CHANGE OUR APPROACH TO BFS(FOR MIN COST PATH) AND DFS/BACKTRACKING(FOR TOTAL PATHS).***
+
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_MergeIntervals"></a>
