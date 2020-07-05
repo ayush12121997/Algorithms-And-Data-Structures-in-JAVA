@@ -2354,7 +2354,7 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="#GP_MinSwapsToSort"></a>
+<a name="GP_MinSwapsToSort"></a>
 ### Minimum swaps required to sort an array
 The question requires you to find the minimum number of swaps needed to sort a given array. We use the process of cyclic swapping here. Let us look at the following example:
 
@@ -2395,19 +2395,26 @@ To apply this idea we create a graph between the indexes where the elements are 
 ```java
 class Solution
 {
+    // The input is an array of length N
     public int minSwaps(int[] arr, int N)
 	{
+        // Construct a Graph, usign class similar to one learned above
 	    Graph g = new Graph(N);
+        // HashMap is used to store the original indexes of the values
 	    HashMap<Integer, Integer> hMap = new HashMap<Integer, Integer>();
 	    for(int i = 0; i < N; i++)
 	    {
+            // Add (element, original index) to HashMap
 	        hMap.put(arr[i], i);
 	    }
+        // Sort the array to know the correct final indexes
 	    Arrays.sort(arr);
 	    for(int i = 0; i < N; i++)
 	    {
+            // Add an edge between the correct index and original index of an element.
 	        g.addEdge(i, hMap.get(arr[i]));
 	    }
+        // Call the function to get the value of min swaps.
 	    return g.minSwapsNeeded();
 	}
 }
@@ -2432,36 +2439,49 @@ class Graph
         adj.get(u).add(v);
     }
     
+    // Calculate minSwaps needed in the given graph
     public int minSwapsNeeded()
     {
+        // Initialise count
         int count = 0;
+        // Visited array to avoid infinite loops in the cycles
         boolean[] visited = new boolean[V];
         for(int i = 0; i < V; i++)
         {
+            // For every non visited vertex so far
             if(!visited[i])
             {
-                count += getCycleLength(i, visited);
+                // Add (cycle length - 1) to total count
+                count += (getCycleLength(i, visited) - 1);
             }
         }
+        // Return total swaps
         return count;
     }
     
+    // Use DFS approach to identify cycle length
     public static int getCycleLength(int curr, boolean[] visited)
     {
-        int c = -1;
+        // Current length initialised as 0
+        int c = 0;
+        // While we do not reach a previously visited node again
         while(!visited[curr])
         {
+            // Mark current node as visited
             visited[curr] = true;
+            // Get next node of current node
             curr = adj.get(curr).get(0);
+            // Increase cycle length by 1
             c++;
         }
+        // Return cycle length
         return c;
     }
 }
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="#GP_MinOpsToConvert"></a>
+<a name="GP_MinOpsToConvert"></a>
 ### Minimum operations needed to convert x into y
 
 <a href="#Contents">Back to contents</a>
