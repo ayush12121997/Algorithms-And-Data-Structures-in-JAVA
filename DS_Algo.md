@@ -2483,7 +2483,86 @@ class Graph
 
 <a name="GP_MinOpsToConvert"></a>
 ### Minimum operations needed to convert x into y
+The question requires you to convert a given number x into y in minimum steps possible and then report the count. You would be allowed only a certain number of operations. For example, lets say convert x into y, with operations allowed:
+1. Multiply number by 2
+2. Subtract 1 from number
 
+In this scenario, the question becoems similar to the knight problem. The source and destination are knows with movements allowed only to numbers (a x 2) and (a - 1) if you are at 'a' currently. Hence, we use a BFS approach to calculate the minimum count. The code would be as follows:
+```java
+/*
+Class value to hold the number and distance
+*/
+class cell
+{
+    int x;
+    int dis;
+    
+    public cell(int X, int Dis)
+    {
+        x = X;
+        dis = Dis;
+    } 
+} 
+
+class Solution
+{
+    // Main method
+    public int minStepToReachTarget(int start, int dest, int N)
+    {
+        // The BFS queue
+        Queue<cell> queue = new LinkedList<>();
+        // The visited hash map to avoid visiting the same number in loops
+        HashMap<Integer, Integer> visited = new hashMap<Integer, Integer>(); 
+
+        /*
+        Add the starting cell to queue and mark it visited
+        The starting cells is (start) with a distance
+        of 0 from the source.
+        */
+        queue.add(new cell(start, 0));
+        visited.add(start, start);
+
+        // Arbitrary node to be accessed inside loop
+        Cell node = null;
+        // Run loop till queue has elements
+        while (!queue.isEmpty())
+        {
+            // Get topmost element from queue
+            node = queue.poll();
+            // If this is destination so return distance
+            if (node.x == dest)
+            {
+                return node.dis;
+            }
+            
+            // Add all possible non visited destinations to queue
+            int next_1 = node.x * 2;
+            int next_2 = node.x - 1;
+            if (!visited.containsKey(next_1))
+            {
+                // Mark as visited
+                visited.add(next_1, next_1);
+                /*
+                Add to queue. The new distance will be the distance of
+                current element that is the node, plus 1.
+                */
+                queue.add(new cell(next_1, node.dis + 1));
+            }
+            if (!visited.containsKey(next_2))
+            {
+                // Mark as visited
+                visited.add(next_2, next_2);
+                /*
+                Add to queue. The new distance will be the distance of
+                current element that is the node, plus 1.
+                */
+                queue.add(new cell(next_2, node.dis + 1));
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
