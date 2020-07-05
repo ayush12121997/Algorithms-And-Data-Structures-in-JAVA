@@ -87,8 +87,10 @@
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
     - [Reverse a graph](#GP_Reverse)
-    - [Find all strongly connected components - Kosaraju’s algorithm](#GP_SCC)
+    - [Connected components in undirected graph]
+    - [Strongly Connected Components in directed graph- Kosaraju’s algorithm](#GP_SCC)
     - [Find a mother vertex](#GP_FindMother)
+    - [Graph coloring - Chromatic Number](#GP_GraphColoring)
     - [Check if  graph is strongly connected]
     - [Dijkstra's Algorithm]
     - [Printing paths in Dijsktra’s Algorithm]
@@ -102,11 +104,10 @@
     - [Disjoint Union Find - Rank and Path Compression]
     - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
     - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
-    - [Minimum Cost Path with Left, Right, Bottom and Up moves allowed]
     - [Minimum steps to reach target by Knight](#GP_KnightProblem)
     - [Minimum number of swaps required to sort an array](#GP_MinSwapsToSort)
     - [Minimum operations needed to convert x into y](#GP_MinOpsToConvert)
-    - [Minimum number of colors required to color a graph]
+    - [Minimum cost path with Left, Right, Bottom and Up moves allowed]
     - [Stable marriage]
 12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
