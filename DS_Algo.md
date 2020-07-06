@@ -95,14 +95,13 @@
     - [Bellman–Ford Algorithm](#GP_BellmanFord)
     - [Floyd Warshall Algorithm](#GP_FloydWarsahll)
     - [Shortest path in an unweighted graph](#GP_ShortestPathUnweighted)
-    - [Shortest path in a Directed Acyclic Graph](#GP_ShortestPathDAG)
-    - [Best First Search]
-    - [A* Search Algorithm]
+    - [Topological Sorting]
+    - [All topological sorts in a Directed Acyclic Graph]
+    - [Shortest path in a Directed Acyclic Graph]
     - [Graph coloring - Chromatic Number](#GP_GraphColoring)
     - [m-Coloring Problem](#GP_mColoring)
     - [Detect a cycle in an undirected graph]
     - [Detect a cycle in an directed graph]
-    - [Detect a negative cycle]
     - [Disjoint Union Find - Rank and Path Compression]
     - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
     - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
@@ -110,7 +109,11 @@
     - [Minimum number of swaps required to sort an array](#GP_MinSwapsToSort)
     - [Minimum operations needed to convert x into y](#GP_MinOpsToConvert)
     - [Minimum cost path with Left, Right, Bottom and Up moves allowed]
+    - [Prim's Minimum Spanning Tree]
+    - [Minimum cost to connect all cities]
     - [Stable marriage]
+    - [Best First Search]
+    - [A* Search Algorithm]
 12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting and string concatenation strats]
@@ -2351,6 +2354,7 @@ class Comparison implements Comparator<Node>
 Use Case:
 - Shortest distance from one source to all destinations
 - Weighted graph with negative weights, no negative weight cycles
+- Detect negative weight cycles
 
 Dijkstra does not work in case of negative weights being present in the graph. In case of negative weights, we can use Bellman Ford Algorithm to get the shortest distance from a source to all vertices and check for the presence of a negative weight cycle.
 
@@ -2415,7 +2419,7 @@ class Graph
         dist[src] = 0;
         
         // Run vertices - 1 times
-        for(int v1 = 0; v1 < V; v1++)
+        for(int v1 = 0; v1 < V-1; v1++)
         {
             // For every edge in the graph
             for(int i = 0; i < graph.size(); i++)
@@ -2538,16 +2542,193 @@ public void floydWarshall(int graph[][])
 
 <a name="GP_ShortestPathUnweighted"></a>
 ### Shortest path in an unweighted graph
+Use case:
+- Shortest path from one source to all destinations
+- Unweighted graph, can be cyclic/acyclic both
 
-<a href="#Contents">Back to contents</a>
+The idea is to use a modified version of BFS instead of Dijkstra. As we do not have any weights attatched, the BFS can run in O(V + E) time as a priority queue won't be needed. The remaining basic steps are simialr to Djikstra for storing and updating distances and parents.
 
-<a name="GP_ShortestPathDAG"></a>
-### Shortest path in a Directed Acyclic Graph
+The code is as follows:
+```java
+class Graph
+{
+    // Distance and parent arrays
+	int dist[];
+    int parent[];
+    int V;
+	ArrayList<ArrayList<Integer>> adj;
 
+	public Graph(int v)
+	{
+		V = v;
+		dist = new int[V];
+        parent = new int[V];
+		adj = new ArrayList<ArrayList<Integer>>();
+		for (int i = 0; i < V; i++)
+		{
+            // Initial distances are marked as infinite
+			dist[i] = Integer.MAX_VALUE;
+            // Initial parents are -1
+            parent[i] = -1;
+			adj.add(new ArrayList<Integer>());
+		}
+	}
+
+	public void addEdge(int u, int v)
+	{
+        adj.get(u).add(v);
+        
+        // Only for undirected graph
+        // adj.get(v).add(u);
+	}
+    
+    // Code for BFS
+	public void BFS(int src)
+	{
+        // Add source to Queue
+		Queue<Integer> queue = new LinkedList<Integer>();
+        boolean[] visited = new boolean[V];
+        
+        // Mark distance of source as 0
+		dist[src] = 0;
+        // Add source to queue
+        queue.add(src);
+        // Mark soruce as visisted
+        visited[src] = true;
+        // Arbitrary node
+        int node = 0;
+		while (!queue.isEmpty())
+		{
+            // Get the head of the queue
+			node = queue.poll();
+            
+            // For all adjacent nodes
+			for (int i = 0; i < adj.get(node).size(); i++)
+			{
+                // Get index value of adjacent node
+				int c_ind = adj.get(node).get(i);
+                // If index not visited before
+                if(!visited[c_ind])
+                {
+                    // Update dist, parent and visited
+                    dist[c_ind] = dist[node] + 1;
+                    parent[c_ind] = node;
+                    visited[c_ind] = true;
+                    // Add to queue
+                    queue.add(c_ind);
+                }
+			}
+		}
+	}
+    
+    public ArrayList<Integer> pathToX(int x)
+    {
+        // Answer given as arraylist of nodes
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        
+        // Add the current element, as path will necessarily
+        // include the current element even if path length is 1
+        arr.add(x);
+        
+        // Check for element's parents, if element's parent is
+        // not -1, that is element has a parent, add the parent
+        // to the answer and then make element = parent and
+        // repeat until parent becomes -1.
+        while(parent[x] != -1)
+        {
+            arr.add(parent[x]);
+            x = parent[x];
+        }
+        
+        // As the path is added in reverse, reverse the array
+        Collections.reverse(arr);
+        return arr;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_GraphColoring"></a>
 ### Graph coloring - Chromatic Number
+Graph coloring is a technique in which you are needed to color the vertices of a graph in such a way that no two adjacent vertices have the same color. The minimum number of colors needed to achieve this is called the chromatic number of the graph. The basic greedy algo to get to an answer can suggest the upperbound on the number of colors needed. The algo is:
+1. Color first vertex with color A.
+2. For the remaining vertices: Choose the lowest numbered color available that hasn't been used in the adjacent vertices. In case no such already available color is present, so add a new color to the list of colors.
+
+The code would be as follows:
+```java
+class Graph
+{
+    // Coloring holds the color for all nodes
+    int[] coloring;
+    // Colors holds list of all available colors
+    boolean[] colors;
+    int V;
+	ArrayList<ArrayList<Integer>> adj;
+
+	public Graph(int v)
+	{
+		V = v;
+		coloring = new int[V];
+        colors = new boolean[V];
+		adj = new ArrayList<ArrayList<Integer>>();
+		for (int i = 0; i < V; i++)
+		{
+            // Initial colors assigned are none
+			coloring[i] = -1;
+			adj.add(new ArrayList<Integer>());
+		}
+	}
+
+	public void addEdge(int u, int v)
+	{
+        adj.get(u).add(v);
+        // Only for undirected graph
+        adj.get(v).add(u);
+	}
+    
+    // Code for coloring
+	public void applyColoring()
+	{
+        // Mark first node with 0 color
+        coloring[0] = 0;
+        
+        // For all other nodes
+        for(int i = 1; i < V; i++)
+        {
+            // Make all colors available initially
+            Arrays.fill(colors, true);
+            
+            // For all adjacent vertices of current node
+            for (int j = 0; j < adj.get(i).size(); j++)
+			{
+                // Get index value of adjacent vertex
+				int c_ind = adj.get(i).get(j);
+                // If index has been colored before
+                if(coloring[c_ind] != -1)
+                {
+                    // Mark color as unavailable
+                    colors[coloring[c_ind]] = false;
+                }
+			}
+            
+            // For all colors in colors list
+            for(int j = 0; j < V; j++)
+            {
+                // If color is available
+                if(colors[j])
+                {
+                    // Use this color
+                    coloring[i] = j;
+                    break;
+                }
+            }
+		}
+	}
+}
+```
+A very common application of coloring can be when similar related people/items have to be sought into different groups. For example, course scheduling such that courses with common students do not have classes at the same time, or exam scheduling, or where say people are to be divided into two groups on the basis of people liking/hating each other and so on. The process is to connect the realted items and then try to color the graph in different adjacent colors.
+
+We may also use it to check if a graph is bipartite or not. If graph is 2 colorable it is bipartite.
 
 <a href="#Contents">Back to contents</a>
 
