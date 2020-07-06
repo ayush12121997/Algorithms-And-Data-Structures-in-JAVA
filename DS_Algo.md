@@ -93,7 +93,7 @@
     - [Check if  graph is strongly connected](#GP_CheckIfSCC)
     - [Dijkstra's Algorithm](#GP_Dijkstra)
     - [Bellman–Ford Algorithm](#GP_BellmanFord)
-    - [Floyd Warshall Algorithm](#GP_FloydWarshall)
+    - [Floyd Warshall Algorithm](#GP_FloydWarsahll)
     - [Shortest path in an unweighted graph](#GP_ShortestPathUnweighted)
     - [Shortest path in a Directed Acyclic Graph](#GP_ShortestPathDAG)
     - [Best First Search]
@@ -2153,13 +2153,13 @@ To check that whether a directed graph is strongly connected or not, we use the 
 <a name="GP_Dijkstra"></a>
 ### Dijkstra's Algorithm
 Use Case:
-- Shortest distance from one source to any/all destinations
+- Shortest distance from one source to all destinations
 - Weighted graph without negative weights
 
 The algorithm for Dijkstra is a BFS inspired algorithm. The aim is to start BFS from the source vertex, and keep updating the distances of the nodes on each level. Instead of a normal queue, we use a priority queue in dijkstra BFS. The reason is that we always need the node with the shortest distance from the source at all time, as for the node at any level with the shortest distance, the distance from source would not change at any further levels. The distance is updated based on the formula:<br>
 Distance of node from source = Distance of parent from source + Distance of node from parent
 
-The time complexity is (E + VlogV).
+The time complexity is ((E+V)logV) = ElogV.
 
 The distances are stored in a dist[] arrar. All the nodes with updated distances are added to the priority queue which is sorted on the basis of dstance from source, and their distances are updated in the dist[] arr. From the priority queue just like in BFS we pop the head and then do the same for the popped node. We update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by either keeping a visited array or by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source. Moreover, if the path to any vertex from the course needs to be stored, we can maintain a parent[] array. The parent array will hold the parent node of a vertex and to print the path, we may iterate the parent array until we hit the source. The parent array is updated along with the distance array. The parent of a neighbour who's distance is updated becomes the node that was popped out.
 
@@ -2349,8 +2349,8 @@ class Comparison implements Comparator<Node>
 <a name="GP_BellmanFord"></a>
 ### Bellman–Ford Algorithm
 Use Case:
-- Shortest distance from one source to any/all destinations
-- Weighted graph with/without negative weights
+- Shortest distance from one source to all destinations
+- Weighted graph with negative weights, no negative weight cycles
 
 Dijkstra does not work in case of negative weights being present in the graph. In case of negative weights, we can use Bellman Ford Algorithm to get the shortest distance from a source to all vertices and check for the presence of a negative weight cycle.
 
@@ -2365,6 +2365,8 @@ Steps:
 2. We start finding shortest distances for paths of length 1 to paths of length v - 1. For v-1 times, for all the edges present in the graph, for each edge we check that for the edge u - > v, is it possible to get a distance smaller than current dist[v]. That is, dist[v] < dist[u] + length of u-v. If yes, so we update dist[v] and parent[v] as well.<br>
 _The reason this step is done v-1 times is that, initially when all distances are infinite, the first iteration would confirm the shortest ditances of paths of length 1 from source. While other distances might have been updated too, but they may not necessarily be the shortest. On the second iteration, as paths of length 1 have already been finalized, so now paths of length 2 would be finalized, that is nodes which are just a single edge away from previously finalized nodes. Building up like this, in v-1 iterations, we can be sure that all non cyclic paths have been finalized to be the shortest possible paths._
 3. Once paths have been finalized, run a final loop over all edges once again, checking that is it still possible to get a smaller path sum than the already finalized values. If true, that means that there is a negative weight cycle present, else there is no negative weight cycle and the path lengths finalized so far are correct.
+
+Time complexity is O(EV).
 
 Code:
 ```java
@@ -2477,9 +2479,61 @@ class Graph
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="GP_FloydWarshall"></a>
+<a name="GP_FloydWarsahll"></a>
 ### Floyd Warshall Algorithm
+Use Case:
+- Shortest distance between all pairs of vertices
+- Weighted graph with negative weights allowed
 
+The task is to compute the shortest distances between every pair of vertices in the graph. The graph is directed and may contain negative weights as well. We calculate this using dp. The task is that for every vertice k, we calculate shortest path between i and j such that k is a vertex in the path. Hence, the steps would look like:
+```
+For every vertex k from 0 to (v-1)
+    For every vertex i from 0 to (v-1)
+        For every vertex j from 0 to (v-1)
+            dist(i,j) = Math.min(dist(i,k) + dist(k,j))
+```
+Distance and parents are stored in a way similar to Dijkstra and Bellman Ford.
+The input graph should be taken as an adjacency matrix, graph[][], where graph[i][j] = INF if an edge doesn't exist between i and j. Time complexity is O(V^3).
+
+The code for the algorithm is as follows:
+```java
+public void floydWarshall(int graph[][]) 
+{ 
+    int dist[][] = new int[V][V];
+    int parent[][] = new int[V][V];
+    /*
+    Initialize the solution matrix same as input graph matrix.
+    This is because initial values of shortest distances are
+    based on shortest paths with no intermediate vertex.
+    */
+    for (int i = 0; i < V; i++)
+    {
+        for (j = 0; j < V; j++)
+        {
+            dist[i][j] = graph[i][j];
+            parent[i][j] = -1;
+        }
+    }
+    
+    // Intermediate vertices loop
+    for (k = 0; k < V; k++)
+    {
+        // Source vertices loop
+        for (i = 0; i < V; i++)
+        {
+            // Destination vertices loop
+            for (j = 0; j < V; j++)
+            {
+                if (dist[i][k] + dist[k][j] < dist[i][j])
+                {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                    parent[i][j] = k;
+                }
+            }
+        }
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_ShortestPathUnweighted"></a>
