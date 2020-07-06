@@ -87,17 +87,20 @@
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
     - [Reverse a graph](#GP_Reverse)
-    - [Connected components in undirected graph]
+    - [Connected components in undirected graph](#GP_ConnectedComponents)
     - [Strongly Connected Components in directed graph- Kosaraju’s algorithm](#GP_SCC)
     - [Find a mother vertex](#GP_FindMother)
+    - [Check if  graph is strongly connected](#GP_CheckIfSCC)
+    - [Dijkstra's Algorithm](#GP_Dijkstra)
+    - [Printing paths in Dijsktra’s Algorithm](#GP_DijkstraPrint)
+    - [Bellman–Ford Algorithm](#GP_BellmanFord)
+    - [Floyd Warshall Algorithm](#GP_FloydWarshall)
+    - [Shortest path in an unweighted graph](#GP_ShortestPathUnweighted)
+    - [Shortest path in a Directed Acyclic Graph](#GP_ShortestPathDAG)
+    - [Best First Search]
+    - [A* Search Algorithm]
     - [Graph coloring - Chromatic Number](#GP_GraphColoring)
-    - [Check if  graph is strongly connected]
-    - [Dijkstra's Algorithm]
-    - [Printing paths in Dijsktra’s Algorithm]
-    - [Bellman–Ford Algorithm]
-    - [Floyd Warshall Algorithm]
-    - [Shortest path in an unweighted graph]
-    - [Shortest path in a Directed Acyclic Graph]
+    - [m-Coloring Problem](#GP_mColoring)
     - [Detect a cycle in an undirected graph]
     - [Detect a cycle in an directed graph]
     - [Detect a negative cycle]
@@ -1762,11 +1765,11 @@ class Comparison implements Comparator<Pair>
     @Override
     public int compare(Pair p1, Pair p2)
     {
-        if (p1.value() > p2.value())
+        if (p1.value > p2.value)
         {
             return 1;
         }
-        else if(p1.value() < p2.value())
+        else if(p1.value < p2.value)
         {
             return -1;
         }
@@ -2096,6 +2099,12 @@ class Graph
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="GP_ConnectedComponents"></a>
+### Connected Components in an Undirected Graph
+Connected components are those components in an undirected graph in which all vertices can be reached from every other vertex. Connected componnets task in an undirected graph is trivial and requires us to just simply perform a BFS/DFS traversal on the graph on every unvisted node, and every new iteration of BFS/DFS outputs a new connceted component. The code is trivial and thus has been omitted out of explanation.
+
+<a href="#Contents">Back to contents</a>
+
 <a name="GP_SCC"></a>
 ### Strongly Connected Components - Kosaraju's Algorithm
 A directed graph is strongly connected if there is a path between all pairs of vertices. A strongly connected component (SCC) of a directed graph is a maximal strongly connected subgraph. This means that within a strongly connected directed graph, if we can partition the graph in such a way that every partition in itself is strongly connected and that adding even a single node to any of these component graphs would result in making it not strongly connected.
@@ -2128,6 +2137,170 @@ To check during DFS that all nodes have been visited or not, we can apply either
 2. As the visisted array prevents us from visiting the same node once again, we can keep count of every time we reach a new node. When we reach a new node we do count++. This way if end count equals number of vertices then it is the mother vertex else it is not.
 
 As the code requires just slight modifications to the code for the DFS traversal of a graph, we do not cover the code for this question here due to triviality.
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_CheckIfSCC"></a>
+### Check if a directed graph is strongly connected
+To check that whether a directed graph is strongly connected or not, we use the conecpt similar to Kosaraju's algorithm for finding all SCC. if we find all SCCs and the number of SCCs is just one, then the graph is strongly connected. But the task here is only different in the meaning that we need to confirm that whther a single SCC covers the entire graph or not and need not find more than one SCC. We ca ndo this according to the following steps:
+1. Marks all nodes unvisited.
+2. Do DFS, if any node remains unvisited, then return false.
+3. If above step did not return false, so reverse the graph.
+4. Again do DFS from the same node. If if any node remains unvisited, then return false.
+5. if above step did not return false, so return true.
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_Dijkstra"></a>
+### Dijkstra's Algorithm
+Use Case:
+- Shortest distance from one source to any/all destinations
+- Weighted graph without negative weights
+
+The algorithm for Dijkstra is a BFS inspired algorithm. The aim is to start BFS from the source vertex, and keep updating the distances of the nodes on each level. The distance is updated based on the formula:<br>
+Distance of node from source = Distance of parent from source + Distance of node from parent
+
+The distances are stored in a dist[] arrar. All the nodes with updated distances are added to a priority queue which is sorted on the basis of dstance from source, and their distances are updated in the dist[] arr. From the priority queue just like in BFS we pop the head and then do the same for the popped node. We update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by either keeping a visited array or by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source.The steps of the algorithm would provide a better understanding of the funcitoning:
+1. Start with the source, and add it to the prioirty queue. The distance of source from source is 0.
+2. Now until the priority queue becomes empty, pop the head. If the head exists in the HashMap of completed elements, discard this element and move ahead. If it does not exist,  then use this popped node and also add it to the completed HashMap. This is done to ensure that once the distance of a node is finalized as mininimum distance till that vertex, no more further changes be allowed to it.
+3. For the popped node, for every neighbour not already in the completed HashMap, check if the distance needs to be updated or not. Distance is updated only in the following condition:<br>
+Let popped node be 'p'<br>
+Let neighbour be 'n'<br>
+Let source be 's'<br>
+Distance updated only if dist[n] < dist[p] + Distance between 'p' and 'n', that is only if current distance of 'n' from 's' is less than sum of distance of 'n' from 'p' and distance of 'p' from 's'.<br>
+If the distance is updated then add this node to the priority queue.<br>
+4. Keep repeating the process until priority queue is empty.
+```java
+class Graph
+{
+	int dist[];
+	HashMap<Integer, Integer> hMap;
+	PriorityQueue<Node> pQueue;
+	int V;
+	ArrayList<ArrayList<Node>> adj;
+
+	public Graph(int v)
+	{
+		V = v;
+		dist = new int[V];
+		adj = new ArrayList<ArrayList<Node>>();
+		for (int i = 0; i < V; i++)
+		{
+			dist[i] = Integer.MAX_VALUE;
+			adj.add(new ArrayList<Node>());
+		}
+		hMap = new HashMap<Integer, Integer>();
+		pQueue = new PriorityQueue<Node>(new Comparison());
+	}
+
+	public void addEdge(int u, int v, int d)
+	{
+		adj.get(u).add(new Node(v, d));
+		adj.get(v).add(new Node(u, d));
+	}
+
+	public void dijkstra(int src)
+	{
+		pQueue.add(new Node(src, 0));
+		dist[src] = 0;
+		while (!pQueue.isEmpty())
+		{
+			while (!pQueue.isEmpty() && hMap.containsKey(pQueue.peek().ind))
+			{
+				pQueue.poll();
+			}
+			if (pQueue.isEmpty())
+			{
+				break;
+			}
+			Node node = pQueue.poll();
+			int st = node.ind;
+			int dt = node.dis;
+			hMap.put(st, dt);
+			for (int i = 0; i < adj.get(st).size(); i++)
+			{
+				int c_ind = adj.get(st).get(i).ind;
+				int c_dis = adj.get(st).get(i).dis + dt;
+				if (!hMap.containsKey(c_ind))
+				{
+					if (c_dis < dist[c_ind])
+					{
+						pQueue.add(new Node(c_ind, c_dis));
+						dist[c_ind] = c_dis;
+					}
+				}
+			}
+		}
+	}
+}
+
+class Node
+{
+	int ind;
+	int dis;
+
+	public Node(int n, int d)
+	{
+		ind = n;
+		dis = d;
+	}
+}
+
+// Defining the comparator class for the queue
+class Comparison implements Comparator<Node>
+{
+	@Override
+	public int compare(Node p1, Node p2)
+	{
+		if (p1.dis > p2.dis)
+		{
+			return 1;
+		}
+		else if (p1.dis < p2.dis)
+		{
+			return -1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_DijkstraPrint"></a>
+### Printing paths in Dijsktra’s Algorithm
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_BellmanFord"></a>
+### Bellman–Ford Algorithm
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_FloydWarshall"></a>
+### Floyd Warshall Algorithm
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_ShortestPathUnweighted"></a>
+### Shortest path in an unweighted graph
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_ShortestPathDAG"></a>
+### Shortest path in a Directed Acyclic Graph
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_GraphColoring"></a>
+### Graph coloring - Chromatic Number
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_mColoring"></a>
+### m-Coloring Problem
 
 <a href="#Contents">Back to contents</a>
 
