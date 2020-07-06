@@ -92,7 +92,6 @@
     - [Find a mother vertex](#GP_FindMother)
     - [Check if  graph is strongly connected](#GP_CheckIfSCC)
     - [Dijkstra's Algorithm](#GP_Dijkstra)
-    - [Printing paths in Dijsktra’s Algorithm](#GP_DijkstraPrint)
     - [Bellman–Ford Algorithm](#GP_BellmanFord)
     - [Floyd Warshall Algorithm](#GP_FloydWarshall)
     - [Shortest path in an unweighted graph](#GP_ShortestPathUnweighted)
@@ -2157,10 +2156,14 @@ Use Case:
 - Shortest distance from one source to any/all destinations
 - Weighted graph without negative weights
 
-The algorithm for Dijkstra is a BFS inspired algorithm. The aim is to start BFS from the source vertex, and keep updating the distances of the nodes on each level. The distance is updated based on the formula:<br>
+The algorithm for Dijkstra is a BFS inspired algorithm. The aim is to start BFS from the source vertex, and keep updating the distances of the nodes on each level. Instead of a normal queue, we use a priority queue in dijkstra BFS. The reason is that we always need the node with the shortest distance from the source at all time, as for the node at any level with the shortest distance, the distance from source would not change at any further levels. The distance is updated based on the formula:<br>
 Distance of node from source = Distance of parent from source + Distance of node from parent
 
-The distances are stored in a dist[] arrar. All the nodes with updated distances are added to a priority queue which is sorted on the basis of dstance from source, and their distances are updated in the dist[] arr. From the priority queue just like in BFS we pop the head and then do the same for the popped node. We update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by either keeping a visited array or by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source.The steps of the algorithm would provide a better understanding of the funcitoning:
+The time complexity is (E + VlogV).
+
+The distances are stored in a dist[] arrar. All the nodes with updated distances are added to the priority queue which is sorted on the basis of dstance from source, and their distances are updated in the dist[] arr. From the priority queue just like in BFS we pop the head and then do the same for the popped node. We update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by either keeping a visited array or by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source. Moreover, if the path to any vertex from the course needs to be stored, we can maintain a parent[] array. The parent array will hold the parent node of a vertex and to print the path, we may iterate the parent array until we hit the source. The parent array is updated along with the distance array. The parent of a neighbour who's distance is updated becomes the node that was popped out.
+
+The steps of the algorithm would provide a better understanding of the funcitoning:
 1. Start with the source, and add it to the prioirty queue. The distance of source from source is 0.
 2. Now until the priority queue becomes empty, pop the head. If the head exists in the HashMap of completed elements, discard this element and move ahead. If it does not exist,  then use this popped node and also add it to the completed HashMap. This is done to ensure that once the distance of a node is finalized as mininimum distance till that vertex, no more further changes be allowed to it.
 3. For the popped node, for every neighbour not already in the completed HashMap, check if the distance needs to be updated or not. Distance is updated only in the following condition:<br>
@@ -2168,13 +2171,20 @@ Let popped node be 'p'<br>
 Let neighbour be 'n'<br>
 Let source be 's'<br>
 Distance updated only if dist[n] < dist[p] + Distance between 'p' and 'n', that is only if current distance of 'n' from 's' is less than sum of distance of 'n' from 'p' and distance of 'p' from 's'.<br>
-If the distance is updated then add this node to the priority queue.<br>
-4. Keep repeating the process until priority queue is empty.
+If the distance is updated then add this node to the priority queue. Moreover, as the distance has been updated, so this means that the shortest way to reach 'n' is now through 'p' and hence we update the parent aray as follows:<br>
+parent[n] = p;
+4. Keep repeating the process until priority queue is empty. The final distance array would provide you with shortest distances and parent array would help in finding the path to a given vertex.
+
+The code is as follows:
 ```java
 class Graph
 {
+    // Distance and parent arrays
 	int dist[];
+    int parent[];
+    // HashMap to store completed nodes
 	HashMap<Integer, Integer> hMap;
+    // Priority Queue for getting shortest distance Node
 	PriorityQueue<Node> pQueue;
 	int V;
 	ArrayList<ArrayList<Node>> adj;
@@ -2183,28 +2193,43 @@ class Graph
 	{
 		V = v;
 		dist = new int[V];
+        parent = new int[V];
 		adj = new ArrayList<ArrayList<Node>>();
 		for (int i = 0; i < V; i++)
 		{
+            // Initial distances are marked as infinite
 			dist[i] = Integer.MAX_VALUE;
+            // Initial parents are -1
+            parent[i] = -1;
 			adj.add(new ArrayList<Node>());
 		}
 		hMap = new HashMap<Integer, Integer>();
+        // Priority queue sorted on the basis of distances
 		pQueue = new PriorityQueue<Node>(new Comparison());
 	}
 
 	public void addEdge(int u, int v, int d)
 	{
+        // We add nodes along with the distance of the edge joining them
 		adj.get(u).add(new Node(v, d));
+        
+        // For undirected graphs, add both directions
 		adj.get(v).add(new Node(u, d));
 	}
-
+    
+    // Code for dijkstra
 	public void dijkstra(int src)
 	{
+        // Add source to pQueue
 		pQueue.add(new Node(src, 0));
+        
+        // Mark distance of source as 0
 		dist[src] = 0;
 		while (!pQueue.isEmpty())
 		{
+            // Check if the head of the priority
+            // queue is already completed or not.
+            // If yes discard, else move ahead
 			while (!pQueue.isEmpty() && hMap.containsKey(pQueue.peek().ind))
 			{
 				pQueue.poll();
@@ -2213,27 +2238,78 @@ class Graph
 			{
 				break;
 			}
+            // Get the head of the priority queue
 			Node node = pQueue.poll();
+            
+            // Node index value of head
 			int st = node.ind;
+            
+            // Distance of head from source
 			int dt = node.dis;
+            
+            // As this is the shortest distance node
+            // available, mark it as completed and add
+            // to hashmap.
 			hMap.put(st, dt);
+            
+            // For all adjacent nodes
 			for (int i = 0; i < adj.get(st).size(); i++)
 			{
+                // Get index value of adjacent node
 				int c_ind = adj.get(st).get(i).ind;
+                
+                // Get possible distance of this node from source
+                // Dist = Dist of parent + Dist from parent
 				int c_dis = adj.get(st).get(i).dis + dt;
+                
+                // If this adjacent node is not already marked as completed
 				if (!hMap.containsKey(c_ind))
 				{
+                    // If possible distance is smaller than current distance
 					if (c_dis < dist[c_ind])
 					{
+                        // Add this element to priority queue
 						pQueue.add(new Node(c_ind, c_dis));
+                        
+                        // Update distance
 						dist[c_ind] = c_dis;
+                        
+                        // Update parent, as the parent for the shortest
+                        // distance now is the popped node 'st'.
+                        parent[c_ind] = st;
 					}
 				}
 			}
 		}
 	}
+    
+    public ArrayList<Integer> pathToX(int x)
+    {
+        // Answer given as arraylist of nodes
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        
+        // Add the current element, as path will necessarily
+        // include the current element even if path length is 1
+        arr.add(x);
+        
+        // Check for element's parents, if element's parent is
+        // not -1, that is element has a parent, add the parent
+        // to the answer and then make element = parent and
+        // repeat until parent becomes -1.
+        while(parent[x] != -1)
+        {
+            arr.add(parent[x]);
+            x = parent[x];
+        }
+        
+        // As the path is added in reverse, reverse the array
+        Collections.reverse(arr);
+        return arr;
+    }
 }
 
+// Node class to store node index and
+// dist of the edge leading to this node
 class Node
 {
 	int ind;
@@ -2247,6 +2323,7 @@ class Node
 }
 
 // Defining the comparator class for the queue
+// Sort on basis of increasing distance
 class Comparison implements Comparator<Node>
 {
 	@Override
@@ -2269,14 +2346,135 @@ class Comparison implements Comparator<Node>
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="GP_DijkstraPrint"></a>
-### Printing paths in Dijsktra’s Algorithm
-
-<a href="#Contents">Back to contents</a>
-
 <a name="GP_BellmanFord"></a>
 ### Bellman–Ford Algorithm
+Use Case:
+- Shortest distance from one source to any/all destinations
+- Weighted graph with/without negative weights
 
+Dijkstra does not work in case of negative weights being present in the graph. In case of negative weights, we can use Bellman Ford Algorithm to get the shortest distance from a source to all vertices and check for the presence of a negative weight cycle.
+
+<ins>Fact-1</ins>: In a graph having v vertices, the maximum non cyclic path length can be v-1. Any path of length >= v, will definitely form a cycle.
+
+<ins>Fact-2</ins>: In case of a cycle consisting of poistive edges only, iterating the path again and again will increase the total to infinite, whereas in case of cycles having a negative weight sum the cost can continue to keep on descreasing till negative infinite.
+
+Using the above two facts we can visualize an algorithm, that builds all path lengths of paths upto length v-1, and when done, checks once again for shorter path lengths possible. If there is still a shorter path length possible, then a newgative weight cycle is present.
+
+Steps:
+1. Initialise distance and parent arrays.
+2. We start finding shortest distances for paths of length 1 to paths of length v - 1. For v-1 times, for all the edges present in the graph, for each edge we check that for the edge u - > v, is it possible to get a distance smaller than current dist[v]. That is, dist[v] < dist[u] + length of u-v. If yes, so we update dist[v] and parent[v] as well.<br>
+_The reason this step is done v-1 times is that, initially when all distances are infinite, the first iteration would confirm the shortest ditances of paths of length 1 from source. While other distances might have been updated too, but they may not necessarily be the shortest. On the second iteration, as paths of length 1 have already been finalized, so now paths of length 2 would be finalized, that is nodes which are just a single edge away from previously finalized nodes. Building up like this, in v-1 iterations, we can be sure that all non cyclic paths have been finalized to be the shortest possible paths._
+3. Once paths have been finalized, run a final loop over all edges once again, checking that is it still possible to get a smaller path sum than the already finalized values. If true, that means that there is a negative weight cycle present, else there is no negative weight cycle and the path lengths finalized so far are correct.
+
+Code:
+```java
+class Graph 
+{
+    // The graph is built be adding edges
+    // Each index in the graph represents an edge (u, v, d)
+    ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
+    int V = 0;
+    int dist[] = null;
+    int parent[] = null;
+    
+    public Graph(int v)
+	{
+		V = v;
+		dist = new int[V];
+        parent = new int[V];
+        for (int i = 0; i < V; i++)
+		{
+            // Initial distances are marked as infinite
+			dist[i] = Integer.MAX_VALUE;
+            // Initial parents are -1
+            parent[i] = -1;
+		}
+	}
+
+	public void addEdge(int u, int v, int d)
+	{
+        // Creating an edge
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        // Edge starting
+        arr.add(u);
+        // Edge ending
+        arr.add(v);
+        // Edge distance
+        arr.add(d);
+        // Add edge to graph
+        graph.add(arr);
+	}
+    
+    // Return true if possible to get shortest paths
+    // Return false if negative weight cycle is present
+    public boolean BellmanFord(int src) 
+    {
+        // Distance of source is 0
+        dist[src] = 0;
+        
+        // Run vertices - 1 times
+        for(int v1 = 0; v1 < V; v1++)
+        {
+            // For every edge in the graph
+            for(int i = 0; i < graph.size(); i++)
+            {
+                int u = graph.get(i).get(0);
+                int v = graph.get(i).get(1);
+                int d = graph.get(i).get(2);
+                // Check if ditsnace of edge can be upated or not
+                if(dist[v] > dist[u] + d)
+                {
+                    // If yes so pdate distance and parent
+                    dist[v] = dist[u] + d;
+                    parent[v] = u;
+                }
+            }
+        }
+        
+        // Check for negative weight cycle
+        // In a graph of v vertices, maximum non cyclic
+        // path can be of length v-1. All paths of length v-1
+        // have been computed in v-1 iterations above. If
+        // the distance of a vertex still decreases then that
+        // means we have a negative weight cycle.
+        for(int i = 0; i < graph.size(); i++)
+        {
+            int u = graph.get(i).get(0);
+            int v = graph.get(i).get(1);
+            int d = graph.get(i).get(2);
+            if(dist[v] != Integer.MAX_VALUE && dist[v] > dist[u] + d)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public ArrayList<Integer> pathToX(int x)
+    {
+        // Answer given as arraylist of nodes
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        
+        // Add the current element, as path will necessarily
+        // include the current element even if path length is 1
+        arr.add(x);
+        
+        // Check for element's parents, if element's parent is
+        // not -1, that is element has a parent, add the parent
+        // to the answer and then make element = parent and
+        // repeat until parent becomes -1.
+        while(parent[x] != -1)
+        {
+            arr.add(parent[x]);
+            x = parent[x];
+        }
+        
+        // As the path is added in reverse, reverse the array
+        Collections.reverse(arr);
+        return arr;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_FloydWarshall"></a>
@@ -2422,7 +2620,7 @@ class Graph
 The question statement is as follows:<br>
 Given a M x N board, a position at which a Knight(Chess piece) has been placed. Find the minimum number of steps the Knight need to reach a given destination.
 
-This problem can be consdiered as a variation of the shortest path in an undirected graph. The only difference would be, that instead of actually having adjacent nodes as an input in the graph, we would need to calculate them ourselves according to the rules of chess for a Knight's movement. Hence, the only movements allowed will be two steps up,down,right or left and then then one step perpendicular to it.
+This problem can be consdiered as a variation of the shortest path in an unweighted graph. The only difference would be, that instead of actually having adjacent nodes as an input in the graph, we would need to calculate them ourselves according to the rules of chess for a Knight's movement. Hence, the only movements allowed will be two steps up,down,right or left and then then one step perpendicular to it.
 
 Running the BFS with these movements in mind, as we traverse level by level. At all times, the nodes on a level so far will have covered the same distance from the source. Hence, as soon as the destination is reached for the first time, the distance so far to the destination will be minimum and our search can end. The code is as follows:
 ```java
