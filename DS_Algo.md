@@ -91,26 +91,26 @@
     - [Strongly Connected Components in directed graph- Kosaraju’s algorithm](#GP_SCC)
     - [Find a mother vertex](#GP_FindMother)
     - [Check if  graph is strongly connected](#GP_CheckIfSCC)
+	- [Topological Sorting]
+	- [All topological sorts in a Directed Acyclic Graph]
     - [Dijkstra's Algorithm](#GP_Dijkstra)
     - [Bellman–Ford Algorithm](#GP_BellmanFord)
     - [Floyd Warshall Algorithm](#GP_FloydWarsahll)
     - [Shortest path in an unweighted graph](#GP_ShortestPathUnweighted)
-    - [Topological Sorting]
-    - [All topological sorts in a Directed Acyclic Graph]
-    - [Shortest path in a Directed Acyclic Graph]
+	- [Shortest path in a Directed Acyclic Graph]
     - [Graph coloring - Chromatic Number](#GP_GraphColoring)
     - [m-Coloring Problem](#GP_mColoring)
-    - [Detect a cycle in an undirected graph]
-    - [Detect a cycle in an directed graph]
+	- [Prim's Minimum Spanning Tree](#GP_PrimsMST)
+    - [Minimum cost to connect all cities](#GP_MinCostConnectCities)
     - [Disjoint Union Find - Rank and Path Compression]
+	- [Detect a cycle in an undirected graph]
+    - [Detect a cycle in an directed graph]
     - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
     - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
     - [Minimum steps to reach target by Knight](#GP_KnightProblem)
     - [Minimum number of swaps required to sort an array](#GP_MinSwapsToSort)
     - [Minimum operations needed to convert x into y](#GP_MinOpsToConvert)
     - [Minimum cost path with Left, Right, Bottom and Up moves allowed]
-    - [Prim's Minimum Spanning Tree]
-    - [Minimum cost to connect all cities]
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
@@ -2726,7 +2726,7 @@ class Graph
     }
 }
 ```
-A very common application of coloring can be when similar related people/items have to be sought into different groups. For example, course scheduling such that courses with common students do not have classes at the same time, or exam scheduling, or where say people are to be divided into two groups on the basis of people liking/hating each other and so on. The process is to connect the realted items and then try to color the graph in different adjacent colors.
+A very common application of coloring can be when similar related people/items have to be sought into different groups. For example, course scheduling such that courses with common students do not have classes at the same time, or exam scheduling, or where say people are to be divided into two groups on the basis of people liking/hating each other and so on. The process is to connect the related items and then try to color the graph in different adjacent colors.
 
 We may also use it to check if a graph is bipartite or not. If graph is 2 colorable it is bipartite.
 
