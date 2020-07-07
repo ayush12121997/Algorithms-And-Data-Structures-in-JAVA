@@ -109,7 +109,7 @@
     - [Minimum steps to reach target by Knight](#GP_KnightProblem)
     - [Minimum number of swaps required to sort an array](#GP_MinSwapsToSort)
     - [Minimum operations needed to convert x into y](#GP_MinOpsToConvert)
-    - [Minimum cost path with Left, Right, Bottom and Up moves allowed]
+    - [Minimum cost path with Left, Right, Bottom and Up moves allowed](#GP_MinCost4Directions)
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
@@ -2736,7 +2736,100 @@ Hence the algortihm would be:
 
 The cod would be as follows:
 ```java
+class Graph
+{
+    // Number of vertices
+    int V = 0;
+    // Adjaceny ist
+    ArrayList<ArrayList<Node>> adj = null;
+    // Stack for TopoSort
+    Stack<Integer> stack = new Stack<Integer>();
+    // Distance array
+    int[] distance = null;
 
+    public Graph(int v)
+    {
+        V = v;
+        adj = new ArrayList<ArrayList<Node>>();
+        distance = new int[V];
+        for(int i = 0; i < V; i++)
+        {
+            distance[i] = Integer.MAX_VALUE;
+            adj.add(new ArrayList<Node>());
+        }
+    }
+
+    public void addEdge(int u, int v, int d)
+    {
+        // As it is TopoSort, graph is necessarily directed
+        adj.get(u).add(new Node(v, d));
+    }
+
+    public void topoSort()
+    {
+        boolean[] visited = new boolean[V];
+
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i])
+            {
+                topoSort_Util(visited, i);
+            }
+        }
+    }
+
+    public void topoSort_Util(boolean[] visited, int s)
+    {
+        visited[s] = true;
+        for(int i = 0; i < adj.get(s).size(); i++)
+        {
+            Node c = adj.get(s).get(i);
+            if(!visited[c.ind])
+            {
+                topoSort_Util(visited, c.ind);
+            }
+        }
+        // Add node to stack only when all adjacent nodes have
+        // been processed
+        stack.push(s);
+    }
+
+    // Function for shortest path in toposorted graph
+    public void calculateShortestPath(int src)
+    {
+        // Update distance of source
+        distance[src] = 0;
+        // From head of stack
+        while(!stack.isEmpty())
+        {
+            // Get head
+            int c = stack.pop();
+            // If head is not at infinite distance from source
+            if(distance[c] != Integer.MAX_VALUE)
+            {
+                // For al adjacent vertices of head
+                for(int i = 0; i < adj.get(c).size(); i++)
+                {
+                    // Update minimum distance for those nodes
+                    distance[adj.get(c).get(i).ind] = Math.min(distance[adj.get(c).get(i).ind], distance[c] + adj.get(c).get(i).dis);
+                }
+            }
+        }
+    }
+}
+
+// Class node for graph
+class Node
+{
+    int ind = 0;
+    int dis = 0;
+
+    public Node(int i, int d)
+    {
+        ind = i;
+        dis = d;
+    }
+}
 ```
 <a href="#Contents">Back to contents</a>
 
@@ -3356,6 +3449,8 @@ class Solution
 }
 ```
 <a href="#Contents">Back to contents</a>
+
+
 
 <a name="Backtracking"></a>
 ## <p align="center"> Recursion and Backtracking </p>
