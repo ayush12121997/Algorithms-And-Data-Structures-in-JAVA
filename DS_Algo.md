@@ -2183,108 +2183,108 @@ The code is as follows:
 class Graph
 {
     // Distance and parent arrays
-	int dist[];
+    int dist[];
     int parent[];
     // HashMap to store completed nodes
-	HashMap<Integer, Integer> hMap;
+    HashMap<Integer, Integer> hMap;
     // Priority Queue for getting shortest distance Node
-	PriorityQueue<Node> pQueue;
-	int V;
-	ArrayList<ArrayList<Node>> adj;
+    PriorityQueue<Node> pQueue;
+    int V;
+    ArrayList<ArrayList<Node>> adj;
 
-	public Graph(int v)
-	{
-		V = v;
-		dist = new int[V];
+    public Graph(int v)
+    {
+        V = v;
+        dist = new int[V];
         parent = new int[V];
-		adj = new ArrayList<ArrayList<Node>>();
-		for (int i = 0; i < V; i++)
-		{
+        adj = new ArrayList<ArrayList<Node>>();
+        for (int i = 0; i < V; i++)
+        {
             // Initial distances are marked as infinite
-			dist[i] = Integer.MAX_VALUE;
+            dist[i] = Integer.MAX_VALUE;
             // Initial parents are -1
             parent[i] = -1;
-			adj.add(new ArrayList<Node>());
-		}
-		hMap = new HashMap<Integer, Integer>();
+            adj.add(new ArrayList<Node>());
+        }
+        hMap = new HashMap<Integer, Integer>();
         // Priority queue sorted on the basis of distances
-		pQueue = new PriorityQueue<Node>(new Comparison());
-	}
+        pQueue = new PriorityQueue<Node>(new Comparison());
+    }
 
-	public void addEdge(int u, int v, int d)
-	{
+    public void addEdge(int u, int v, int d)
+    {
         // We add nodes along with the distance of the edge joining them
-		adj.get(u).add(new Node(v, d));
+        adj.get(u).add(new Node(v, d));
         
         // For undirected graphs, add both directions
-		adj.get(v).add(new Node(u, d));
-	}
+        adj.get(v).add(new Node(u, d));
+    }
     
     // Code for dijkstra
-	public void dijkstra(int src)
-	{
+    public void dijkstra(int src)
+    {
         // Add source to pQueue
-		pQueue.add(new Node(src, 0));
+        pQueue.add(new Node(src, 0));
         
         // Mark distance of source as 0
-		dist[src] = 0;
-		while (!pQueue.isEmpty())
-		{
+        dist[src] = 0;
+        while (!pQueue.isEmpty())
+        {
             // Check if the head of the priority
             // queue is already completed or not.
             // If yes discard, else move ahead
-			while (!pQueue.isEmpty() && hMap.containsKey(pQueue.peek().ind))
-			{
-				pQueue.poll();
-			}
-			if (pQueue.isEmpty())
-			{
-				break;
-			}
+            while (!pQueue.isEmpty() && hMap.containsKey(pQueue.peek().ind))
+            {
+                pQueue.poll();
+            }
+            if (pQueue.isEmpty())
+            {
+                break;
+            }
             // Get the head of the priority queue
-			Node node = pQueue.poll();
+            Node node = pQueue.poll();
             
             // Node index value of head
-			int st = node.ind;
+            int st = node.ind;
             
             // Distance of head from source
-			int dt = node.dis;
+            int dt = node.dis;
             
             // As this is the shortest distance node
             // available, mark it as completed and add
             // to hashmap.
-			hMap.put(st, dt);
+            hMap.put(st, dt);
             
             // For all adjacent nodes
-			for (int i = 0; i < adj.get(st).size(); i++)
-			{
+            for (int i = 0; i < adj.get(st).size(); i++)
+            {
                 // Get index value of adjacent node
-				int c_ind = adj.get(st).get(i).ind;
+                int c_ind = adj.get(st).get(i).ind;
                 
                 // Get possible distance of this node from source
                 // Dist = Dist of parent + Dist from parent
-				int c_dis = adj.get(st).get(i).dis + dt;
+                int c_dis = adj.get(st).get(i).dis + dt;
                 
                 // If this adjacent node is not already marked as completed
-				if (!hMap.containsKey(c_ind))
-				{
+                if (!hMap.containsKey(c_ind))
+                {
                     // If possible distance is smaller than current distance
-					if (c_dis < dist[c_ind])
-					{
+                    if (c_dis < dist[c_ind])
+                    {
                         // Add this element to priority queue
-						pQueue.add(new Node(c_ind, c_dis));
+                        pQueue.add(new Node(c_ind, c_dis));
                         
                         // Update distance
-						dist[c_ind] = c_dis;
+                        dist[c_ind] = c_dis;
                         
                         // Update parent, as the parent for the shortest
                         // distance now is the popped node 'st'.
                         parent[c_ind] = st;
-					}
-				}
-			}
-		}
-	}
+                    }
+                }
+            }
+        }
+    }
     
     public ArrayList<Integer> pathToX(int x)
     {
@@ -2315,36 +2315,36 @@ class Graph
 // dist of the edge leading to this node
 class Node
 {
-	int ind;
-	int dis;
+    int ind;
+    int dis;
 
-	public Node(int n, int d)
-	{
-		ind = n;
-		dis = d;
-	}
+    public Node(int n, int d)
+    {
+        ind = n;
+        dis = d;
+    }
 }
 
 // Defining the comparator class for the queue
 // Sort on basis of increasing distance
 class Comparison implements Comparator<Node>
 {
-	@Override
-	public int compare(Node p1, Node p2)
-	{
-		if (p1.dis > p2.dis)
-		{
-			return 1;
-		}
-		else if (p1.dis < p2.dis)
-		{
-			return -1;
-		}
-		else
-		{
-			return 0;
-		}
-	}
+    @Override
+    public int compare(Node p1, Node p2)
+    {
+        if (p1.dis > p2.dis)
+        {
+            return 1;
+        }
+        else if (p1.dis < p2.dis)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }
 ```
 <a href="#Contents">Back to contents</a>
