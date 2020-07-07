@@ -2553,60 +2553,60 @@ The code is as follows:
 class Graph
 {
     // Distance and parent arrays
-	int dist[];
+    int dist[];
     int parent[];
     int V;
-	ArrayList<ArrayList<Integer>> adj;
+    ArrayList<ArrayList<Integer>> adj;
 
-	public Graph(int v)
-	{
-		V = v;
-		dist = new int[V];
+    public Graph(int v)
+    {
+        V = v;
+        dist = new int[V];
         parent = new int[V];
-		adj = new ArrayList<ArrayList<Integer>>();
-		for (int i = 0; i < V; i++)
-		{
+        adj = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < V; i++)
+        {
             // Initial distances are marked as infinite
-			dist[i] = Integer.MAX_VALUE;
+            dist[i] = Integer.MAX_VALUE;
             // Initial parents are -1
             parent[i] = -1;
-			adj.add(new ArrayList<Integer>());
-		}
-	}
+            adj.add(new ArrayList<Integer>());
+        }
+    }
 
-	public void addEdge(int u, int v)
-	{
+    public void addEdge(int u, int v)
+    {
         adj.get(u).add(v);
         
         // Only for undirected graph
         // adj.get(v).add(u);
-	}
+    }
     
     // Code for BFS
-	public void BFS(int src)
-	{
+    public void BFS(int src)
+    {
         // Add source to Queue
-		Queue<Integer> queue = new LinkedList<Integer>();
+        Queue<Integer> queue = new LinkedList<Integer>();
         boolean[] visited = new boolean[V];
         
         // Mark distance of source as 0
-		dist[src] = 0;
+        dist[src] = 0;
         // Add source to queue
         queue.add(src);
         // Mark soruce as visisted
         visited[src] = true;
         // Arbitrary node
         int node = 0;
-		while (!queue.isEmpty())
-		{
+        while (!queue.isEmpty())
+        {
             // Get the head of the queue
-			node = queue.poll();
+            node = queue.poll();
             
             // For all adjacent nodes
-			for (int i = 0; i < adj.get(node).size(); i++)
-			{
+            for (int i = 0; i < adj.get(node).size(); i++)
+            {
                 // Get index value of adjacent node
-				int c_ind = adj.get(node).get(i);
+                int c_ind = adj.get(node).get(i);
                 // If index not visited before
                 if(!visited[c_ind])
                 {
@@ -2617,9 +2617,9 @@ class Graph
                     // Add to queue
                     queue.add(c_ind);
                 }
-			}
-		}
-	}
+            }
+        }
+    }
     
     public ArrayList<Integer> pathToX(int x)
     {
@@ -2663,32 +2663,32 @@ class Graph
     // Colors holds list of all available colors
     boolean[] colors;
     int V;
-	ArrayList<ArrayList<Integer>> adj;
+    ArrayList<ArrayList<Integer>> adj;
 
-	public Graph(int v)
-	{
-		V = v;
-		coloring = new int[V];
+    public Graph(int v)
+    {
+        V = v;
+        coloring = new int[V];
         colors = new boolean[V];
-		adj = new ArrayList<ArrayList<Integer>>();
-		for (int i = 0; i < V; i++)
-		{
+        adj = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < V; i++)
+        {
             // Initial colors assigned are none
-			coloring[i] = -1;
-			adj.add(new ArrayList<Integer>());
-		}
-	}
+            coloring[i] = -1;
+            adj.add(new ArrayList<Integer>());
+        }
+    }
 
-	public void addEdge(int u, int v)
-	{
+    public void addEdge(int u, int v)
+    {
         adj.get(u).add(v);
         // Only for undirected graph
         adj.get(v).add(u);
-	}
+    }
     
     // Code for coloring
-	public void applyColoring()
-	{
+    public void applyColoring()
+    {
         // Mark first node with 0 color
         coloring[0] = 0;
         
@@ -2700,16 +2700,16 @@ class Graph
             
             // For all adjacent vertices of current node
             for (int j = 0; j < adj.get(i).size(); j++)
-			{
+            {
                 // Get index value of adjacent vertex
-				int c_ind = adj.get(i).get(j);
+                int c_ind = adj.get(i).get(j);
                 // If index has been colored before
                 if(coloring[c_ind] != -1)
                 {
                     // Mark color as unavailable
                     colors[coloring[c_ind]] = false;
                 }
-			}
+            }
             
             // For all colors in colors list
             for(int j = 0; j < V; j++)
@@ -2722,8 +2722,8 @@ class Graph
                     break;
                 }
             }
-		}
-	}
+        }
+    }
 }
 ```
 A very common application of coloring can be when similar related people/items have to be sought into different groups. For example, course scheduling such that courses with common students do not have classes at the same time, or exam scheduling, or where say people are to be divided into two groups on the basis of people liking/hating each other and so on. The process is to connect the realted items and then try to color the graph in different adjacent colors.
