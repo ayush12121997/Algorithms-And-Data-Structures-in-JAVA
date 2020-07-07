@@ -2382,23 +2382,23 @@ class Graph
     int V = 0;
     int dist[] = null;
     int parent[] = null;
-    
+
     public Graph(int v)
-	{
-		V = v;
-		dist = new int[V];
+    {
+        V = v;
+        dist = new int[V];
         parent = new int[V];
         for (int i = 0; i < V; i++)
-		{
+        {
             // Initial distances are marked as infinite
-			dist[i] = Integer.MAX_VALUE;
+            dist[i] = Integer.MAX_VALUE;
             // Initial parents are -1
             parent[i] = -1;
-		}
-	}
+        }
+    }
 
-	public void addEdge(int u, int v, int d)
-	{
+    public void addEdge(int u, int v, int d)
+    {
         // Creating an edge
         ArrayList<Integer> arr = new ArrayList<Integer>();
         // Edge starting
@@ -2409,15 +2409,15 @@ class Graph
         arr.add(d);
         // Add edge to graph
         graph.add(arr);
-	}
-    
+    }
+
     // Return true if possible to get shortest paths
     // Return false if negative weight cycle is present
     public boolean BellmanFord(int src) 
     {
         // Distance of source is 0
         dist[src] = 0;
-        
+
         // Run vertices - 1 times
         for(int v1 = 0; v1 < V-1; v1++)
         {
@@ -2436,7 +2436,7 @@ class Graph
                 }
             }
         }
-        
+
         // Check for negative weight cycle
         // In a graph of v vertices, maximum non cyclic
         // path can be of length v-1. All paths of length v-1
@@ -2455,16 +2455,16 @@ class Graph
         }
         return true;
     }
-    
+
     public ArrayList<Integer> pathToX(int x)
     {
         // Answer given as arraylist of nodes
         ArrayList<Integer> arr = new ArrayList<Integer>();
-        
+
         // Add the current element, as path will necessarily
         // include the current element even if path length is 1
         arr.add(x);
-        
+
         // Check for element's parents, if element's parent is
         // not -1, that is element has a parent, add the parent
         // to the answer and then make element = parent and
@@ -2474,7 +2474,7 @@ class Graph
             arr.add(parent[x]);
             x = parent[x];
         }
-        
+
         // As the path is added in reverse, reverse the array
         Collections.reverse(arr);
         return arr;
