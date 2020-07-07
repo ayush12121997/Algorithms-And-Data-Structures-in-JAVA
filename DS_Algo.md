@@ -3450,7 +3450,144 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="GP_MinCost4Directions"></a>
+### Minimum cost path with Left, Right, Bottom and Up moves allowed
+The question is a modification of the min cost path in grid where movements allowed were bottom and right. Now all 4 directional movements are allowed. Hence, we cannot use DP here. Instead, we have following options:
+1. If the graph is unweighted, that one cell means cost of 1 then we use BFS to search for target and as soon as we find the target we return.
+2. If the graph is weighted, we can check if it has negative weights or not. If not, use Djikstra.
+3. If graph is weighted and has negative weights, we may choose to use Bellman Ford.
 
+For our question, let us assume that the conditions for Djikstra are satisfactory. So in order to build our solution as the input is a grid and not a graph, we modify our algorithm to accomodate for this variation. In grid questions, requiring graph algorithms, we build a new class to represent the cell in a grid as a vertex in the graph. We generally need not build the entire graph using this new class, rather as and when the next cell of grid needs to be accessed, we build a new object of our class with required values. A demonstration can be seen in the following implementation for this question, where the class cell represents the cell in the grid, with x cordinate, y cordinate and the distance of the cell from source thus far.
+```java
+class Solution
+{
+    public static int calculateShortestPath(int[][] cost, int src_x, int src_y, int dest_x, int dest_y, int n, int m)
+    {
+        // Distance and parent arrays
+        int[][] distance = new int[n][m];
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                distance[i][j] = Integer.MAX_VALUE;
+            }
+        } 
+        // Visited/Completed array
+        boolean[][] visited = new boolean[n][m];
+        // PriorityQueue for our djikstra
+        PriorityQueue<Cell> pQueue = new PriorityQueue<Cell>(new Comparison());
+        // Add source
+        pQueue.add(new Cell(src_x, src_y, cost[src_x][src_y]));
+        // Distacne of source is 0
+        distance[src_x][src_y] = cost[src_x][src_y];
+        // Till priority queue becomes empty
+        while(!pQueue.isEmpty())
+        {
+            Cell c = null;
+            // Check if the head of queue is already visited
+            while(!pQueue.isEmpty() && visited[pQueue.peek().x][pQueue.peek().y])
+            {
+                // If yes so remove
+                pQueue.poll();
+            }
+            // Get latest head with shortest distance
+            c = pQueue.poll();
+            int x = c.x;
+            int y = c.y;
+            int d = c.dis;
+            // If destination so break
+            if(x == dest_x && y == dest_y)
+            {
+                return d;
+            }
+            // Mark as visited
+            visited[x][y] = true;
+            // Check the next to be visited nodes
+            // (x+1, y), (x-1, y), (x, y+1), (x, y-1)
+            if(isInside(x+1, y, n, m) && !visited[x+1][y])
+            {
+                if(distance[x+1][y] > d + cost[x+1][y])
+                {
+                    distance[x+1][y] = d + cost[x+1][y];
+                    pQueue.add(new Cell(x+1, y, distance[x+1][y]));
+                }
+            }
+            if(isInside(x-1, y, n, m) && !visited[x-1][y])
+            {
+                if(distance[x-1][y] > d + cost[x-1][y])
+                {
+                    distance[x-1][y] = d + cost[x-1][y];
+                    pQueue.add(new Cell(x-1, y, distance[x-1][y]));
+                }
+            }
+            if(isInside(x, y+1, n, m) && !visited[x][y+1])
+            {
+                if(distance[x][y+1] > d + cost[x][y+1])
+                {
+                    distance[x][y+1] = d + cost[x][y+1];
+                    pQueue.add(new Cell(x, y+1, distance[x][y+1]));
+                }
+            }
+            if(isInside(x, y-1, n, m) && !visited[x][y-1])
+            {
+                if(distance[x][y-1] > d + cost[x][y-1])
+                {
+                    distance[x][y-1] = d + cost[x][y-1];
+                    pQueue.add(new Cell(x, y-1, distance[x][y-1]));
+                }
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+    
+    // Check if cell (x,y) is inside matrix
+    public static boolean isInside(int x, int y, int n, int m)
+    {
+        if(x < 0 || x >= n || y < 0 || y >= m)
+        {
+            return false;
+        }
+        return true;
+    }
+}
+
+// Class node for graph
+class Cell
+{
+    int x = 0;
+    int y = 0;
+    int dis = 0;
+
+    public Cell(int a, int b, int d)
+    {
+        x = a;
+        y = b;
+        dis = d;
+    }
+}
+
+// Comparator for prioirty Queue
+class Comparison implements Comparator<Cell>
+{
+    @Override
+    public int compare(Cell c1, Cell c2)
+    {
+        if(c1.dis > c2.dis)
+        {
+            return 1;
+        }
+        else if(c1.dis < c2.dis)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
 ## <p align="center"> Recursion and Backtracking </p>
