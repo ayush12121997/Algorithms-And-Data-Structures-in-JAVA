@@ -143,7 +143,7 @@
     - [DP on Strings](#DP_Strings)
     - [DP for decision making (Knapsack)](#DP_Decision)
     - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference, convert 2d to 1d see first discussion of coin change 2, extended knapsack]
-    - [Dp problems classification]
+    - [DP problems classification]
     - [Longest Integer Subsequence](#DP_LIS)
     - [Longest Common Subsequence](#DP_LCS)
     - [Unique Paths in a grid]
