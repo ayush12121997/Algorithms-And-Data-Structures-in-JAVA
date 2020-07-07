@@ -2734,7 +2734,78 @@ We may also use it to check if a graph is bipartite or not. If graph is 2 colora
 
 <a name="GP_mColoring"></a>
 ### m-Coloring Problem
+The m coloring problem is similar to finding the chromatic number of a graph in terms of the way it is formulated in code. The question asks you to tell whether or not a graph can be colored using m colors at most such that no two adjacent vertices have the same color. If yes, then also output the coloring selected.
 
+We can apply a simple standard backtracking approach here, that is, assign the smallest numbered color available to a node such that it doesn't clash with colors of neighbours. If with this assignment of color, the remaining graph can be properly colored as well, then return true, else backtrack and retry with a different available color. If in any of the permutations the entire graph has been colored, so return true and end, else return false when all options have been exhausted without a suitable permutation. The code is as follows:
+```java
+class Graph
+{
+    // Coloring holds the color for all nodes
+    int[] coloring;
+    int V;
+    ArrayList<ArrayList<Integer>> adj;
+
+    public Graph(int v)
+    {
+        V = v;
+        coloring = new int[V];
+        colors = new boolean[V];
+        adj = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < V; i++)
+        {
+            // Initial colors assigned are none
+            coloring[i] = -1;
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+
+    public void addEdge(int u, int v)
+    {
+        adj.get(u).add(v);
+        // Only for undirected graph
+        adj.get(v).add(u);
+    }
+    
+    // Code for coloring
+    public boolean applyColoring_Util(int v, int m)
+    {
+        // If have completed the last node
+        if(v == V)
+        {
+            return true;
+        }
+        // For all colors avaialable
+        for(int i = 0; i < m; i++)
+        {
+            // Check if color can be used, that is
+            // not has been used by neibours
+            boolean check = true;
+            for(int j = 0; j < adj.get(v).size(); j++)
+            {
+                // Check with neighbours color
+                if(coloring[adj.get(v).get(j)] == i)
+                {
+                    check = false;
+                    break;
+                }
+            }
+            // If no neighbours use this color
+            if(check)
+            {
+                // Assign this color to v
+                coloring[v] = i;
+                // If with this coloring graph completes
+                if(applyColoring_Util(v+1, m))
+                {
+                    return true;
+                }
+                // If coloring fails, remove color
+                coloring[v] = -1;
+            }
+        }
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_CountAllSourceDestination"></a>
