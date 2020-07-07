@@ -91,13 +91,12 @@
     - [Strongly Connected Components in directed graph- Kosaraju’s algorithm](#GP_SCC)
     - [Find a mother vertex](#GP_FindMother)
     - [Check if  graph is strongly connected](#GP_CheckIfSCC)
-	- [Topological Sorting]
-	- [All topological sorts in a Directed Acyclic Graph]
     - [Dijkstra's Algorithm](#GP_Dijkstra)
     - [Bellman–Ford Algorithm](#GP_BellmanFord)
     - [Floyd Warshall Algorithm](#GP_FloydWarsahll)
     - [Shortest path in an unweighted graph](#GP_ShortestPathUnweighted)
-	- [Shortest path in a Directed Acyclic Graph]
+	- [Topological Sorting](#GP_TopoSort)
+	- [Shortest path in a Directed Acyclic Graph](#GP_ShortestPathDAG)
     - [Graph coloring - Chromatic Number](#GP_GraphColoring)
     - [m-Coloring Problem](#GP_mColoring)
 	- [Prim's Minimum Spanning Tree](#GP_PrimsMST)
@@ -830,10 +829,7 @@ long binToDec(String s)
     long base = 1;
     while(len >= 0)
     {
-    	if(s.charAt(len) == '1')
-        {
-            ans += base;
-        }
+    	ans += base*Integer.parseInt(String.valueOf(s.charAt(len)));
         base *= 2;
         len--;
     }
@@ -2254,6 +2250,11 @@ class Graph
             // available, mark it as completed and add
             // to hashmap.
             hMap.put(st, dt);
+            // End loop if all vertices included
+            if(hMap.size() == V)
+            {
+                return;
+            }
             
             // For all adjacent nodes
             for (int i = 0; i < adj.get(st).size(); i++)
@@ -2648,6 +2649,97 @@ class Graph
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="GP_TopoSort"></a>
+### Topological Sorting
+Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge from u to v, vertex u comes before v in the ordering. Topological Sorting for a graph is not possible if the graph is not a DAG. In short, an ordering of a graph in which all parents are listed before their children is colled topological sort.
+
+Topological Sorting is mainly used for scheduling jobs from the given dependencies among jobs. This means that for example lets say job A needs job B to be finsihed first and job C needs job A to be finsished first so a topological sort of dependencies would print B A C, meaning that complete job B first, then A then C.
+
+Topological sort can be easily implemented using DFS. In DFS, we process a vertex and then recursively call DFS for its adjacent vertices. In topological sorting, we need to process a vertex only after its adjacent vertices have been processed. Hence, the only change in DFS needed would be to store a node after DFS has been called for its adjacent nodes. The complexity is the same as DFS, that is O(E+V).
+
+We achieve this by maintaint a stack and one by one add vertices when they have been completed. This way, all child vertices are added to stack before the parent vertex. Hence, when actually printing the stack the parents would be printed first followed by the children.
+
+The code is as follows:
+```java
+class Graph
+{
+    // Number of vertices
+    int V = 0;
+    // Adjaceny ist
+    ArrayList<ArrayList<<Integer>> adj = null;
+
+    public Graph(int v)
+    {
+        V = v;
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < V; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+
+    public void addEdge(int u, int v)
+    {
+        // As it is TopoSort, graph is necessarily directed
+        adj.get(u).add(v);
+    }
+
+    public void topoSort()
+    {
+        Stack<Integer> stack = new Stack<Integer>();
+        boolean[] visited = new boolean[V];
+
+        for(int i = 0; i < v; i++)
+        {
+            if(!visited[i])
+            {
+                topoSort_Util(stack, visited, i);
+            }
+        }
+
+        // Print stack for topoSort
+        while(!stack.isEmpty())
+        {
+            System.out.println(stack.pop());
+        }
+    }
+
+    public void topoSort_Util(Stack<Integer> stack, boolean[] visited, int s)
+    {
+        visited[s] = true;
+        for(int i = 0; i < adj.get(s).size(); i++)
+        {
+            int c = adj.get(s).get(i);
+            if(!visited[c])
+            {
+                topoSort_Util(stack, visited, c);
+            }
+        }
+        // Add node to stack only when all adjacent nodes have
+        // been processed
+        stack.push(s);
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_ShortestPathDAG"></a>
+### Shortest path in a Directed Acyclic Graph
+The shortest path in a DAG can be easily found using topological sort. We know that topological sort will give us an ordering where parents are necessarily placed before children. So as to say any graph is converted into the form of a linear ordering like A -> B -> C -> D. In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have the source in shortest distance path as some elemnt k, we would know that all elements, from 1 to (k-1) will be at a distance of infinity as they would not be reachable. Furthermore, moving from k to k+1 and so on till n, we can keep updating minimum distances, as we would know that if k goes to k+1 and k+1 goes to n, then minimum distance till n will necessarily be sum of distance from k to k+1 and from k+1 to n.
+
+A visual representation of the idea can be taken from the following link where in the source is the node s and the given graph is a topoligcal ordered graph: https://media.geeksforgeeks.org/wp-content/uploads/shortestpathsteps.png
+
+Hence the algortihm would be:
+1. Represent the graph as a topologically sorted graph.
+2. Mark distance of source index as 0 and all others as infinity.
+3. Begining from first vertex in topo sorted graph, move till the end, updating all adjacent vertexes for each node you are on.
+
+The cod would be as follows:
+```java
+
+```
+<a href="#Contents">Back to contents</a>
+
 <a name="GP_GraphColoring"></a>
 ### Graph coloring - Chromatic Number
 Graph coloring is a technique in which you are needed to color the vertices of a graph in such a way that no two adjacent vertices have the same color. The minimum number of colors needed to achieve this is called the chromatic number of the graph. The basic greedy algo to get to an answer can suggest the upperbound on the number of colors needed. The algo is:
@@ -2806,6 +2898,28 @@ class Graph
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_PrimsMST"></a>
+### Prim's Minimum Spanning Tree
+Given a connected and undirected graph, a spanning tree of that graph is a subgraph that is a tree and connects all the vertices together. There can be multiple spanning trees for a single graph. A minimum spanning tree (MST) for a weighted, connected and undirected graph is a spanning tree with weight less than or equal to the weight of every other spanning tree. The eight of a spanning tree is defined as the sum of weights of all edges included in the spanning tree. A MST  will always have V-1 edges.
+
+Spannign trees can be used for finding the minimum cost of connecting various cities or points through roads such that every city is accessible from every other city and cost of building roads is minimum.
+
+The algorithm for calculating the MST is exactly similar to how we calculate the shortest path using djikstra. The steps are:
+1. Pick a source vertex and create a hashset to store finalized vertices and a priority queue sorted on the basis of distance from the source to store upcoming vertices.
+2. For the source vertex, select all adjacent vertices which are not already present in the hashset and update their distances. Add these vertices with updated shortest distances from course in the priority queue. Distance of a vertex = Math.min(Distance of vertex, Distance of parent from source + Distance of vertex from parent)
+3. Repeat step 2 until either the queue becomes empty or the hashset size is equal to V.
+4. During step 2, make sure to maintain a distance and parent array to store the final information regarding distances between two nodes in MST and the parent child connections for the tree.
+
+The code is exactly like Djikstra and hence wont be covered here. Time complexity is O(ElogV).
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_MinCostConnectCities"></a>
+### Minimum cost to connect all cities
+The question is to find the minimum cost of connecting all cities with roads such that every city is reachable form every other city. This is a very straigh forward application of a MST and can easily be implemented using the Djikstra algorithm as discussed above in Prims MST section. As the code has been covered already and is trivial, it won't be repeated here. Please refer to Djikstra for the implementation.
+
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_CountAllSourceDestination"></a>
