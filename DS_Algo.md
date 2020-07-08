@@ -60,6 +60,8 @@
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
     - [Priority Queues](#SQ_PQ)
+	- [Tree sets](#SQ_TreeSet)
+	- [Maximum sum subarray with sum less than equal to k for above treeset]
     - [Monotonous increasing/decreasing stacks, use for previous smaller, next smaller, previous greater, next greater]
     - [Next greater element - I]
     - [Next greater element - II]
@@ -193,8 +195,6 @@
     - [Square root decomposition]
     - [Segment trees]
     - [Trie]
-    - [Union Find]
-    - [Tree sets and usage, like maximum sum subarray with sum less than equal to k]
     - [Line Sweep Algo]
     - [Catalan Number]
     - [Add char to int and int to char and ascii shiz]
@@ -1801,6 +1801,55 @@ class Pair
 }
 ```
 <a href="#Contents">Back to contents</a>
+
+<a name="SQ_TreeSet"></a>
+### Tree Set
+A tree set is a better version of priority queue. It can be used as a double sided priority queue. It can also take in a customized comparator just like PriorityQueue. The reason it is preferred over priorityqueue is that it has a O(logN) remove element complexity.
+
+Treeset does not allow duplicate values. TreeSet is basically an implementation of a self-balancing binary search tree like a Red-Black Tree. Therefore operations like add, remove, and search take O(log(N)) time. The reason is that in a self-balancing tree, it is made sure that the height of the tree is always O(log(N)) for all the operations. Therefore, this is considered as one of the most efficient data structure in order to store the huge sorted data and perform operations on it. However, operations like printing N elements in the sorted order takes O(N) time.
+```java
+TreeSet<Pair> trSet = new TreeSet<Pair>(new Comparison());
+trSet.add(new Pair()); //O(Log n)
+trSet.getMax() // O(1)
+trSet.getMin() // O(1)
+trSet.deleteMax() //O(Log n)
+trSet.deleteMin() //O(Log n)
+trSet.size() //O(1)
+trSet.isEmpty() //O(1)
+
+// Defining the comparator class for the TreeSet
+class Comparison implements Comparator<Pair>
+{
+    @Override
+    public int compare(Pair p1, Pair p2)
+    {
+        if (p1.value > p2.value)
+        {
+            return 1;
+        }
+        else if(p1.value < p2.value)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+}
+
+class Pair
+{
+    public int key;
+    public int value;
+    
+    public Pair(int k, int v)
+    {
+        key = k;
+        value = v;
+    }
+}
+```
 
 <a name="Graphs"></a>
 ## <p align="center"> Graphs </p>
@@ -3784,7 +3833,12 @@ In undirected graphs, every triangle will be counted 6 times, like say triangle 
 5. CBA
 6. CAB
 
-In directed graphs, a triangle say ABC, will be counted ony
+In directed graphs, a triangle say ABC, will be counted only three times as it has the following variations becaus of the direction of edges mattering:
+1. ABC
+2. BCA
+3. CAB
+
+Hence, the final count in case of undirected graph is total triangles/6 and that for directed graphs is total triangles/3.
 ```java
 class Graph
 {
@@ -3846,6 +3900,16 @@ class Graph
 	
 <a name="GP_MinCashFlow"></a>
 ### Minimize Cash Flow among a given set of friends
+The questions statement is that "Given a number of friends who have to give or take some amount of money from one another. Design an algorithm by which the total cash flow among all the friends is minimized."
+
+We can approach the question by thinking about money lending among friends. If freind A owes friend B and C, 200 rupees each, and friend B owes friend C 400 rupees, and we may directly ask A to pay 400 rupees to C and B pays C only 200 rupees. This way instead of 3 transacions, we need only two transactions. The same idea needs to be implemented for n number of friends.
+
+We can develop a greedy approach for this quetion. Among the group of friends, there will always be a person with the maximum and minimum profit. Indirectly, there will always be someone who gets the maximum money and someone who pays the most. We select these two people, and transfer Min(MaxProfit, MaxDebt) from person with maximum dept to person with maximum profit. This ways, either of the two would have been freed from the remaining transactions. We then recur for remaining people. So in short, all we need to do is:
+1. Maintain a list at all times having the current maximum profit and minimum profit.
+2. Pay Min(MaxProft, MinProfit) from guy with MinProfit to guy with MaxProfit.
+3. Repeat the process.
+
+This can be achieved using TreeSet in java, to maintain a two ended priority queue and using graphs to store the input and output. The code being trivial has been opted out. For further details on topic understanding, please refer to: https://www.geeksforgeeks.org/minimize-cash-flow-among-given-set-friends-borrowed-money/. Do note that the implementation on GFG is different from the one advised above in terms of code, but has the same algorithm.
 
 <a href="#Contents">Back to contents</a>
 
