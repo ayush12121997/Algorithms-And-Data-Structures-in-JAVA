@@ -3774,7 +3774,74 @@ class Comparison implements Comparator<Cell>
 
 <a name="GP_NumTriangles"></a>
 ### Number of triangles in a graph
+The task is to find the number of traingles in a directed/undirected graph. It is simple to do so by taking all pairs of three vertices present in the graph and checking them for forming triangles.
 
+In undirected graphs, every triangle will be counted 6 times, like say triangle name is ABC, so it will be counted as:
+1. ABC
+2. ACB
+3. BCA
+4. BAC
+5. CBA
+6. CAB
+
+In directed graphs, a triangle say ABC, will be counted ony
+```java
+class Graph
+{
+    int V = 0;
+    // Use hashmap as we just want to know whether an
+    // edge exists or not. Can preferable use adjacency
+    // matrix as well. 
+    ArrayList<HashMap<Integer, Integer>> adj = null;
+
+    public Graph(int v)
+    {
+        V = v;
+        adj = new ArrayList<HashMap<Integer, Integer>>();
+        for(int i = 0; i < V, i++)
+        {
+            adj.add(new HashMap<Integer, Integer>());
+        }
+    }
+
+    public void addEdge(int u, int v)
+    {
+        adj.get(u).put(v,v);
+        // For undirected only
+        adj.get(v).put(u,u);
+    }
+
+    public int countTriangles()
+    {
+        int count = 0;
+        // Check for all pairs of three vertices
+        // We may run loops like
+        // i : (0, n)
+        // j : (i + 1, n)
+        // k : (j + 1, n)
+        // for undirected graphs only and then not return
+        // count divided 6. This is because in undirected
+        // graphs, order does not matter for checking. 
+        for(int i = 0; i < V; i++)
+        {
+            for(int j = 0; j < V; j++)
+            {
+                for(int k = 0; k < V; k++)
+                {
+                    if(adj.get(i).containsKey(j) && adj.get(j).containsKey(k) && adj.get(k).containsKey(i))
+                    {
+                        count++;
+                    }
+                }
+            }
+        }
+        // For undirected graphs:
+        return count/6;
+        // For directed graphs:
+        // return count/3;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 	
 <a name="GP_MinCashFlow"></a>
