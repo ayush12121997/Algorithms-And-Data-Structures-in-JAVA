@@ -101,9 +101,9 @@
     - [m-Coloring Problem](#GP_mColoring)
 	- [Prim's Minimum Spanning Tree](#GP_PrimsMST)
     - [Minimum cost to connect all cities](#GP_MinCostConnectCities)
-    - [Disjoint Union Find - Rank and Path Compression]
-	- [Detect a cycle in an undirected graph]
-    - [Detect a cycle in an directed graph]
+    - [Disjoint Union Find - Rank and Path Compression](#GP_DSU)
+	- [Detect a cycle in an undirected graph](#GP_CycleUndirected)
+    - [Detect a cycle in an directed graph](#GP_CycleDirected)
     - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
     - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
     - [Minimum steps to reach target by Knight](#GP_KnightProblem)
@@ -141,7 +141,7 @@
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
     - [DP for decision making (Knapsack)](#DP_Decision)
-    - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference, convert 2d to 1d see first discussion of coin change 2, extended knapsack]
+    - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d, convert 2d to 1d see first discussion of coin change 2, extended knapsack]
     - [DP problems classification]
     - [Longest Integer Subsequence](#DP_LIS)
     - [Longest Common Subsequence](#DP_LCS)
@@ -3012,6 +3012,105 @@ The code is exactly like Djikstra and hence wont be covered here. Time complexit
 <a name="GP_MinCostConnectCities"></a>
 ### Minimum cost to connect all cities
 The question is to find the minimum cost of connecting all cities with roads such that every city is reachable form every other city. This is a very straigh forward application of a MST and can easily be implemented using the Djikstra algorithm as discussed above in Prims MST section. As the code has been covered already and is trivial, it won't be repeated here. Please refer to Djikstra for the implementation.
+
+Also as the task is to not only find the MST but calculate the minimum cost, once our parent array is ready, we need to check for every edge between, parent[i] to i and add the weight of the edge to the answer.
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_DSU"></a>
+### Disjoint Union Find - Rank and Path Compression
+Disjoint data structures are data structures which are used to store things in groups. We can easily create groupings for various items and then use our find and union methods on these groupings to check whether two items are in the same group or not and to put two groups together respectively.
+
+We use a method called find by path compression and union by rank. Please visit the following two links first, before reading the code provided:
+1. https://www.geeksforgeeks.org/union-find/
+2. https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/
+```java
+// DSU class
+class DSU
+{
+    // Array to hold subsess : A subest is basically
+    // information regarding an elements parent group
+    // and it's rank
+    Subset[] subsets = null;
+    // Number of elements in our DSU
+    int n = 0;
+
+    public DSU(int a)
+    {
+        n = a;
+        subsets = new subsets[n];
+        for(int i = 0; i < n; i++)
+        {
+            // Initialise every subset as it's own parents
+            subsets[i] = new Susbet(i);
+        }
+    }
+
+    // UNion of two subsets for element x and y
+    public void union(int x, int y)
+    {
+        // Parents of x and y
+        int xRoot = find(x);
+        int yRoot = find(y);
+        // If rank of parent of x is more than rank of
+        // parent of y, so change parent of y to x
+        if(subsets[xRoot].rank > subsets[yRoot].rank)
+        {
+            subsets[yRoot].parent = xRoot;
+        }
+        // If rank of parent of y is more than rank of
+        // parent of x, so change parent of x to y
+        else if(subsets[xRoot].rank < subsets[yRoot].rank)
+        {
+            subsets[xRoot].parent = yRoot;
+        }
+        // If ranks are same so change parent of x to y and
+        // increase rank of y
+        else
+        {
+            subsets[xRoot].parent = yRoot;
+            subsets[yRoot].rank++;
+        }
+    }
+
+    public int find(int x)
+    {
+        if (subsets[x].parent != x)
+        {
+            subsets[x].parent = find(subsets[x].parent);
+        }
+        return subsets[x].parent;
+    }
+}
+
+class Subset
+{
+    // Each element of class Subset will have a parent
+    // and a rank. Parent is used to identify grouping.
+    // Items with same parents belng to same groups.
+    // Rank is used to speed up the process of union and
+    // find. Basically, using rank, we can choose the shorten
+    // the trees formed by our DSU. Calling union and find
+    // using path compression and union by rank, we are able to
+    // flatten the tree as much as possible.
+    int parent = 0;
+    int rank = 0;
+
+    public Subset(int p)
+    {
+        parent = p;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_CycleUndirected"></a>
+### Detect a cycle in an undirected graph
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_CycleDirected"></a>
+### Detect a cycle in an directed graph
 
 <a href="#Contents">Back to contents</a>
 
