@@ -110,6 +110,14 @@
     - [Minimum number of swaps required to sort an array](#GP_MinSwapsToSort)
     - [Minimum operations needed to convert x into y](#GP_MinOpsToConvert)
     - [Minimum cost path with Left, Right, Bottom and Up moves allowed](#GP_MinCost4Directions)
+	- [Number of triangles in a graph](#GP_NumTriangles)
+	- [Minimize Cash Flow among a given set of friends](#GP_MinCashFlow)
+	- [Rotting oranges](#GP_RottingOranges)
+	- [Find similar contacts in contact list](#GP_SimilarContacts)
+	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
+	- [Rat in a maze - I](#GP_RatInMazeI)
+	- [Rat in a maze - II](#GP_RatInMazeII)
+	- [Shortest path with exactly k edges in a directed graph](#GP_ShortestPathWithKEdges)
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
@@ -141,7 +149,8 @@
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
     - [DP for decision making (Knapsack)](#DP_Decision)
-    - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d, convert 2d to 1d see first discussion of coin change 2, extended knapsack]
+    - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d]
+	- [Convert 2d to 1d see first discussion of coin change 2, extended knapsack]
     - [DP problems classification]
     - [Longest Integer Subsequence](#DP_LIS)
     - [Longest Common Subsequence](#DP_LCS)
@@ -171,9 +180,10 @@
     - [Regular expression mathcing]
     - [Wildcard matching]
     - [Minimum cost tree from leaf values]
+	- [Ones and zeroes]
     - [Partition into two equal subset problem]
     - [Partition into two subsets with minimum difference]
-    - [Last stone weight 2, normal knapsack and coin change 2 as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
+    - [Last stone weight 2, normal knapsack(2D) and coin change 2(1D) as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
     - [Flip array]
     - [Trapping rain water]
 14. [Bit Manipulation]
@@ -3760,6 +3770,46 @@ class Comparison implements Comparator<Cell>
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_NumTriangles"></a>
+### Number of triangles in a graph
+
+<a href="#Contents">Back to contents</a>
+	
+<a name="GP_MinCashFlow"></a>
+### Minimize Cash Flow among a given set of friends
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_RottingOranges"></a>
+### Rotting oranges
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_SimilarContacts"></a>
+### Find similar contacts in contact list
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_KnightsTour"></a>
+### Knight's tour problem - Visit each cell in a grid atleast once
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_RatInMazeI"></a>
+### Rat in a maze - I
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_RatInMazeII"></a>
+### Rat in a maze - II
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_ShortestPathWithKEdges"></a>
+### Shortest path with exactly k edges
+
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
