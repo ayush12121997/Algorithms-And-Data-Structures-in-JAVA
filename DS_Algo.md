@@ -115,7 +115,7 @@
 	- [Number of triangles in a graph](#GP_NumTriangles)
 	- [Minimize Cash Flow among a given set of friends](#GP_MinCashFlow)
 	- [Rotting oranges](#GP_RottingOranges)
-	- [Find similar contacts in contact list](#GP_SimilarContacts)
+	- [Find similar contacts in contact list (Accounts Merge)](#GP_SimilarContacts)
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
 	- [Rat in a maze - I](#GP_RatInMazeI)
 	- [Rat in a maze - II](#GP_RatInMazeII)
@@ -3915,12 +3915,245 @@ This can be achieved using TreeSet in java, to maintain a two ended priority que
 
 <a name="GP_RottingOranges"></a>
 ### Rotting oranges
+The questions is as follows:
+In a given grid, each cell can have one of three values:
+1. The value 0 representing an empty cell;
+2. The value 1 representing a fresh orange;
+3. The value 2 representing a rotten orange.<
 
+Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten.
+Return the minimum number of minutes that must elapse until no cell has a fresh orange.  If this is impossible, return -1 instead.
+
+Now to solve this problem, this can be seen as a modification of the shortest distance in unweighted graph problem. The reason this is considered an unweighted graph is because the cost of moving to a moveable cell is jsut 1, that is 1 minute.
+
+The modification that we make to our BFS call would be that in case we encounter a cell with value 0, we do not proceed any further, and in case we encounter a cell with value 1, we plus the distance so far(time taken to rot) by 1.
+
+The code is as follows:
+```java
+class Solution
+{
+    public int orangesRotting(int[][] grid)
+    {
+        int n = grid.length;
+        if(n == 0)
+        {
+            return 0;
+        }
+        int m = grid[0].length;
+        int freshCount = 0;
+        Queue<Cell> queue = new LinkedList<Cell>();
+        boolean[][] visited = new boolean[n][m];
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < m; j++)
+            {
+                if(grid[i][j] == 1)
+                {
+                    freshCount++;
+                }
+                else if(grid[i][j] == 2)
+                {
+                    queue.add(new Cell(i, j, 2, 0));
+                    visited[i][j] = true;
+                }
+            }
+        }
+        if(freshCount == 0)
+        {
+            return 0;
+        }
+        Cell cell = null;
+        int[] move_x = { 1, -1, 0 ,0 };
+        int[] move_y = { 0, 0, 1, -1 };
+        while(!queue.isEmpty())
+        {
+            cell = queue.poll();
+            int x = cell.x;
+            int y = cell.y;
+            int type = cell.type;
+            int time = cell.time;
+            if(type == 1)
+            {
+                freshCount--;
+            }
+            if(freshCount == 0)
+            {
+                return time;
+            }
+            for(int i = 0; i < 4; i++)
+            {
+                int x_new = x + move_x[i];
+                int y_new = y + move_y[i];
+                if((type == 1 || type == 2) && isInside(x_new, y_new, n, m) && !visited[x_new][y_new])
+                {
+                    if(grid[x_new][y_new] == 1)
+                    {
+                        queue.add(new Cell(x_new, y_new, 1, time + 1));
+                        visited[x_new][y_new] = true;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+    
+    public boolean isInside(int x, int y, int n, int m)
+    {
+        if(x < 0 || x >= n || y < 0 || y >= m)
+        {
+            return false;
+        }
+        return true;
+    }
+}
+
+class Cell
+{
+    int x = 0;
+    int y = 0;
+    int type = 0;
+    int time = 0;
+    
+    public Cell(int a, int b, int ty, int ti)
+    {
+        x = a;
+        y = b;
+        type = ty;
+        time = ti;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_SimilarContacts"></a>
-### Find similar contacts in contact list
+### Find similar contacts in contact list (Accounts Merge)
+The question gives us a list of lists. Each inner list, is of the following format:<br>
+<Name, Email1, Email2 .... Emailn><br>
+Note: The number of values in each inner list might varry, the only constant is atleast one email ID and necessarily the name.<br>
 
+The task is that given such a list of list, merge all contacts having common Email IDS and output a joined list with merged contacts. In the list of merged contacts for every inner list, make sure the emails are in lexographically sorted order.<br>
+Note: Two people with the same name might not necessarily have the same emails, whereas two people with same emails will necessarily have the same names.
+
+To get a better look at the question description, refer to: https://leetcode.com/problems/accounts-merge/
+
+We can solve this problem using the union find algorithm. As we are required to merge similar contacts together, union find using DSU seems a perfect fit over here. Now, we shall see the requirements for the DSU union find algorithm:
+1. We should be able to define individual subsets, preferable using integers.
+2. The task should to be merge these subsets.
+
+The second requirement is met as seen in question description. For the first requirement, we can modify the input taken. For every email ID that we read, we can assign a unique ID to ech new Email using a hashMap and then combine IDs of the same person together. This way all Email names would be converted into integers and the union and find methods of DSU would work on integers instead of working on strings.
+
+So now let us look at the final algorithm:
+1. For the input, create two hashmaps.
+	- <ins>Email to Name</ins>: Maps the email to the name of the person. Do not need to check for overlapping insertions, as if the same email repeats, from the qeustion description we know the same name will be used.
+	- <ins>Email to ID</ins>: ID here is an integer ID. Maps email to integer ID. This is needed so that we can use these IDs in our DSU instead strings. Ensure not to overwrite already included emails, as an ID assigned to an email once should remain the same. Also, for every email in the same list, that is for every email beloning to the same person in the initial list, we call union on the first email for that person and all the others. This way, say a person has 5 emails, two in one list and three in another, in which there is one common one. So we get the following scenario:<br>
+	For 1st list of the person, EMail A and Email B are unioned. [A, B]<br>
+	For the 2nd list, lets say Email A is common so now the unions would for the set [A, B, C]<br>
+2. So using this process, we are able to form a DSU for the emails and their owners. Now for every email in our second hashmap(Email to integer ID), we find the parent of that email and form a list of emails for vvery parent. Sort each of these list lexographically.
+3. Once we have got a list for every parent emailid, we use the first element of every list to find the name of the owner of the email from our frist hashmap(email to name) and add the name to their respective email lists.
+
+Here is the code:
+```java
+class Solution
+{
+    public List<List<String>> accountsMerge(List<List<String>> accounts)
+    {
+        DSU dsu = new DSU();
+        HashMap<String, String> emailToName = new HashMap<String, String>();
+        HashMap<String, Integer> emailToID = new HashMap<String, Integer>();
+        int id = 0;
+        int n = accounts.size();
+        for (int i = 0; i < n; i++)
+        {
+            List<String> innerAccount = accounts.get(i);
+            String name = innerAccount.get(0);
+            for(int j = 1; j < innerAccount.size(); j++)
+            {
+                String email = innerAccount.get(j);
+                emailToName.put(email, name);
+                if(!emailToID.containsKey(email))
+                {
+                    emailToID.put(email, id);
+                    id++;
+                }
+                dsu.union(emailToID.get(innerAccount.get(1)), emailToID.get(email));
+            }
+        }
+
+        HashMap<Integer, List<String>> ans = new HashMap();
+        for (String email: emailToID.keySet())
+        {
+            int index = dsu.find(emailToID.get(email));
+            if(ans.containsKey(index))
+            {
+                ans.get(index).add(email);
+            }
+            else
+            {
+                ans.put(index, new ArrayList<String>());
+                ans.get(index).add(email);
+            }
+        }
+        for(List<String> joinedEmails: ans.values())
+        {
+            Collections.sort(joinedEmails);
+            joinedEmails.add(0, emailToName.get(joinedEmails.get(0)));
+        }
+        return new ArrayList(ans.values());
+    }
+}
+
+class DSU
+{
+    Subset[] subsets;
+    public DSU()
+    {
+        subsets = new Subset[10001];
+        for (int i = 0; i <= 10000; i++)
+        {
+            subsets[i] = new Subset(i);
+        }
+    }
+    
+    public int find(int x)
+    {
+        if (subsets[x].parent != x)
+        {
+            subsets[x].parent = find(subsets[x].parent);
+        }
+        return subsets[x].parent;
+    }
+    
+    public void union(int x, int y)
+    {
+        int xRoot = find(x);
+        int yRoot = find(y);
+        if(subsets[xRoot].rank > subsets[yRoot].rank)
+        {
+            subsets[yRoot].parent = xRoot;
+        }
+        else if(subsets[xRoot].rank < subsets[yRoot].rank)
+        {
+            subsets[xRoot].parent = yRoot;
+        }
+        else
+        {
+            subsets[xRoot].parent = yRoot;
+            subsets[yRoot].rank++;
+        }
+    }
+}
+
+class Subset
+{
+    int parent = 0;
+    int rank = 0;
+    
+    public Subset(int p)
+    {
+        parent = p;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_KnightsTour"></a>
