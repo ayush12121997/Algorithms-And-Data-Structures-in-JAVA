@@ -3104,14 +3104,88 @@ class Subset
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="GP_CycleUndirected"></a>
-### Detect a cycle in an undirected graph
+<a name="GP_CycleDirected"></a>
+### Detect a cycle in an directed graph
+Detecting a cycle in a directed graph is easy. All it requires you to do is to run DFS on the graph and if you ever encounter a visited node then return true as it forms a cycle.
 
 <a href="#Contents">Back to contents</a>
 
-<a name="GP_CycleDirected"></a>
-### Detect a cycle in an directed graph
+<a name="GP_CycleUndirected"></a>
+### Detect a cycle in an undirected graph
+Detecting a cycle in an undirected graph is trickier than doing it for a directed graph. Remember, that in undirected graphs, edges are always added in both directions, hence for every child node you will always find the parent as already visited and hence the direct method of finding an already visited node would not work. Rather the exact fact that a parent is always visited is utilized, in such a way that if we find a visited node other than the parent, we return true.
 
+The code is as follows:
+```java
+class Graph
+{
+    int V;
+    ArrayList<ArrayList<Integer>> adj;
+
+    public Graph(int v)
+    {
+        V = v;
+        adj = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < V; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+
+    public void addEdge(int u, int v)
+    {
+        adj.get(u).add(v);
+        adj.get(v).add(u);
+    }
+    
+    // Code for checking Cycle
+    public boolean checkCycle()
+    {
+        // Visited array
+        boolean[] visited = new boolean[V];
+        for(int i = 0, i < V; i++)
+        {
+            // If node is not visisted
+            if(!visited[i])
+            {
+                // Check for cycle
+                // Send parent value as -1 for head vertex
+                if(checkCycleUtil(visited, i, -1))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkCycleUtil(boolean[] visited, int i, int u)
+    {
+        // Mark ith node as visited
+        // u is the parent of ith node
+        visited[i] = true;
+        // For all adjacent vertices of i
+        for(int j = 0; j < adj.get(i).size(); j++)
+        {
+            int c = adj.get(i).get(j);
+            // If adjacent vertex not visited
+            if(!visited[c])
+            {
+                // Check for cycle further
+                return checkCycleUtil(visited, c, i);
+            }
+            else
+            {
+                // If visited so make sure not parent
+                if(c != u)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_CountAllSourceDestination"></a>
