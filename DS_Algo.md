@@ -117,9 +117,8 @@
 	- [Rotting oranges](#GP_RottingOranges)
 	- [Find similar contacts in contact list (Accounts Merge)](#GP_SimilarContacts)
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
-	- [Rat in a maze - I](#GP_RatInMazeI)
-	- [Rat in a maze - II](#GP_RatInMazeII)
-	- [Shortest path with exactly k edges in a directed graph](#GP_ShortestPathWithKEdges)
+	- [Rat in a maze - II (All 4 directions)](#GP_RatInMazeII)
+	- [Count all paths with exactly k edges and shortest path](#GP_ShortestPathWithKEdges)
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
@@ -4158,22 +4157,276 @@ class Subset
 
 <a name="GP_KnightsTour"></a>
 ### Knight's tour problem - Visit each cell in a grid atleast once
+The problem asks you to check that is it possible that a Knight placed on a board of size N x N, cover all the cells on the board, visiting each cell atmost once. Printing the board would be benefetial to confirm the answer.
 
-<a href="#Contents">Back to contents</a>
+This can be solved easily using backtracking. The idea is to use a DFS based approach in backtracking. For every cell we are own we try all the possibilities till we get the corect final answer. If a possibility is wrong we reverse back and change the possibility. If the cell we are on runs out of possibilities we directly return false.
 
-<a name="GP_RatInMazeI"></a>
-### Rat in a maze - I
+The algorithm is the basic backtracking approach that from the starting cell (0,0) we try to move in all possible valid Knight movement directions and increase the total cell's filled count by 1. We then repeat the process, until we reach the totoal count to be N x N (positive base case) or if we run out of options for a particular cell (negative base case). The code is as follows:
+```java
+class Solution
+{
+    public boolean KnightsTour(int N)
+    {
+        int[][] board = new int[N][N];
+        int[] di_x = { 2, 2, -2, -2, 1, 1, -1, -1};
+        int[] di_y = { 1, -1, 1, -1, 2, -2, 2, -2};
+        board[0][0] = 1;
+        return KnightsTourUtil(board, 0, 0, di_x, di_y, 1, N);
+    }
 
+    public boolean KnightsTourUtil(int[][] board, int x, int y, int[] di_x, int[] di_y, int count, int N)
+    {
+        if(count == N*N)
+        {
+            return true;
+        }
+        for(int i = 0; i < 8; i++)
+        {
+            int next_x = x + di_x[i];
+            int next_y = y + di_y[i];
+            if(isInside(next_x, next_y, N) && board[next_x][next_y] == 0)
+            {
+                board[next_x][next_y] = count + 1;
+                if(KnightsTourUtil(board, next_x, next_y, di_x, di_y, count + 1, N))
+                {
+                    return true;
+                }
+                board[next_x][next_y] = 0;
+            }
+        }
+
+        // Print the board
+        for(int i = 0; i < N; i++)
+        {
+            for(int j = 0; j < N; j++)
+            {
+                if(board[i][j] > 99)
+                {
+                    System.put.print(board[i][j] + "  ");    
+                }
+                else if(board[i][j] > 9)
+                {
+                    System.put.print(board[i][j] + "   ");    
+                }
+                else
+                {
+                    System.out.print(board[i][j] + "    ");
+                }
+            }
+            System.out.println();
+        }
+        return false;
+    }
+
+    public boolean isInside(int x, int y, int N)
+    {
+        if(x < 0 || x >= N || y < 0 || y >= N)
+        {
+            return false;
+        }
+        return true;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_RatInMazeII"></a>
-### Rat in a maze - II
+### Rat in a maze - II (All 4 directions)
+Rat in a Maze - I problem is very basic. It is exactly similar to the DP problem involving a grid with some obstacles and you are needed to find the minimum cost path from the top left to the bottom right of the grid. This problem is covered in the section <a href="#DP_2DimensionalGrids">DP for 2D grids</a>.
 
+We tackle an advanced version of the problem here. We say that movement is allowed in all four directions Up(U), Down(D), Left(L) and Right(R). The gird has certain cells that can be visited marked by 1 and certain cells that are blocked, marked by 0. The task is to output a sorted list of all possible paths to reach the bottom right of the grid from the top left.
+
+Instead of using dynamic programming, we need a graph based backtracking soltion here. Reasons:
+1. <ins>Why not dynamic programming?</ins><br>
+Because dynamic programming depends on previously computed values, and for movements in 4 directions, previous values would not be available.
+2. <ins>Why graphs?</ins><br>
+If we imagine the grid as a graph where all the visitable cells are connected with edges and the cells he ce form the nodes, the question becomes similar to a graph traversal that to find a path to reach a given node from a source. This is a very typical DFS problem. We apply DFS on the source cell, have 4 adjacent cells(U, D, L and R) and then for each reachable adjacent cell we recurse til lwe reach the final answer and find a path.
+3. <ins>Why backtracking?</ins><br>
+As we are needed to find all paths till the destination, we do not stop at finding the first path, which is what the DFS normally does, that as soon as we reach the target, we stop. Instead, when we reach the end, we add the current path to answer and then recurse/travel back to the previous node and try the next available option and check if a new path can be formed. This way after every path found, until newer options are available to traverse we keep on looking for more.
+
+The algortithm is a very trivial backtracking algorithm and has been implemented below.
+```java
+class Solution
+{
+    public static ArrayList<String> printPath(int[][] m, int n)
+    {
+        ArrayList<String> ans = new ArrayList<String>();
+        int[] di_x = { 1, -1, 0, 0 };
+        int[] di_y = { 0, 0, 1, -1 };
+        String[] di_s = { "D", "U", "R", "L"};
+        boolean[][] visited = new boolean[n][n];
+        visited[0][0] = true;
+        if(m[0][0] == 0)
+        {
+            return ans;
+        }
+        ratInMazeUtil(m, 0, 0, "", ans, di_x, di_y, di_s, visited);
+        Collections.sort(ans);
+        return ans;
+    }
+
+    public static void ratInMazeUtil(int[][] grid, int x, int y, String directions, ArrayList<String> ans, int[] di_x, int[] di_y, String[] di_s, boolean[][] visited)
+    {
+        int N = grid.length;
+        if(x == N - 1 && y == N - 1)
+        {
+            ans.add(directions);
+        }
+        else
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                int next_x = x + di_x[i];
+                int next_y = y + di_y[i];
+                String next_s = di_s[i];
+                if(isInside(next_x, next_y, grid) && !visited[next_x][next_y])
+                {
+                    visited[next_x][next_y] = true;
+                    ratInMazeUtil(grid, next_x, next_y, directions + next_s, ans, di_x, di_y, di_s, visited);
+                    visited[next_x][next_y] = false;
+                }
+            }
+        }
+    }
+
+    public static boolean isInside(int x, int y, int[][] grid)
+    {
+        int N = grid.length;
+        if(x < 0 || x >= N || y < 0 || y >= N || grid[x][y] == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_ShortestPathWithKEdges"></a>
-### Shortest path with exactly k edges
+### Count all paths with exactly k edges and shortest path
 
+For count of paths:
+```java
+class Solution 
+{
+    // Function to calculate and return count
+    // Input is graph[][], source u, destination v, edges k, vertices v
+    public int countwalks(int graph[][], int u, int v, int k, int V)
+    {
+        // DP array to store [Source][Destination][NumEdges]
+        int count[][][] = new int[V][V][k+1];
+        // For number of edges ranging from 0 to k
+        for (int e = 0; e <= k; e++)
+        {
+            // For source from 0 to V-1
+            for (int i = 0; i < V; i++)
+            {
+                // For destination from 0 to V-1
+                for (int j = 0; j < V; j++)
+                {
+                    // If number of edges is 0
+                    // Then path exists if source = destination
+                    if (e == 0 && i == j)
+                    {
+                        count[i][j][e] = 1;
+                    }
+                    // If number of edges is 1
+                    // Path exists if a direct edge exists
+                    if (e == 1 && graph[i][j]!=0)
+                    {
+                        count[i][j][e] = 1;
+                    }
+                    // If number of edges is more than 1
+                    if (e > 1)
+                    {
+                        // For all vertices from 0 to V-1
+                        for (int a = 0; a < V; a++)
+                        {
+                            // Check adjacent vertice of i by checking for edge
+                            // If edge exists from i to a
+                            if (graph[i][a]!=0)
+                            {
+                                // New count of paths from i to j is
+                                // Old count + Count of paths from a to j using
+                                // 1 less edge
+                                // Hence,
+                                // count(i,j,e) = count(i,j,e) + count(a,j,e-1)
+                                count[i][j][e] += count[a][j][e-1];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // return count from vertex u to vertex v with k edges
+        return count[u][v][k];
+    }
+}
+```
+For shortest path:
+```java
+class Solution 
+{
+    // Function to calculate and return the minimum distance
+    // Input is graph[][], source u, destination v, max edges k, vertices v
+    public int shortestPath(int graph[][], int u, int v, int k, int V)
+    {
+        // DP array to store the distance of path belong ing to
+        // [Source][Destination][Max edges used]
+        int dist[][][] = new int[V][V][k+1];
+        // For number of edges ranging from 0 to k
+        for (int e = 0; e <= k; e++)
+        {
+            // For source from 0 to V-1
+            for (int i = 0; i < V; i++)
+            {
+                // For destination from 0 to V-1
+                for (int j = 0; j < V; j++)
+                {
+                    // If number of edges is 0
+                    // Then path exists if source = destination
+                    // And as source = destination, min path is 0
+                    if (e == 0 && i == j)
+                    {
+                        dist[i][j][e] = 0;
+                    }
+                    // If number of edges is 1
+                    // Path exists if a direct edge exists
+                    // If yes, so path length is 1 as 1 edge
+                    if (e == 1 && graph[i][j]!=-1)
+                    {
+                        dist[i][j][e] = 1;
+                    }
+                    // If number of edges is more than 1
+                    if (e > 1)
+                    {
+                        // For all vertices from 0 to V-1
+                        for (int a = 0; a < V; a++)
+                        {
+                            // 1. Check adjacent vertice of i by checking for edge
+                            // 2. Check that it should not be a self loop, that is i != a
+                            // 3. Check a should not be j itself as that is base case
+                            // 4. Check there exists a path from a to j
+                            if (graph[i][a]!=-1 && i != a && j!=a && dist[a][j][e-1] != Integer.MAX_VALUE)
+                            {
+                                // New distance of path from i to j with
+                                // atmost k edges is minimum of distance
+                                // before and the sum of (distance from i to a)
+                                // and (distance from a to j using one less edge)
+                                // Hence,
+                                // dist(i,j,e) = Min(dist(i,j,e), dist(i,j,e) + dist(a,j,e-1))
+                                dist[i][j][e] = Math.min(dist[i][j][e], dist[a][j][e-1] + graph[i][a]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // return distance from vertex u to vertex v with atmost k edges
+        return dist[u][v][k];
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
@@ -4357,7 +4610,7 @@ for (int i = 1; i <= target; ++i)
 }
 return dp[target]
 ```
-***NOTE: THE DP APPROACH TO SOLVING GRID QUESTIONS WORKS ONLY WHEN THE ANSWER FOR A CELL IN THE DP TABLE CAN BE EASILY CALCULATED USING THE PRECOMPUTED VALUES. HENCE, EVEN A SMALL MODIFICATION SUCH AS ALLOWING MOVEMENTS IN ALL 4 DIRECTIONS WOULD REQUIRE US TO CHANGE OUR APPROACH TO BFS(FOR MIN COST PATH) AND DFS/BACKTRACKING(FOR TOTAL PATHS).***
+***NOTE: THE DP APPROACH TO SOLVING GRID QUESTIONS WORKS ONLY WHEN THE ANSWER FOR A CELL IN THE DP TABLE CAN BE EASILY CALCULATED USING THE PRECOMPUTED VALUES. HENCE, EVEN A SMALL MODIFICATION SUCH AS ALLOWING MOVEMENTS IN ALL 4 DIRECTIONS WOULD REQUIRE US TO CHANGE OUR APPROACH TO BFS(FOR MIN COST PATH) AND DFS/BACKTRACKING(FOR TOTAL PATHS/ CHECKING EXISTENCE OF A PATH).***
 
 <a href="#Contents">Back to contents</a>
 
