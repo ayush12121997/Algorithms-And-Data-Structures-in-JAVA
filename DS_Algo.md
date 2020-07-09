@@ -4304,8 +4304,8 @@ class Solution
 
 <a name="GP_ShortestPathWithKEdges"></a>
 ### Count all paths with exactly k edges and shortest path
+**<ins>For count of paths</ins>:**
 
-For count of paths:
 ```java
 class Solution 
 {
