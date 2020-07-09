@@ -4304,8 +4304,21 @@ class Solution
 
 <a name="GP_ShortestPathWithKEdges"></a>
 ### Count all paths with exactly k edges and shortest path
-**<ins>For count of paths</ins>:**
+**<ins>For count of paths</ins>:**<br>
+The question states that in a given graph/grid, count all the paths with exactly k edges from a given source to a destination. The approach one mght immediately think of is backtracking. Yes, the question is solvable using backtracking but with an exponential complexity of O(V^k).
 
+Instead, we may choose to use dynamic programming. Using a 3D array, the dynamic programming solution becomes very easy and intuitive. We try to build all paths from length 0 to k, in the input graph in a bottom's up manner. We follow the following process:
+```java
+// The dp array will be of the form [Source][Destination][NumEdges] storing the count
+// of total paths from 'Source' vertex to 'Destination' vertex with 'NumEdges' edges
+
+// For number of edges 'e' in the path (from 0 to k)
+//   For every vertex 'u' marking start of path (from 0 to V)
+//     For every vertex 'v' marking end of path (from 0 to V)
+//       For every vertex 'a' adjacent to source 'u' (from 0 to V)
+//         num paths from 'u' to 'v' with 'e' edges += num paths from 'a' to 'v' with 'e-1' edges 
+```
+As we can see there are three loops for length V and one loop for length k. Hence the time complexity becomes O(V^3 x k). This is significantly faster than the backtracking solution. The code has been commented for further explanation.
 ```java
 class Solution 
 {
@@ -4363,7 +4376,20 @@ class Solution
     }
 }
 ```
-For shortest path:
+**<ins>For shortest path</ins>:**<br>
+The above part can have a variation to find the shortes path from the course to the destination instead of counts of all paths. We use the similar dp approach with just defining a new value to be represented by the dp array.
+```java
+// The dp array will be of the form [Source][Destination][NumEdges] storing the min
+// length of path from 'Source' vertex to 'Destination' vertex with 'NumEdges' edges
+
+// For number of edges 'e' in the path (from 0 to k)
+//   For every vertex 'u' marking start of path (from 0 to V)
+//	   For every vertex 'v' marking end of path (from 0 to V)
+//       For every vertex 'a' adjacent to source 'u' (from 0 to V)
+//         if there is a path from 'a' to 'v' using 'e-1' edges
+//           path from 'u' to 'v' with 'e' edges = Min of (previous path, path from 'a' to 'v' with 'e-1' edges) 
+```
+The code is as follows:
 ```java
 class Solution 
 {
