@@ -81,14 +81,12 @@
 10. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
 	- [Tree traversals](#TR_Traversal)
-	- [Tree search - BFS and DFS](#TR_Search)
+	- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
+	- [Find all possible binary trees with given Inorder Traversal](#TR_AllPossibleBTFromInorder)
 	- [Binary tree level order traverssal](#TR_LOTraversal)
 	- [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
 	- [Binary tree reverse level order traversal](#TR_RLOTraversal)
 	- [Binary tree diagnoal traversal](#TR_DTraversal)
-	- [Construct binary tree from given preorder traversal](#TR_ConstructBSTFromPreorder)
-	- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
-	- [Find postorder traversal from given preorder only](#TR_PostorderFromPreorder)
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
@@ -1816,6 +1814,8 @@ TreeSet<Pair> trSet = new TreeSet<Pair>(new Comparison());
 trSet.add(new Pair()); //O(Log n)
 trSet.getMax() // O(1)
 trSet.getMin() // O(1)
+trSet.first() // O(1)
+trSet.last() // O(1)
 trSet.deleteMax() //O(Log n)
 trSet.deleteMin() //O(Log n)
 trSet.size() //O(1)
@@ -1854,21 +1854,417 @@ class Pair
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
 <a name="Trees"></a>
 ## <p align="center"> Trees </p>
 
 <a name ="TR_Intro"></a>
 ### Introduction
-- [Introduction](#TR_Intro)
-- [Tree traversals](#TR_Traversal)
-- [Tree search - BFS and DFS](#TR_Search)
+Trees ar heirarchical data structure and hence differ from linked lists, arrays, stacks and queues in functionality as they are all linear data structures. The topmost node of a tree is called the root. In a connection between the nodes, that is when an edge in the tree connects two nodes, the ndoe where the edge begins is called a parent node, and where the edge ends is called the child node. Moreover, in trees, there are no back edges, that means edges are pssobile only from a higher level to a lower level. Nodes which do not have any children are called leaf nodes.
+
+A tree whose elements have at most 2 children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right child. Binary trees provide moderate access and modification speeds. The operation search, delete, insert are all O(n) in a binary tree.
+```java
+// Node class to represent nodes in the tree
+class Node
+{
+    // Value of the node
+    int key;
+    // Left and right children are also nodes
+    Node left = null;
+    Node right = null;
+
+    public Node(int value)
+    {
+        key = value;
+    }
+	
+	public Node(int value, Node r, Node l)
+    {
+        key = value;
+		right = r;
+		left = l;
+    }
+}
+
+// Class for binary tree
+class BinaryTree
+{
+    // All we need is the root of the tree
+    // to run any algorithm on the tree
+    Node root = null;
+    
+    public BinaryTree(int key)
+    {
+        root = new Node(key);
+    }
+}
+```
+Properties of a binary tree:
+1. The maximum number of nodes in a binary tree at a level 'l' is 2^l. Root is level 0.
+2. Maximum number of nodes in a binary tree of height 'h' is 2^h – 1. Root is at height 1.
+3. In a binary tree with N nodes, minimum height possible is Log(N+1).
+4. In binary tree where every node has 0 or 2 children, number of leaf nodes is always one more than nodes with two children.
+5. A full binary tree is one in which all nodes have either 0 or 2 children. This means that all nodes other than leaves have 2 children.
+6. A complete binary tree is a tree where in only the last level is allowed to be incomplete and that all the nodes in the last level are to as left as possible.
+
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_Traversal"></a>
+### Tree traversals
+There are three types of tree traversals:
+1. Inorder: Inorder traversal is when the left subtree of a node is listed first, then the node and then the right subtree of the node. Both left and right subtrees are also listed in inorder fashion.
+2. Preorder: Prorder traversal is when the node is listed first, then the left subtree of the node and then the right subtree of the node. Both left and right subtrees are also listed in preorder fashion.
+3. Postorder: Postorder traversal is when the left subtree of a node is listed first, then the right subtree of the node and then the node at the end. Both left and right subtrees are also listed in postorder fashion.
+```java
+            1
+         /     \
+	    2       3
+	 /     \      \
+    4       5      6
+	              /
+				 7
+```
+For the tree above the traversal would be as follows:
+1. Inorder: 4 2 5 1 3 7 6
+2. Preorder: 1 2 4 5 3 6 7
+3. Postoreder: 4 5 2 7 6 3 1
+
+These tree traversals can be achieved using recursion and stacks. The idea in both the approaches is similar and has been implemented below:
+```java
+// INORDER TRAVERSAL - RECURSIVE
+class Solution
+{
+    ArrayList<Integer> ans = new ArrayList<Integer>();
+    public List<Integer> inorderTraversal(TreeNode root)
+    {
+        if(root == null)
+        {
+            return ans;
+        }
+        inorderTraversal(root.left);
+        ans.add(root.val);
+        inorderTraversal(root.right);
+        return ans;
+    }
+}
+
+// INORDER TRAVERSAL - ITERATIVE STACK
+class Solution
+{
+    public List < Integer > inorderTraversal(TreeNode root)
+    {
+        List<Integer> ans = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        // Current element is root
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty())
+        {
+            // Traverse till extreme left and
+            // keep adding to stack
+            while (curr != null)
+            {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            // At this point top of stack is current extreme left element
+            // We pop the head, and then add it to the asnwer
+            // The new head would now be the parent of the popped element
+            curr = stack.pop();
+            ans.add(curr.val);
+            // We set the current element to the right child of the
+            // popped element
+            // If the right child exists, then in the next iteration
+            // it would come to the top of the stack
+            curr = curr.right;
+        }
+        return ans;
+    }
+}
+
+// PREORDER TRAVERSAL - RECURSIVE
+class Solution
+{
+    ArrayList<Integer> ans = new ArrayList<Integer>();
+    public List<Integer> preorderTraversal(TreeNode root)
+    {
+        if(root == null)
+        {
+            return ans;
+        }
+        ans.add(root.val);
+        preorderTraversal(root.left);
+        preorderTraversal(root.right);
+        return ans;
+    }
+}
+
+// PREORDER TRAVERSAL - ITERATIVE STACK
+class Solution
+{
+    public List<Integer> preorderTraversal(TreeNode root)
+    {
+        List<Integer> ans = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        // Current element is root
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty())
+        {
+            // We move to the extreme left, but while doing so
+            // we add all the parent nodes to ans as in preorder
+            // the parent comes before the left and right children
+            while (curr != null)
+            {
+                ans.add(curr.val);
+                stack.push(curr);
+                curr = curr.left;
+            }
+            // When the extreme left is reached,
+            // all parents and left nodes so far
+            // have been added.
+            // We start popping the stack now and
+            // shift current to the right element of
+            // the popped node.
+            curr = stack.pop();
+            curr = curr.right;
+        }
+        return ans;
+    }
+}
+
+// POSTORDER TRAVERSAL - RECURSIVE
+class Solution
+{
+    ArrayList<Integer> ans = new ArrayList<Integer>();
+    public List<Integer> postorderTraversal(TreeNode root)
+    {
+        if(root == null)
+        {
+            return ans;
+        }
+        postorderTraversal(root.left);
+        postorderTraversal(root.right);
+        ans.add(root.val);
+        return ans;
+    }
+}
+
+// POSTORDER TRAVERSAL - ITERATIVE STACK
+class Solution
+{
+    // Ides used here is that for the normal preorder traversal
+    // the format is ROOT LEFT RIGHT
+    // If we modify this format to be ROOT RIGHT LEFT and then
+    // reverse the output it would become LEFT RIGHT ROOT and hence
+    // create postorder traversal.
+    public List<Integer> postorderTraversal(TreeNode root)
+    {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        // Current element is root
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty())
+        {
+            // We move to the extreme right(right first preorder),
+            // but while doing so we add all the parent nodes
+            // to the answer as in preorder the parent comes
+            // before the children
+            while (curr != null)
+            {
+                res.add(curr.val);
+                stack.push(curr);
+                curr = curr.right;
+            }
+            // When the extreme right is reached,
+            // all parents and right nodes so far
+            // have been added.
+            // We start popping the stack now and
+            // shift current to the left element of
+            // the popped node.
+            curr = stack.pop();
+            curr = curr.left;
+        }
+        // As the ans currently is a ROOT RIGHT LEFT preorder,
+        // we reverse it to produce LEFT RIGHT ROOT postorder
+        Collections.reverse(res);
+        return res;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_PostorderFromPreAndInorder"></a>
+### Find postorder traversal from given inorder and preorder
+The questions is that given in-order and pre-order traversal of a binary tree, can we output the postorder traversal for the same. The question can be solved recursively, by using the pre-order traversal to decide roots and the inorder subtree to decide elements of the left and right subtrees for each root.
+We know that inorder follows the format Left Root Right and preorder follows the format ROOT LEFT RIGHT. Hence, the first element of the preorder will be the root of the tree, and in the inorder, elements to the left of the root will be left subtree and those to right will be from right subtree. For example,<br>
+Inorder = { 4, 2, 5, 1, 3, 6 }<br>
+Preorder = { 1, 2, 4, 5, 3, 6 }<br>
+Hence, from the preorder the root of the tree would be 1, and from the inorder the elements of the left subtree would be { 4, 2, 5 } and those of the right subtree would be { 3, 6 }.
+
+Now solving for the left subtree, moving on to the next root element in the preorder, we know that 2 would be the root of the subtree, and the subtree as obtained from inorder is { 4, 2, 5 }. We repeat the same process again to get new left and right subtrees as { 4 } and { 5 } respectively and the root from preorder as 2.
+
+This process can be repeated recursively to complete the entire tree. Now to solve the question, we can either build the tree first and then print the postorder traversal of the tree, or instead we can get the postorder traversal directly while building the tree as shown in the code below:
+```java
+class Solution
+{
+    // Index for keeping track of root element in preOrder
+    static int pIndex = 0;
+
+    // Return postOrder
+    public static ArrayList<Integer> findPostOrder()
+    {
+        int[] inOrder = { 4, 2, 5, 1, 3, 6 };
+        int[] prOrder = { 1, 2, 4, 5, 3, 6 };
+        int n = inOrder.length;
+        // HashMap to store the index of elements in inOrder
+        HashMap<Integer, Integer> inMap = new HashMap<Integer, Integer>();
+        for(int i = 0; i < n; i++)
+        {
+            // Fill HashMap
+            inMap.put(inOrder[i], i);
+        }
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        findPostOrderUtil(inMap, prOrder, ans, 0, n);
+        return ans;
+    }
+
+    // Input is given as HashMap, the preOrder traversal,
+	// final asnwer arraylist and the starting and ending points of subtrees
+    public static void findPostOrderUtil(HashMap<Integer, Integer> inMap, int[] prOrder, ArrayList<Integer> ans, int start, int end)
+    {
+        // If start is same as end, this means that epmty subtree
+        // has been reached. So do nothing.
+        if(start == end)
+        {
+            return;
+        }
+        // The value of the root for the subtree
+        int value = prOrder[pIndex];
+        // The index of root in inOrder
+        // Everything right to this index forms right subtree
+        // Everything left to this index forms left subtree
+        int rootIndex = inMap.get(value);
+        
+        // Move preOrder index to next root
+        pIndex++;
+        // Solve for left subtree
+        findPostOrderUtil(inMap, prOrder, ans, start, rootIndex);
+        // Solve for right subtree
+        findPostOrderUtil(inMap, prOrder, ans, rootIndex+1, end);
+        // As it is PostOrder, the actuall root is added after
+        // left and right subtrees are added.
+        ans.add(value);
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_AllPossibleBTFromInorder"></a>
+### Find all possible binary trees with given Inorder Traversal
+The task is to find all possible tree formations from a given inorder traversal. We output the trees as their preorder traversals.
+
+We from all possbile inorder traversal trees recursively by selecting all elements as root once and by forming left and right subtrees from elements to the left and right of selected root respectively.
+
+The code is as foolows:
+```java
+class Solution
+{
+    public static void findAllTrees()
+    {
+        int[] inOrder = { 4, 5, 7, 8 };
+        ArrayList<Node> ans = findAllTreesUtil(inOrder, 0, inOrder.length);
+        for(int i = 0; i < ans.size(); i++)
+        {
+            System.out.println(preOrderTraversal(ans.get(i)));
+        }
+    }
+
+    // Input is the inOrder traversal, and starting and ending point of subtree
+    // Output is the list of root nodes for all the trees formed
+    public static ArrayList<Node> findAllTreesUtil(int []inOrder, int start, int end)
+    {
+        // List of root nodes
+        ArrayList<Node> ans = new ArrayList<Node>();
+        // If the starting and ending elements
+        // are same then this means we have reached
+        // the null children.
+        if(end == start)
+        {
+            // Add null as the subtree root.
+            ans.add(null);
+            return ans;
+        }
+        // For all elements from start to end
+        // we make every element root once
+        for(int i = start; i < end; i++)
+        {
+            // List of roots of all left subtrees with
+            // element 'i' as parent root
+            ArrayList<Node> leftTrees = findAllTreesUtil(inOrder, start, i);
+            // List of roots of all right subtrees with
+            // element 'i' as parent root
+            ArrayList<Node> rightTrees = findAllTreesUtil(inOrder, i+1, end);
+            // For all left subtrees possible
+            for(int j = 0; j < leftTrees.size(); j++)
+            {
+                // For all right subtrees possible
+                for(int k = 0; k < rightTrees.size(); k++)
+                {
+                    // Create node with 'i' as root
+                    Node n = new Node(inOrder[i]);
+                    // Add left and right subtree
+                    n.left = leftTrees.get(j);
+                    n.right = rightTrees.get(k);
+                    // Add this node to the list of all trees with elements
+                    // from start to end
+                    ans.add(n);
+                }
+            }
+        }
+        return ans;
+    }
+
+    // Simple preorder traversal for output
+    public static ArrayList<Integer> preOrderTraversal(Node root)
+    {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        Stack<Node> stack = new Stack<Node>();
+        Node curr = root;
+        while(curr != null || !stack.isEmpty())
+        {
+            while(curr != null)
+            {
+                ans.add(curr.value);
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            curr = curr.right;
+        }
+        return ans;
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int value = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        value = v;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
 - [Binary tree level order traverssal](#TR_LOTraversal)
 - [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
 - [Binary tree reverse level order traversal](#TR_RLOTraversal)
 - [Binary tree diagnoal traversal](#TR_DTraversal)
-- [Construct binary tree from given preorder traversal](#TR_ConstructBSTFromPreorder)
-- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
-- [Find postorder traversal from given preorder only](#TR_PostorderFromPreorder)
+
 
 <a name="Graphs"></a>
 ## <p align="center"> Graphs </p>
@@ -1927,7 +2323,7 @@ class Graph
 
 <a name="GP_BFS"></a>
 ### Breadth First Traversal
-The BFS on a graph is very similar to the BFS on a tree. For those who haven't completed the section on trees above, BFS is a searching technique which helps you search through various nodes of a tree or a graph level by level. We begin with a starting index, root in case of trees, and then traverse all the nodes that can be reached from in one step and and add them in a queue. Then for all the nodes present in the queue we repeat the process, until the queue becomes empty. Why use a queue? The aim of a BFS search is to first visit all direct children of the node and then proceed with each child seperately. This can be achieved by maintaining a queue which follows a FIFO order and hence only when the processing of parents at the starting of the queue is completed, the subequent children are proccessed.
+BFS is a searching technique which helps you search through various nodes of a tree or a graph, level by level. We begin with a starting index, root in case of trees, and then traverse all the nodes that can be reached from in one step and and add them in a queue. Then for all the nodes present in the queue we repeat the process, until the queue becomes empty. Why use a queue? The aim of a BFS search is to first visit all direct children of the node and then proceed with each child seperately. This can be achieved by maintaining a queue which follows a FIFO order and hence only when the processing of parents at the starting of the queue is completed, the subequent children are proccessed.
 
 The difference between the BFS of a tree and that of a graph is that in graphs we need to maintain a visited array, to store the nodes which have been visited before. This is needed because unlike trees, graphs may contain cycles and without a visited array the search might end up in an infinite loop. We further build our graph class by adding the BFS functionality to it.
 ```java
