@@ -76,14 +76,19 @@
     - [Sum of all subarray minimums]
     - [Evaluate Reverse Polish Notation]
     - [Trapping rain water]
-    - [Binary Tree Traversls - Inorder, Postorder and Preorder]
-    - [Binary tree zigzag traversal]
-    - [Binary tree level order traversal]
 8. [Heaps and Maps]
 9. [Hashing]
-10. [Trees]
-    - [Traversals take from leetcode]
-    - [Binary tree zigzag traversal, level order traversal]
+10. [Trees](#Trees)
+	- [Introduction](#TR_Intro)
+	- [Tree traversals](#TR_Traversal)
+	- [Tree search - BFS and DFS](#TR_Search)
+	- [Binary tree level order traverssal](#TR_LOTraversal)
+	- [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
+	- [Binary tree reverse level order traversal](#TR_RLOTraversal)
+	- [Binary tree diagnoal traversal](#TR_DTraversal)
+	- [Construct binary tree from given preorder traversal](#TR_ConstructBSTFromPreorder)
+	- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
+	- [Find postorder traversal from given preorder only](#TR_PostorderFromPreorder)
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
@@ -1849,6 +1854,21 @@ class Pair
     }
 }
 ```
+<a name="Trees"></a>
+## <p align="center"> Trees </p>
+
+<a name ="TR_Intro"></a>
+### Introduction
+- [Introduction](#TR_Intro)
+- [Tree traversals](#TR_Traversal)
+- [Tree search - BFS and DFS](#TR_Search)
+- [Binary tree level order traverssal](#TR_LOTraversal)
+- [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
+- [Binary tree reverse level order traversal](#TR_RLOTraversal)
+- [Binary tree diagnoal traversal](#TR_DTraversal)
+- [Construct binary tree from given preorder traversal](#TR_ConstructBSTFromPreorder)
+- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
+- [Find postorder traversal from given preorder only](#TR_PostorderFromPreorder)
 
 <a name="Graphs"></a>
 ## <p align="center"> Graphs </p>
