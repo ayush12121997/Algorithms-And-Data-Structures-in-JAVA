@@ -2260,7 +2260,117 @@ class Node
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Binary tree level order traverssal](#TR_LOTraversal)
+<a name ="TR_LOTraversal"></a>
+### Binary tree level order traverssal
+The level order traversal for a tree is when we list nodes of the tree level by level starting from the left to right. The code is trivial and is a simple implementation of BFS on a tree where we add the nodes to a queue. For ever y node in queue, we pop the head, add the popped nodes left and right child to queue respectively and then print the popped head. This is repeated till the queue becomes empty. This way all nodes on a particular level are treated first before their children.
+```java
+class Solution
+{
+    public static ArrayList<Integer> levelOrderTraversal(Node root)
+    {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        Node curr = null;
+        while(!queue.isEmpty())
+        {
+            curr = queue.poll();
+            if(curr.left != null)
+            {
+                queue.add(curr.left);
+            }
+            if(curr.right != null)
+            {
+                queue.add(curr.right);
+            }
+            ans.add(curr.value);
+        }
+        return ans;
+    }   
+}
+
+// Class node for forming the tree
+class Node
+{
+    int value = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        value = v;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_ZZTraversal"></a>
+### Binary tree zigzag traversal - Level order in spiral
+The zigzag level traversal is a modification of the simple level order traversal. For every lternate level we need to change the order of printing from left to right to right to left. This can achived in O(n) time using two different stacks. The approach is as foolows:
+1. Create two empty stacks, say A and B, add all nodes of level 1, that is the root, to A.
+2. Now pop elements from node A and add them to the answer, and for every popped elemnt, push the right and left child of the node to stack B. Now as the right and left child were pushed in order, therefore stack B has left child at top and right child below in the stack. Hence, <ins>stack B</ins> would represent a <ins>Left to Right</ins> printing pattern.
+3. For every node in stack B, now pop the head and add it to the answer. For every popped head, add the left and right children to stack A. This way, now when <ins>stack A</ins> is popped it will result in a <ins>Right to Left</ins> oredering.
+4. Repeat the process above till both stacks become empty and return the final result.
+
+In short, we alternatively add level to different stacks, One stack follows a push right before left order and the other follows a push left before right order. This way, when popping, alternate orders are followed.
+```java
+class Solution
+{
+    public static ArrayList<Integer> levelOrderTraversal(Node root)
+    {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        Stack<Node> stackA = new Stack<Node>();
+        Stack<Node> stackB = new Stack<Node>();
+        stackA.push(root);
+        while(!stackA.isEmpty() || !stackB.isEmpty())
+        {
+            Node temp = null;
+            while(!stackA.isempty())
+            {
+                temp = stackA.pop();
+                ans.add(temp.data);
+                if(temp.right != null)
+                {
+                    stackB.push(temp.right);
+                }
+                if(temp.left != null)
+                {
+                    stackB.push(temp.left);
+                }
+            }
+            while(!stackB.isempty())
+            {
+                temp = stackB.pop();
+                ans.add(temp.data);
+                if(temp.left != null)
+                {
+                    stackA.push(temp.left);
+                }
+                if(temp.right != null)
+                {
+                    stackA.push(temp.right);
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
 - [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
 - [Binary tree reverse level order traversal](#TR_RLOTraversal)
 - [Binary tree diagnoal traversal](#TR_DTraversal)
