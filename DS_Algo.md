@@ -2371,9 +2371,156 @@ class Node
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
-- [Binary tree reverse level order traversal](#TR_RLOTraversal)
-- [Binary tree diagnoal traversal](#TR_DTraversal)
+<a name ="TR_RLOTraversal"></a>
+### Binary tree reverse level order traversal
+Here we are required to print the level order traversal of a tree in reverse order. This means that the last elvel should be printed first and then the second last and so on, with the root being printed last.
+
+This can be achieved using a stack. Values added to stack are put in a LIFO order that is the element put in last would be taken out first. o if for every level we were to put values in a right to left order till the very last level, we would eventually be pulling out values in left to right order starting from the last level. This is exactly what is needed. For example for three below:
+```java
+            1
+         /     \
+	    2       3
+	 /     \      \
+    4       5      6
+	              /
+				 7
+```
+The stack would be filled like this by traversing the tree level by level from right to left:
+1 3 2 6 5 4 7
+The stack when popped would result in output similar to reverse printing level from left to right:
+7 4 5 6 2 3 1
+
+Now to put values in stack we can do either of the following:
+1. Traverse the 
+2.
+```java
+class Solution
+{
+    public static ArrayList<Integer> levelOrderTraversal(Node root)
+    {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        Stack<Node> stack = new Stack<Node>();
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        Node n = null;
+        while(!queue.isEmpty())
+        {
+            n = queue.poll();
+            stack.push(n);
+            if(n.right != null)
+            {
+                queue.add(n.right);
+            }
+            if(n.left != null)
+            {
+                queue.add(n.left);
+            }
+        }
+        while(!stack.isEmpty())
+        {
+            // System.out.print(stack.pop().data + " ");
+            ans.add(stack.pop().data);
+        }
+        return ans;
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_DTraversal"></a>
+### Binary tree diagnoal traversal
+The question is to print the tree in a digaonal order. This means that levels are decided diagonally. The root and all it's right nodes form level 1, the second level is root's left node and the left nodes of all the right nodes of root and so on. Example:
+```java
+            1
+         /     \
+	    2       3
+	 /     \      \
+    4       5      6
+	              / \
+				 7   10
+```
+In the above tree,<br>
+The first level would be: 1 3 6 10<br>
+The second level would be: 2 5 7<br>
+The third level would be: 4<br>
+
+For a better explanation of the problem statement refer to this image: https://media.geeksforgeeks.org/wp-content/uploads/d1-1.png
+
+This question can be solved recursively by adding nodes to a map of different diagonal levels. Let us consider we have a hashmap of the form HashMap<Integer, ArrayList<Integer>>, where the key is the level number and the value which is the array list is list of nodes on that diagonal level. So our task now is that for each level, we add values to the list in the following way:
+1. For the element on that level, add the element to the list of that level.
+2. Add the right node of the element to the same level as the element.
+3. Add the left node of the element to the next level as the element.
+4. Rapeat the process for the right and left nodes of the element.
+	
+The code is as follows:
+```java
+class Solution
+{    
+    public static void diagonalTraversal(Node root)
+    {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+        HashMap<Integer, ArrayList<Integer>> hMap = new HashMap<Integer, ArrayList<Integer>>();
+        diagonalTraversalUtil(hMap, 0, root);
+        for(int i = 0; i < hMap.size(); i++)
+        {
+            ans.add(hMap.get(i));
+        }
+        for(int i = 0; i < ans.size(); i++)
+        {
+            System.out.println(ans.get(i));
+        }
+    }
+
+    public static void diagonalTraversalUtil(HashMap<Integer, ArrayList<Integer>> hMap, int dist, Node node)
+    {
+        if(node == null)
+        {
+            return;
+        }
+        ArrayList<Integer> arr = hMap.get(dist);
+        if(arr == null)
+        {
+            arr = new ArrayList<Integer>();
+            arr.add(node.data);
+        }
+        else
+        {
+            arr.add(node.data);
+        }
+        hMap.put(dist, arr);
+        diagonalTraversalUtil(hMap, dist + 1, node.left);
+        diagonalTraversalUtil(hMap, dist, node.right);
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
+```
+
+<a href="#Contents">Back to contents</a>
 
 
 <a name="Graphs"></a>
