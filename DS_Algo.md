@@ -2623,6 +2623,19 @@ class Solution
         return root;
     }
 }
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
 ```
 <a href="#Contents">Back to contents</a>
 
@@ -2634,10 +2647,156 @@ This question differs form the previous one in the manner that it is not just th
 
 We solve such type of problems by following a post order traversal for deletion. The reason we follow a post order traversal is because it is necessary to delete the child elements of a node first before considering the removal of the node. If we follow a normal BFS traversal of the tree we would need to traverse the entire tree again and again for checking leaves, instead if we follow a post order traversal, if the leaves are deleted and we reach the root, the root automatically becomes the leaf and can be checked side by side.
 
+The code is as follows:
+```java
+class Solution
+{
+    public static Node removeShortPathNodes(Node root, int k)
+    {
+        // Utility recursive function
+        // Input is root, current level or root and
+        // the minimum length needed
+        return removeShortPathNodesUtil(root, 1, k);
+    }
+
+    public static Node removeShortPathNodesUtil(Node node, int cuurHeight, int k)
+    {
+        // If node is null so return null
+        if (node == null)
+        {
+            return null;
+        }
+        // Set left child of node recursively
+        // If left subtree satisfies the property needed
+        // then left child will remain same else it will
+        // be null
+        // Increase height by 1 before calling recursive function
+        node.left = removeShortPathNodesUtil(node.left, cuurHeight + 1, k);
+        // Do same for right child
+        node.right = removeShortPathNodesUtil(node.right, cuurHeight + 1, k);
+        // If both children are null, so check if the current node itself
+        // satisfies the condition or not
+        if (node.left == null && node.right == null && cuurHeight < k)
+        {
+            // If not return null
+            return null;
+        }
+        return node;
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
-- [Remove nodes on root to leaf paths of length < K](#TR_DeleteNodesLessLength)
-- [Remove all nodes which don’t lie in any path with sum>= k](#TR_DeleteNodesLessSum)
+<a name ="TR_DeleteNodesLessLength"></a>
+### Remove nodes on root to leaf paths of length < K
+Given a Binary Tree and a number k, remove all nodes that lie only on root to leaf path(s) of length smaller than k. If a node X lies on multiple root-to-leaf paths and if any of the paths has path length >= k, then X is not deleted from Binary Tree. In other words a node is deleted if all paths going through it have lengths smaller than k.
+```java
+class Solution
+{
+    public static Node deleteLeafNodesX(Node root, int x)
+    {
+        return removeShortPathNodesUtil(root, x);
+    }
+
+    public static Node deleteLeafNodesXUtil(Node root, int x)
+    {
+        if(root == null)
+        {
+            return null;
+        }
+        root.left = deleteLeafNodesXUtil(root.left, x);
+        root.right = deleteLeafNodesXUtil(root.right, x);
+        if(root.left == null && root.right == null && root.data == x)
+        {
+            return null;
+        }
+        return root;
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_DeleteNodesLessSum"></a>
+### Remove all nodes which don’t lie in any path with sum>= k
+Given a binary tree, a complete path is defined as a path from root to a leaf. The sum of all nodes on that path is defined as the sum of that path. Given a number K, you have to remove all nodes which don’t lie in any path with sum>=k. The question is similar to previous one and follows the same approach.
+```java
+class Solution
+{
+    public static Node removeLessSum(Node root, int sum)
+    {
+        return removeLessSumUtil(root, 0, sum);
+    }
+
+    public static Node removeLessSumUtil(Node root, int curr, int sum)
+    {
+        
+        if(root == null)
+        {
+            return root;
+        }
+        System.out.println("CALL FOR " + root.data + " when sum is " + curr);
+        root.left = removeLessSumUtil(root.left, curr + root.data, sum);
+        root.right = removeLessSumUtil(root.right, curr + root.data, sum);
+        if(root.left == null && root.right == null && root.data + curr < sum)
+        {
+            System.out.println("REMOVING " + root.data + " when sum is " + (curr + root.data));
+            return null;
+        }
+        return root;
+    }
+    
+    public static void print(Node root)  
+    {  
+        if (root != null)  
+        {  
+            print(root.left);  
+            System.out.print(root.data + " ");  
+            print(root.right);  
+        }  
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
 - [Binary Tree as array](#TR_BTAsArray)
 - [Construct binary tree from array representation](#TR_ArrayToBT)
 - [Convert a given tree to its Sum Tree](#TR_TreeToSumTree)
