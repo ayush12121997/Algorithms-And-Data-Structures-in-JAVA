@@ -87,6 +87,19 @@
 	- [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
 	- [Binary tree reverse level order traversal](#TR_RLOTraversal)
 	- [Binary tree diagnoal traversal](#TR_DTraversal)
+	- [Deletion in a binary tree](#TR_DeleteAndReplace)
+	- [Delete leaf nodes with value as x](#TR_DeleteLeafNodes)
+	- [Remove nodes on root to leaf paths of length < K](#TR_DeleteNodesLessLength)
+	- [Remove all nodes which don’t lie in any path with sum>= k](#TR_DeleteNodesLessSum)
+	- [Binary Tree as array](#TR_BTAsArray)
+	- [Construct binary tree from array representation](#TR_ArrayToBT)
+	- [Convert a given tree to its Sum Tree](#TR_TreeToSumTree)
+	- [Convert a given Binary Tree to Doubly Linked List](#TR_BTToDLL)
+	- [Lowest Common Ancestor in a Binary Tree](#TR_LCAInBT)
+	- [Diameter of Binary Tree](#TR_DiameterTree)
+	- [Height of Binary Tree](#TR_HeightTree)
+	- [Serialize and Deserialize a Binary Tree](#TR_SerializeDeserializeBT)
+	- [Symmetric Tree](#TR_SymetricTree)
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
@@ -2522,6 +2535,118 @@ class Node
 
 <a href="#Contents">Back to contents</a>
 
+<a name ="TR_DeleteAndReplace"></a>
+### Deletion in a binary tree
+Given a binary tree, delete a node from it by making sure that tree shrinks from the bottom (i.e. the deleted node is replaced by bottom most and rightmost node).
+
+This can be achieved by in a three traversal process:
+1. Traverse and storing the deepest rightmost node in the tree.
+2. We then find the node to be deleted and swap the values of the deepest node and the node to be deleted.
+3. We the find the parent of the deepest rightmost node and replace the deepest rightmost node with null.
+```java
+class Solution
+{
+    public Node deletionBT(Node root, int key)
+    {
+        Node rightMost = null;
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        while(!queue.isEmpty())
+        {
+            rightMost = queue.poll();
+            if(rightMost.left != null)
+            {
+                queue.add(rightMost.left);
+            }
+            if(rightMost.right != null)
+            {
+                queue.add(rightMost.right);
+            }
+        }
+        Node toDelete = null;
+        queue.add(root);
+        while(!queue.isEmpty())
+        {
+            toDelete = queue.poll();
+            if(toDelete.data == key)
+            {
+                break;
+            }
+            if(toDelete.left != null)
+            {
+                queue.add(toDelete.left);
+            }
+            if(toDelete.right != null)
+            {
+                queue.add(toDelete.right);
+            }
+        }
+        int temp = rightMost.data;
+        toDelete.data = temp;
+        rightMost.data = key;
+        Node parent = null;
+        queue = new LinkedList<Node>();
+        queue.add(root);
+        while(!queue.isEmpty())
+        {
+            parent = queue.poll();
+            if(parent.data == key)
+            {
+                root = null;
+                break;
+            }
+            if(parent.left != null)
+            {
+                if(parent.left.data == key)
+                {
+                    parent.left = null;
+                    break;
+                }
+                else
+                {
+                    queue.add(parent.left);
+                }
+            }
+            if(parent.right != null)
+            {
+                if(parent.right.data == key)
+                {
+                    parent.right = null;
+                    break;
+                }
+                else
+                {
+                    queue.add(parent.right);
+                }
+            }
+        }
+        return root;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_DeleteLeafNodes"></a>
+### Delete leaf nodes with value as x
+Given a binary tree and a target integer x, delete all the leaf nodes having value as x. Also, delete the newly formed leaves with the target value as x.
+
+This question differs form the previous one in the manner that it is not just the leaf node that is to be deelted, but recursively all ndoes that satisfy the condition have to be deleted until no node satisfies the given condition. This introduces a new type of tree node deletion problems, where we need to delete nodes recursively until no remaining nodes satsify the deletion condition.
+
+We solve such type of problems by following a post order traversal for deletion. The reason we follow a post order traversal is because it is necessary to delete the child elements of a node first before considering the removal of the node. If we follow a normal BFS traversal of the tree we would need to traverse the entire tree again and again for checking leaves, instead if we follow a post order traversal, if the leaves are deleted and we reach the root, the root automatically becomes the leaf and can be checked side by side.
+
+<a href="#Contents">Back to contents</a>
+
+- [Remove nodes on root to leaf paths of length < K](#TR_DeleteNodesLessLength)
+- [Remove all nodes which don’t lie in any path with sum>= k](#TR_DeleteNodesLessSum)
+- [Binary Tree as array](#TR_BTAsArray)
+- [Construct binary tree from array representation](#TR_ArrayToBT)
+- [Convert a given tree to its Sum Tree](#TR_TreeToSumTree)
+- [Convert a given Binary Tree to Doubly Linked List](#TR_BTToDLL)
+- [Lowest Common Ancestor in a Binary Tree](#TR_LCAInBT)
+- [Diameter of Binary Tree](#TR_DiameterTree)
+- [Height of Binary Tree](#TR_HeightTree)
+- [Serialize and Deserialize a Binary Tree](#TR_SerializeDeserializeBT)
+- [Symmetric Tree](#TR_SymetricTree)
 
 <a name="Graphs"></a>
 ## <p align="center"> Graphs </p>
