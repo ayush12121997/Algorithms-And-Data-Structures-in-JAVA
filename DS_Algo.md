@@ -1,5 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
+### 3038
+
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
 1. [Reader class](#ReaderClass)
@@ -91,10 +93,9 @@
 	- [Delete leaf nodes with value as x](#TR_DeleteLeafNodes)
 	- [Remove nodes on root to leaf paths of length < K](#TR_DeleteNodesLessLength)
 	- [Remove all nodes which don’t lie in any path with sum>= k](#TR_DeleteNodesLessSum)
-	- [Binary Tree as array](#TR_BTAsArray)
 	- [Construct binary tree from array representation](#TR_ArrayToBT)
 	- [Convert a given tree to its Sum Tree](#TR_TreeToSumTree)
-	- [Convert a given Binary Tree to Doubly Linked List](#TR_BTToDLL)
+	- [Convert a Binary Tree to DLL](#TR_BTToDLL)
 	- [Lowest Common Ancestor in a Binary Tree](#TR_LCAInBT)
 	- [Diameter of Binary Tree](#TR_DiameterTree)
 	- [Height of Binary Tree](#TR_HeightTree)
@@ -2797,12 +2798,245 @@ class Node
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Binary Tree as array](#TR_BTAsArray)
+<a name ="TR_ArrayToBT"></a>
+### Construct binary tree from array representation
+Given an array that represents a tree in such a way that array indexes are values in tree nodes and array values give the parent node of that particular index (or node). The value of the root node index would always be -1 as there is no parent for root. Construct the standard linked representation of given Binary Tree from this given representation.
 
-- [Construct binary tree from array representation](#TR_ArrayToBT)
-- [Convert a given tree to its Sum Tree](#TR_TreeToSumTree)
-- [Convert a given Binary Tree to Doubly Linked List](#TR_BTToDLL)
-- [Lowest Common Ancestor in a Binary Tree](#TR_LCAInBT)
+For exmaple for the array { 1, 5, 5, 2, 2, -1, 3 } the tree would look like:
+```java
+          5
+        /  \
+       1    2
+      /    / \
+     0    3   4
+         /
+        6 
+```
+We can solve this problem in a simple iterative manner. All we would need is to store the nodes that we create along the way. Lets say we have a map that stores the array index as key and the node for that index as the value for the hashmap key. Let us say the input array is called parent[].
+1. Traverse the parent[] array element by element. For every index check if the map contains the index. If map does not contain the index 'i', then create node for 'i' and add it to the map. The node would have the value as parent[i]. If map already contained index 'i' then move to next element.
+2. If the parent[i] was -1, in that case make sure you also mark the root to be equal to map.get(i).
+3. If the parent[i] was not -1, then search for the parent's index in the map. If the parent's index does not exist, so create the parent index's node and add the child element node to its left subchild. Else if the parent's index node exists already so check for a vacant child node and add the child element there.
+
+The code is as follows:
+```java
+class Solution
+{
+    public static Node createTree(int[] parent)
+    {
+        int n = parent.length;
+        Node root = null;
+        HashMap<Integer, Node> hMap = new HashMap<Integer, Node>();
+        for(int i = 0; i < n; i++)
+        {
+            Node newNode = null;
+            if(!hMap.containsKey(i))
+            {
+                newNode = new Node(i);
+                hMap.put(i, newNode);
+            }
+            else
+            {
+                newNode = hMap.get(i);
+            }
+            if(parent[i] == -1)
+            {
+                root = newNode;
+            }
+            else if(!hMap.containsKey(parent[i]))
+            {
+                Node p = new Node(parent[i]);
+                p.left = newNode;
+                hMap.put(parent[i], p);
+            }
+            else
+            {
+                Node p = hMap.get(parent[i]);
+                if(p.left == null)
+                {
+                    p.left = newNode;
+                }
+                else
+                {
+                    p.right = newNode;
+                }
+            }
+        }
+        return root;
+    }
+
+    public static void inorder(Node root)
+    {
+        if (root != null)
+        {
+            inorder(root.left);
+            System.out.print(root.data + " ");
+            inorder(root.right);
+        }
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_TreeToSumTree"></a>
+### Convert a given tree to its sum tree
+Given a Binary Tree where each node has positive and negative values. Convert this to a tree where each node contains the sum of the left and right sub trees in the original tree. The values of leaf nodes are changed to 0.
+
+If original tree is:
+```java
+                  10
+               /      \
+             -2        6
+           /   \      /  \ 
+         8     -4    7    5
+```
+It would become:
+```java
+                 20=4-2+12+6
+               /      \
+           4=8-4     12=7+5
+           /   \      /  \ 
+         0      0    0    0
+```
+Note that once a child takes values from the sum of leaf nodes, its original value is still considered when calculating sum for parent node.
+
+This is a very trivial question that can be solved recursively. For every node we store its orgiinal value and then update the value as sum of left and right subtrees. Then, the new value + original value are returned in further recursive calls. We basically follow a bottoms up building approach recursively. Steps:
+1. Do a traversal of the given tree. In the traversal, store the old value of the current node.
+2. Recursively call for left and right subtrees.
+3. Change the value of current node as sum of the values returned by the recursive calls
+
+The code is as follows:
+```java
+class Solution
+{
+    public void toSumTree(Node root)
+    {
+        sumTree(root);
+    }
+    
+    public int sumTree(Node root)
+    {
+        if(root == null)
+        {
+            return 0;
+        }
+        int value = root.data;
+        root.data = sumTree(root.left) + sumTree(root.right);
+        return root.data + value; 
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_BTToDLL"></a>
+### Convert a Binary Tree to DLL
+We can covnert a binary tree to its DLL representation very easily. A DLL is a doubly linked list and a binary tree node can be represented as a DLL node by simply putting the DLL previous as binary tree's left and DLL's next as binary tree's right. This way a BTree can be converted into a DLL easily.
+```java
+             10
+          /      \
+         2        6
+       /   \     /  \ 
+      8     4   7    5
+```
+For the tree above converting it into a DLL ould have the following process.
+1. First add root, 10.<br>
+DLL: 10
+2. Now, the left element is 2 and right is 6. So link them accordingly.<br>
+DLL: 2 <--> 10 <--> 6
+3. For, 2, we connect it to 8 and 4 recursively.<br>
+DLL: 8 <--> 2 <--> 4 <--> 10 <--> 6
+4. Repeat same process fro children of 6.<br>
+DLL: 8 <--> 2 <--> 4 <--> 10 <--> 7 <--> 6 <--> 5
+
+Looking deeper into the algorithm discussed, we can notice that simlpy getting the inorder traversal of the tree and then froming a DLL out of it would do trick. The code is trivial and hence not covered in detail.
+
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_LCAInBT"></a>
+### Lowest Common Ancestor in a Binary Tree
+Given a binary tree (not a binary search tree) and two values say n1 and n2, write a program to find the least common ancestor.
+
+If say only one of the elemments exist in the tree, in that case the lowest common ancestor would be the respective element itself.
+
+We traverse the tree starting form the root and look for the given elements in the left and right subtrees recursively. The node which has one element in its right subtree and one in its left subtree is the LCA. If no such node exists then following three conditions might be possible:
+1. Root is one of the elements. In this case, root is the answer.
+2. Only one element is present. In this case, the element present is the answer.
+3. None of the elements are present. In this case, the answer is null.
+```java
+class Solution
+{
+    public static Node lowestCommonAncestor(Node root, int n1, int n2)
+    {
+        // If given element is null so return null
+        if(root == null)
+        {
+            return null;
+        }
+        // If the element matches either of the given inputs
+        // return the element itself
+        if(root.data == n1 || root.data == n2)
+        {
+            return root;
+        }
+        // If the element is present in left subtree
+        // the this value 'left' would hold a node
+        // else the function call will return null
+        Node left = lca(root.left, n1, n2);
+        // If the element is present in right subtree
+        // the this value 'right' would hold a node
+        // else the function call will return null
+        Node right = lca(root.right, n1, n2);
+        // If both left and right are not null
+        // then this node is our answer as its
+        // left and right subtrees have the values
+        if(left != null && right != null)
+        {
+            return root;
+        }
+        // If only left is not null, then left is the
+        // answer as only one element is present
+        if(left != null)
+        {
+            return left;
+        }
+        // If only right is not null, then right is the
+        // answer as only one element is present
+        else
+        {
+            return right;
+        }
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
 - [Diameter of Binary Tree](#TR_DiameterTree)
 - [Height of Binary Tree](#TR_HeightTree)
 - [Serialize and Deserialize a Binary Tree](#TR_SerializeDeserializeBT)
