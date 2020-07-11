@@ -2798,6 +2798,7 @@ class Node
 <a href="#Contents">Back to contents</a>
 
 - [Binary Tree as array](#TR_BTAsArray)
+
 - [Construct binary tree from array representation](#TR_ArrayToBT)
 - [Convert a given tree to its Sum Tree](#TR_TreeToSumTree)
 - [Convert a given Binary Tree to Doubly Linked List](#TR_BTToDLL)
