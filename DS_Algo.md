@@ -3037,10 +3037,226 @@ class Node
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Diameter of Binary Tree](#TR_DiameterTree)
-- [Height of Binary Tree](#TR_HeightTree)
-- [Serialize and Deserialize a Binary Tree](#TR_SerializeDeserializeBT)
-- [Symmetric Tree](#TR_SymetricTree)
+<a name ="TR_DiameterTree"></a>
+### Diameter of Binary Tree
+The diameter of a tree is the number of nodes on the longest path between two leaves in the tree. Our task is to find the diameter given the root.
+
+We can achieve this by simple recursive tree traversal by recursively checking at each node for the following:
+1. Length of maximum path length in subtree rooted at node, such that node is necessarily included.
+2. Diameter in left subtree of node.
+3. Diameter in right subtree of node.
+
+The diameter for the node would be the maximum of the above three options fo any node. We repeat this process recursively for all the nodes. To implement this algorithm we take the following steps:
+1. Maintain a global variable as 'answer' that represents our diameter.
+2. For any node on which we are, get the maximum path length including the node. This is equal to height of left subtree of node + height of right subtree of node + 1 for the node itself.
+3. Now this maximum path might form the new largest diameter so we check for the maximum of current 'answer' and the new maxlegnth at given node. The max of the two form the new 'answer'.
+4. The above steps are ventualy repeted in recursive calls, giving us the final diameter as the value of the variable 'answer'.
+```java
+class Solution
+{
+    static int ans = 0;
+    public static int diameter(Node root)
+    {
+        ans = 0;
+        if(root == null)
+        {
+            return 0;
+        }
+        getHeight(root);
+        return ans;
+    }
+    
+    public static int getHeight(Node root)
+    {
+        if(root == null)
+        {
+            return 0;
+        }
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+        ans = Math.max(ans, left + right + 1);
+        return Math.max(left, right) + 1;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_HeightTree"></a>
+### Height of Binary Tree
+Given a binary tree, find its height. Height of a binary tree with only the root element is 1. The code is very simple and similar to the previous problem of following the diameter. The height of any node will be equal to 1 + maximum of height of left subtree and height of right subtree.
+```java
+class Solution
+{
+    int height(Node root)
+    {
+        if(root == null)
+        {
+            return 0;
+        }
+        int left = height(root.left);
+        int right = height(root.right);
+        return Math.max(left, right) + 1;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_SerializeDeserializeBT"></a>
+### Serialize and Deserialize a Binary Tree
+Serialization means to store the structure of something in a format different and simpler than the structure itself. Here serialization of tree means converting it into an array format and deserialization would mean reconstructing the tree from the serialized array.
+
+There are various scenarios that can be encoutered for serializing trees:
+1. **If given Binary Tree is Complete Tree:** A Binary Tree is complete if all levels are completely filled except possibly the last level and all nodes of last level are as left as possible, level order traversal is sufficient to store the tree. We know that the first node is root, next two nodes are nodes of next level, next four nodes are nodes of 2nd level and so on.
+2. **If given Binary Tree is Full Tree:** A full binary tree is where every node has either 0 or 2 children. It is easy to serialize such trees as every internal node necessarily has 2 children. We can simply store preorder traversal of the tree with every null node being denoted by a special value, say -1. This way even when desrializing every time we would encounter -1 we would know we do not need to add a new node and move to the next element in order.
+3. **If the tree is neither full nor complete:** To serialize the tree we can use both inorder and preorder traversals of the tree as we can build the tree back using the two. This method eventually requires O(2N) space and O(2N) complexity for both serialization and desrialization. We can speed this up by converting the preorder traversal of the tree to match the one as mentioned in point 2, that is that of a full tree. Every time we encounter a null node as the child of a node in our preorder traversal, we add '-1' to the preorder traversal answer. This way in a single iteration and approcimately O(N) space we can store the serialized array and similarly in O(N) space and time we can covnert the arrray back into the tree as discussed in step two. The process is depicted in detail in the code below:
+```java
+class Solution
+{
+    // A pointer for the preOrder array used in
+    // deserialization
+    static int p = 0;
+
+    // serialization function. Exactly same as the preOrder traversal
+    // except for the line where we add '-1' for null nodes.
+    public static ArrayList<Integer> serializeTree(Node root)
+    {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        Stack<Node> stack = new Stack<Node>();
+        Node curr = root;
+        while(curr != null || !stack.isEmpty())
+        {
+            // The node curr is not null here
+            while(curr != null)
+            {
+                ans.add(curr.data);
+                stack.push(curr);
+                curr = curr.left;
+            }
+            // When we reach this point we know now we have either traversed
+            // to a null node, or the node curr was originally null itself
+            // and never entered into the above while loop. In either of the
+            // cases we would add '-1' to our preOrder traversal. We would do
+            // this because if ndoe was not originally null, then this means
+            // we have reached a null left child of some parent. And if the
+            // node was already null then it means it was the null right child
+            // of some parent.
+            ans.add(-1);
+            curr = stack.pop();
+            curr = curr.right;
+        }
+        return ans;
+    }
+
+    // Input is the serialized preOrder array
+    public static Node deserializeTree(ArrayList<Integer> arr)
+    {
+        // Set initial pointer of the preOrder array as 0.
+        p = 0;
+        return deserializeTree(arr);
+    }
+
+    // Input is the serialized preOrder array
+    // Remember preOrder format is ROOT, LEFT, RIGHT
+    public static Node deserializeTreeUtil(ArrayList<Integer> arr)
+    {
+        // If pointer has crossed array size or the pointer pointed to
+        // a null node so we return null
+        if(arr.size() <= p || arr.get(p) == -1)
+        {
+            // As it might be possible pointer points to a null node
+            // and not necessarily has crossed the array length, so we
+            // need to increase it for further iterations
+            p++;
+            return null;   
+        }
+        // Node root is initialized with value in the preOrder array
+        Node root = new Node(arr.get(p));
+        // Pointer is moved forward to next node
+        p++;
+        // We know that from preOrder fromat, the next node is left child
+        // Now the pointer points to the next node in the preOrder array
+        // and hence the desrialized left subtree would be added to root.left
+        root.left = deserializeTree(arr);
+        // When the above recursive call completes, the pointer would have
+        // itself reached the point of the right child of the original node.
+        // Hence we dont need to increase its value again.
+        root.right = deserializeTree(arr);
+        // Return the root, this return tree's root in case of first
+        // call and the root's of subtrees in case of recursive calls.
+        return root;
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_SymetricTree"></a>
+### Symmetric Tree
+Given a Binary Tree. Check whether it is Symmetric or not, i.e. whether the binary tree is a Mirror image of itself or not.
+
+We simply need to iterate both the normal version and mirrored version of the tree together and check that whether or not nodes at every point are same. The code is easy to understand and hence detailed explanations of the workings have been opted out.
+```java
+class Solution
+{
+    public boolean isSymmetric(Node root)
+    {
+        // Add the root two times to the queue. We will
+        // add nodes in such a saw as if we are traversing
+        // the tree normalyl and its mirror side by side. 
+        // Hence root is added twice as in both normal
+        // and mirrored iteration, root comes first.
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        queue.add(root);
+        while (!queue.isEmpty())
+        {
+            // Get two heads
+            Node t1 = queue.poll();
+            Node t2 = queue.poll();
+            // If both heads null so move to next
+            if (t1 == null && t2 == null)
+            {
+                continue;
+            }
+            // If either one is null so return false
+            // as not equal
+            if (t1 == null || t2 == null)
+            {
+                return false;
+            }
+            // If values dont match so return false
+            if (t1.val != t2.val)
+            {
+                return false;
+            }
+            // Now in normal iteration we would put first
+            // head's left and hence in mirrored it's opposite
+            // would be right of the other head.
+            queue.add(t1.left);
+            queue.add(t2.right);
+            // Now when we put right of first head. its opposite
+            // would be the left of second head.
+            queue.add(t1.right);
+            queue.add(t2.left);
+        }
+        return true;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
 
 <a name="Graphs"></a>
 ## <p align="center"> Graphs </p>
