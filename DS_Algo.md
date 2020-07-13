@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 3480
+### 3590
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -3476,7 +3476,112 @@ Binary Search Tree, is a node-based binary tree which has the following properti
 
 The above properties of Binary Search Tree provide an ordering among keys so that the operations like search, minimum and maximum can be done fast. If there is no ordering, then we may have to compare every key to search a given key.
 
+**Searching:**<br>
+Searching in a BST is similar to binary search in an array. At every step we reduce the current search space to n/2. In a binary tree as we know elements are smaller in the left subtree and bigger in the right subtree, we can search accordingly.
 
+**Insertion:**<br>
+Insertion in a BST is modified version of searching. We basically search for the value we wish to insert and as soon as we reach a null node we insert the value at the position of the null node. We do this because while searching if we reach a null ndoe, that means, the value if present was expected to be at that position. Hence, we insert it there.
+
+**Deletion:**<br>
+Deletion in binary tree can have the following 4 cases:
+1. <ins>The node to be deleted is leaf node</ins>: Simply make the leaf node null.
+2. <ins>The node to be deleted has only one child</ins>: Replace the child with the node value. Delete the new child now, which is the original node.
+3. <ins>The node has 2 children</ins>: In this case as the BST needs to be arranged in a particular manner that is left subtree should have smaller elements and right subtree should have greater elements, we replace the node with either the biggest element of the left subtree or the smallest element of the right subtree. And then delete the node from the new replaced position.
+4. <ins>The node to be deleted does not exist</ins>: In this case the tree is returned as it is.
+```java
+class Solution
+{
+    public boolean search(int x, Node root)
+    {
+        if(root == null)
+        {
+            return false;
+        }
+        else if(root.data == x)
+        {
+            return true;
+        }
+        else if(x < root.data)
+        {
+            return search(x, root.left);
+        }
+        else
+        {
+            return search(x, root.right);
+        }
+    }
+
+    public void insert(int x, Node root)
+    {
+        if(root == null)
+        {
+            root = new Node(x);
+        }
+        if(x > root.data)
+        {
+            insert(x, root.right);
+        }
+        if(x < root.data)
+        {
+            insert(x, root.left);
+        }
+    }
+	
+	public static Node deleteNode(Node root, int x)
+    {
+        if(root == null)
+        {
+            return null;
+        }
+        if(x == root.data)
+        {
+            if(root.left == null)
+            {
+                return root.right;
+            }
+            else if(root.right == null)
+            {
+                return root.left;
+            }
+            else
+            {
+                Node minNode = root.right;
+                int min = minNode.data;
+                while(minNode != null)
+                {
+                    min = minNode.data;
+                    minNode = minNode.left;
+                }
+                root.data = min;
+                root.right = deleteNode(root.right, min);
+            }
+        }
+        else if(x > root.data)
+        {
+            root.right = deleteNode(root.right, x);
+        }
+        else
+        {
+            root.left = deleteNode(root.left, x);
+        }
+        return root;
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="Graphs"></a>
