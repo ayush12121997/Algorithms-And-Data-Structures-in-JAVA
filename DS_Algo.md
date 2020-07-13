@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 3266
+### 3480
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -90,6 +90,7 @@
 	- [Binary tree reverse level order traversal](#TR_RLOTraversal)
 	- [Binary tree diagnoal traversal](#TR_DTraversal)
 	- [Deletion in a binary tree](#TR_DeleteAndReplace)
+	- [Recursion in a tree](#TR_Recursion)
 	- [Delete leaf nodes with value as x](#TR_DeleteLeafNodes)
 	- [Remove nodes on root to leaf paths of length < K](#TR_DeleteNodesLessLength)
 	- [Remove all nodes which don’t lie in any path with sum>= k](#TR_DeleteNodesLessSum)
@@ -2643,6 +2644,15 @@ class Node
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name ="TR_Recursion"></a>
+### Recursion in a tree
+As a rule one may follow:
+1. If recursion is to build the tree, follow a preOrder format, that is create the root first and then add children.
+2. If recursion is to delete the nodes of a tree then follow the postOrder format that is delete the children first and ony then the parent.
+3. If recursion is to neither build a tree nor delete nodes, but to replicate the structure of thee tree such as convert tree to linked list/ convert tree to array/ serializing a tree, always follow the preOrder format.
+
+<a href="#Contents">Back to contents</a>
+
 <a name ="TR_DeleteLeafNodes"></a>
 ### Delete leaf nodes with value as x
 Given a binary tree and a target integer x, delete all the leaf nodes having value as x. Also, delete the newly formed leaves with the target value as x.
@@ -3263,16 +3273,209 @@ class Solution
 
 <a name ="TR_TreeFromBracket"></a>
 ### Construct Binary Tree from String with bracket representation
+Construct a binary tree from a string consisting of parenthesis and integers. The whole input represents a binary tree. Output the tree in it's preorder form. It contains an integer followed by zero, one or two pairs of parenthesis. The integer represents the root’s value and a pair of parenthesis contains a child binary tree with the same structure.
 
+An example would be:
+```java
+Input : "4(2(3)(1))(6(5))"
+Output : 4 2 3 1 6 5
+Explanation :
+           4
+         /   \
+        2     6
+       / \   / 
+      3   1 5   
+```
+We can solve this question recursively by building the root first and then recursively building the left and right child and repeating the process until all nodes have been created. The process is simple:
+1. If string is empty, return null else the first number of string forms the root.
+2. If the next character in string is '(' then that means root has a left child. Iterate the string to the point where you find a closing bracket for the original '('. This can be done easily using stack.<br>
+Once the closing brackt has been found, call the recursive function again for the string between opening and closing brackets. The subtree formed would be the left subtree of the root.
+3. If the next character in string is '(' after the last ')' for the left subtree, then that means root has a right child as well. Iterate the string to the point where you find a closing bracket for the original '(' of the right child. This can be done easily using stack.<br>
+Once the closing brackt has been found, call the recursive function again for the string between opening and closing brackets. The subtree formed would be the right subtree of the root.
+4. Once both the children have been checked, return the root.
+
+NOTE: If the left child is null and right child is not null then representation is of the form rootNode()(leftChild). Instead, if right child is null and left is not null then empty brackets are not used, and is represented as rootNode(leftChild).
+```java
+class Solution
+{
+    public Node convertToBinaryTree(String s)
+    {
+        return convertToBinaryTreeUtil(s.toCharArray(), 0);
+    }
+
+    public Node convertToBinaryTreeUtil(char[] arr, int start)
+    {
+        // Check for empty string or end of string
+        if(arr.length == 0 || start >= arr.length)
+        {
+            return null;
+        }
+        // Create root with first character
+        Node root = new Node(Integer.parseInt(Character.toString(arr[start])));
+        // Index that denotes the ending bracket position
+        int leftIndex = -1;
+        // Check if left child exists
+        if(arr[start + 1] == '(')
+        {
+            leftIndex = start + 1;
+        }
+        else
+        {
+            return root;
+        }
+        // Stack to check parentheses
+        Stack<Integer> stack = new Stack<Integer>();
+        stack.push(1);
+        // Iterate till the point we find valid closing bracket
+        while(!stack.isEmpty())
+        {
+
+            leftIndex++;
+            if(arr[leftIndex] == ')')
+            {
+                stack.pop();
+            }
+            else if(arr[leftIndex] == '(')
+            {
+                stack.push(1);
+            }
+        }
+        // If closing bracket is just after the opening bracket,
+        // it means left child is null
+        if(leftIndex == start + 2)
+        {
+            root.left = null;
+        }
+        else
+        {
+            // Recursively call for left subtree, with root at start + 2
+            // start + 1 is '(', hence start + 2
+            root.left = convertToBinaryTreeUtil(arr, start + 2);
+        }
+        // Index denoting ending bracket position for right tree
+        int rightIndex = leftIndex;
+        if(arr[rightIndex + 1] == '(')
+        {
+            rightIndex++;
+        }
+        else
+        {
+            return root;
+        }
+        stack.push(1);
+        // Iterate to find valid ending for right subtree
+        while(!stack.isEmpty())
+        {
+
+            rightIndex++;
+            if(arr[rightIndex] == ')')
+            {
+                stack.pop();
+            }
+            else if(arr[rightIndex] == '(')
+            {
+                stack.push(1);
+            }
+        }
+        // Recursively call for right subtree, with root at leftIndex + 2
+        // leftIndex + 1 is '(', hence leftIndex + 2
+        root.right = convertToBinaryTreeUtil(arr, leftIndex + 2);
+        return root;
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name ="TR_BracketFromTree"></a>
 ### Construct String with bracket representation from Binary Tree
+You need to construct a string consists of parenthesis and integers from a binary tree with the preorder traversing way. The null node needs to be represented by empty parenthesis pair "()" if only left child is null and omitted if both children are null or if only the right child is null.
+```java
+       1
+     /   \
+    2     3
+     \  
+      4 
 
+Output: "1(2()(4))(3)"
+```
+We follow the recursive process similar to the previous question:
+1. If root is not null so add the root nodes data to the String 'main'.
+2. If left and right child are null return main as answer.
+3. Initialise String 'left' as "()" and String 'right' as "". The reason 'left' is not empty is because if right child is not null, we would need to represnt a null left child as "()".
+3. Recursively check for right and left subtrees if they are not null.
+4. Finally return 'main' + 'left' + 'right'.
+```java
+class Solution
+{
+    public String convertToBracketString(Node root)
+    {
+        return convertToBracketStringUtil(root);
+    }
+
+    public String convertToBracketStringUtil(Node root)
+    {
+        if(root == null)
+        {
+            return "";
+        }
+        String main = Integer.toString(root.data);
+        String left = "()";
+        String right = "";
+        if(root.left == null && root.right == null)
+        {
+            return main;
+        }
+        if(root.left != null)
+        {
+            left = "(" + convertToBracketStringUtil(root.left) + ")";
+        }
+        if(root.right != null)
+        {
+            right = "(" + convertToBracketStringUtil(root.right) + ")";
+        }
+        return main + left + right;
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name ="TR_BST"></a>
 ### Binary Search Tree
+Binary Search Tree, is a node-based binary tree which has the following properties:
+1. The left subtree of a node contains only nodes with values lesser than the root's value.
+2. The right subtree of a node contains only nodes with values greater than the root's value.
+3. The left and right subtree each must also be a binary search tree. There must be no duplicate nodes.
+
+The above properties of Binary Search Tree provide an ordering among keys so that the operations like search, minimum and maximum can be done fast. If there is no ordering, then we may have to compare every key to search a given key.
+
 
 <a href="#Contents">Back to contents</a>
 
