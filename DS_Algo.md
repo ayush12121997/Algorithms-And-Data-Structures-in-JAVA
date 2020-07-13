@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 3038
+### 3266
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -101,6 +101,9 @@
 	- [Height of Binary Tree](#TR_HeightTree)
 	- [Serialize and Deserialize a Binary Tree](#TR_SerializeDeserializeBT)
 	- [Symmetric Tree](#TR_SymetricTree)
+	- [Construct Binary Tree from String with bracket representation](#TR_TreeFromBracket)
+	- [Construct String with bracket representation from Binary Tree](#TR_BracketFromTree)
+	- [Binary Search Tree](#TR_BST)
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
@@ -3256,6 +3259,21 @@ class Solution
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_TreeFromBracket"></a>
+### Construct Binary Tree from String with bracket representation
+
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_BracketFromTree"></a>
+### Construct String with bracket representation from Binary Tree
+
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_BST"></a>
+### Binary Search Tree
+
 <a href="#Contents">Back to contents</a>
 
 <a name="Graphs"></a>
