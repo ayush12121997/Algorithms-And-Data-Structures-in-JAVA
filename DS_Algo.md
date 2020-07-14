@@ -2399,13 +2399,13 @@ Here we are required to print the level order traversal of a tree in reverse ord
 
 This can be achieved using a stack. Values added to stack are put in a LIFO order that is the element put in last would be taken out first. o if for every level we were to put values in a right to left order till the very last level, we would eventually be pulling out values in left to right order starting from the last level. This is exactly what is needed. For example for three below:
 ```java
-            1
-         /     \
-	    2       3
-	 /     \      \
-    4       5      6
-	              /
-				 7
+          1
+        /   \
+       2     3
+      / \     \
+     4   5     6
+              /
+             7
 ```
 The stack would be filled like this by traversing the tree level by level from right to left:
 1 3 2 6 5 4 7
