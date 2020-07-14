@@ -2665,6 +2665,48 @@ The code is as follows:
 ```java
 class Solution
 {
+    public static Node deleteLeafNodesX(Node root, int x)
+    {
+        return removeShortPathNodesUtil(root, x);
+    }
+
+    public static Node deleteLeafNodesXUtil(Node root, int x)
+    {
+        if(root == null)
+        {
+            return null;
+        }
+        root.left = deleteLeafNodesXUtil(root.left, x);
+        root.right = deleteLeafNodesXUtil(root.right, x);
+        if(root.left == null && root.right == null && root.data == x)
+        {
+            return null;
+        }
+        return root;
+    }
+}
+
+// Class node for forming the tree
+class Node
+{
+    int data = 0;
+    Node right = null;
+    Node left = null;
+
+    public Node(int v)
+    {
+        data = v;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_DeleteNodesLessLength"></a>
+### Remove nodes on root to leaf paths of length < K
+Given a Binary Tree and a number k, remove all nodes that lie only on root to leaf path(s) of length smaller than k. If a node X lies on multiple root-to-leaf paths and if any of the paths has path length >= k, then X is not deleted from Binary Tree. In other words a node is deleted if all paths going through it have lengths smaller than k.
+```java
+class Solution
+{
     public static Node removeShortPathNodes(Node root, int k)
     {
         // Utility recursive function
@@ -2714,48 +2756,6 @@ class Node
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name ="TR_DeleteNodesLessLength"></a>
-### Remove nodes on root to leaf paths of length < K
-Given a Binary Tree and a number k, remove all nodes that lie only on root to leaf path(s) of length smaller than k. If a node X lies on multiple root-to-leaf paths and if any of the paths has path length >= k, then X is not deleted from Binary Tree. In other words a node is deleted if all paths going through it have lengths smaller than k.
-```java
-class Solution
-{
-    public static Node deleteLeafNodesX(Node root, int x)
-    {
-        return removeShortPathNodesUtil(root, x);
-    }
-
-    public static Node deleteLeafNodesXUtil(Node root, int x)
-    {
-        if(root == null)
-        {
-            return null;
-        }
-        root.left = deleteLeafNodesXUtil(root.left, x);
-        root.right = deleteLeafNodesXUtil(root.right, x);
-        if(root.left == null && root.right == null && root.data == x)
-        {
-            return null;
-        }
-        return root;
-    }
-}
-
-// Class node for forming the tree
-class Node
-{
-    int data = 0;
-    Node right = null;
-    Node left = null;
-
-    public Node(int v)
-    {
-        data = v;
-    }
-}
-```
-<a href="#Contents">Back to contents</a>
-
 <a name ="TR_DeleteNodesLessSum"></a>
 ### Remove all nodes which don’t lie in any path with sum>= k
 Given a binary tree, a complete path is defined as a path from root to a leaf. The sum of all nodes on that path is defined as the sum of that path. Given a number K, you have to remove all nodes which don’t lie in any path with sum>=k. The question is similar to previous one and follows the same approach.
@@ -2774,12 +2774,10 @@ class Solution
         {
             return root;
         }
-        System.out.println("CALL FOR " + root.data + " when sum is " + curr);
         root.left = removeLessSumUtil(root.left, curr + root.data, sum);
         root.right = removeLessSumUtil(root.right, curr + root.data, sum);
         if(root.left == null && root.right == null && root.data + curr < sum)
         {
-            System.out.println("REMOVING " + root.data + " when sum is " + (curr + root.data));
             return null;
         }
         return root;
@@ -2826,7 +2824,7 @@ For exmaple for the array { 1, 5, 5, 2, 2, -1, 3 } the tree would look like:
         6 
 ```
 We can solve this problem in a simple iterative manner. All we would need is to store the nodes that we create along the way. Lets say we have a map that stores the array index as key and the node for that index as the value for the hashmap key. Let us say the input array is called parent[].
-1. Traverse the parent[] array element by element. For every index check if the map contains the index. If map does not contain the index 'i', then create node for 'i' and add it to the map. The node would have the value as parent[i]. If map already contained index 'i' then move to next element.
+1. Traverse the parent[] array element by element. For every index check if the map contains the index. If map does not contain the index 'i', then create node for 'i' and add it to the map. The node would have the value as i (Node n = new Node(i)). If map already contained index 'i' then move to next element.
 2. If the parent[i] was -1, in that case make sure you also mark the root to be equal to map.get(i).
 3. If the parent[i] was not -1, then search for the parent's index in the map. If the parent's index does not exist, so create the parent index's node and add the child element node to its left subchild. Else if the parent's index node exists already so check for a vacant child node and add the child element there.
 
@@ -3004,11 +3002,11 @@ class Solution
         {
             return root;
         }
-        // If the element is present in left subtree
+        // If the elements are present in left subtree
         // the this value 'left' would hold a node
         // else the function call will return null
         Node left = lca(root.left, n1, n2);
-        // If the element is present in right subtree
+        // If the elements are present in right subtree
         // the this value 'right' would hold a node
         // else the function call will return null
         Node right = lca(root.right, n1, n2);
@@ -3048,6 +3046,9 @@ class Node
     }
 }
 ```
+
+Another method to do this can be we find and store the path to both the nodes in the tree. If only one node is found the the other node automatically becomes the answer. Else, both the paths will initially have certain number of common elements. The element, just before the first different element is the LCA.
+
 <a href="#Contents">Back to contents</a>
 
 <a name ="TR_DiameterTree"></a>
@@ -3071,10 +3072,6 @@ class Solution
     public static int diameter(Node root)
     {
         ans = 0;
-        if(root == null)
-        {
-            return 0;
-        }
         getHeight(root);
         return ans;
     }
@@ -3119,9 +3116,9 @@ class Solution
 Serialization means to store the structure of something in a format different and simpler than the structure itself. Here serialization of tree means converting it into an array format and deserialization would mean reconstructing the tree from the serialized array.
 
 There are various scenarios that can be encoutered for serializing trees:
-1. **If given Binary Tree is Complete Tree:** A Binary Tree is complete if all levels are completely filled except possibly the last level and all nodes of last level are as left as possible, level order traversal is sufficient to store the tree. We know that the first node is root, next two nodes are nodes of next level, next four nodes are nodes of 2nd level and so on.
+1. **If given Binary Tree is Complete Tree:** A Binary Tree is complete if all levels are completely filled except possibly the last level and all nodes of last level are as left as possible. In this case level order traversal is sufficient to store the tree. We know that the first node is root, next two nodes are nodes of next level, next four nodes are nodes of 2nd level and so on.
 2. **If given Binary Tree is Full Tree:** A full binary tree is where every node has either 0 or 2 children. It is easy to serialize such trees as every internal node necessarily has 2 children. We can simply store preorder traversal of the tree with every null node being denoted by a special value, say -1. This way even when desrializing every time we would encounter -1 we would know we do not need to add a new node and move to the next element in order.
-3. **If the tree is neither full nor complete:** To serialize the tree we can use both inorder and preorder traversals of the tree as we can build the tree back using the two. This method eventually requires O(2N) space and O(2N) complexity for both serialization and desrialization. We can speed this up by converting the preorder traversal of the tree to match the one as mentioned in point 2, that is that of a full tree. Every time we encounter a null node as the child of a node in our preorder traversal, we add '-1' to the preorder traversal answer. This way in a single iteration and approcimately O(N) space we can store the serialized array and similarly in O(N) space and time we can covnert the arrray back into the tree as discussed in step two. The process is depicted in detail in the code below:
+3. **If the tree is neither full nor complete:** To serialize the tree we can use both inorder and preorder traversals of the tree as we can build the tree back using the two. This method eventually requires O(2N) space and O(2N) complexity for both serialization and desrialization. We can speed this up by converting the preorder traversal of the tree to match the one as mentioned in point 2, that is that of a full tree. Every time we encounter a null node as the child of a node in our preorder traversal, we add '-1' to the preorder traversal answer. This way in a single iteration and approximately O(N) space we can store the serialized array and similarly in O(N) space and time we can covnert the arrray back into the tree as discussed in step two. The process is depicted in detail in the code below:
 ```java
 class Solution
 {
@@ -3526,8 +3523,8 @@ class Solution
             insert(x, root.left);
         }
     }
-	
-	public static Node deleteNode(Node root, int x)
+
+    public static Node deleteNode(Node root, int x)
     {
         if(root == null)
         {
