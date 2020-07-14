@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 3590
+### 3865
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -105,6 +105,10 @@
 	- [Construct Binary Tree from String with bracket representation](#TR_TreeFromBracket)
 	- [Construct String with bracket representation from Binary Tree](#TR_BracketFromTree)
 	- [Binary Search Tree](#TR_BST)
+	- [Construct BST from given pre-order traversal](#TR_ConstructBSTFromPreOrder)
+	- [Binary Tree to Binary Search Tree](#TR_BTreeToBST)
+	- [Sorted linked list and array to BST](#TR_SortedLLToBST)
+	- [Lowest Common Ancestor in a Binary Search Tree](#TR_LCAInBST)
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
@@ -3563,6 +3567,280 @@ class Solution
         else
         {
             root.left = deleteNode(root.left, x);
+        }
+        return root;
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_ConstructBSTFromPreOrder"></a>
+### Construct BST from given pre-order traversal
+Given preorder traversal of a binary search tree, construct the BST. To construct a binary tree from  given preOrder traversal, we can use a simple method based on the BST property of left subtree having values smaller than root and right subtree having values bigger than the root.
+
+For any preOrder traversal we know that the first value is the root of the tree. So we use the first value of the preOrder to make the root. Now we know that further on, the values in left subtree will be in range from (-Infinity, root) and in right subtree will be from (root, +Infinity). So the next value that we get in preOrder would be the root of the leftsubtree or the right subtree depending on the range to which it belongs. This method can be used recursively to build the entire BST by modifying the range for the left and right subtrees of every node according to their respective root's values.
+
+The process would be as follows:
+1. Initialize the range as (-Infinity, +Infinity). Let us call this range (min, max). Maintain a global index preIndex for iterating the preOrder array.
+2. The first value in preOrder definitely lies in this range and forms the root. Now, in preOrder as the format is ROOT LEFT RIGHT, we build the left subtree first followed by the right subtree.
+3. Increment the golbal variable preIndex to point to the next element in preOrder and call the function recursively for the left subtree in range(min, root.data).
+4. For the right subtree call the function in range (root.data, max). Remember, as the variable preIndex is globally defined, when the call for the left subtre finishes, preIndex automatically points to the right subtree's root and we need not increment it.
+3. Repeat this process until preIndex >= preOrder array's size.
+```java
+class Solution
+{
+    int preIndex = 0;
+
+    public Node constructBST(int[] preOrder)
+    {
+        return constructBSTUtil(preOrder, Integer.MIN_VALUE, Integer.MAX_VALUE, preOrder.length);
+    }
+
+    public Node constructBSTUtil(int[] preOrder, int min, int max, int size)
+    {
+        if(preIndex >= size)
+        {
+            return null;
+        }
+        Node root = null;
+        int val = preOrder[preIndex];
+        if(val > min && val < max)
+        {
+            root = new Node(val);
+            preIndex++;
+            root.left = constructBSTUtil(preOrder, min, val, size);
+            root.right = constructBSTUtil(preOrder, val, max, size);
+        }
+        return root;
+    }
+
+    public void inOrder(Node root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        inOrder(root.left);
+        System.out.println(root.data);
+        inOrder(root.right);
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_BTreeToBST"></a>
+### Binary Tree to Binary Search Tree
+Given a Binary Tree, convert it to a Binary Search Tree. The conversion must be done in such a way that keeps the original structure of Binary Tree.
+
+To convert a binary tree to a binary search tree, we can first get the inOrder traversal of the binary tree and sort it. This sorted array would be the inorder traversal of the BST. Now we iterate the binary tree in inOrder fashion once again, and replace the values of the nodes according to the sorted array.
+```java
+class Solution
+{
+    public Node convertBTreeToBST(Node root)
+    {
+        // Inorder traversal of Binary Tree
+        ArrayList<Integer> arrInOrder = new ArrayList<Integer>();
+        Node node = root;
+        Stack<Node> stack = new Stack<Node>();
+        Node curr = node;
+        while(curr != null || !stack.isEmpty())
+        {
+            while(curr != null)
+            {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            arrInOrder.add(curr.data);
+            curr = curr.right;
+        }
+
+        // Sort the inOrder array
+        Collections.sort(arrInOrder);
+        
+        // Build tree again according to sorted array
+        int index = 0;
+        curr = root;
+        stack = new Stack<Node>();
+        while(curr != null || !stack.isEmpty())
+        {
+            while(curr != null)
+            {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            curr.data = arrInOrder.get(index);
+            index++;
+            curr = curr.right;
+        }
+
+        return root;
+    }
+
+    public void inOrder(Node root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        inOrder(root.left);
+        System.out.print(root.data + " ");
+        inOrder(root.right);
+    }
+}
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_SortedLLToBST"></a>
+### Sorted linked list/array to BST
+The process for both is similar. Find the middle element's index. This becomes the root. Recursively create left subtree and right subtree from the left and right half of list/array respectively. Note that the tree has to be a balanced tree that is the difference in height of the any two leaf nodes shoulbe be <= 1.
+
+The code for linked list has been described below. For a linked list find the middle element is always O(N) and doing it repeatedly is time consuming. Hecne we make a time-space tradeoff and convert the linked list to an array in O(N) time and then use this array to build the BST.
+```java
+class Solution
+{
+    public Node convertLLToBST(LinkedListNode head)
+    {
+        // Convert LinkedList to ArrayList
+        // This ArrayList as sorted would be the inOrder
+        // traversal of the binary search tree
+        ArrayList<Integer> arrInOrder = new ArrayList<Integer>();
+        while(head != null)
+        {
+            arrInOrder.add(head.data);
+            head = head.next;
+        }
+
+        // Convert this array into BST
+        return convertLLToBSTUtil(arrInOrder, start, end);
+
+    }
+
+    public Node convertLLToBSTUtil(ArrayList<Integer> arr, int start, int end)
+    {
+        if(arr.size() == 0 || start > end)
+        {
+            return null;
+        }
+        int mid = start + (end-start)/2;
+        int val = arr.get(mid);
+        Node root = new Node(val);
+        root.left = convertLLToBSTUtil(arr, start, mid-1);
+        root.right = convertLLToBSTUtil(arr, mid + 1, end);
+        return root;
+    }
+
+    public void preOrder(Node root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+}
+
+class Node
+{
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int x)
+    {
+        data = x;
+        left = null;
+        right = null;
+    }
+}
+
+class LinkedListNode
+{
+    int data;
+    LinkedListNode next;
+
+    public LinkedListNode(int x)
+    {
+        data = x;
+        next = null;
+    }
+
+    public LinkedListNode(int x, LinkedListNode n)
+    {
+        next = n;
+        data = x;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name ="TR_LCAInBST"></a>
+### Lowest Common Ancestor in a Binary Search Tree
+Given values of two values n1 and n2 in a Binary Search Tree, find the Lowest Common Ancestor (LCA). You may assume that both the values exist in the tree.
+
+We recursively traverse the BST. If a node's value is greater than both n1 and n2 then our LCA lies in the left subtree of the node. If it's is smaller than both n1 and n2, then LCA lies in the right subtree. Otherwise, either the node is equal to either of n1 and n2 or the node has a value which is greater than one and lesser than one of n1 and n2. In both cases, the node itself is the LCA.
+
+Note, the above algorithm assumes that the elements are always present in the BST. If the elements might or might not be present, the process is exactly same a sthe one for a normal binary tree.
+```java
+class Solution
+{
+    public Node LCAinBST(Node root, int x, int y)
+    {
+        if(root == null)
+        {
+            return null;
+        }
+        if(root.data > x && root.data > y)
+        {
+            return LCAinBST(root.left, x, y);
+        }
+        if(root.data < x && root.data < y)
+        {
+            return LCAinBST(root.right, x, y);
         }
         return root;
     }
