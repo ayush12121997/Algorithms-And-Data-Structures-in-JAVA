@@ -2481,7 +2481,7 @@ This question can be solved recursively by adding nodes to a map of different di
 1. For the element on that level, add the element to the list of that level.
 2. Add the right node of the element to the same level as the element.
 3. Add the left node of the element to the next level as the element.
-4. Rapeat the process for the right and left nodes of the element.
+4. Repeat the process for the right and left nodes of the element.
 	
 The code is as follows:
 ```java
@@ -2544,8 +2544,8 @@ class Node
 ### Deletion in a binary tree
 Given a binary tree, delete a node from it by making sure that tree shrinks from the bottom (i.e. the deleted node is replaced by bottom most and rightmost node).
 
-This can be achieved by in a three traversal process:
-1. Traverse and storing the deepest rightmost node in the tree.
+This can be achieved by a three traversal process:
+1. Traversing the tree and then storing the deepest rightmost node in the tree.
 2. We then find the node to be deleted and swap the values of the deepest node and the node to be deleted.
 3. We the find the parent of the deepest rightmost node and replace the deepest rightmost node with null.
 ```java
