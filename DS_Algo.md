@@ -2411,10 +2411,6 @@ The stack would be filled like this by traversing the tree level by level from r
 1 3 2 6 5 4 7
 The stack when popped would result in output similar to reverse printing level from left to right:
 7 4 5 6 2 3 1
-
-Now to put values in stack we can do either of the following:
-1. Traverse the 
-2.
 ```java
 class Solution
 {
