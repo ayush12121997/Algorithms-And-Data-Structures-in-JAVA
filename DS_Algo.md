@@ -2330,7 +2330,7 @@ class Node
 ### Binary tree zigzag traversal - Level order in spiral
 The zigzag level traversal is a modification of the simple level order traversal. For every lternate level we need to change the order of printing from left to right to right to left. This can achived in O(n) time using two different stacks. The approach is as foolows:
 1. Create two empty stacks, say A and B, add all nodes of level 1, that is the root, to A.
-2. Now pop elements from node A and add them to the answer, and for every popped elemnt, push the right and left child of the node to stack B. Now as the right and left child were pushed in order, therefore stack B has left child at top and right child below in the stack. Hence, <ins>stack B</ins> would represent a <ins>Left to Right</ins> printing pattern.
+2. Now pop elements from stack A and add them to the answer, and for every popped elemnt, push the right and left child of the node to stack B. Now as the right and left child were pushed in order, therefore stack B has left child at top and right child below in the stack. Hence, <ins>stack B</ins> would represent a <ins>Left to Right</ins> printing pattern.
 3. For every node in stack B, now pop the head and add it to the answer. For every popped head, add the left and right children to stack A. This way, now when <ins>stack A</ins> is popped it will result in a <ins>Right to Left</ins> oredering.
 4. Repeat the process above till both stacks become empty and return the final result.
 
