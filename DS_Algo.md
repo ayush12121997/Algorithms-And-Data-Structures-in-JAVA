@@ -1883,7 +1883,7 @@ class Pair
 
 <a name ="TR_Intro"></a>
 ### Introduction
-Trees ar heirarchical data structure and hence differ from linked lists, arrays, stacks and queues in functionality as they are all linear data structures. The topmost node of a tree is called the root. In a connection between the nodes, that is when an edge in the tree connects two nodes, the ndoe where the edge begins is called a parent node, and where the edge ends is called the child node. Moreover, in trees, there are no back edges, that means edges are pssobile only from a higher level to a lower level. Nodes which do not have any children are called leaf nodes.
+Trees are heirarchical data structure and hence differ from linked lists, arrays, stacks and queues in functionality as they are all linear data structures. The topmost node of a tree is called the root. In a connection between the nodes, that is when an edge in the tree connects two nodes, the ndoe where the edge begins is called a parent node, and where the edge ends is called the child node. Moreover, in trees, there are no back edges, that means edges are pssobile only from a higher level to a lower level. Nodes which do not have any children are called leaf nodes.
 
 A tree whose elements have at most 2 children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right child. Binary trees provide moderate access and modification speeds. The operation search, delete, insert are all O(n) in a binary tree.
 ```java
