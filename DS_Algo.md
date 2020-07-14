@@ -5063,6 +5063,7 @@ class Graph
                 coloring[v] = -1;
             }
         }
+        return false;
     }
 }
 ```
