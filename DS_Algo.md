@@ -1834,6 +1834,7 @@ Treeset does not allow duplicate values. TreeSet is basically an implementation 
 ```java
 TreeSet<Pair> trSet = new TreeSet<Pair>(new Comparison());
 trSet.add(new Pair()); //O(Log n)
+trSet.remove(Object o); //O(Log n)
 trSet.getMax() // O(1)
 trSet.getMin() // O(1)
 trSet.first() // O(1)
@@ -3857,7 +3858,7 @@ class Node
 
 <a name="Graphs"></a>
 ## <p align="center"> Graphs </p>
-A graphs is a 2D data structure which consists of nodes and edges. The nodes are the vertices of the graph and the edges are the lines/path connecting these vertices. The nodes in the graphs can be classes in themselves, containting information more than simply a single vaue, and the edges might represent connections between the structures.
+A graph is a 2D data structure which consists of nodes and edges. The nodes are the vertices of the graph and the edges are the lines/path connecting these vertices. The nodes in the graphs can be classes in themselves, containting information more than simply a single vaue, and the edges might represent connections between the structures.
 
 Other than understanding concepts and solving questions based on graphs, we will also build a standard graph class which would support all the standard graph queries. We will build this class step by step as various subsections proceed.
 
@@ -3912,7 +3913,7 @@ class Graph
 
 <a name="GP_BFS"></a>
 ### Breadth First Traversal
-BFS is a searching technique which helps you search through various nodes of a tree or a graph, level by level. We begin with a starting index, root in case of trees, and then traverse all the nodes that can be reached from in one step and and add them in a queue. Then for all the nodes present in the queue we repeat the process, until the queue becomes empty. Why use a queue? The aim of a BFS search is to first visit all direct children of the node and then proceed with each child seperately. This can be achieved by maintaining a queue which follows a FIFO order and hence only when the processing of parents at the starting of the queue is completed, the subequent children are proccessed.
+BFS is a searching technique which helps you search through various nodes of a tree or a graph, level by level. We begin with a starting index, root in case of trees, and then traverse all the nodes that can be reached from it in one step and and add them in a queue. Then for all the nodes present in the queue we repeat the process, until the queue becomes empty. Why use a queue? The aim of a BFS search is to first visit all direct children of the node and then proceed with each child seperately. This can be achieved by maintaining a queue which follows a FIFO order and hence only when the processing of parents at the starting of the queue is completed, the subequent children are proccessed.
 
 The difference between the BFS of a tree and that of a graph is that in graphs we need to maintain a visited array, to store the nodes which have been visited before. This is needed because unlike trees, graphs may contain cycles and without a visited array the search might end up in an infinite loop. We further build our graph class by adding the BFS functionality to it.
 ```java
@@ -4129,7 +4130,7 @@ class Graph
     }
 }
 ```
-***NOTE: A key point to remember can be that in DFS, the node is marked as visited inside the loop that is once it has been reached and is being processed, on the other hand in BFS a node is marked as visited when it is being added to the queue for further processing.***
+***NOTE: A key point to remember can be that in DFS, the node is marked as visited when it has been reached and is being processed. On the other hand, in BFS, a node is marked as visited before it is processed, at the time of adding it to the queue itself.***
 
 <a href="#Contents">Back to contents</a>
 
@@ -4176,7 +4177,7 @@ The steps for the algorithm would be as follows:
 3. Now we reverse the graph and create a transpose of the graph. Creating a transpose reverses the order of sinks and heads in the graph. The nodes that were sinks before, are now the heads and vice versa.
 4. On the graph reversed, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
 
-As DFS and reversing a graph have bee covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
+As DFS and reversing a graph have been covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
 
 <a href="#Contents">Back to contents</a>
 
@@ -4203,12 +4204,18 @@ As the code requires just slight modifications to the code for the DFS traversal
 
 <a name="GP_CheckIfSCC"></a>
 ### Check if a directed graph is strongly connected
-To check that whether a directed graph is strongly connected or not, we use the conecpt similar to Kosaraju's algorithm for finding all SCC. if we find all SCCs and the number of SCCs is just one, then the graph is strongly connected. But the task here is only different in the meaning that we need to confirm that whther a single SCC covers the entire graph or not and need not find more than one SCC. We ca ndo this according to the following steps:
-1. Marks all nodes unvisited.
+To check that whether a directed graph is strongly connected or not, we use the conecpt similar to Kosaraju's algorithm for finding all SCC. if we find all SCCs and the number of SCCs is just one, then the graph is strongly connected. But the task here is only different in the meaning that we need to confirm that whether a single SCC covers the entire graph or not and need not find more than one SCC. We can do this according to the following steps:
+1. Mark all nodes unvisited.
 2. Do DFS, if any node remains unvisited, then return false.
 3. If above step did not return false, so reverse the graph.
 4. Again do DFS from the same node. If if any node remains unvisited, then return false.
-5. if above step did not return false, so return true.
+5. If above step did not return false, so return true.
+
+We can make the following observations from this and the previous three questions:
+1. Connected components can be found simply by doing a DFS on every unvisited node.
+2. Strongly connected componenets are found by reversing the graph and doing DFS on the original heads before the sinks. This way DFS for a head ends by forming a SCC for itself.
+3. For checking if entire graph is SCC or not, first check if a single DFS reaches all nodes. If yes, so reverse the graph and once again repeat the DFS on the same node. If true both times so graph is a SCC.
+4. Mother vertex cn be found by checking reachability of a vertex to all others. Instead of repeating it for every vertex, find the topmost head by DFS. Then rub DFS on this head. If this head is not the mother vertex then mother vertex does not exist.
 
 <a href="#Contents">Back to contents</a>
 
@@ -4411,6 +4418,8 @@ class Comparison implements Comparator<Node>
     }
 }
 ```
+**NOTE: As prioirity queue does not provide optimal time for deleting nodes, we used a hashmap to checks for duplicate values in the priority queue. We can alternatively use a TreeSet instead which has O(logN) complexity for both add and remove functionalities.**
+
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_BellmanFord"></a>
@@ -4578,7 +4587,7 @@ public void floydWarshall(int graph[][])
     {
         for (j = 0; j < V; j++)
         {
-            dist[i][j] = graph[i][j];
+            dist[i][j] = graph[i][j]; // Assuming graph[i][j] is infinity in case of no path
             parent[i][j] = -1;
         }
     }
@@ -4868,13 +4877,16 @@ class Graph
             // Get head
             int c = stack.pop();
             // If head is not at infinite distance from source
+            // The first element would be the source itself to
+            // satisfy the condition
             if(distance[c] != Integer.MAX_VALUE)
             {
-                // For al adjacent vertices of head
+                // For all adjacent vertices of head
                 for(int i = 0; i < adj.get(c).size(); i++)
                 {
                     // Update minimum distance for those nodes
-                    distance[adj.get(c).get(i).ind] = Math.min(distance[adj.get(c).get(i).ind], distance[c] + adj.get(c).get(i).dis);
+                    Node inner = adj.get(c).get(i);
+                    distance[inner.ind] = Math.min(distance[inner.ind], distance[c] + inner.dis);
                 }
             }
         }
