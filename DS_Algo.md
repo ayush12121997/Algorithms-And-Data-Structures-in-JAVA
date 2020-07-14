@@ -2471,7 +2471,7 @@ The question is to print the tree in a digaonal order. This means that levels ar
         2     3
        / \     \
       4   5     6
-	           / \
+               / \
               7  10
 ```
 In the above tree,<br>
