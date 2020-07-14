@@ -1939,13 +1939,13 @@ There are three types of tree traversals:
 2. Preorder: Prorder traversal is when the node is listed first, then the left subtree of the node and then the right subtree of the node. Both left and right subtrees are also listed in preorder fashion.
 3. Postorder: Postorder traversal is when the left subtree of a node is listed first, then the right subtree of the node and then the node at the end. Both left and right subtrees are also listed in postorder fashion.
 ```java
-            1
-         /     \
-	    2       3
-	 /     \      \
-    4       5      6
-	              /
-				 7
+        1
+      /   \
+     2     3
+    / \     \
+   4   5     6
+            /
+           7
 ```
 For the tree above the traversal would be as follows:
 1. Inorder: 4 2 5 1 3 7 6
