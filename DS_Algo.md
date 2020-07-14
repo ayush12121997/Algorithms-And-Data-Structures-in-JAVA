@@ -2466,13 +2466,13 @@ class Node
 ### Binary tree diagnoal traversal
 The question is to print the tree in a digaonal order. This means that levels are decided diagonally. The root and all it's right nodes form level 1, the second level is root's left node and the left nodes of all the right nodes of root and so on. Example:
 ```java
-            1
-         /     \
-	    2       3
-	 /     \      \
-    4       5      6
-	              / \
-				 7   10
+           1
+         /   \
+        2     3
+       / \     \
+      4   5     6
+	           / \
+              7  10
 ```
 In the above tree,<br>
 The first level would be: 1 3 6 10<br>
