@@ -1,7 +1,5 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 3865
-
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
 1. [Reader class](#ReaderClass)
@@ -144,6 +142,9 @@
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
 	- [Rat in a maze - II (All 4 directions)](#GP_RatInMazeII)
 	- [Count all paths with exactly k edges and shortest path](#GP_ShortestPathWithKEdges)
+	- [Dungeon Game - Leetcode]
+	- [Unique Paths III - Leetcode]
+	- [Redundant Connection - Leetcode]
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
