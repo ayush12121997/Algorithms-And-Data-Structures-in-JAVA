@@ -6404,7 +6404,11 @@ class Solution
 }
 ```
 **<ins>For shortest path</ins>:**<br>
-The above part can have a variation to find the shortes path from the course to the destination instead of counts of all paths. We use the similar dp approach with just defining a new value to be represented by the dp array.
+The above part can have a variation to find the shortes path from the source to the destination with atmost k edges instead of counts of all paths. Hence the modifications in the questions are:
+1. Atmost k edges instead of exactly k
+2. Find shortest path instead of all paths
+
+We use the similar dp approach with just defining a new value to be represented by the dp array.
 ```java
 // The dp array will be of the form [Source][Destination][NumEdges] storing the min
 // length of path from 'Source' vertex to 'Destination' vertex with 'NumEdges' edges
