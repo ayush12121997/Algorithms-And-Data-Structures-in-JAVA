@@ -142,9 +142,12 @@
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
 	- [Rat in a maze - II (All 4 directions)](#GP_RatInMazeII)
 	- [Count all paths with exactly k edges and shortest path](#GP_ShortestPathWithKEdges)
-	- [Dungeon Game - Leetcode]
-	- [Unique Paths III - Leetcode]
-	- [Redundant Connection - Leetcode]
+	- [Dungeon Game]
+	- [Unique Paths III]
+	- [Redundant Connection]
+	- [Redundant Connection II]
+	- [Couple holding hands]
+	- []
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
