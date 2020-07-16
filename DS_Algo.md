@@ -78,6 +78,8 @@
     - [Trapping rain water]
 8. [Heaps and Maps]
 9. [Hashing]
+	- [HashMaps]
+	- [HashSets]
 10. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
 	- [Tree traversals](#TR_Traversal)
@@ -147,7 +149,10 @@
 	- [Redundant Connection]
 	- [Redundant Connection II]
 	- [Couple holding hands]
-	- []
+	- [K-Similar Strings]
+	- [Similar String Groups]
+	- [Binary Tree Maximum Path Sum]
+	- [Cheapest flights within K stops]
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
