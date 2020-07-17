@@ -154,7 +154,8 @@
 	- [K-Similar Strings]
 	- [Similar String Groups]
 	- [Cheapest flights within K stops]
-	 -[Critical Connections in a Network - Can also be used to group cycles together with same numbers]
+	- [Critical Connections in a Network - Can also be used to group cycles together with same numbers]
+	- [Longest increasing path in a matrix]
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
@@ -223,6 +224,7 @@
     - [Last stone weight 2, normal knapsack(2D) and coin change 2(1D) as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
     - [Flip array]
     - [Trapping rain water]
+	- [Partition Array for Maximum Sum]
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
     - [Jump Game - I and II]
@@ -6200,7 +6202,11 @@ class Solution
         int[] di_x = { 2, 2, -2, -2, 1, 1, -1, -1};
         int[] di_y = { 1, -1, 1, -1, 2, -2, 2, -2};
         board[0][0] = 1;
-        return KnightsTourUtil(board, 0, 0, di_x, di_y, 1, N);
+        if(KnightsTourUtil(board, 0, 0, di_x, di_y, 1, N))
+        {
+            printTour(board);
+        }
+        return false;
     }
 
     public boolean KnightsTourUtil(int[][] board, int x, int y, int[] di_x, int[] di_y, int count, int N)
@@ -6223,19 +6229,23 @@ class Solution
                 board[next_x][next_y] = 0;
             }
         }
+        return false;
+    }
 
-        // Print the board
+    public void printTour(int[][] board)
+    {
+        int N = board.length;
         for(int i = 0; i < N; i++)
         {
             for(int j = 0; j < N; j++)
             {
                 if(board[i][j] > 99)
                 {
-                    System.put.print(board[i][j] + "  ");    
+                    System.out.print(board[i][j] + "  ");    
                 }
                 else if(board[i][j] > 9)
                 {
-                    System.put.print(board[i][j] + "   ");    
+                    System.out.print(board[i][j] + "   ");    
                 }
                 else
                 {
@@ -6244,7 +6254,6 @@ class Solution
             }
             System.out.println();
         }
-        return false;
     }
 
     public boolean isInside(int x, int y, int N)
