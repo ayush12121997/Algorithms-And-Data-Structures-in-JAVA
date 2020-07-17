@@ -5197,7 +5197,7 @@ class Subset
 
 <a name="GP_CycleDirected"></a>
 ### Detect a cycle in an directed graph
-Detecting a cycle in a directed graph is easy. All it requires you to do is to run DFS on the graph and if you ever encounter a visited node then return true as it forms a cycle.
+Detecting a cycle in a directed graph is easy. All it requires you to do is to run DFS on the graph and if you ever encounter a visited node in a DFS run then return true as it forms a cycle. Look into "Course Scheduling I and II" for a cycle checking directed graph implementation within topological sorting code.
 
 <a href="#Contents">Back to contents</a>
 
