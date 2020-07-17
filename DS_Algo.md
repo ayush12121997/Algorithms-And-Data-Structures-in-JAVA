@@ -145,7 +145,7 @@
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
 	- [Rat in a maze - II (All 4 directions)](#GP_RatInMazeII)
 	- [Shortest path + Count all paths with exactly k edges in a graph](#GP_ShortestPathWithExactlyKEdges)
-	- [Shortest path with upto k edges in a graph]
+	- [Shortest path with upto k edges in a graph - Djikstra and Bellman Ford]
 	- [Dungeon Game]
 	- [Unique Paths III]
 	- [Redundant Connection]
@@ -154,6 +154,7 @@
 	- [K-Similar Strings]
 	- [Similar String Groups]
 	- [Cheapest flights within K stops]
+	 -[Critical Connections in a Network]
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
