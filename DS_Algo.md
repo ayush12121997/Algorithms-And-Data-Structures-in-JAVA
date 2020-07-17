@@ -109,6 +109,7 @@
 	- [Binary Tree to Binary Search Tree](#TR_BTreeToBST)
 	- [Sorted linked list and array to BST](#TR_SortedLLToBST)
 	- [Lowest Common Ancestor in a Binary Search Tree](#TR_LCAInBST)
+	- [Binary Tree Maximum Path Sum]
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
@@ -143,7 +144,8 @@
 	- [Find similar contacts in contact list (Accounts Merge)](#GP_SimilarContacts)
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
 	- [Rat in a maze - II (All 4 directions)](#GP_RatInMazeII)
-	- [Count all paths with exactly k edges and shortest path](#GP_ShortestPathWithKEdges)
+	- [Shortest path + Count all paths with exactly k edges in a graph](#GP_ShortestPathWithExactlyKEdges)
+	- [Shortest path with upto k edges in a graph]
 	- [Dungeon Game]
 	- [Unique Paths III]
 	- [Redundant Connection]
@@ -151,7 +153,6 @@
 	- [Couple holding hands]
 	- [K-Similar Strings]
 	- [Similar String Groups]
-	- [Binary Tree Maximum Path Sum]
 	- [Cheapest flights within K stops]
     - [Stable marriage]
     - [Best First Search]
@@ -6329,8 +6330,8 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="GP_ShortestPathWithKEdges"></a>
-### Count all paths with exactly k edges and shortest path
+<a name="GP_ShortestPathWithExactlyKEdges"></a>
+### Shortest path + Count all paths with exactly k edges in a graph
 **<ins>For count of paths</ins>:**<br>
 The question states that in a given graph/grid, count all the paths with exactly k edges from a given source to a destination. The approach one mght immediately think of is backtracking. Yes, the question is solvable using backtracking but with an exponential complexity of O(V^k).
 
@@ -6404,11 +6405,7 @@ class Solution
 }
 ```
 **<ins>For shortest path</ins>:**<br>
-The above part can have a variation to find the shortes path from the source to the destination with atmost k edges instead of counts of all paths. Hence the modifications in the questions are:
-1. Atmost k edges instead of exactly k
-2. Find shortest path instead of all paths
-
-We use the similar dp approach with just defining a new value to be represented by the dp array.
+The above part can have a variation to find the shortest path from the source to the destination with exactly k edges instead of counts of all paths. We use the similar dp approach with just defining a new value to be represented by the dp array.
 ```java
 // The dp array will be of the form [Source][Destination][NumEdges] storing the min
 // length of path from 'Source' vertex to 'Destination' vertex with 'NumEdges' edges
@@ -6440,6 +6437,8 @@ class Solution
                 // For destination from 0 to V-1
                 for (int j = 0; j < V; j++)
                 {
+                    // Initial distance before calculationg is infinite
+                    dist[i][j][e] = Integer.MAX_VALUE;
                     // If number of edges is 0
                     // Then path exists if source = destination
                     // And as source = destination, min path is 0
