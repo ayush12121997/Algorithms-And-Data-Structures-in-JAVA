@@ -154,7 +154,7 @@
 	- [K-Similar Strings]
 	- [Similar String Groups]
 	- [Cheapest flights within K stops]
-	 -[Critical Connections in a Network]
+	 -[Critical Connections in a Network - Can also be used to group cycles together with same numbers]
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
