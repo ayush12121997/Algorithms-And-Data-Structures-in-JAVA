@@ -88,6 +88,7 @@
 	- [Binary tree level order traverssal](#TR_LOTraversal)
 	- [Binary tree zigzag traversal - Level order in spiral](#TR_ZZTraversal)
 	- [Binary tree reverse level order traversal](#TR_RLOTraversal)
+	- [Binary tree reverse level order traversal - List of levels]
 	- [Binary tree diagnoal traversal](#TR_DTraversal)
 	- [Deletion in a binary tree](#TR_DeleteAndReplace)
 	- [Recursion in a tree](#TR_Recursion)
@@ -99,6 +100,8 @@
 	- [Convert a Binary Tree to DLL](#TR_BTToDLL)
 	- [Lowest Common Ancestor in a Binary Tree](#TR_LCAInBT)
 	- [Diameter of Binary Tree](#TR_DiameterTree)
+	- [Diameter of a nary tree]
+	- [Minimum height trees]
 	- [Height of Binary Tree](#TR_HeightTree)
 	- [Serialize and Deserialize a Binary Tree](#TR_SerializeDeserializeBT)
 	- [Symmetric Tree](#TR_SymetricTree)
@@ -230,13 +233,20 @@
 14. [Bit Manipulation]
 15. [Greedy Algorithms]
     - [Jump Game - I and II]
+16. [Tips and Tricks]
+	- [List<List> instantiation]
+	- [Array tips and tricks from the array section]
+	- [TreeSet vs Priority Queue]
+	- [HashMap vs HashSet]
+	- [Character, String and Integer interchange among themselves]
+	- [How to take mid by avoiding overflow]
+	- [Input sizes for various complexities]
 16. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Trie]
     - [Line Sweep Algo]
     - [Catalan Number]
-    - [Add char to int and int to char and ascii shiz]
 
 <a name="ReaderClass"></a>
 ## <p align="center"> Reader Class </p>
