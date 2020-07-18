@@ -113,6 +113,11 @@
 	- [Sorted linked list and array to BST](#TR_SortedLLToBST)
 	- [Lowest Common Ancestor in a Binary Search Tree](#TR_LCAInBST)
 	- [Binary Tree Maximum Path Sum]
+	- [Kth Smallest Element in a BST]
+	- [Distribute Coins in Binary Tree]
+	- [Validate BST - Inorder sorted, Check recursively]
+	- [Binary Tree Cameras]
+	- []
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
