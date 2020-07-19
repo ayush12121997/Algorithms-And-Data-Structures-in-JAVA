@@ -231,6 +231,7 @@
 	- [Ones and zeroes]
     - [Partition into two equal subset problem]
     - [Partition into two subsets with minimum difference]
+	- [Number of subsets with sum < K or sum > K or sum = K]
     - [Last stone weight 2, normal knapsack(2D) and coin change 2(1D) as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
     - [Flip array]
     - [Trapping rain water]
