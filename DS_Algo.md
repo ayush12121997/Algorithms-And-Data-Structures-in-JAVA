@@ -118,6 +118,8 @@
 	- [Validate BST - Inorder sorted, Check recursively]
 	- [Binary Tree Cameras]
 	- [Path Sum - II]
+	- [Path Sum - III]
+	- [Longest Univalue Path]
 	- []
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
