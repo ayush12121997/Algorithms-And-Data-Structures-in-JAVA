@@ -117,6 +117,7 @@
 	- [Distribute Coins in Binary Tree]
 	- [Validate BST - Inorder sorted, Check recursively]
 	- [Binary Tree Cameras]
+	- [Path Sum - II]
 	- []
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
@@ -165,6 +166,7 @@
 	- [Critical Connections in a Network - Can also be used to group cycles together with same numbers]
 	- [Longest increasing path in a matrix]
 	- [Course Schedule I and II]
+	- [Time needed to inform all employees]
 	- []
     - [Stable marriage]
     - [Best First Search]
