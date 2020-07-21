@@ -120,6 +120,9 @@
 	- [Path Sum - II]
 	- [Path Sum - III]
 	- [Longest Univalue Path]
+	- [Storing a tree in it's array foramt]
+	- [Maximum width of binary tree]
+	- [Binary tree right side view]
 	- []
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
@@ -169,7 +172,9 @@
 	- [Longest increasing path in a matrix]
 	- [Course Schedule I and II]
 	- [Time needed to inform all employees]
-	- []
+	- [Friend Circles]
+	- [Flood fill algorithm]
+	- [Number of Islands]
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
