@@ -123,6 +123,7 @@
 	- [Storing a tree in it's array foramt]
 	- [Maximum width of binary tree]
 	- [Binary tree right side view]
+	- [Sum of distances in tree]
 	- []
 11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
