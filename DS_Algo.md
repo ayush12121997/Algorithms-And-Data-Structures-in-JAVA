@@ -28,6 +28,7 @@
     - [Range Sum Query](#Arrays_RSQuery)
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
+	- [Randomly shuffle an array - Fisher Yates Algorithm]
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
