@@ -1,5 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
+### 820
+
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
 1. [Reader class](#ReaderClass)
@@ -29,6 +31,7 @@
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 	- [Randomly shuffle an array - Fisher Yates Algorithm]
+	- [Sliding Window Algorithm](#Arrays_SlidingWindow)
 4. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
@@ -773,6 +776,48 @@ class NumArray
     }
 }
 ```
+<a href="#Contents">Back to contents</a>
+
+<a name="Arrays_SlidingWindow"></a>
+### Sliding Window Algorithm
+Sliding Window Algorith is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single resulting in a O(N) complexity instead of O(N^2).
+
+The idea is to select a window of say size k. The window depicts the range of elements that we can have in access at a time for a particular operation. We then iterate this entire window of size k over the array by adding elements from the front and removing those form the back. This way in O(N) time in a single iteration elements in groups of k can be iterated over. For example if the task is to find the maximum sum contigous subarray where the subarray size is atmost 3. Once method to do it would be for every index i in the array, check if the array from i to i + k forms the answer we need.
+```java
+int maxSum = 0;
+int currSum = 0;
+for(int i = 0; i < n-k; i++)
+{
+    currSum = 0;
+    for(int j = 0; j < k; j++)
+    {
+        currSum += arr[i+j];
+    }
+    maxSum = Math.max(maxSum, currSum);
+}
+```
+The above method sovles our problem in O(NK) time.
+
+We can potentially do better by instead of iterating over every element for k times, we can create a window of size k and calculate its sum by moving the window forward. Initialy the window lies from 0 to k. We clculate the sum in this. Now as we move forward, the window lies from 1 to k+1 and then from 2 to k+2 until we iterate till n-k to n. Now when moving forward we need not calculate the entire window sum from sratch in O(1) time. We can instead do this by adding the incoming index in the window and subtracting the first index of the window. For example when moving from 0->k to 1->(k+1), we can simply just add arr[k+1] and subtract arr[0] from current sum. This has been illustrated below:
+1. We compute the sum of first k elements out of n terms using a linear loop and store the sum in variable maxSum.
+2. Then we will iterate linearly over the array till it reaches the end and simultaneously keep track of maxSum.
+3. To get the current sum of block of k elements just subtract the first element from the previous currSum and add the next element to it.
+```java
+int maxSum = 0;
+int currSum = 0;
+for(int i = 0; i < k; i++)
+{
+    currSum += arr[i];
+}
+maxSum = currSum;
+for(int i = k; i < n; i++)
+{
+    currSum += arr[i] - arr[i-k];
+    maxSum = Math.max(maxSum, currSum);
+}
+```
+Hence, now we can solve our problem in O(N) time. This is known as the Sliding Window Technique.
+
 <a href="#Contents">Back to contents</a>
 
 <a name="Math"></a>
