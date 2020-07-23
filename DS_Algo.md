@@ -1925,12 +1925,10 @@ Treeset does not allow duplicate values. TreeSet is basically an implementation 
 TreeSet<Pair> trSet = new TreeSet<Pair>(new Comparison());
 trSet.add(new Pair()); //O(Log n)
 trSet.remove(Object o); //O(Log n)
-trSet.getMax() // O(1)
-trSet.getMin() // O(1)
 trSet.first() // O(1)
 trSet.last() // O(1)
-trSet.deleteMax() //O(Log n)
-trSet.deleteMin() //O(Log n)
+trSet.pollFirst() //O(Log n)
+trSet.pollLast() //O(Log n)
 trSet.size() //O(1)
 trSet.isEmpty() //O(1)
 
