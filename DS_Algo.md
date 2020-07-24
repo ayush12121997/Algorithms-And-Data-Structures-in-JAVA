@@ -35,10 +35,15 @@
 	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
 	- [Sliding Window Maximum]
+	- [Sliding Window Median]
 	- [Find all anagrams in a string]
 	- [Remove duplicates from sorted array]
 	- [Remove duplicates from sorted array - II]
 	- [Remove element]
+	- [Longest Substring Without Repeating Characters]
+	- [Minimum Window Substring]
+	- [Permutation in String]
+	- [Substring with Concatenation of All Words]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
