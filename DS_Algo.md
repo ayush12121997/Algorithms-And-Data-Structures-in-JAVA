@@ -787,6 +787,7 @@ class NumArray
 ## <p align="center"> Sliding Window and Two Pointers Technique </p>
 <a name="SWTP_Introduction"></a>
 ### Introduction
+#### Sliding Window Algorithm
 Sliding Window Algorith is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single resulting in a O(N) complexity instead of O(N^2).
 
 The idea is to select a window of say size k. The window depicts the range of elements that we can have in access at a time for a particular operation. We then iterate this entire window of size k over the array by adding elements from the front and removing those form the back. This way in O(N) time in a single iteration elements in groups of k can be iterated over.
@@ -826,6 +827,9 @@ for(int i = k; i < n; i++)
 }
 ```
 Hence, now we can solve our problem in O(N) time. This is known as the Sliding Window Technique.
+
+#### Two Pointer Technique
+
 
 <a href="#Contents">Back to contents</a>
 
