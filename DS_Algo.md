@@ -36,6 +36,10 @@
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
 	- [Sliding Window Maximum]
 	- [Find all anagrams in a string]
+	- [Remove duplicates from sorted array]
+	- [Remove duplicates from sorted array - II]
+	- [Remove element]
+	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
