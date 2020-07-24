@@ -32,7 +32,7 @@
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 	- [Randomly shuffle an array - Fisher Yates Algorithm]
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
-	- [Sliding Window Algorithm](#SWTP_Introduction)
+	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Maximum]
 	- [Find all anagrams of ]
 5. [Math](#Math)
@@ -786,7 +786,7 @@ class NumArray
 <a name="SlideWindow_TwoPointer"></a>
 ## <p align="center"> Sliding Window and Two Pointers Technique </p>
 <a name="SWTP_Introduction"></a>
-### Introductions
+### Introduction
 Sliding Window Algorith is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single resulting in a O(N) complexity instead of O(N^2).
 
 The idea is to select a window of say size k. The window depicts the range of elements that we can have in access at a time for a particular operation. We then iterate this entire window of size k over the array by adding elements from the front and removing those form the back. This way in O(N) time in a single iteration elements in groups of k can be iterated over.
