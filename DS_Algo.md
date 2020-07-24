@@ -840,8 +840,140 @@ A faster way to achieve this is using two pointers. We take two pointers, one re
 
 <a name="SWTP_StringTemplate"></a>
 ### Sliding Window Template - String pattern questions
+Many sliding window questions can involve strings. The questions regarding strings are generalyl related to finding contigous patterns under certain conditions in a parent string. In such type of questions the following pattern can be utilized to solve the questions. Let us assume that the question at hand is to find the starting indexes of all anagrams of a pattern in a string.
 ```java
+public class Solution
+{
+    public List<Integer> slidingWindowTemplateForStrings(String original, String pattern)
+    {
+        // Create a result List to store the results
+        // This can be any object or data structure suitable
+        // for storng the results needed.
+        List<Integer> result = new ArrayList<Integer>();
 
+        // If pattern is longer than string itself,
+        // then no answer exists so return empty result
+        if(pattern.length()> original.length())
+        {
+            return result;
+        }
+
+        // Create a HashMap to store the count of the characters
+        // in the pattern.
+        // Key: Character in pattern; Value: Count of character
+        Map<Character, Integer> patternMap = new HashMap<Character, Integer>();
+        // Character array for the String pattern
+        char[] patternArray = pattern.toCharArray();
+
+        for(int i = 0; i < patternArray.length; i++)
+        {
+            char c = patternArray[i];
+            // If character exists so increase count of character
+            if(patternMap.containsKey(c))
+            {
+                patternMap.put(c, patternMap.get(c) + 1);
+            }
+            // If character does not exist so add it with count 1
+            else
+            {
+                patternMap.put(c, 1);
+            }
+        }
+
+        // The size of the HashMap patternSize is the total number
+        // of unique characters in the String pattern. It acts as a
+        // counter to remaining unmatched characters in the pattern.
+        int counter = patternMap.size();
+
+        // The begin pointer and end pointer to mark the range of
+        // the sliding window
+        int start = 0;
+        int end = 0;
+
+        // Current length of substring which matches the target
+        int len = Integer.MAX_VALUE; 
+
+        // Loop until the end of the original string is reached
+        while(end < original.length())
+        {
+            // Current ending character
+            char c = original.charAt(end);
+
+            // The value in the patternMap that is the count of every
+            // character in the pattern would act as a buffer when
+            // matching characters with the original string. With every
+            // match the buffer size would reduce by 1 until no more
+            // characters are available to match.
+
+            // If the current character exists in the pattern
+            if(patternMap.containsKey(c))
+            {
+                // As we have got a match with the pattern, the number
+                // of times we can further match this same character
+                // is reduced by 1.
+                patternMap.put(c, patternMap.get(c)-1);
+
+                // If the buffer size has reached 0, we mean we have
+                // completed matching the given character of the pattern
+                // and hence number of remaining uncompleted characters
+                // is reduced by 1. The condition to check for counter
+                // reduction might be different for different questions.
+                if(patternMap.get(c) == 0)
+                {
+                    counter--;
+                }
+            }
+
+            // Move the window end to the next character
+            end++;
+
+            // If all characters of the pattern have been matched so check
+            // if the condition according to the question are satisfied or
+            // not to modify the result.
+            while(counter == 0)
+            {
+                // First character of the sliding window
+                char tempc = original.charAt(start);
+
+                // IMPORTANT:
+                // CHECK FOR SATISFACTORY CONDITIONS ACCORDING TO THE
+                // QUESTION TO MODIFY THE RESULT HERE. AS OF NOW LET US
+                // ASSUME THAT TASK AT HAND IS TO FIND THE STARTING
+                // INDEXES OF ALL ANAGRAMS OF THE PATTERN IN THE ORIGINAL
+                // STRING. SO WE CHECK IF THE PART THAT COMPLETELY MATACHES
+                // ALL CHARACTERS OF THE PATTERN IS OF THE SAME LENGTH AS
+                // PATTERN OR NOT. AS IF LENGTH IS NOT SAME IT WONT BE AN
+                // ANAGRAM.
+                if(end - start == pattern.length())
+                {
+                    result.add(start);
+                }
+
+                // If the character is a part of the mathcing, that is
+                // character is present in the pattern
+                if(patternMap.containsKey(tempc))
+                {
+                    // Increase the buffer size for the given character
+                    // as we would be moving the start of the window to the
+                    // next element. Hence, this character would now not be
+                    // a part of the mathcing and thus the pattern would
+                    // have a new unmatched character again
+                    patternMap.put(tempc, patternMap.get(tempc) + 1);
+                    // If pattern has a new unmatched character increase the
+                    // counter value
+                    if(patternMap.get(tempc) > 0)
+                    {
+                        counter++;
+                    }
+                }
+
+                // Decrease the window size by incrementing the start pointer
+                start++;
+            }
+        }
+        return result;
+    }
+}
 ```
 <a href="#Contents">Back to contents</a>
 - [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
