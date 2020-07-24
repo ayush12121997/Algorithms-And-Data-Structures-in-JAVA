@@ -6,7 +6,7 @@
 ## <p align="center"> Table of contents </p>
 1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
-3. [Arrays](#Arrays)
+3. [Arrays(Searching, Sorting and Miscellaneous)](#Arrays)
     - [Basic Concepts](#Arrays_BasicConcepts)
     - [Bubble Sort](#Arrays_BubbleSort)
     - [Selection Sort](#Arrays_SelectionSort)
@@ -31,8 +31,11 @@
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 	- [Randomly shuffle an array - Fisher Yates Algorithm]
-	- [Sliding Window Algorithm](#Arrays_SlidingWindow)
-4. [Math](#Math)
+4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
+	- [Sliding Window Algorithm](#SWTP_Introduction)
+	- [Sliding Window Maximum]
+	- [Find all anagrams of ]
+5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
     - [Check if a number is prime](#CheckPrime)
     - [Finding all factors of a number](#FindFactors)
@@ -44,10 +47,10 @@
     - [Divisibility by 3, 4, 5, 6, 7, 8, 9 and (2, 3 and 5)]
     - [Calculate nCr](#Math_NCR)
     - [Palindrome Number]
-5. [String]
+6. [String]
     - [Java String workarounds (Substring, toCharArray, charAt)]
     - [Learn KMP robin karp and stuff]
-6. [Linked Lists](#LinkedLists)
+7. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
     - [Reverse a linked list](#LL_Reverse)
@@ -60,11 +63,12 @@
     - [Doubly linked lists](#LL_Double)
     - [Odd even linked lists]
     - [Remove N'th Node from end]
-7. [Stacks and Queues](#StackAndQueue)
+8. [Stacks and Queues](#StackAndQueue)
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
     - [Priority Queues](#SQ_PQ)
 	- [Tree sets](#SQ_TreeSet)
+	- [Deque]
 	- [Maximum sum subarray with sum less than equal to k for above treeset]
     - [Monotonous increasing/decreasing stacks, use for previous smaller, next smaller, previous greater, next greater]
     - [Next greater element - I]
@@ -80,11 +84,12 @@
     - [Sum of all subarray minimums]
     - [Evaluate Reverse Polish Notation]
     - [Trapping rain water]
-8. [Heaps and Maps]
-9. [Hashing]
+	- [Sliding Window Maximum]
+9. [Heaps and Maps]
+10. [Hashing]
 	- [HashMaps]
 	- [HashSets]
-10. [Trees](#Trees)
+11. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
 	- [Tree traversals](#TR_Traversal)
 	- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
@@ -129,7 +134,7 @@
 	- [Binary tree right side view]
 	- [Sum of distances in tree]
 	- []
-11. [Graphs](#Graphs)
+12. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
@@ -186,7 +191,7 @@
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
-12. [Recursion and Backtracking](#Backtracking)
+13. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting and string concatenation strats]
     - [Generate paranthesis]
@@ -204,7 +209,7 @@
     - [Letter combinations of a Phone Number]
     - [Word search - I and II]
     - [Combinations]
-13. [Dynamic Programming](#DynamicProgramming)
+14. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -253,10 +258,10 @@
     - [Flip array]
     - [Trapping rain water]
 	- [Partition Array for Maximum Sum]
-14. [Bit Manipulation]
-15. [Greedy Algorithms]
+15. [Bit Manipulation]
+16. [Greedy Algorithms]
     - [Jump Game - I and II]
-16. [Tips and Tricks]
+17. [Tips and Tricks]
 	- [List<List> instantiation]
 	- [Array tips and tricks from the array section]
 	- [TreeSet vs Priority Queue]
@@ -264,7 +269,7 @@
 	- [Character, String and Integer interchange among themselves]
 	- [How to take mid by avoiding overflow]
 	- [Input sizes for various complexities]
-16. [Others]
+18. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Trie]
@@ -778,11 +783,15 @@ class NumArray
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="Arrays_SlidingWindow"></a>
-### Sliding Window Algorithm
+<a name="SlideWindow_TwoPointer"></a>
+## <p align="center"> Sliding Window and Two Pointers Technique </p>
+<a name="SWTP_Introduction"></a>
+### Introductions
 Sliding Window Algorith is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single resulting in a O(N) complexity instead of O(N^2).
 
-The idea is to select a window of say size k. The window depicts the range of elements that we can have in access at a time for a particular operation. We then iterate this entire window of size k over the array by adding elements from the front and removing those form the back. This way in O(N) time in a single iteration elements in groups of k can be iterated over. For example if the task is to find the maximum sum contigous subarray where the subarray size is atmost 3. Once method to do it would be for every index i in the array, check if the array from i to i + k forms the answer we need.
+The idea is to select a window of say size k. The window depicts the range of elements that we can have in access at a time for a particular operation. We then iterate this entire window of size k over the array by adding elements from the front and removing those form the back. This way in O(N) time in a single iteration elements in groups of k can be iterated over.
+
+For example if the task is to find the **maximum sum contigous subarray where the subarray size is atmost 3**. Once method to do it would be for every index i in the array, check if the array from i to i + k forms the answer we need.
 ```java
 int maxSum = 0;
 int currSum = 0;
