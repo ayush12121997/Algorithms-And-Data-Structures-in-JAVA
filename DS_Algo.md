@@ -46,6 +46,9 @@
 	- [Substring with Concatenation of All Words]
 	- [Trapping rain water]
 	- [Container with maximum water]
+	- [Dutch National Flag Algorithm / Sort colors]
+	- [Subarrays with K Different Integers]
+	- [Subarray Product Less Than K]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
