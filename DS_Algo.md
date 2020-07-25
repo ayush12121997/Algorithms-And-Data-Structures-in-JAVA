@@ -31,6 +31,8 @@
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 	- [Randomly shuffle an array - Fisher Yates Algorithm]
+	- [Two Sum - Random Array]
+	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
@@ -47,8 +49,12 @@
 	- [Trapping rain water]
 	- [Container with maximum water]
 	- [Dutch National Flag Algorithm / Sort colors]
-	- [Subarrays with K Different Integers]
-	- [Subarray Product Less Than K]
+	- [Longest substring with at most K distinct characters]
+	- [Subarrays with atmost K different integers]
+	- [Subarrays with K different integers]
+	- [Subarrays with product less than K]
+	- [Longest substring with at least K repeating characters]
+	- [Two Sum - Sorted Array]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
@@ -101,10 +107,7 @@
     - [Trapping rain water]
 	- [Sliding Window Maximum]
 9. [Heaps and Maps]
-10. [Hashing]
-	- [HashMaps]
-	- [HashSets]
-11. [Trees](#Trees)
+10. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
 	- [Tree traversals](#TR_Traversal)
 	- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
@@ -149,7 +152,7 @@
 	- [Binary tree right side view]
 	- [Sum of distances in tree]
 	- []
-12. [Graphs](#Graphs)
+11. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
@@ -206,7 +209,7 @@
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
-13. [Recursion and Backtracking](#Backtracking)
+12. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting and string concatenation strats]
     - [Generate paranthesis]
@@ -224,7 +227,7 @@
     - [Letter combinations of a Phone Number]
     - [Word search - I and II]
     - [Combinations]
-14. [Dynamic Programming](#DynamicProgramming)
+13. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -273,10 +276,10 @@
     - [Flip array]
     - [Trapping rain water]
 	- [Partition Array for Maximum Sum]
-15. [Bit Manipulation]
-16. [Greedy Algorithms]
+14. [Bit Manipulation]
+15. [Greedy Algorithms]
     - [Jump Game - I and II]
-17. [Tips and Tricks]
+16. [Tips and Tricks]
 	- [List<List> instantiation]
 	- [Array tips and tricks from the array section]
 	- [TreeSet vs Priority Queue]
@@ -287,7 +290,7 @@
 	- [Integer.compare(a,b)]
 	- [Reverse comaparator]
 	- [Number of continous subarrays fromed in array of length n = n + n-1 + n-2 + n-3 and so on. The number of all possible subarrays of an array of size N is N * (N + 1)/2. Used in 'Subarrays with k different integers']
-18. [Others]
+17. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Trie]
