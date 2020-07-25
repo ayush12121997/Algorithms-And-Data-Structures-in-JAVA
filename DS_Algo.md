@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 837
+### 990
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -843,9 +843,7 @@ for(int i = k; i < n; i++)
 Hence, now we can solve our problem in O(N) time. This is known as the Sliding Window Technique.
 
 #### Two Pointer Technique
-Two pointers is really an easy and effective technique which is typically used for searching pairs in a sorted array. Let us consider an example. Given a sorted array A (sorted in ascending order), having N integers, find if there exists any pair of elements (A[i], A[j]) such that their sum is equal to X.
-
-A naive method would be two compare every pair in O(N^2) time.
+Two pointers is really an easy and effective technique which is typically used for searching pairs in a sorted array or when we search in a window which can change length from either side. Let us consider an example. Given a sorted array A (sorted in ascending order), having N integers, find if there exists any pair of elements (A[i], A[j]) such that their sum is equal to X. A naive method would be two compare every pair in O(N^2) time.
 
 A faster way to achieve this is using two pointers. We take two pointers, one representing the first element and other representing the last element of the array, and then we add the values kept at both the pointers. If their sum is smaller than X then we shift the left pointer to right or if their sum is greater than X then we shift the right pointer to left, in order to get closer to the sum. We keep moving the pointers until we get the sum as X. The algorithm basically uses the fact that the input array is sorted. We start the sum of extreme values (smallest and largest) and conditionally move both pointers. We move left pointer i when the sum of A[i] and A[j] is less than X. We do not miss any pair because the sum is already smaller than X. Same logic applies for right pointer j.
 
@@ -989,7 +987,6 @@ public class Solution
 }
 ```
 <a href="#Contents">Back to contents</a>
-- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
 
 <a name="Math"></a>
 ## <p align="center"> Math </p>
