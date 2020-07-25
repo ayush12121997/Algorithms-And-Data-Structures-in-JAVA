@@ -286,6 +286,7 @@
 	- [Input sizes for various complexities]
 	- [Integer.compare(a,b)]
 	- [Reverse comaparator]
+	- [Number of continous subarrays fromed in array of length n = n + n-1 + n-2 + n-3 and so on. The number of all possible subarrays of an array of size N is N * (N + 1)/2. Used in 'Subarrays with k different integers']
 18. [Others]
     - [Square root decomposition]
     - [Segment trees]
