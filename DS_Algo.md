@@ -44,6 +44,8 @@
 	- [Minimum Window Substring]
 	- [Permutation in String]
 	- [Substring with Concatenation of All Words]
+	- [Trapping rain water]
+	- [Container with maximum water]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
