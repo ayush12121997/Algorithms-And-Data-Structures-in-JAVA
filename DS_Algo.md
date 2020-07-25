@@ -279,6 +279,8 @@
 	- [Character, String and Integer interchange among themselves]
 	- [How to take mid by avoiding overflow]
 	- [Input sizes for various complexities]
+	- [Integer.compare(a,b)]
+	- [Reverse comaparator]
 18. [Others]
     - [Square root decomposition]
     - [Segment trees]
