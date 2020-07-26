@@ -23,6 +23,7 @@
     - [Kadane's Algorithm for maximum product (Maximum product subarray)]
     - [Merge two sorted arrays in O(n1+n2) time]
     - [Merge two sorted arrays in O(1) space](#Arrays_MergeTwo)
+	- [Merge two sorted arrays and keep track of parent arrays]
     - [Find closest number in sorted array]
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Generalization of above if available]
