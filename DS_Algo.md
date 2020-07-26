@@ -33,7 +33,7 @@
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 	- [Randomly shuffle an array - Fisher Yates Algorithm]
 	- [Two Sum - Random Array]
-	- []
+	- [Quick select]
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
