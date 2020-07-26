@@ -55,6 +55,11 @@
 	- [Subarrays with product less than K]
 	- [Longest substring with at least K repeating characters]
 	- [Two Sum - Sorted Array]
+	- [3Sum Closest]
+	- [3Sum - Both methods(Ignoring repetitions and HashSet)]
+	- [4Sum(kSum)]
+	- [Find a triplet such that sum of two eqauls third]
+	- [Find the closest pair from two sorted arrays]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
