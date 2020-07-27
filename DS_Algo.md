@@ -377,6 +377,8 @@ arr.add(i, value); //Add value at index i in O(size - i)
 
 <a name="Arrays_BubbleSort"></a>
 ### Bubble Sort
+Bubble sort is based on the methodoly that we constantly check adjacent elements that whether or not they are in particular sorted order. And if found to be wrongly arranged, we swap their positions. It can be seen that this method if applied n times on an array of length n, will result in a sorted array. We only run the iterations till the point we get a sorted array. Hence, if the array is already sorted then the complexity is O(N) and if in worst case we do O(N) work N times hence O(N^2).
+
 - Best Case : O(n)
 - Average Case : O(n^2)
 - Worst Case : O(n^2)
@@ -388,19 +390,25 @@ public int[] BubbleSort(int[] a)
 {
     int temp = 0;
     int n = a.length;
+    // For n iterations
     for(int i = 0; i < n - 1; i++)
     {
+        // Used to check whether we have reached the
+        // sorted condition or not
         boolean flag = false;
+        // Iterate entire list comparing adjacent elements
         for(int j = 1; j < n; j++)
         {
             if(a[j-1] > a[j])
             {
                 temp = a[j-1];
+                // Swap adjacent elements if wrongly arranged
                 a[j-1] = a[j];
                 a[j] = temp;
                 flag = true;
             }
         }
+        // Flag is false, if array already sorted
         if(!flag)
         {
             break;
@@ -413,6 +421,8 @@ public int[] BubbleSort(int[] a)
 
 <a name="Arrays_SelectionSort"></a>
 ### Selection Sort
+In every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray. SO hecne in two loops, one outer one for every index, and inner for every index after the outer index, we find the smallest element and swap it with the element at outer index. See this for better understanding: https://www.w3resource.com/w3r_images/selection-short.png
+
 - Best Case : O(n)
 - Average Case : O(n^2)
 - Worst Case : O(n^2)
@@ -446,6 +456,8 @@ public int[] SelectionSort(int[] a)
 
 <a name="Arrays_InsertionSort"></a>
 ### Insertion Sort
+Insertion sort is a simple sorting algorithm that works similar to selection sort. Here instead of selecting minimum form remaining array, for every element we place it at its correct position in the array so far. The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part. Look at this for bettwe understanding: https://media.geeksforgeeks.org/wp-content/uploads/insertionsort.png
+
 - Best Case : O(n)
 - Average Case : O(n^2)
 - Worst Case : O(n^2)
