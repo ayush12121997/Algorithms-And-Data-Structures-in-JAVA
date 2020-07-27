@@ -486,6 +486,8 @@ public int[] InsertionSort(int[] arr)
 
 <a name="Arrays_MergeSort"></a>
 ### Merge Sort
+Merge Sort is a Divide and Conquer algorithm. It divides input array in two halves, calls itself for the two halves until we have reached the point where the two divided arrays are each individully merged alreay and then merge the two sorted halves back together by backtracking the recursion stack. In simpler words, we keep splitting the array to the point where single elements are reached. We know that all single elements are individually sorted so we start merging these elements back together in a sorted manner. Refer to this for better visualiztion(The nubmers in the image depict the steps that at which step what merging/dividing takes place): https://www.geeksforgeeks.org/wp-content/uploads/Merge-Sort-Tutorial.png
+
 - Best Case : O(nlog(n))
 - Average Case : O(nlog(n))
 - Worst Case : O(nlog(n))
@@ -493,50 +495,81 @@ public int[] InsertionSort(int[] arr)
 - Number of comparisons(Worst case) : nlogn(n)
 - Space complexity : O(n)
 ```java
+// The main function that is called for mergeSort in an array
+// Start = 0 and end = n-1 for entire array length
 public void MergeSort(int[] arr, int start, int end)
 {
     if(start>end)
     {
-        int mid = (start + end)/2;
+        // Find mid
+        int mid = start + (end - start)/2;
+        // Divide array into two halves and
+        // recursively call mergesort on both
         MergeSort(arr, start, mid);
         MergeSort(arr, mid + 1, end);
+        // Merge the two sorted arrays
         Merge(arr, start, mid, end);
     }
 }
 
+// Merge function for merging the arrays
 public Merge(int[] arr, int start, int mid, int end)
 {
+    // Temp array the size of the total merged array
     int[] temp = new int[end - start + 1];
+    // i marks the starting of first array
     int i = start;
+    // mid+1 marks the starting of second array
     int j = mid + 1;
+    // k marks the index we have reached in the
+    // temp array
     int k = 0;
+    // For as long as both i and j are valid
+    // i is valid from start -> mid
+    // j is valid from mid + 1 -> end
     while(i <= mid && j <= end)
     {
+        // If element of first array is smaller
         if(arr[i] <= arr[j])
         {
+            // Use the element of first array in temp and
+            // increment curr indexes for both first array
+            // and temp
             temp[k] = arr[i];
             k++;
             i++;
         }
+        // If element of second array is smaller
         else
         {
+            // Use the element of second array in temp and
+            // increment curr indexes for both second array
+            // and temp
             temp[k] = arr[j];
             k++;
             j++;
         }
     }
+    // At this point either first array has completed
+    // or the second one
+
+    // If first hasnt compelted, all remaining items
+    // in first array are directly added to temp
     while(i <= mid)
     {
         temp[k] = arr[i];
         k++;
         i++;
     }
+    // If second hasnt compelted, all remaining items
+    // in second array are directly added to temp
     while(j <= end)
     {
         temp[k] = arr[i];
         k++;
         i++;
     }
+    // Now this temp array is copied to the original array
     for(int m = start; m <= end; m++)
     {
         arr[m] = temp[m-start];
