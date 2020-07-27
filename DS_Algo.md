@@ -486,7 +486,7 @@ public int[] InsertionSort(int[] arr)
 
 <a name="Arrays_MergeSort"></a>
 ### Merge Sort
-Merge Sort is a Divide and Conquer algorithm. It divides input array in two halves, calls itself for the two halves until we have reached the point where the two divided arrays are each individully merged alreay and then merge the two sorted halves back together by backtracking the recursion stack. In simpler words, we keep splitting the array to the point where single elements are reached. We know that all single elements are individually sorted so we start merging these elements back together in a sorted manner. Refer to this for better visualiztion(The nubmers in the image depict the steps that at which step what merging/dividing takes place): https://www.geeksforgeeks.org/wp-content/uploads/Merge-Sort-Tutorial.png
+Merge Sort is a Divide and Conquer algorithm. It divides input array in two halves, calls itself for the two halves until we have reached the point where the two divided arrays are each individully merged alreay and then merge the two sorted halves back together by backtracking the recursion stack. In simpler words, we keep splitting the array to the point where single elements are reached. We know that all single elements are individually sorted so we start merging these elements back together in a sorted manner. Refer to this for better visualiztion: https://www.geeksforgeeks.org/wp-content/uploads/Merge-Sort-Tutorial.png
 
 - Best Case : O(nlog(n))
 - Average Case : O(nlog(n))
