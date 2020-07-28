@@ -14,7 +14,9 @@
     - [Merge Sort](#Arrays_MergeSort)
     - [Bucket Sort]
     - [Count Sort]
+	- [Randomly shuffle an array - Fisher Yates Algorithm]
     - [Quick Sort]
+	- [Quick select]
     - [Prefix Sum](#Arrays_PrefixSum)
     - [Array tips and tricks in JAVA, multiplication, char_arr and String, substring hashmap, stringbuilder](#Arrays_TipsAndTricks)
     - [Binary Search](#Arrays_BinarySearch)
@@ -31,9 +33,7 @@
     - [Range Sum Query](#Arrays_RSQuery)
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
-	- [Randomly shuffle an array - Fisher Yates Algorithm]
 	- [Two Sum - Random Array]
-	- [Quick select]
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
