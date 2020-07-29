@@ -40,7 +40,7 @@
 	- [Spiral Matrix]
 	- [Spiral Matrix - II]
 	- [Find missing number from N natural numbers]
-	- []
+	- [Largest number from array of integers]
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
@@ -304,6 +304,7 @@
 	- [Integer.compare(a,b)]
 	- [Reverse comaparator]
 	- [Number of continous subarrays fromed in array of length n = n + n-1 + n-2 + n-3 and so on. The number of all possible subarrays of an array of size N is N * (N + 1)/2. Used in 'Subarrays with k different integers']
+	- [Inbuilt str.compareTo() and integer.compareTo() methods]
 17. [Others]
     - [Square root decomposition]
     - [Segment trees]
