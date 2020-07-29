@@ -35,6 +35,7 @@
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 	- [Two Sum - Random Array]
 	- [First Missing Positive Integer]
+	- [Game of Life]
 	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
