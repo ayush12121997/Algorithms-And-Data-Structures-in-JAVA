@@ -41,6 +41,9 @@
 	- [Spiral Matrix - II]
 	- [Find missing number from N natural numbers]
 	- [Largest number from array of integers]
+	- [Plus one to array value]
+	- [Array nesting]
+	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
