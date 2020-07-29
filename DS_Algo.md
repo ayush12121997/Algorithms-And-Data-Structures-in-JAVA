@@ -16,7 +16,7 @@
     - [Count Sort]
 	- [Randomly shuffle an array - Fisher Yates Algorithm]
     - [Quick Sort]
-	- [Quick select]
+	- [Kth largest/smallest element]
     - [Prefix Sum](#Arrays_PrefixSum)
     - [Array tips and tricks in JAVA, multiplication, char_arr and String, substring hashmap, stringbuilder](#Arrays_TipsAndTricks)
     - [Binary Search](#Arrays_BinarySearch)
@@ -34,6 +34,8 @@
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
 	- [Two Sum - Random Array]
+	- [First Missing Positive Integer]
+	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
@@ -61,6 +63,7 @@
 	- [4Sum(kSum)]
 	- [Find a triplet such that sum of two eqauls third]
 	- [Find the closest pair from two sorted arrays]
+	- [Minimum size subarray sum]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
