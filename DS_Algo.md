@@ -37,6 +37,8 @@
 	- [First Missing Positive Integer]
 	- [Game of Life]
 	- [Finding peak element]
+	- [Spiral Matrix]
+	- [Spiral Matrix - II]
 	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
