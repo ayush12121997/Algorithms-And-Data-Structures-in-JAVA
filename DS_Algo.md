@@ -39,6 +39,7 @@
 	- [Finding peak element]
 	- [Spiral Matrix]
 	- [Spiral Matrix - II]
+	- [Find missing number from N natural numbers]
 	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
