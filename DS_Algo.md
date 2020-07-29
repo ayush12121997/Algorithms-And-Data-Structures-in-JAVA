@@ -36,6 +36,7 @@
 	- [Two Sum - Random Array]
 	- [First Missing Positive Integer]
 	- [Game of Life]
+	- [Finding peak element]
 	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
