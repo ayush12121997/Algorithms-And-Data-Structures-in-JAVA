@@ -43,6 +43,7 @@
 	- [Largest number from array of integers]
 	- [Plus one to array value]
 	- [Array nesting]
+	- [Contains duplicate]
 	- []
 4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
 	- [Introduction](#SWTP_Introduction)
@@ -72,6 +73,7 @@
 	- [Find a triplet such that sum of two eqauls third]
 	- [Find the closest pair from two sorted arrays]
 	- [Minimum size subarray sum]
+	- [Contains duplicate - II]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
