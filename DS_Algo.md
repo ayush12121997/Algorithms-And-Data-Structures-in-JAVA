@@ -50,6 +50,7 @@
 	- [Subarray sum equals K]
 	- [Continuous subarray sum]
 	- [Product of array except self]
+	- [Wiggle Sort]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
