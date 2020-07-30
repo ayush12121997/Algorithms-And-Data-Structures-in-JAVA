@@ -45,9 +45,9 @@
 	- [Array nesting]
 	- [Contains duplicate]
 	- []
-4. [Sliding Window and Two Pointers](#SlideWindow_TwoPointer)
-	- [Introduction](#SWTP_Introduction)
-	- [Sliding Window Template - String pattern questions](#SWTP_StringTemplate)
+4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
+	- [Introduction](#SWTPS_Introduction)
+	- [Sliding Window Template - String pattern questions](#SWTPS_StringTemplate)
 	- [Sliding Window Maximum]
 	- [Sliding Window Median]
 	- [Find all anagrams in a string]
@@ -87,10 +87,7 @@
     - [Divisibility by 3, 4, 5, 6, 7, 8, 9 and (2, 3 and 5)]
     - [Calculate nCr](#Math_NCR)
     - [Palindrome Number]
-6. [String]
-    - [Java String workarounds (Substring, toCharArray, charAt)]
-    - [Learn KMP robin karp and stuff]
-7. [Linked Lists](#LinkedLists)
+6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
     - [Reverse a linked list](#LL_Reverse)
@@ -103,7 +100,7 @@
     - [Doubly linked lists](#LL_Double)
     - [Odd even linked lists]
     - [Remove N'th Node from end]
-8. [Stacks and Queues](#StackAndQueue)
+7. [Stacks and Queues](#StackAndQueue)
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
     - [Priority Queues](#SQ_PQ)
@@ -125,8 +122,8 @@
     - [Evaluate Reverse Polish Notation]
     - [Trapping rain water]
 	- [Sliding Window Maximum]
-9. [Heaps and Maps]
-10. [Trees](#Trees)
+8. [Heaps]
+9. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
 	- [Tree traversals](#TR_Traversal)
 	- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
@@ -171,7 +168,7 @@
 	- [Binary tree right side view]
 	- [Sum of distances in tree]
 	- []
-11. [Graphs](#Graphs)
+10. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
@@ -228,7 +225,7 @@
     - [Stable marriage]
     - [Best First Search]
     - [A* Search Algorithm]
-12. [Recursion and Backtracking](#Backtracking)
+11. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting and string concatenation strats]
     - [Generate paranthesis]
@@ -246,7 +243,7 @@
     - [Letter combinations of a Phone Number]
     - [Word search - I and II]
     - [Combinations]
-13. [Dynamic Programming](#DynamicProgramming)
+12. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -295,10 +292,10 @@
     - [Flip array]
     - [Trapping rain water]
 	- [Partition Array for Maximum Sum]
-14. [Bit Manipulation]
-15. [Greedy Algorithms]
+13. [Bit Manipulation]
+14. [Greedy Algorithms]
     - [Jump Game - I and II]
-16. [Tips and Tricks]
+15. [Tips and Tricks]
 	- [List<List> instantiation]
 	- [Array tips and tricks from the array section]
 	- [TreeSet vs Priority Queue]
@@ -310,7 +307,7 @@
 	- [Reverse comaparator]
 	- [Number of continous subarrays fromed in array of length n = n + n-1 + n-2 + n-3 and so on. The number of all possible subarrays of an array of size N is N * (N + 1)/2. Used in 'Subarrays with k different integers']
 	- [Inbuilt str.compareTo() and integer.compareTo() methods]
-17. [Others]
+16. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Trie]
@@ -869,10 +866,14 @@ class NumArray
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="SlideWindow_TwoPointer"></a>
-## <p align="center"> Sliding Window and Two Pointers Technique </p>
-<a name="SWTP_Introduction"></a>
+<a name="SlideWindow_TwoPointer_String"></a>
+## <p align="center"> Sliding Window, Two Pointers and Strings </p>
+<a name="SWTPS_Introduction"></a>
 ### Introduction
+We combine these topics as a lot of String questions can be solved using the sliding window and to pointers technique. String problems in general are not a particular subsection of programming but rather form sub sections of various different techinques such as DP based string problems, sliding window based string problems, backtracking based string problems and so on. In this section we cover:
+1. Sliding Window Algorithm
+2. Two Pointer Technique
+3. String questions that can be solved using the above two technique and specific String based algorithms
 #### Sliding Window Algorithm
 Sliding Window Algorith is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single resulting in a O(N) complexity instead of O(N^2).
 
@@ -921,7 +922,7 @@ A faster way to achieve this is using two pointers. We take two pointers, one re
 
 <a href="#Contents">Back to contents</a>
 
-<a name="SWTP_StringTemplate"></a>
+<a name="SWTPS_StringTemplate"></a>
 ### Sliding Window Template - String pattern questions
 Many sliding window questions can involve strings. The questions regarding strings are generalyl related to finding contigous patterns under certain conditions in a parent string. In such type of questions the following pattern can be utilized to solve the questions. Let us assume that the question at hand is to find the starting indexes of all anagrams of a pattern in a string.
 ```java
