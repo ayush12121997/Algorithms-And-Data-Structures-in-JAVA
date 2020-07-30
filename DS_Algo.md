@@ -44,6 +44,10 @@
 	- [Plus one to array value]
 	- [Array nesting]
 	- [Contains duplicate]
+	- [Shortest unsorted continous subarray]
+	- [Lucky Numbers in a Matrix]
+	- [Subarray sum divisble by K]
+	- [Subarray sum equals K]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
@@ -74,6 +78,7 @@
 	- [Find the closest pair from two sorted arrays]
 	- [Minimum size subarray sum]
 	- [Contains duplicate - II]
+	- [K-Different pairs in an array]
 	- []
 5. [Math](#Math)
     - [Sieve of eratosthenes (Find prime numbers upto a given number)](#Math_SieveOfErast)
@@ -307,6 +312,8 @@
 	- [Reverse comaparator]
 	- [Number of continous subarrays fromed in array of length n = n + n-1 + n-2 + n-3 and so on. The number of all possible subarrays of an array of size N is N * (N + 1)/2. Used in 'Subarrays with k different integers']
 	- [Inbuilt str.compareTo() and integer.compareTo() methods]
+	- [Clone, shallow copy, deep copy]
+	- []
 16. [Others]
     - [Square root decomposition]
     - [Segment trees]
