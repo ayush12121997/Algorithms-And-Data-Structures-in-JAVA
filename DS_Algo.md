@@ -7,10 +7,10 @@
 1. [Reader class](#ReaderClass)
 2. [Faster printing using String Builder](#Printing)
 3. [Arrays(Searching, Sorting and Miscellaneous)](#Arrays)
-    1. [Basic Concepts](#Arrays_BasicConcepts)
-    2. [Bubble Sort](#Arrays_BubbleSort)
-    3. [Selection Sort](#Arrays_SelectionSort)
-    4. [Insertion Sort](#Arrays_InsertionSort)
+    3.1 [Basic Concepts](#Arrays_BasicConcepts)
+    3.2 [Bubble Sort](#Arrays_BubbleSort)
+    3.3 [Selection Sort](#Arrays_SelectionSort)
+    3.4 [Insertion Sort](#Arrays_InsertionSort)
     - [Merge Sort](#Arrays_MergeSort)
     - [Bucket Sort]
     - [Count Sort]
