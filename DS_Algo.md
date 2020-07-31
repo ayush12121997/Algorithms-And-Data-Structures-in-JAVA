@@ -53,7 +53,9 @@
 	- [Product of array except self]
 	- [Wiggle Sort]
 	- [Find minimum in rotated sorted array - Add about difference in if condtions leading to left <= right or left < right]
+	- [Search in rotated sorted array]
 	- [Find minimum in rotated sorted array - II]
+	- [Search in rotated sorted array - II]
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTPS_StringTemplate)
