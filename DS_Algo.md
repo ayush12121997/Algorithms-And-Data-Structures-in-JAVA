@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 745
+### Last edit - 872
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -679,12 +679,27 @@ Arrays.sort(arrayName, (i1, i2) -> Integers.compare(i1[0], i2[0]));
 
 <a name="Arrays_BinarySearch"></a>
 ### Binary Search
-Given a sorted array, we can find the existence of an element in O(logN) time instead of the standard O(N) time of a normal iterative search. As the array is sorted, we can in each iteration reduce our search space to half. We directly look at the middle element. If the element is the element we are looking for it is the answer, if it is bigger then the answer lies on the left, if it is smaller then the answer lies on the right. This process can be repeated recursively till search space becomes 0 or we have found the element.
+Given a sorted array, we can find the existence of an element in O(logN) time instead of the standard O(N) time of a normal iterative search. 
 
 - Best Case : O(1)
 - Average Case : O(log(n))
 - Worst Case : O(log(n))
 - Space complexity : O(1)
+
+Binary search can be used for the following purposes:
+1. Index of a key
+2. Index of first occurrence of a key
+3. Index of last occurrence of a key
+4. Index of least element greater than key
+5. Index of greatest element less than key
+6. Binary search in unsorted array using range
+
+#### Index of a key
+As the array is sorted, we can in each iteration reduce our search space to half. We follow the following steps:
+1. Directly look at the middle element. If the element is the element we are looking for it is the answer.
+2. If it is bigger than the value we are looking for, so the element lies in the left subarray.
+3. If it is smaller than the value we are looking for, so the element lies in the right subarray.
+4. This process can be repeated recursively till the search space becomes 0 or we have found the element.
 ```java
 // Recursive Binary Search
 // The function remains the same, we just call it with modified
@@ -717,7 +732,7 @@ public int BinarySearch(int[] arr, int value)
 {
     int start = 0;
     int end = arr.length - 1;
-    while(start < end)
+    while(start <= end)
     {
         int mid = start + (end - start) / 2;
         if (arr[mid] == value)
@@ -736,12 +751,123 @@ public int BinarySearch(int[] arr, int value)
     return -1;
 }
 ```
-Binary search can be used for the following purposes:
-1. Contains a key:
-2. Index of first occurrence of a key:
-3. Index of last occurrence of a key:
-4. Index of least element greater than key:
-5. Index of greatest element less than key:
+#### Index of first occurrence of a key:
+If the list contains duplicates, we may wish to get the first time an element occurs in the sorted list.
+The modification from the normal code for binary search is that even when we find an element we do not return it directly. Instead we search for it once again in the left subarray as if more elements with the same value existed before the element we have found, they would necessarily be to its left.
+```java
+public int BinarySearch(int[] arr, int value)
+{
+    int start = 0;
+    int end = arr.length - 1;
+    int ans = -1;
+    while(start <= end)
+    {
+        int mid = start + (end - start) / 2;
+        if (arr[mid] == value)
+        {
+            ans = mid;
+            end = mid -1;
+        }
+        else if (arr[mid] > value)
+        {
+            end = mid - 1;
+        }
+        else
+        {
+            start = mid + 1;
+        }
+    }
+    return ans;
+}
+```
+#### Index of last occurrence of a key
+If the list contains duplicates, we may wish to get the last time an element occurs in the sorted list.
+The modification from the normal code for binary search is that even when we find an element we do not return it directly. Instead we search for it once again in the right subarray as if more elements with the same value existed after the element we have found, they would necessarily be to its right.
+```java
+public int BinarySearch(int[] arr, int value)
+{
+    int start = 0;
+    int end = arr.length - 1;
+    int ans = -1;
+    while(start <= end)
+    {
+        int mid = start + (end - start) / 2;
+        if (arr[mid] == value)
+        {
+            ans = mid;
+            start = mid + 1;
+        }
+        else if (arr[mid] > value)
+        {
+            end = mid - 1;
+        }
+        else
+        {
+            start = mid + 1;
+        }
+    }
+    return ans;
+}
+```
+#### Index of least element greater than key
+So far one thing must be cear that all we need to do in binary serch is just think of the three conditions where we have to make a decision. So when we need to find the smallest element just greater than a given key we have the following three condtions:
+1. When the middle element is the key: We search in the array to the right for a value just greater than this.
+2. When the middle element is greater than the key: We store this value as a plausible answer and then search on the left for a smaller vlue if it exists.
+3. When the middle element is smaller than the key: We search in the array to the right.
+```java
+public int BinarySearch(int[] arr, int value)
+{
+    int start = 0;
+    int end = arr.length - 1;
+    int ans = -1;
+    while(start < end)
+    {
+        int mid = start + (end - start) / 2;
+        if (arr[mid] == value)
+        {
+            start = mid + 1;
+        }
+        else if (arr[mid] > value)
+        {
+            ans = mid;
+            end = mid - 1;
+        }
+        else
+        {
+            start = mid + 1;
+        }
+    }
+    return ans;
+}
+```
+#### Index of greatest element less than key
+The idea is similar to finding least element greater than a key.
+```java
+public int BinarySearch(int[] arr, int value)
+{
+    int start = 0;
+    int end = arr.length - 1;
+    int ans = -1;
+    while(start < end)
+    {
+        int mid = start + (end - start) / 2;
+        if (arr[mid] == value)
+        {
+            end = mid - 1;
+        }
+        else if (arr[mid] > value)
+        {
+            end = mid - 1;
+        }
+        else
+        {
+            ans = mid;
+            start = mid + 1;
+        }
+    }
+    return ans;
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="Arrays_InPlace"></a>
