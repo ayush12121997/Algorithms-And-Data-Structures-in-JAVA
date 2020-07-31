@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### 990
+### 745
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -318,7 +318,7 @@
 	- [Number of continous subarrays fromed in array of length n = n + n-1 + n-2 + n-3 and so on. The number of all possible subarrays of an array of size N is N * (N + 1)/2. Used in 'Subarrays with k different integers']
 	- [Inbuilt str.compareTo() and integer.compareTo() methods]
 	- [Clone, shallow copy, deep copy]
-	- []
+	- [Arrays.binarySearch() and Collections.binarySearch()]
 16. [Others]
     - [Square root decomposition]
     - [Segment trees]
@@ -679,18 +679,23 @@ Arrays.sort(arrayName, (i1, i2) -> Integers.compare(i1[0], i2[0]));
 
 <a name="Arrays_BinarySearch"></a>
 ### Binary Search
+Given a sorted array, we can find the existence of an element in O(logN) time instead of the standard O(N) time of a normal iterative search. As the array is sorted, we can in each iteration reduce our search space to half. We directly look at the middle element. If the element is the element we are looking for it is the answer, if it is bigger then the answer lies on the left, if it is smaller then the answer lies on the right. This process can be repeated recursively till search space becomes 0 or we have found the element.
+
 - Best Case : O(1)
 - Average Case : O(log(n))
 - Worst Case : O(log(n))
 - Space complexity : O(1)
 ```java
+// Recursive Binary Search
+// The function remains the same, we just call it with modified
+// starting and ending points
 public int BinarySearch(int[] arr, int start, int end, int value)
 {
     if (start > end)
     {
         return -1;
     }
-    int mid = (start + end) / 2;
+    int mid = start + (end - start) / 2;
     if (arr[mid] == value)
     {
         return mid;
@@ -704,7 +709,39 @@ public int BinarySearch(int[] arr, int start, int end, int value)
         return BinarySearch(arr, mid + 1, end, value);
     }
 }
+
+// Iterative Binary Search
+// In the same function inside a while loop, we keep updating
+// the starting and the ending points
+public int BinarySearch(int[] arr, int value)
+{
+    int start = 0;
+    int end = arr.length - 1;
+    while(start < end)
+    {
+        int mid = start + (end - start) / 2;
+        if (arr[mid] == value)
+        {
+            return mid;
+        }
+        else if (arr[mid] > value)
+        {
+            end = mid - 1;
+        }
+        else
+        {
+            start = m + 1;
+        }
+    }
+    return -1;
+}
 ```
+Binary search can be used for the following purposes:
+1. Contains a key:
+2. Index of first occurrence of a key:
+3. Index of last occurrence of a key:
+4. Index of least element greater than key:
+5. Index of greatest element less than key:
 <a href="#Contents">Back to contents</a>
 
 <a name="Arrays_InPlace"></a>
