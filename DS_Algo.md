@@ -52,7 +52,7 @@
 	- [Continuous subarray sum]
 	- [Product of array except self]
 	- [Wiggle Sort]
-	- [Find minimum in rotated sorted array]
+	- [Find minimum in rotated sorted array - Add about difference in if condtions leading to left <= right or left < right]
 	- [Find minimum in rotated sorted array - II]
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
@@ -746,7 +746,7 @@ public int BinarySearch(int[] arr, int value)
         }
         else
         {
-            start = m + 1;
+            start = mid + 1;
         }
     }
     return -1;
@@ -821,7 +821,7 @@ public int BinarySearch(int[] arr, int value)
     int start = 0;
     int end = arr.length - 1;
     int ans = -1;
-    while(start < end)
+    while(start <= end)
     {
         int mid = start + (end - start) / 2;
         if (arr[mid] == value)
@@ -849,7 +849,7 @@ public int BinarySearch(int[] arr, int value)
     int start = 0;
     int end = arr.length - 1;
     int ans = -1;
-    while(start < end)
+    while(start <= end)
     {
         int mid = start + (end - start) / 2;
         if (arr[mid] == value)
