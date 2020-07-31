@@ -30,6 +30,7 @@
     - [Finding single element in array of pairs](#Arrays_FindSingle)
     - [Generalization of above if available]
     - [Merge intervals together - Edit this one to add code to it]
+	- [Insert Intervals]
     - [Range Sum Query](#Arrays_RSQuery)
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
