@@ -57,6 +57,9 @@
 	- [Find minimum in rotated sorted array - II]
 	- [Search in rotated sorted array - II]
 	- [Find duplicate in sorted array]
+	- [Set mismatch - Use inplace storing two elements policy]
+	- []
+	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTPS_StringTemplate)
