@@ -56,7 +56,7 @@
 	- [Search in rotated sorted array]
 	- [Find minimum in rotated sorted array - II]
 	- [Search in rotated sorted array - II]
-	- []
+	- [Find duplicate in sorted array]
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTPS_StringTemplate)
@@ -115,6 +115,9 @@
     - [Doubly linked lists](#LL_Double)
     - [Odd even linked lists]
     - [Remove N'th Node from end]
+	- [Floyd's Tortoise and Hare - Cycle detection]
+	- [Linked List Cycle - II]
+	- []
 7. [Stacks and Queues](#StackAndQueue)
     - [Stacks](#SQ_Stack)
     - [Queues](#SQ_Queue)
