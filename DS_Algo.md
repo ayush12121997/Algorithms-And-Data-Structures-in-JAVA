@@ -59,7 +59,11 @@
 	- [Find duplicate in sorted array]
 	- [Set mismatch - Use inplace storing two elements policy]
 	- [Binary search template for trial and error]
-	- [Find kth smallest pair distance]
+	- [K'th smallest element in sorted matrix]
+	- [Find K-th smallest pair distance]
+	- [Find K pairs with smallest sums]
+	- [Kth smallest number in multiplication table]
+	- [K-th smallest prime fraction]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
@@ -144,8 +148,13 @@
     - [Evaluate Reverse Polish Notation]
     - [Trapping rain water]
 	- [Sliding Window Maximum]
+	- [Priority queue template for kth smallest element in sorted matrix]
 	- [K'th smallest element in sorted matrix]
-	- [K smallest pairs]
+	- [Find K-th smallest pair distance]
+	- [Find K pairs with smallest sums]
+	- [Kth smallest number in multiplication table]
+	- [K-th smallest prime fraction]
+	- []
 8. [Heaps]
 9. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
