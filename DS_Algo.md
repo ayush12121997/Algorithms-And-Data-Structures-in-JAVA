@@ -63,7 +63,7 @@
 	- [K'th smallest element in sorted matrix]
 	- [Find K pairs with smallest sums]
 	- [Kth smallest number in multiplication table]
-	- [K-th smallest prime fraction]
+	- [K-th smallest prime fraction - See discussion too]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
@@ -149,12 +149,11 @@
     - [Trapping rain water]
 	- [Sliding Window Maximum]
 	- [Kth largest/smallest element]
-	- [Priority queue template for kth smallest element in sorted matrix]
+	- [Priority queue template for kth smallest element in sorted matrix - Slower than binary search but can be used as a quick getaway]
 	- [Find K-th smallest pair distance]
 	- [K'th smallest element in sorted matrix]
 	- [Find K pairs with smallest sums]
 	- [Kth smallest number in multiplication table]
-	- [K-th smallest prime fraction]
 	- []
 8. [Heaps]
 9. [Trees](#Trees)
