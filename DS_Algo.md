@@ -148,6 +148,7 @@
     - [Evaluate Reverse Polish Notation]
     - [Trapping rain water]
 	- [Sliding Window Maximum]
+	- [Kth largest/smallest element]
 	- [Priority queue template for kth smallest element in sorted matrix]
 	- [Find K-th smallest pair distance]
 	- [K'th smallest element in sorted matrix]
