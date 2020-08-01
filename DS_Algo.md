@@ -52,15 +52,14 @@
 	- [Continuous subarray sum]
 	- [Product of array except self]
 	- [Wiggle Sort]
-	- [Bnary search template for finding minimum in rotated sorted array]
 	- [Find minimum in rotated sorted array - Add about difference in if condtions leading to left <= right or left < right]
 	- [Search in rotated sorted array]
 	- [Find minimum in rotated sorted array - II]
 	- [Search in rotated sorted array - II]
 	- [Find duplicate in sorted array]
 	- [Set mismatch - Use inplace storing two elements policy]
-	- [Binary search template for finding kth smallest element in sorted matrix]
-	- []
+	- [Binary search template for trial and error]
+	- [Find kth smallest pair distance]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
@@ -145,7 +144,8 @@
     - [Evaluate Reverse Polish Notation]
     - [Trapping rain water]
 	- [Sliding Window Maximum]
-	- []
+	- [K'th smallest element in sorted matrix]
+	- [K smallest pairs]
 8. [Heaps]
 9. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
