@@ -56,6 +56,7 @@
 	- [Search in rotated sorted array]
 	- [Find minimum in rotated sorted array - II]
 	- [Search in rotated sorted array - II]
+	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
 	- [Sliding Window Template - String pattern questions](#SWTPS_StringTemplate)
@@ -100,6 +101,7 @@
     - [Divisibility by 3, 4, 5, 6, 7, 8, 9 and (2, 3 and 5)]
     - [Calculate nCr](#Math_NCR)
     - [Palindrome Number]
+	- []
 6. [Linked Lists](#LinkedLists)
     - [Singly Linked List](#LL_SinglyLinkedList)
     - [Detect a cycle in a linked list](#LL_Cycle)
@@ -135,6 +137,7 @@
     - [Evaluate Reverse Polish Notation]
     - [Trapping rain water]
 	- [Sliding Window Maximum]
+	- []
 8. [Heaps]
 9. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
@@ -235,9 +238,6 @@
 	- [Surrounding regions]
 	- [Maximum area of island]
 	- []
-    - [Stable marriage]
-    - [Best First Search]
-    - [A* Search Algorithm]
 11. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting and string concatenation strats]
@@ -328,6 +328,7 @@
     - [Trie]
     - [Line Sweep Algo]
     - [Catalan Number]
+	- [Stable marriage]
 
 <a name="ReaderClass"></a>
 ## <p align="center"> Reader Class </p>
@@ -695,7 +696,6 @@ Binary search can be used for the following purposes:
 3. Index of last occurrence of a key
 4. Index of least element greater than key
 5. Index of greatest element less than key
-6. Binary search in unsorted array using range
 
 #### Index of a key
 As the array is sorted, we can in each iteration reduce our search space to half. We follow the following steps:
