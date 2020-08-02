@@ -155,8 +155,7 @@
 	- [Find K pairs with smallest sums]
 	- [Kth smallest number in multiplication table]
 	- []
-8. [Heaps]
-9. [Trees](#Trees)
+8. [Trees](#Trees)
 	- [Introduction](#TR_Intro)
 	- [Tree traversals](#TR_Traversal)
 	- [Find postorder traversal from given inorder and preorder](#TR_PostorderFromPreAndInorder)
@@ -201,7 +200,7 @@
 	- [Binary tree right side view]
 	- [Sum of distances in tree]
 	- []
-10. [Graphs](#Graphs)
+9. [Graphs](#Graphs)
     - [Representing a graph](#GP_Representaations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
@@ -255,7 +254,7 @@
 	- [Surrounding regions]
 	- [Maximum area of island]
 	- []
-11. [Recursion and Backtracking](#Backtracking)
+10. [Recursion and Backtracking](#Backtracking)
     - [Keys to backtracking](#R_BT_Keys)
     - [Standard structure for backtracking problems - Listing and counting and string concatenation strats]
     - [Generate paranthesis]
@@ -273,7 +272,7 @@
     - [Letter combinations of a Phone Number]
     - [Word search - I and II]
     - [Combinations]
-12. [Dynamic Programming](#DynamicProgramming)
+11. [Dynamic Programming](#DynamicProgramming)
     - [Overlapping Subproblems](#DP_OverlappingSubproblems)
     - [Optimal Substructure](#DP_OptimalSubstructure)
     - [Tabulation vs Memoization](#DP_TabulationVsMemoization)
@@ -323,12 +322,11 @@
     - [Flip array]
     - [Trapping rain water]
 	- [Partition Array for Maximum Sum]
-13. [Bit Manipulation]
-14. [Greedy Algorithms]
+12. [Greedy Algorithms]
     - [Jump Game - I and II]
-15. [Tips and Tricks]
+13. [Tips and Tricks]
 	- [List<List> instantiation]
-	- [Array tips and tricks from the array section]
+	- [Add array tips and tricks from the array section]
 	- [TreeSet vs Priority Queue]
 	- [HashMap vs HashSet]
 	- [Character, String and Integer interchange among themselves]
@@ -340,13 +338,15 @@
 	- [Inbuilt str.compareTo() and integer.compareTo() methods]
 	- [Clone, shallow copy, deep copy]
 	- [Arrays.binarySearch() and Collections.binarySearch()]
-16. [Others]
+14. [Others]
     - [Square root decomposition]
     - [Segment trees]
     - [Trie]
     - [Line Sweep Algo]
     - [Catalan Number]
 	- [Stable marriage]
+	- [Heaps]
+	- [Bit Manipulation]
 
 <a name="ReaderClass"></a>
 ## <p align="center"> Reader Class </p>
