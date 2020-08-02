@@ -1,7 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
 ### Last edit content - 280
-### Last edit content- 7040
+### Last edit content- 7392
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -7039,61 +7039,55 @@ On the basis of these keys to backtracking, we can divide our process into steps
 
 <a name="DynamicProgramming"></a>
 ## <p align="center"> Dynamic Programming </p>
-Dynamic Programming solves complex problems that tend to take exponential time by dividing them into smaller subproblems and storing their results for use later on to calculate larger values. 
+Dynamic Programming solves complex problems that tend to take exponential time by dividing them into smaller subproblems and storing their results for use later on to calculate larger values.
 
 <a name="DP_OverlappingSubproblems"></a>
 ### Overlapping Subproblems
-Recursive solutions where various base cases call the already calculated subproblems again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This solution works only when there is a overlapping subproblems property in the question.
+Recursive solutions where the already calculated subproblems are called again and again result in exponential time complexities. Hence, if the solutions of the common subproblems are stored and used directly in O(1) time, the complexity of the entire problem is reduced by large. This is called the overlapping subproblems property of a dynamic programmign question.
 
-One method to check this is to generally find a recurrence relation. A good point to note is that it is not necessary to solve the recurrence relation at hand. If the recurrence relation, calls the function itself and forms a recurrence tree with common elements, the overlapping subproblems property is satisfied. An example is fib(n) = fib(n-1) + fib(n-2).
+One method to check the existence of this property is to generally find a recurrence relation that solves/fits the given question. A good point to note is that it is not necessary to solve the recurrence relation at hand but enough to just construct it. If the recurrence relation, calls the function itself forming a recurrence tree with common elements in different subtrees, then the overlapping subproblems property is satisfied. An example is fib(n) = fib(n-1) + fib(n-2).
 
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_OptimalSubstructure"></a>
 ### Optimal Substructure
-Optimal substructure property means that the results of the parents values should be directly computable ftome the optimal results of the child values. 
+Optimal substructure property means that the results of the parents values should be directly computable from the optimal results of the child values. If this were not the case then even though the child values were available at hand, the parent values calculated would require recalculation from beginning to get the optimal answer for the parent. Hence, it is important to note that the recurrence relation/tree should not form any loopholes where the parent needs the value of the child and child needs the value of the parent for optimal answers. 
 
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_TabulationVsMemoization"></a>
 ### Tabulation vs Memoization
-Tabulation is when you follow a bottom's up approach to solving the problems. So for example if the recursion tree goes down to 15 levels so you start from the bottom calculating subproblems to build to the final answer. You generally do this by having an array say dp[n] and start from filling dp[0] -> dp[1] -> -> dp[n]. Used when it is necessary to solve all the possible subproblems for the final answer.
+Tabulation is when you follow a bottom's up approach to solving the problems. For example if the recursion tree goes down to 15 levels so you start from the bottom, calculating subproblems to build to the final answer. You generally do this by having an array say dp[n] and start from filling dp[0] -> dp[1] -> -> dp[n] or dp[n] -> dp[n-1] -> - > dp[0], depending on the question format. Tabulation is used when it is necessary to solve all the possible subproblems for the final answer.
 
-Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap. Used when it is not necessary to solve all the subproblems for reaching the final answer.
+Memoization is a top down approach where you directly calculate for the final value but for every call you store the value of the subproblem such that if it is called again you can access the value directly. Generally values are stored in a hashmap and this technique is used when it is not necessary to solve all the subproblems for reaching the final answer.
 
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_SolvingDP"></a>
 ### Solving a DP Problem
-The DP question solving can be divided into further smaller tasks (Just like DP XD):
-1. State identification: A state in a DP problem can be defined as something that helps you identify at which subproblem have you reached in your dp. For example it can be dp[index], where index is used to identify the the current subproblem, that is the current level can be traced using the index. In a knapsack problem thsi would be the [index][weight] and hence the dp formed is of the type dp[index][weight]. Hence the state identifier should be a value or at max two that help you identify the current subproblem uniquely from others.
-2. Relations between states: Find the recursive relations which defines your state(n) in terms of previously calculated values like n-1, n-2, ... and so on.
-3. Choosing between tabulation and memoization: This choice should be made according to the differences explained in the above section.
-
-Majority of the DP problems can be categorized into t
+The DP question solving can be divided into further smaller tasks, just like DP: (LOL XD)
+1. <ins>State identification</ins>: A state in a DP problem can be defined as something that helps you identify at which subproblem have you reached in your dp. For example it can be dp[index], where index is used to identify the the current subproblem, that is the current level can be traced using the index. In a knapsack problem this would be the [index][weight] and hence the dp formed is of the type dp[index][weight]. We need to identify the minimum number of variables needed to identify the states of a problem as it is these number of variables that help us construct our DP tables. One variable -> 1D array, 2 variables -> 2D array and so on.
+2. <ins>Relations between states</ins>: Find the recursive relations which defines your states in terms of previously calculated values.
+3. <ins>Choosing between tabulation and memoization</ins>: This choice should be made according to the differences explained in the previous section.
 
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_BacktrackDP"></a>
 ### DP with Backtracking (Top-down approach)
-In certain situations we might need to solve a question with backtracking. Backtracking has been explained in detail in the section before DP(<a href="#Backtracking">Backtracking</a>). Backtracking enables us to explore all outcomes and choose the best afterwards when directly going for a particular outcome or greedy/iterative solutions won't work.
+In certain situations we might need to solve a question with backtracking. Backtracking has been explained in detail in the section before(<a href="#Backtracking">Backtracking</a>). Backtracking enables us to explore all outcomes and choose the best afterwards when directly going for a particular outcome or greedy/iterative solutions won't work.
 
 Using recursion we might encounter the same problem again and again making the time complexity of backtracking solutions exponential. Hence, we combine backtracking with DP, which in general cases is known as the top down recursive approach.
-
-Steps to follow to define a backtracking recursive DP solution:
-1. Describe the problem as a recursive function. Steps to help decide the flow of the fucntion are explained in the backtracking section.
-2. Try to maximize the use of local variables and minimize the use of global variables. What this means is that we should try to use minimum size possible table for the memoization. Instead of identifying a particular state using all the variables available, we should try to minimize the number of variables needed to identify a state uniquely from others.
-3. Once state varibles are decided, use memoization to store and check values of smaller subproblems to avoid exponential time complexity.
 
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_2DimensionalGrids"></a>
 ### 2 Dimensional DP - Grids
 The grid problems can be broadly classified into three subcategories:
-1. Find minimum cost path when a grid matrix is given.
-2. Find number of ways to reach and ending point from the starting point travelling only in specified directions.
+1. Find minimum cost path in a given cost matrix.
+2. Find number of ways to reach and ending point from the starting point.
 3. Find number of ways to reach and ending point from the starting point with obstructions.<br>
-We will discuss them one by one:
+
+All of these grid problems will have one common part, which is, movement will be allowed only in the right and down direction, enabling us to use DP, as the only two ways to reach a cell in the grid would be from the previously visited left and up cells. We will discuss these three variations one by one:
 
 #### Finding Minimum-Cost Path in a 2-D Matrix
 The problem statement is that given a cost matrix cost[][] where cost[i][j] is the cost of visiting the cell (i,j), find minimum cost path from (0,0) to (x,y). Only movements allowed are right and down.
@@ -7137,7 +7131,7 @@ return dp[target]
 ```
 <a href="#Contents">Back to contents</a>
 
-#### Finding the number of ways to reach from a starting position to an ending position travelling in specified directions only
+#### Finding the number of ways to reach from a starting position to an ending position
 You would be given a 2D matrix. The task is to find the number of ways to reach (i,j) from (0,0). Only movements allowed are right and down.
 
 The recurrence relation can be formed as: NumWays(i,j) = NumWays(i-1,j) + NumWays(i,j-1)<br>
@@ -7191,7 +7185,7 @@ for (int i = 1; i <= target; ++i)
 }
 return dp[target]
 ```
-***NOTE: THE DP APPROACH TO SOLVING GRID QUESTIONS WORKS ONLY WHEN THE ANSWER FOR A CELL IN THE DP TABLE CAN BE EASILY CALCULATED USING THE PRECOMPUTED VALUES. HENCE, EVEN A SMALL MODIFICATION SUCH AS ALLOWING MOVEMENTS IN ALL 4 DIRECTIONS WOULD REQUIRE US TO CHANGE OUR APPROACH TO BFS(FOR MIN COST PATH) AND DFS/BACKTRACKING(FOR TOTAL PATHS/ CHECKING EXISTENCE OF A PATH).***
+***NOTE: THE DP APPROACH TO SOLVING GRID QUESTIONS WORKS ONLY WHEN THE ANSWER FOR A CELL IN THE DP TABLE CAN BE CALCULATED USING THE PRECOMPUTED VALUES. HENCE, EVEN A SMALL MODIFICATION SUCH AS ALLOWING MOVEMENTS IN ALL 4 DIRECTIONS WOULD REQUIRE US TO CHANGE OUR APPROACH TO PREFERABLY BFS(FOR MIN COST PATH) AND TO DFS/BACKTRACKING(FOR TOTAL PATHS/ CHECKING EXISTENCE OF A PATH).***
 
 <a href="#Contents">Back to contents</a>
 
@@ -7199,23 +7193,22 @@ return dp[target]
 ### DP on Merging Intervals
 Merging intervals DP questions will generally have a problem statement of the form, that, given a set of numbers find an optimal solution using the current number and the optimal values from the right and left sides.
 
-The problem statement might not always be direct. It can be presented as a simple array with a target to achieve. The catch is that to achieve the target we should be able to identify that every step some values of the array are merged together(that is used up to get a new value) and the size of te array reduces as we move ahead. So for example, let the operation be adding elements, we might figure that our process look like this:<br>
+The problem statement might not always be direct. It can be presented as a simple array with a target to achieve, or even a tree that requires merging of leaf nodes. The catch is that to achieve the target we should be able to identify that at every step some values of the array are merged together(that is used up to get a new value) and the size of the array reduces as we move ahead. So for example, let the operation be adding elements, our process might like this:<br>
 [1, 2, 3, 4, 5] -> [1, 2, 3, 9] -> [3, 3, 9] -> [6, 9] -> [15]
 
 The standard recurrence relation for such type of a problem would be:
 ```java
-dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]
+// dp[i][j] = Most optimal value of (dp[i][k] + result[k] + dp[k+1][j]) for k from i -> j
 // i and j are the starting and ending index of the intervals
 // The final answer hence would be dp[0][length of array - 1]
 ```
 The standard method to code dp problems by merging up intervals looks like:
-
 ```java
 /*
 Decide the window size of the interval. We build from window size 1 to the
 entire array length as our window size.
 */
-for(int l = 1; l<n; l++)
+for(int l = 1; l < n; l++)
 {
     /*
     For the chosen window size, we need to traverse the entire array in
@@ -7225,7 +7218,7 @@ for(int l = 1; l<n; l++)
     Therefore, we need to decide starting and ending indexes.
     For the starting index, we move from 0 to (n - window size).
     */
-    for(int i = 0; i<n-l; i++)
+    for(int i = 0; i < n-l; i++)
     {
         /*
         j becomes our ending index. This is always equal to i + l.
@@ -7240,23 +7233,24 @@ for(int l = 1; l<n; l++)
         */
         /*
         The partitioning strategy depends on the question. What this means
-        is that to decide what to with the partitions and to decide where
+        is that to decide what to do with the partitions and to decide where
         to make the partitions varries from question to question. In this
-        example we assume we add the value from an array doSomething[].
+        example we assume we add the value from an array called doSomething[].
         */
-        for(int k = i; k<j; k++)
+        for(int k = i; k < j; k++)
         {
             dp[i][j] = max(dp[i][j], dp[i][k] + doSomething[k] + dp[k+1][j]);
         }
     }
 }
+// Return the value for entire range of the array as one window
 return dp[0][n-1]
 ```
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_Strings"></a>
 ### DP on Strings
-The general problem statement shared is given two or one string return some result. The result can be to find some subsequence or substring according to a condition or find the count of certain possible subsequences/substrings.
+The general problem statement is that given two string or maybe one string, return some result. The result can be to find existence or value of some subsequence or substring according to a condition or to find the count of certain possible subsequences/substrings.
 
 The common pattern followed for two string questions is:
 ```java
@@ -7275,11 +7269,11 @@ for (int i = 1; i <= n; i++)
     {
         if (s1[i-1] == s2[j-1])
         {
-            dp[i][j] = /*Implement required changes here*/;
+            dp[i][j] = /*Implement required function here*/;
         }
         else
         {
-            dp[i][j] = /*Implement required changes here*/;
+            dp[i][j] = /*Implement required function here*/;
         }
     }
 }
@@ -7292,7 +7286,7 @@ is to check the required conditions/validations for every
 subsequence/substring of the string. To check for every substring,
 we move the end point of our substring from 1 -> length of string,
 and consider every starting point possible for each end point. Hence,
-the substrings for string "abcde" would look like:
+the substrings for string "abcde" in each iteration would look like:
 For end point a: a
 For end point b: a->b, b
 For end point c: a->c, b->c, c
@@ -7306,15 +7300,15 @@ for (int i = 1; i < n; i++)
 {
     // Choose the starting point for the substring
     // Ranges from 0 to (end point - 1)
-    for (int j = 0; i <= i; j++)
+    for (int j = 0; j <= i; j++)
     {
         if (s[i] == s[j])
         {
-            dp[i][j] = /*Implement required changes here*/;
+            dp[i][j] = /*Implement required function here*/;
         }
         else
         {
-            dp[i][j] = /*Implement required changes here*/;
+            dp[i][j] = /*Implement required function here*/;
         }
     }
 }
@@ -7337,40 +7331,128 @@ Sample problems can be Knapsack, Buy and Sell Stock, House Robber etc.
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_LIS"></a>
-### Longest Integer Subsequence
+### Longest Integer Subsequence(LIS)
 The longest integer subsequence problem requires you to find the length of the longest increasing integer subsequence in an array. For example for the array [5, 8, 3, 7, 9, 1] the answer would be 3 and the subsequence would be [3, 7, 9]. Do note, the subsequence is not necessarily contiguous.
 
-For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array of the form dp[n+1]. The final answer would be the maximum of all dp[i]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. Hence, for every i,
+For every index, we store the length of the LIS upto that point such that the given element at the index is also included. We store this in an array of the form dp[n+1]. The final answer would be the maximum of all dp[i]. dp[i] is calculated by getting the max LIS of all elements upto the current index such that their ending element is smaller than the current element. The code is as follows:
 ```java
-dp[i] = 1 + Max(All dp[j] such that j < i and arr[j] is smaller than arr[i]).
-```
-Basic code:
-```java
-for(int i = 1; i < n; i++)
+// dp[i] = 1 + Max(All dp[j] such that j < i and arr[j] is smaller than arr[i]).
+
+class Solution
 {
-    int max = 0;
-    for(int j = 0; j < i; j++)
+    public int lengthOfLIS(int[] nums)
     {
-        if(A.get(j) < A.get(i))
+        int n = nums.length;
+        // If n < 2, then no subsequence to choose from
+        if(n == 0 || n == 1)
         {
-            if(dp[j] > max)
+            return n;
+        }
+        // DP Table
+        int[] dp = new int[n];
+        // Subsequence of single element is always increasing
+        dp[0] = 1;
+        // Current answer is 1
+        int ans = 1;
+        // For all elements after index 0
+        for(int i = 1; i < n; i++)
+        {
+            // Minimum length of subsequence at any index will
+            // be 1, as the element in itself will always form
+            // an increasing subsequence
+            dp[i] = 1;
+            // For all elements before index i
+            for(int j = 0; j < i; j++)
             {
-                max = dp[j];
+                // If element at index j is smaller than element
+                // at index i, then it can form a valid subsequence
+                if(nums[j] < nums[i])
+                {
+                    // New value is max of prev and current possible
+                    // Current possible = Length till j + 1
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+                // Ans is ax of all subsequences
+                ans = Math.max(dp[i], ans);
             }
         }
+        return ans;
     }
-    dp[i] = 1 + max;
 }
-````
-
+```
 The problem may have two variations as follows:
 1. Longest decreasing subsequence: Simply change the comparison of getting values lesser than the current element so far to getting values greater than the current element so far.
 2. Longest increasing followed by decreasing subsequence: Calculate LIS from the beginning and also LIS from the end. The LIS from the end acts as a decreasing subsequence of elements ahead in the list. For example, LIS from the back would mean that for dp[i] the value is the longest decreasing subsequence from i -> n instead of from 0 -> i. Then calculate the max of (FrontLIS + BackLIS for all i).
 
 <a href="#Contents">Back to contents</a>
 
-- [Unique Paths in a grid](#DP_UniquePaths)
-- [Minimum sum path in a grid](#DP_MinSumPath)
+<a name="DP_UniquePaths"></a>
+### Unique Paths in a grid with obstacles
+The question requires us to move from the top left to bottom down in a grid, with only movements allowed in right and down directions. We have to find the total number of unique paths to do so. The grid also contains obstacles which are marked as 1 and the free spaces are marked as 0.
+
+The number of ways to reach a cell will always be equal to the number of ways to reach the cell above it + the number of ways to reach the cell to the left. Hence, we can create a 2D DP table, where every cell dp[i][j] holds the number of ways to reach (i,j), and to calculate dp[i][j] we use the following relation:<br>
+dp[i][j] = dp[i-1][j](Number of ways to reach above cell) + dp[i][j-1](Number of ways to reach left cell)<br>
+The final snwer would be dp[n][m], if there are n rows and m columns, that is the number of ways to reach last cell.
+
+Moreover, as we have obstacles, if a cell contains an obstacle the number of ways to reach it would be 0. Hence, if either the starting or ending cell have an obstacle, total unique ways will be 0.
+```java
+class Solution
+{
+    public int uniquePathsWithObstacles(int[][] obstacleGrid)
+    {
+        int n = obstacleGrid.length;
+        if(n == 0)
+        {
+            return 0;
+        }
+        int m = obstacleGrid[0].length;
+        if(m == 0)
+        {
+            return 0;
+        }
+        /*
+        Need dp[][] of size [n+1][m+1] because for the top row and
+        the first column of the grid, the values needed would not be
+        available and hence to avoid writing extra if conditions and
+        for avoiding null pointer exception, we increase the size by
+        1 ob both sides. Now, when dp[i-1][j] and dp[i][j-1] are
+        accessed for the top row and first column, only 0 values will
+        received.
+        */
+        int[][] dp = new int[n+1][m+1];
+        // If starting point or ending point themselves are blocked
+        if(obstacleGrid[0][0] == 1 || obstacleGrid[n-1][m-1] == 1)
+        {
+            return 0;
+        }
+        // First cell has only way to reach and forms our base case
+        dp[1][1] = 1;
+        // For every row
+        for(int i = 1; i <= n; i++)
+        {
+            // For every column
+            for(int j = 1; j <= m; j++)
+            {
+                // If cell is reachables
+                if(obstacleGrid[i-1][j-1] != 1)
+                {
+                    // Number of ways = Number of ways to reach left cell
+                    //                  + Number of ways to reach top cell 
+                    dp[i][j] += dp[i-1][j] + dp[i][j-1];
+                }
+            }
+        }
+        // Return number of ways to reach last cell
+        return dp[n][m];
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_MinSumPath"></a>
+### Minimum sum path in a grid
+
+<a href="#Contents">Back to contents</a>
 
 <a name="DP_LCS"></a>
 ### Longest Common Subsequence
