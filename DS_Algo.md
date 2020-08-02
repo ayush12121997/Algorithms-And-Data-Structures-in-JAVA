@@ -64,6 +64,7 @@
 	- [Find K pairs with smallest sums]
 	- [Kth smallest number in multiplication table]
 	- [K-th smallest prime fraction - See discussion too]
+	- [Median of two sorted arrays]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
