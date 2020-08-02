@@ -13,5 +13,4 @@ ayush16024@iiitd.ac.in
 
 All the best for your preparation!
 
-<img src="/Signature/Sign.png" width="12%"><br>
-Ayush Shrivastava
+<p style="text-align: right"> Ayush Shrivastava </p>
