@@ -290,13 +290,12 @@
 	- [Convert 2d to 1d see first discussion of coin change 2, extended knapsack]
     - [DP problems classification]
     - [Longest Integer Subsequence](#DP_LIS)
+	- [Unique Paths in a grid](#DP_UniquePaths)
+    - [Minimum sum path in a grid](#DP_MinSumPath)
     - [Longest Common Subsequence](#DP_LCS)
-	- [Write proper code for above two]
-    - [Unique Paths in a grid]
-    - [Minimum sum path in a grid]
-    - [Longest Common Substring and print it too]
-    - [Longest Palindromic Subsequence]
-    - [Longest Palindromic Substring and print it too]
+    - [Longest Common Substring and print it too](#DP_LCSs)
+    - [Longest Palindromic Subsequence](#DP_LPS)
+    - [Longest Palindromic Substring and print it too](#DP_LPSs)
     - [Edit Distance]
     - [Maximum Sum Subarray and print it too]
     - [Maximum sum subarray without adjacent elements]
@@ -7370,6 +7369,9 @@ The problem may have two variations as follows:
 
 <a href="#Contents">Back to contents</a>
 
+- [Unique Paths in a grid](#DP_UniquePaths)
+- [Minimum sum path in a grid](#DP_MinSumPath)
+
 <a name="DP_LCS"></a>
 ### Longest Common Subsequence
 The longest common subsequence problem requires you to find the length of the longest common subsequence between two given strings. For example for the inputs 'ABCDGH' and 'AEDFHR', the length would be 3, and the longest common subsequence would be 'ADH'.
@@ -7416,3 +7418,7 @@ for(int i = 0; i < n; i++)
 }
 ```
 <a href="#Contents">Back to contents</a>
+
+- [Longest Common Substring and print it too](#DP_LCSs)
+- [Longest Palindromic Subsequence](#DP_LPS)
+- [Longest Palindromic Substring and print it too](#DP_LPSs)
