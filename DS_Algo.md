@@ -325,7 +325,7 @@
 12. [Greedy Algorithms]
     - [Jump Game - I and II]
 13. [Tips and Tricks]
-	- [List<List> instantiation]
+	- [List of List instantiation]
 	- [Add array tips and tricks from the array section]
 	- [TreeSet vs Priority Queue]
 	- [HashMap vs HashSet]
