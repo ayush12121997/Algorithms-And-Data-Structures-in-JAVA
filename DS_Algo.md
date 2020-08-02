@@ -65,6 +65,7 @@
 	- [Kth smallest number in multiplication table]
 	- [K-th smallest prime fraction - See discussion too]
 	- [Median of two sorted arrays]
+	- [Smallest range covering elements from K lists]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
@@ -126,6 +127,7 @@
     - [Remove N'th Node from end]
 	- [Floyd's Tortoise and Hare - Cycle detection]
 	- [Linked List Cycle - II]
+	- [Merge K Sorted Lists]
 	- []
 7. [Stacks and Queues](#StackAndQueue)
     - [Stacks](#SQ_Stack)
