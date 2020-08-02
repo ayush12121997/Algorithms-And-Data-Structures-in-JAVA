@@ -13,4 +13,4 @@ ayush16024@iiitd.ac.in
 
 All the best for your preparation!
 
-<p style="text-align: right"> Ayush Shrivastava </p>
+<p align="right"> Ayush Shrivastava </p>
