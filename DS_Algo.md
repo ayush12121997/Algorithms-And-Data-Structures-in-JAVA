@@ -1,7 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
 ### Last edit content - 280
-### Last edit content- 7392
+### Last edit content- 7516
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -7415,7 +7415,7 @@ class Solution
         the first column of the grid, the values needed would not be
         available and hence to avoid writing extra if conditions and
         for avoiding null pointer exception, we increase the size by
-        1 ob both sides. Now, when dp[i-1][j] and dp[i][j-1] are
+        1 on both sides. Now, when dp[i-1][j] and dp[i][j-1] are
         accessed for the top row and first column, only 0 values will
         received.
         */
@@ -7451,7 +7451,65 @@ class Solution
 
 <a name="DP_MinSumPath"></a>
 ### Minimum sum path in a grid
+The problem statement is as follows:<br>
+Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path. You can only move either down or right at any point in time.
 
+The minimum cost path to any cell in the grid will be the minimum of the cell above and the cell to the left of the current cell. This is because the only two valid ways to reach the current cell are from top or from left as movements allowed are only right and bottom. Hence, the cost of any cell would be:<br>
+Cost to reach cell (i,j) = Cost of cell (i,j) + Minimum(Cost to reach (i-1,j), Cost to reach (i,j-1))
+
+The code is as follows:
+```java
+class Solution
+{
+    public int minPathSum(int[][] grid)
+    {
+        int n = grid.length;
+        if(n == 0)
+        {
+            return 0;
+        }
+        int m = grid[0].length;
+        if(m == 0)
+        {
+            return 0;
+        }
+        int[][] dp = new int[n][m];
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < m; j++)
+            {
+                // As we take minimum of top and left, and cells in top row
+                // can be reached only from the left, we consider only left
+                // value
+                if(i == 0)
+                {
+                    if(j == 0)
+                    {
+                        dp[i][j] = grid[i][j];
+                    }
+                    else
+                    {
+                        dp[i][j] = dp[i][j-1] + grid[i][j];    
+                    }
+                }
+                // As we take minimum of top and left, and cells in left col
+                // can be reached only from the top, we consider only the top
+                // value
+                else if(j == 0)
+                {
+                    dp[i][j] = dp[i-1][j] + grid[i][j];
+                }
+                // Cell can be reached from both sides, hence consider both values
+                else
+                {
+                    dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+                }
+            }
+        }
+        return dp[n-1][m-1];
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_LCS"></a>
