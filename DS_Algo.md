@@ -288,6 +288,7 @@
     - [DP problems classification]
     - [Longest Integer Subsequence](#DP_LIS)
     - [Longest Common Subsequence](#DP_LCS)
+	- [Write proper code for above two]
     - [Unique Paths in a grid]
     - [Minimum sum path in a grid]
     - [Longest Common Substring and print it too]
