@@ -1,7 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Last edit content - 280
-### Last edit content- 7516
+### Next edit content - 290
+### Next edit content- 7321
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
