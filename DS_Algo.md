@@ -67,6 +67,8 @@
 	- [K-th smallest prime fraction - See discussion too]
 	- [Median of two sorted arrays]
 	- [Smallest range covering elements from K lists]
+	- [Buy and Sell Stock - I]
+	- [Buy and Sell Stock - II]
 	- []
 4. [Sliding Window, Two Pointers and Strings](#SlideWindow_TwoPointer_String)
 	- [Introduction](#SWTPS_Introduction)
@@ -7855,5 +7857,136 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Maximum Sum Subarray without adjacent elements](#DP_MaxSumSubArrWithoutAdjElem)
-- [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
+<a name="DP_MaxSumSubArrWithoutAdjElem"></a>
+### Maximum Sum Subarray without adjacent elements
+A slight modification of the previous question. Given a 2 x N grid of integer, A, choose numbers such that the sum of the numbers is maximum and no two chosen numbers are adjacent horizontally, vertically or diagonally, and return it. For exmaple if the input is of the form:<br>
+[[1, 2, 3, 4]<br>
+[2, 3, 4, 5]]<br>
+In here we would choose the numbers 3 and 5 to form the maximum sum wihtout adjacent elements.
+
+We create a dp table of the form int[Number of rows + 2][Number of columns + 2]. We add 2 to both as while checking, we would need to check the following:
+1. Rows just above and below the current value, hence, for topmost row we need a new row above and for bottom most row we need an extra row below.
+2. We will be accessing column 2 before the current value to check for previous values, hence for the first leftmost column we need two new columns on the left.
+
+At every value we simply take the max among the following:
+1. If we include the element: Current Value + Maximum between non adjacent values from two columns before, that is MaxOf(dp[i-1][j-2], dp[i][j-2], dp[i+1][j-2]).
+2. If we do not include the element: Maximum between the adjacent values from current and previous column, that is MaxOf(dp[i-1][j], dp[i-1][j-1], dp[i][j-1], dp[i+1][j-1], dp[i+1][j]).
+
+The code is as follows:
+```java
+public class Solution
+{
+    public int adjacent(ArrayList<ArrayList<Integer>> A)
+    {
+        // Number of rows
+        int n = 2;
+        // Number of columns
+        int m = A.get(0).size();
+        // Number of rows + 2 because we need one row above and one below
+        // when accounting for adjacent element above and below
+        
+        // Number of columns + 2 because we need to access values from 2
+        // columns before in case of we are going to skip the previous column's
+        // values
+        int[][] dp = new int[n+2][m+2];
+        // For every column
+        for(int j = 2; j < m+2; j++)
+        {
+            // For every row
+            for(int i = 1; i < n+1; i++)
+            {
+                // a is the max if we do not include current element
+                int a = Math.max(dp[i+1][j], Math.max(dp[i+1][j-1], Math.max(dp[i-1][j], dp[i][j-1])));
+                // b is the max if we include the current element
+                int b = A.get(i-1).get(j-2) + Math.max(dp[i+1][j-2], Math.max(dp[i][j-2], dp[i-1][j-2]));
+                // dp[i][j] = Max of either including or not including the current element
+                dp[i][j] = Math.max(a, b);
+            }
+        }
+        // Return value at nth row, and mth column
+        return dp[n][m+1];
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_BuyAndSellStock"></a>
+### Buy and Sell Stock - K transactions allowed
+The question is similar to Buy and Sell Stock I and II as covered in Arrays. The difference being that we are allowed at most 2 transactions. We generalise the concept for atmost k transactions. The question statement is as follows:<br>
+Say you have an array for which the ith element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete at most two transactions. You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+The code has been explained in the comments itself:
+```java
+class Solution
+{
+    public int maxProfit(int[] prices)
+    {
+        int n = prices.length;
+        // If only one or zero price points, then no transactions
+        if(n <= 1)
+        {
+            return 0;
+        }
+        // Maximum number of transactions allowed
+        int k = 2;
+        // Current profit
+        int ans = Integer.MIN_VALUE;
+        
+        // dp[i][j] denotes profit by doing 'i' trnsactions until
+        // day j. We can only sell on the j'th day and not buy.
+        // So technically we assume that 'i' buyings and 'i-1' times
+        // selling has been done until day j.
+        // dp[0, n] = 0 as 0 times transation makes 0 profit
+        // dp[k, 0] = 0 as we cannot sell on day 0
+        int[][] dp = new int[k+1][n];
+        
+        // For every transaction t
+        for(int t = 1; t <= k; t++)
+        {
+            // temp denotes the profit so far - buying cost of latest stock
+            // The profit so far at any day d would be:
+            // Profit from previous t-1 transactions. Let us assume the day
+            // of buying the t'th stock is d, hence, profit so far = dp[t-1][d]
+            // Buying cost at day d: prices[d]
+            // Hence temp = dp[t-1][d] - prices[d]
+
+            // temp begins from day 0
+            // As we can only buy on day 0 and the profit so far is 0.
+            int temp = -prices[0];
+            
+            // Our task is to maximize profit for the t'th transaction on every day.            
+            // For all selling days possible
+            for(int d = 1; d < n; d++)
+            {
+                // On any given day 'd', the maximum profit at that day is:
+                // Either profit from completing t transactions before this day itself.
+                // That is we do not sell any stock on the given day. This is dp[t-1][d].
+
+                // Or by selling a stock on the given day 'd', hence:
+                // For all possible buying days we calculate max Of:
+                //       Selling price of stock on the given day 'd'
+                //     - Buying cost of stock on a previous day before 'd'
+                //     + Profit with one less transaction on the buying day selected
+                // which is = Selling price + MaxOf(Profit - BuyPrice) for all buying days
+                // For selling on day 'd' this would be:
+                // = MaxOf(prices[d] - prices[j] + dp[t-1, j]) For all j in range of [0, d-1]
+                // = prices[d] + MaxOf(dp[t-1, j] - prices[j]) For all j in range of [0, d-1]
+
+                // Instead of calculatig MaxOf(dp[t-1, j] - prices[j]) seperately for every day,
+                // it is calculated simultanesouly through the variable temp as we progress
+                // through each day. This can be done because for MaxOf(dp[t-1, j] - prices[j])
+                // till a given day d, all we need is the previous value of temp till day d-1,
+                // the previously calculated value of dp[t-1][d] and prices[d]
+
+                dp[t][d] = Math.max(dp[t][d-1], prices[d] + temp);
+                temp = Math.max(temp, dp[t-1][d] - prices[d]);
+                
+                // Update profit
+                ans = Math.max(ans, dp[t][d]);
+            }
+        }
+        return ans;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
