@@ -296,7 +296,6 @@
     - [Longest Common Substring and print it too](#DP_LCSs)
     - [Longest Palindromic Subsequence](#DP_LPS)
     - [Longest Palindromic Substring and print it too](#DP_LPSs)
-    - [Edit Distance]
     - [Maximum Sum Subarray and print it too]
     - [Maximum sum subarray without adjacent elements]
     - [Buy and Sell Stock (k transactions)]
@@ -307,6 +306,7 @@
 	- [Number of subsets with sum < K or sum > K or sum = K]
     - [Last stone weight 2, normal knapsack(2D) and coin change 2(1D) as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
     - [Flip array]
+	- [Edit Distance]
     - [Word break - I, also add the version where you need to tell which words were selcted out of the dictionary]
     - [Word Break - II]
     - [Decode ways and print all]
