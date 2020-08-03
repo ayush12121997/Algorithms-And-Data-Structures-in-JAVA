@@ -7584,7 +7584,14 @@ class Solution
 ### Longest Common Substring/Subarray
 The problem statement is that given two integer arrays A and B, return the maximum length of an subarray that appears in both arrays. This can also be presented as to find the maximum length of common substring between two strings s1 and s2.
 
-This is very similar to the previous question of finding the longest subsequence but instead of subsequence we have to find a substring. As we need to calculate the substring 
+This is very similar to the previous question of finding the longest subsequence but instead of subsequence we have to find a substring. As we need to calculate the substring, one thing which we need to be sure about is that we have to ensure that a valid answer is one in which there were no gaps between the characters of the candidate answer. For example, for the strings:<br>
+String A: 'ABCDEFGH'<br>
+String B: 'BCADFIH'<br>
+If the question was to find longest common subsequence the answer would have been 'BCDFH', but as we need the substring, the answer is 'BC'.
+
+Instead of string, we solve this question on subarrays two given subarrays A and B. For example if:
+A: [1,2,3,2,]<br>
+B: [3,2,1,4,7]<br>
 ```java
 class Solution
 {
