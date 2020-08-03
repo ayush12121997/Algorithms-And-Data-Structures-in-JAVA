@@ -7516,22 +7516,12 @@ class Solution
 ### Longest Common Subsequence
 The longest common subsequence problem requires you to find the length of the longest common subsequence between two given strings. For example for the inputs 'ABCDGH' and 'AEDFHR', the length would be 3, and the longest common subsequence would be 'ADH'.
 
-As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. We compare the two input string character by character. The entry dp[i][j] would hold the value of the longest common subsequence until the s1[0..1] and s2[0..j] strings. The recurrence relation can be defined as:
-```java
-/*
-If the ith and jth characters in the strings are equal, then the length
-of LCS increases by 1, as we have got one extra common character.
-*/
+As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest common subsequence between the strings s1[0..1] and s2[0..j]. We compare the two input string character by character. If the ith and jth characters in the strings are equal, then the length of LCS increases by 1, as we have got one extra common character. Hence,<br>
 dp[i][j] = 1 + dp[i-1][j-1]
 
-/*
-If the ith and jth characters in the strings are not equal, then the length
-of LCS does not increase and remains the same as the previous maximum value.
-The previous maximum value will either be the maximum length LCS when character
-from string 1 is not included or when character from string 2 is not included.
-*/
-dp[i][j] = max(dp[i][j-1], dp[i-1][j])
-```
+If the ith and jth characters in the strings are not equal, then the length of LCS does not increase and remains the same as the previous maximum value. The previous maximum value will either be the maximum length LCS when character from string 1 is not included or when character from string 2 is not included. Hence,<br>
+dp[i][j] = Maximum Of (dp[i][j-1], dp[i-1][j])
+
 The code is as follows:
 ```java
 class Solution
@@ -7589,9 +7579,15 @@ String A: 'ABCDEFGH'<br>
 String B: 'BCADFIH'<br>
 If the question was to find longest common subsequence the answer would have been 'BCDFH', but as we need the substring, the answer is 'BC'.
 
-Instead of string, we solve this question on subarrays two given subarrays A and B. For example if:
+Instead of string, we solve this question on subarrays two given subarrays A and B. For example if:<br>
 A: [1,2,3,2,]<br>
 B: [3,2,1,4,7]<br>
+Then the asner would be 3 as the longest common subarray is [3, 2, 1].
+
+We create a dp table, dp[Length of A][Length of B] where dp[i][j] represents length of the longest common subarray between A[0:i] and B[0:j] with A[i] and B[j] necessarily being included in the subarray. We compare the two subarrays index by index, and if we find a common value, we check the length of the longest common subarray until the point these indexes were not included and add 1 to it. Hence,<br>
+dp[i][j] = dp[i-1][j-1] + 1;
+
+If the values in the two subarrays do not match, unlike longest common subsequence, we do nothing. This is because as we need a contigous subarray, two values tht are not equal would form a ap in the subarray, making it a subsequence and hence are disregarded. The code is as follows:
 ```java
 class Solution
 {
@@ -7637,9 +7633,176 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
+<a name="DP_LPS"></a>
+### Longest Palindromic Subsequence
+Given a string s, we have to find the longest palindromic subsequence's length in s.
 
-- [Longest Palindromic Subsequence](#DP_LPS)
-- [Longest Palindromic Substring/Subarray](#DP_LPSs)
+First let us understand how a plaindrome can be identified. One straightforawrd method would be to compare the starting and ending characters one by one and check if they are equal and move to the middle like this. If every pair was equal then the string is a palindrome else it is not. This same process can be reversed as well, that is we begin from the middle and move to the end, we can check for mathcing characters at both ends. This idea can be utilized in building a DP based colution for the problem at hand.
+
+For a given substring, we can form a recurrence relation that if the starting and ending characters are equal then length of longest plaindrome for that substring would be equal to 2 + length of longest palindrome in substring formed by removing the first and last character. We may visualize this as follows:<br>
+String A: 'ABA'<br>
+String A is a palindrome of length 3. Now say if we have another string as follows:<br>
+String B: 'CABAC'<br>
+We need not check the entire string B for being a palindrome instead we just check the first and last chaacter which are equal, and we already know that for ABA length of palindrome is 3, hence length for CABAC becomes 2 + 3 = 5.<br>
+Moreover for Strings of length upto 3, that is strings of kind 'A', 'AA', 'AXA', if the first and last character are equal we can directly say that the length of the substring is the length of the palindrome.<br>
+We utilize these concepts to build our dp solution.
+
+We create a DP table dp[Length of S][Length of S] where dp[i][j] represents the length of the longest palindromic substring in String s[j:i] that is the substring which begins at j and ends at i, both j and i included. Now to solve the DP, we follow the steps discussed in <a href="#DP_Strings">DP for Strings</a> for a single string question.
+
+If the characters at the beginning and end of the given subsequence say S[j:i] are equal, we simply update length for S[j:i] as length for S[j+1:i-1] + 2.<br>
+dp[i][j] = dp[i-1][j+1] + 2<
+
+If the characters are not equal then length of longest palindromic subsequence in S[j:i] would be maximum of length in S[j+1:i] or S[j:i-1].<br>
+dp[i][j] = Max(dp[i-1][j], dp[i][j+1])
+
+The code is as follows:
+```java
+class Solution
+{
+    public int longestPalindromeSubseq(String s)
+    {
+        int n = s.length();
+        // In our dp table every state is repreented as:
+        // dp[i][j] = Longest palindromic subsequence from s[j:i]
+        int[][] dp = new int[n][n];
+        char[] s1 = s.toCharArray();
+        
+		// The ending character of the subsequence is marked by i
+        for(int i = 0; i < n; i++)
+        {
+            // j marks the starting character of the subsequence
+
+            // The reason we cannot start j from 0 and then move to i
+            // is that to find the value of s[j:i] we need the value of
+            // s[j+1:i-1] already calculated. Hence, for j, the value 
+            // already needed is of the cell j+1 instead of j-1.
+
+            // Hence, i increases from 0 -> n and j decreases from i -> 0.
+            for(int j = i; j >= 0; j--)
+            {
+                // If the two characters are equal, meaning the end and start are
+                // equal, so all we need to check is that whether or not the string
+                // inside is a plaindrome
+                if(s1[i] == s1[j])
+                {
+                    // If length of subsequence <= 3, we need not check for plaindrome
+                    // wihtin the string as it will garaunteed be a palindrome
+                    if(i - j < 3)
+                    {
+                        dp[i][j] = i - j + 1;
+                    }
+                    
+					// If length is more than 3, the new length of longest palindromic
+                    // subsequence will be:
+                    //For string s[j:i] = 1(for starting character)
+                    //                  + 1(for ending character)
+                    //                  + Length of longest palindrome for s[j+1:i-1]
+                    else
+                    {
+                        dp[i][j] = dp[i-1][j+1] + 2;
+                    }
+                }
+                
+				// If starting and ending characters are not equal, then length is same
+                // as maximum possible length if either the starting or ending character
+                // were removed.
+                else
+                {
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j+1]);
+                }
+            }
+        }
+        // Return length with ending as n-1 and starting as 0, that is entire string as subsequence
+        return dp[n-1][0];
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+<a name="DP_LPSs"></a>
+### Longest Palindromic Substring/Subarray
+```java
+class Solution
+{
+    public String longestPalindrome(String s)
+    {
+        int n = s.length();
+        if(n < 2)
+        {
+            return s;
+        }
+        char[] s1 = s.toCharArray();
+        // In our dp table every state is repreented as:
+        // dp[i][j] = Longest palindromic substring from s[j:i],
+        // such that s[j] and s[i] are necessarily a part of the
+        // substring. We need to ensure this, because the question
+        // asks us to find contigous substrings instead of subsequence
+        // hence no breaks are allowed between characters
+        int[][] dp = new int[n][n];
+        // Initial length of palindromic substring
+        int ans = 0;
+        // Start and end values for storing the starting and ending of the
+        // palindromic substring
+        int start = -1;
+        int end = -1;
+        // i marks the ending character of the substring
+        for(int i = 0; i < n; i++)
+        {
+            // j marks the starting character of the substring
+            
+            // The reason we cannot start j from 0 and then move to i
+            // is that to find the value of s[j:i] we need the value of
+            // s[j+1:i-1] already calculated. Hence, for j, the value 
+            // already needed is of the cell j+1 instead of j-1.
+            
+            // Hence, i increases from 0 -> n and j decreases from i -> 0.
+            for(int j = i; j >= 0; j--)
+            {
+                // If the two characters are equal, meaning the end and start are
+                // equal, so all we need to check is that whether or not the string
+                // inside is a plaindrome
+                if(s1[i] == s1[j])
+                {
+                    // If length of substring <= 3, we need not check for plaindrome
+                    // wihtin the string as it will garaunteed be a palindrome
+                    if(i - j < 3)
+                    {
+                        dp[i][j] = i - j + 1;
+                    }
+                    // If length is more than 3 and the substring contained is also a
+                    // a plaindrome, then the new length of the longest palindromic
+                    // substring will be:
+                    //For string s[j:i] = 1(for starting character)
+                    //                  + 1(for ending character)
+                    //                  + Length of longest palindrome for s[j+1:i-1]
+                    else if(dp[i-1][j+1] != 0)
+                    {
+                        dp[i][j] = dp[i-1][j+1] + 2;
+                    }
+                }
+                // There is no else condition as we are searching for contigous substrings,
+                // and hence if the starting and ending characters are not equal, these cannot
+                // be included in forming the palindromic substring, thus the length will be
+                // 0, which is the default value of dp[i][j].
+                
+                // Select the maximum length palindromic substring
+                if(dp[i][j] > ans)
+                {
+                    ans = dp[i][j];
+                    // Update starting and ending point of the substring
+                    start = j;
+                    // Ending point is marked as i + 1 because of the substring function at the end
+                    end = i + 1;
+                }
+            }
+        }
+        // Return longest palindromic substring
+        return s.substring(start,end);
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
 - [Maximum Sum Subarray](#DP_MaxSumSubArr)
 - [Maximum Sum Subarray without adjacent elements](#DP_MaxSumSubArrWithoutAdjElem)
 - [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
