@@ -7721,6 +7721,12 @@ class Solution
 
 <a name="DP_LPSs"></a>
 ### Longest Palindromic Substring/Subarray
+The problem statement is exactly same as the previous one with the only difference being that instead of subsequence now we need a substring. The modifications from the previous approach would be:
+1. dp[i][j] now doesnt represent longest palindromic subsequence but instead represents the longest palindromic substring necessarily including the i'th and j'th characters of the string. Hence, the value for dp would not either be 0 or the length of entire substring.
+2. If the characters at start and end do not match, we discard that substring as if we considered it, it would have created gaps in the answer leading to subsquence formation.
+3. We also need an additional check even if characters in end and start match, that is we need to make sure that the substring contained within was a palindrome. This can be simply done by checking if dp[i-1][j+1] != 0.
+
+The code is as follows:
 ```java
 class Solution
 {
@@ -7803,6 +7809,51 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Maximum Sum Subarray](#DP_MaxSumSubArr)
+<a name="DP_MaxSumSubArr"></a>
+### Maximum Sum Subarray
+The question is that given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum. This is the same as Kedane's algorithm but rather with a DP approach. Please visit <a href="#Arrays_KadanesAlgo">Kadane's Algorithm</a> in Arrray section first and then revisit this problem. The commented code is as below: 
+```java
+class Solution
+{
+    public int maxSubArray(int[] nums)
+    {
+        int n = nums.length;
+        int ans = Integer.MIN_VALUE;
+        if(n == 0)
+        {
+            return ans;
+        }
+        // dp[i] would represent maximum sum possible if for nums[0:i]
+        // with nums[i] included in the subarray
+        int[] dp = new int[n];
+        // Max sum possible for first element is element itself
+        dp[0] = nums[0];
+        ans = dp[0];
+        for(int i = 1; i < n; i++)
+        {
+            // Sum of current value and max sum so far till previous element
+            int val = nums[i] + dp[i-1];
+            // As previous sum was till the point including the previous element,
+            // so if this new sum > value of current index so we have a new max
+            // sum contigous subarray
+            if(val > nums[i])
+            {
+                dp[i] = val;
+            }
+            // If new sum <= current value, so max including current value until now
+            // is the current value itself
+            else
+            {
+                dp[i] = nums[i];
+            }
+            // Answer is the maximum subarray sum so far
+            ans = Math.max(ans, dp[i]);
+        }
+        return ans;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
 - [Maximum Sum Subarray without adjacent elements](#DP_MaxSumSubArrWithoutAdjElem)
 - [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
