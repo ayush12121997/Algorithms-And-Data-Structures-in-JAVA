@@ -293,12 +293,12 @@
 	- [Unique Paths in a grid](#DP_UniquePaths)
     - [Minimum sum path in a grid](#DP_MinSumPath)
     - [Longest Common Subsequence](#DP_LCS)
-    - [Longest Common Substring and print it too](#DP_LCSs)
+    - [Longest Common Substring/Subarray](#DP_LCSs)
     - [Longest Palindromic Subsequence](#DP_LPS)
-    - [Longest Palindromic Substring and print it too](#DP_LPSs)
-    - [Maximum Sum Subarray and print it too]
-    - [Maximum sum subarray without adjacent elements]
-    - [Buy and Sell Stock (k transactions)]
+    - [Longest Palindromic Substring/Subarray](#DP_LPSs)
+    - [Maximum Sum Subarray](#DP_MaxSumSubArr)
+    - [Maximum Sum Subarray without adjacent elements](#DP_MaxSumSubArrWithoutAdjElem)
+    - [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
     - [Coin Change problem - cover both examples, and perfect squares and printing similar to combination sum, see first discussion of coin change 2]
 	- [Ones and zeroes]
     - [Partition into two equal subset problem]
@@ -7516,15 +7516,11 @@ class Solution
 ### Longest Common Subsequence
 The longest common subsequence problem requires you to find the length of the longest common subsequence between two given strings. For example for the inputs 'ABCDGH' and 'AEDFHR', the length would be 3, and the longest common subsequence would be 'ADH'.
 
-As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. The entry dp[i][j] would hold the value of the longest common subsequence until the s1[0..1] and s2[0..j] strings.
-
-The recurrence relation can be defined as:
+As seen for string DP above, we store the two strings in character arrays say s1arr and s2arr and then make a dp table of the form dp[n+1][m+1]. We compare the two input string character by character. The entry dp[i][j] would hold the value of the longest common subsequence until the s1[0..1] and s2[0..j] strings. The recurrence relation can be defined as:
 ```java
 /*
 If the ith and jth characters in the strings are equal, then the length
 of LCS increases by 1, as we have got one extra common character.
-For this increase, we need the previous maximum value of the LCS where
-these characters were not included.
 */
 dp[i][j] = 1 + dp[i-1][j-1]
 
@@ -7532,33 +7528,109 @@ dp[i][j] = 1 + dp[i-1][j-1]
 If the ith and jth characters in the strings are not equal, then the length
 of LCS does not increase and remains the same as the previous maximum value.
 The previous maximum value will either be the maximum length LCS when character
-from string 1 is included and from string 2 isn't, or when character from
-string 2 is included and the one from string 1 isn't. For example, say if we
-have reached a point "G" and "H" in the two strings, these characters would
-not be the same. Hence we will check for the maximum between, "ABCDG"-"AEDF"
-and "ABCD"-"AEDFH", that is values before the new characters were introduced.
+from string 1 is not included or when character from string 2 is not included.
 */
 dp[i][j] = max(dp[i][j-1], dp[i-1][j])
 ```
-Basic code:
+The code is as follows:
 ```java
-for(int i = 0; i < n; i++)
+class Solution
 {
-    for(int j = 0; j < m; j++)
+    public int longestCommonSubsequence(String text1, String text2)
     {
-        if(s1arr[i] == s2arr[j])
+        int n = text1.length();
+        int m = text2.length();
+        // Convert string to charArrays for easier character access
+        char[] s1 = text1.toCharArray();
+        char[] s2 = text2.toCharArray();
+        // dp[i][j] represents length of longest subequence between
+        // text1[0:i] and text2[0:j].
+        
+        // DP is of greater size to account for previous values of
+        // top row and first column
+        int[][] dp = new int[n+1][m+1];
+        // The value of i represents that text1 is from
+        // 1st to i'th character
+        for(int i = 1; i <= n; i++)
         {
-            dp[i+1][j+1] = 1 + dp[i][j];
+            // The value of j represents that text2 is from
+            // 1st to j'th character
+            for(int j = 1; j <= m; j++)
+            {
+                // Remeber that charArray indexing is from 0
+
+                // If the two characters are equal
+                if(s1[i-1] == s2[j-1])
+                {
+                    // dp[i][j] = Longest subsequence without these characters + 1
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                }
+                // If the characters are not equal
+                else
+                {
+                    // dp[i][j] = Longest subsequence when either of the characters
+                    // is removed
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
         }
-        else
-        {
-            dp[i+1][j+1] = Math.max(dp[i][j+1], dp[i+1][j]);
-        }
+        return dp[n][m];
     }
 }
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Longest Common Substring and print it too](#DP_LCSs)
+<a name="DP_LCSs"></a>
+### Longest Common Substring/Subarray
+
+```java
+class Solution
+{
+    public int findLength(int[] A, int[] B)
+    {
+        int n = A.length;
+        int m = B.length;
+        // dp[i][j] represents length of longest subarray between
+        // A[0:i] and B[0:j] including the characters A[i-1] and B[j-1].
+        
+        // DP is of greater size to account for previous values of
+        // top row and first column
+        int[][] dp = new int[n+1][m+1];
+        
+        // We tore the maximum length of substring in ans, as the final cell,
+        // dp[n][m] will not necessarily have the longest subarray of entire
+        // array but only the longest subarray which includes A[n-1] and A[m-1].
+        int ans = 0;
+        for(int i = 1; i <= n; i++)
+        {
+            for(int j = 1; j <= m; j++)
+            {
+                // If the two values are equal, then this can be a part of
+                // previous longest subarray
+                if(A[i-1] == B[j-1])
+                {
+                    // dp[i][j] = 1 + Longest subarray jsut before this
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                    // Maximum subarray so far
+                    ans = Math.max(ans, dp[i][j]);
+                }
+                // There is no else condition, as we need a contigous
+                // subarray, hence if the two values are not equal then
+                // that means there is a gap in the subarray and hence
+                // the value of longest common subarray when A[i-1] != B[j-1]
+                // is 0, which is the default value of dp[i][j].
+            }
+        }
+        // Return maximum length
+        return ans;
+    }
+}
+```
+<a href="#Contents">Back to contents</a>
+
+
 - [Longest Palindromic Subsequence](#DP_LPS)
-- [Longest Palindromic Substring and print it too](#DP_LPSs)
+- [Longest Palindromic Substring/Subarray](#DP_LPSs)
+- [Maximum Sum Subarray](#DP_MaxSumSubArr)
+- [Maximum Sum Subarray without adjacent elements](#DP_MaxSumSubArrWithoutAdjElem)
+- [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
