@@ -7326,10 +7326,7 @@ The standard approach is that given a choice, we have two options, to either mak
 1. If we make that choice, we calculate the best between the current option and the previous time where we ignored the given choice
 2. If we choose to ignore the choice now, we just choose the value from the previous time we made the choice.
 
-The Knapsack problem is a very famous and standard example of a DP consisting of decision choices of including or including an option in the answer set.
-
-#### <ins>The Knapsack Problem</ins>
-The standard problem statement of Knapsack problems is:<br>
+The Knapsack problem is a very famous and standard example of a DP consisting of decision choices of including or including an option in the answer set. The standard problem statement of Knapsack problems is:<br>
 Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.
 
 The Knapsack problem can be divided into the following three categories parts:
@@ -7337,7 +7334,7 @@ The Knapsack problem can be divided into the following three categories parts:
 2. Unbounded Knapsack Problem: Each item can be selected infinite number of times.
 3. Bounded Knapsack Problem: We can select at most K items.
 
-##### 0-1 Knapsack Problem:
+#### <ins>0-1 Knapsack Problem</ins>:
 We are given two integer arrays val[0..n-1] and wt[0..n-1] which represent values and weights associated with n items respectively. Also given an integer W which represents knapsack capacity, find out the maximum value we can make by choosing items such that sum of the weights of these items is smaller than or equal to W. We can only pick an item at most once, hence the name, 0-1 knapsack that is either pick or not pick.
 
 A simple straightforward solution can be:
@@ -7432,7 +7429,7 @@ public static int knapSack(int W, int wt[], int val[], int n)
     return dp[n][W];
 }
 ```
-##### Unbounded Knapsack Problem
+#### <ins>Unbounded Knapsack Problem</ins>:
 Given a knapsack weight W and a set of n items with certain value vali and weight wti, we need to calculate minimum amount that could make up this quantity exactly. This is different from classical Knapsack problem, as here we are allowed to use unlimited number of instances of an item.
 
 With the allowance of using an item as many times as we wish, the only thing that needs to be monitored now is the weight cap. Hence, instead of the 2D DP table, a 1D table of the form int[Maximum weight allowed + 1] can be created to keep track of the maximum value obtained for a given weight. Every item dp[i] would be the maximum value with upto i weight allowed. Hence, the process would now look like:
@@ -7455,7 +7452,7 @@ public static int knapSack(int W, int wt[], int val[], int n)
     return dp[W];
 }
 ```
-##### Extended Knapsack Problem
+#### <ins>Extended Knapsack Problem</ins>:
 Given N items, each item having a given weight and value, the task is to maximize the value by selecting a maximum of K items adding up to a maximum weight W. This is a step ahead of the 0-1 Knapsack problem, where besides a cap on an item being selected atmost once, we also have a cap on total items being selected to be <= to K.
 
 The modification to a normal 0-1 Knapsack DP would be that insetad of a 2D table, we now use a 3D tables which look like dp[Total number of items + 1][Maximum weight allowed + 1][Number of items allowed + 1]. And every cell dp[i][j][k] would hold the maximum value possible by using items upto item i, with maximum weight allowed as j and maximum total items allowed as k.
