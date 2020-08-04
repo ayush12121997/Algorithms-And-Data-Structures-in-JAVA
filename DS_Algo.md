@@ -7328,7 +7328,7 @@ The standard approach is that given a choice, we have two options, to either mak
 
 The Knapsack problem is a very famous and standard example of a DP consisting of decision choices of including or including an option in the answer set.
 
-#### The Knapsack Problem
+#### <ins>The Knapsack Problem</ins>
 The standard problem statement of Knapsack problems is:<br>
 Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.
 
@@ -7338,7 +7338,18 @@ The Knapsack problem can be divided into the following three categories parts:
 3. Bounded Knapsack Problem: We can select at most K items.
 
 ##### 0-1 Knapsack Problem:
+We are given two integer arrays val[0..n-1] and wt[0..n-1] which represent values and weights associated with n items respectively. Also given an integer W which represents knapsack capacity, find out the maximum value we can make by choosing items such that sum of the weights of these items is smaller than or equal to W. We can only pick an item at most once, hence the name, 0-1 knapsack that is either pick or not pick.
 
+A simple straightforward solution can be:
+1. Generate all subsets of items.
+2. Select subsets with total weight <= W.
+3. Select the highest value subset.<br>
+
+We can improvise on the above approach while creating the subsets. Insteax of creating all subsets and then moving on to selecting those with weight less than equal to W, we can rather build only those that satisfy this condition. While building a subset for every item we can have only two choices, that is to pick or not pick the item. Let us say for choosing the nth item in a subset:
+1. <ins>Do not pick the item</ins>: If the weight of the nth item + weight so far > W, then we cannot pick the item and this is the only viable choice. The maximum value obtained will eb the value of n-1 items picked so far. The weight so far remains unchanged.
+2. <ins>Pick the item</ins>: If the weight of the nth item + weight so far <= W, then we have an option to pick this item. The value obtained will be value of nth item plus value obtained by n-1 items and the weight so far will also increase by the weight of the nth item.
+
+Hence at every point, we can choose the maximum value subset formed from either picking the item or not picking the item.
 
 <a href="#Contents">Back to contents</a>
 
