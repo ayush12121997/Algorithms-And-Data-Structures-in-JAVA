@@ -288,8 +288,6 @@
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
     - [DP for decision making - Knapsack](#DP_Decision)
-    - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d]
-	- [Convert 2d to 1d see first discussion of coin change 2, extended knapsack]
     - [DP problems classification]
     - [Longest Integer Subsequence](#DP_LIS)
 	- [Unique Paths in a grid](#DP_UniquePaths)
@@ -301,19 +299,21 @@
     - [Maximum Sum Subarray](#DP_MaxSumSubArr)
     - [Maximum Sum Subarray without adjacent elements](#DP_MaxSumSubArrWithoutAdjElem)
 	- [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
-	- [House Robber]
-    - [Coin Change problem - cover both examples, and perfect squares and printing similar to combination sum, see first discussion of coin change 2]
+	- [House robber]
+    - [Coin change I]
+	- [Coin change II]
+	- [Perfect Squares]
 	- [Ones and zeroes]
     - [Partition into two equal subset problem]
     - [Partition into two subsets with minimum difference]
 	- [Number of subsets with sum < K or sum > K or sum = K]
-    - [Last stone weight 2, normal knapsack(2D) and coin change 2(1D) as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
+    - [Last stone weight II, normal knapsack(2D) and coin change 2(1D) as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
     - [Flip array]
 	- [Edit Distance]
     - [Word break - I, also add the version where you need to tell which words were selcted out of the dictionary]
     - [Word Break - II]
     - [Decode ways and print all]
-    - [Number of Distinct Subsequences]
+    - [Distinct Subsequences]
     - [Longest Artihmetic Sequence]
     - [Interleaving Strings]
     - [Jump game - I and II]
