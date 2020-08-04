@@ -1,7 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next edit content - 290
-### Next edit content- 7321
+### Next edit content - 304
+### Next edit content- 8170
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -7421,7 +7421,7 @@ public static int knapSack(int W, int wt[], int val[], int n)
             }
             if (wt[i - 1] <= j)
             {
-                dp[i][j] = max(val[i - 1] + dp[i - 1][j - wt[i - 1]], dp[i - 1][j]);
+                dp[i][j] = Math.max(val[i - 1] + dp[i - 1][j - wt[i - 1]], dp[i - 1][j]);
             }
             else
             {
@@ -7432,9 +7432,82 @@ public static int knapSack(int W, int wt[], int val[], int n)
     return dp[n][W];
 }
 ```
-<a href="#Contents">Back to contents</a>
+##### Unbounded Knapsack Problem
+Given a knapsack weight W and a set of n items with certain value vali and weight wti, we need to calculate minimum amount that could make up this quantity exactly. This is different from classical Knapsack problem, as here we are allowed to use unlimited number of instances of an item.
 
-- [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d]
+With the allowance of using an item as many times as we wish, the only thing that needs to be monitored now is the weight cap. Hence, instead of the 2D DP table, a 1D table of the form int[Maximum weight allowed + 1] can be created to keep track of the maximum value obtained for a given weight. Every item dp[i] would be the maximum value with upto i weight allowed. Hence, the process would now look like:
+```java
+public static int knapSack(int W, int wt[], int val[], int n) 
+{
+    // DP array for weight
+    int dp[] = new int[W + 1];
+    // For every item
+    for (i = 0; i < n; i++)
+    {
+        // For all weights, it can fit
+        for (j = wt[i]; j <= W; j++)
+        {
+            // Choose between using or not using that item
+            dp[j] = Math.max(val[i] + dp[j - wt[i], dp[j]);
+        }
+    }
+    // Return value for maximum weight allowed
+    return dp[W];
+}
+```
+##### Extended Knapsack Problem
+Given N items, each item having a given weight and value, the task is to maximize the value by selecting a maximum of K items adding up to a maximum weight W. This is a step ahead of the 0-1 Knapsack problem, where besides a cap on an item being selected atmost once, we also have a cap on total items being selected to be <= to K.
+
+The modification to a normal 0-1 Knapsack DP would be that insetad of a 2D table, we now use a 3D tables which look like dp[Total number of items + 1][Maximum weight allowed + 1][Number of items allowed + 1]. And every cell dp[i][j][k] would hold the maximum value possible by using items upto item i, with maximum weight allowed as j and maximum total items allowed as k.
+
+The recursive formula would remain the same and look as follows:
+```
+For every item i (0 -> i):
+    For every weight possible j (0 -> W):
+        For number of items allowed k (0 -> K):
+            If i = 0 or j = 0; or k = 0:
+                dp[i][j][k] = 0
+            If not eligible for weight j:
+                // Previous value without this item
+                dp[i][j][k] = dp[i-1][j][k]
+            If item i is eligible for weight j:
+                // Max of choosing the item and not choosing 
+                dp[i][j][k] = MaxOf(val[i] + dp[i-1][j-wt[i]][k-1], dp[i-1][j][k]);
+```
+The final code would look like:
+```java
+public static int boundedKnapsack(int val[], int wt[], int N, int W, int K)
+{
+    // i = 0; j = 0; k = 0 are not needed to be considered
+    for (int i = 1; i <= N; i++)
+    {
+        for (int j = 1; j <= W; j++)
+        {
+            for (int k = 1; k <= K; k++)
+            {
+                // If eligibale
+                if (j >= weight[i])
+                {
+                    // Max of selecting or not selecting
+                    // If selected so:
+                    // Weight becomes weight - wt[i]
+                    // Item goes back to i-1
+                    // Number of allowed items is reduced by 1
+                    dp[i][j][k] = Math.max(dp[i - 1][j][k], dp[i - 1][j - wt[i]][k - 1] + val[i]);
+                }
+                else
+                {
+                    dp[i][j][k] = dp[i - 1][j][k];
+                }
+            }
+        }
+    }
+    // Return value for using upto the last item, with maximum weight allowed
+    // and maximum number of items allowed
+    return dp[N][W][K];
+}
+```
+<a href="#Contents">Back to contents</a>
 
 <a name="DP_LIS"></a>
 ### Longest Integer Subsequence(LIS)
