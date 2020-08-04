@@ -7349,8 +7349,60 @@ We can improvise on the above approach while creating the subsets. Insteax of cr
 1. <ins>Do not pick the item</ins>: If the weight of the nth item + weight so far > W, then we cannot pick the item and this is the only viable choice. The maximum value obtained will eb the value of n-1 items picked so far. The weight so far remains unchanged.
 2. <ins>Pick the item</ins>: If the weight of the nth item + weight so far <= W, then we have an option to pick this item. The value obtained will be value of nth item plus value obtained by n-1 items and the weight so far will also increase by the weight of the nth item.
 
-Hence at every point, we can choose the maximum value subset formed from either picking the item or not picking the item.
+The following recursive approach can be developed using the above points:
+```java
+// RECURSIVE APPROACH FOR 0-1 KNAPSACK
+// W - Weight allowed
+// n - Number of items remaining to check
+// wt[] and val[] are weight and value arrays
+public static int knapSack(int W, int wt[], int val[], int n) 
+{
+    // If all items have ben checked or remaining weight is 0
+    if (n == 0 || W == 0)
+    {
+        return 0;
+    }
+    
+    // If weight of the nth item is more than Knapsack capacity W,
+    // then this item cannot be included in the optimal solution
+    if (wt[n - 1] > W)
+    {
+        // Move to the next item without selecting this item
+        // Hecne the remaining weight remaing unchanged
+        return knapSack(W, wt, val, n - 1);
+    }
 
+    // If weight of the nth item is not more than Knapsack capacity W,
+    // then this item can be included in the knapasck and hence we
+    // return the maximum of two cases where we iether select or not
+    // select the item
+    else
+    {
+        // If the item is selected, remaining weight is reduced by item's weight that is
+        // wt[n-1] and current value is increased by the item's value that is val[n-1]
+
+        // If the item is not selected no increase in value and no change in weight. Similar
+        // to the above case of not selecting an item due to ineligibility
+        return Math.max(val[n - 1] + knapSack(W - wt[n - 1], wt, val, n - 1), knapSack(W, wt, val, n - 1));
+    }
+}
+```
+In the recursive approach, it can be noted, that the same subproblem will be called repeatedly and hence a more efficient, preferable dynamic programming approach which helps us store the values of repeated subproblems would be preferred.
+
+We build the DP through the following steps:
+1. Build a DP table int[Number of items allowed + 1][Maximum weight allowed + 1]. The cell dp[i][j] would hold the maximum value that cen be obtained from considering items from 1 -> i, with the maximum weight allowed as j. All values in dp[0][j] = 0 as with zero items considered, no value is possible. Similarly, all values in dp[i][0] = 0, as with no weight allowed, no value is possible.
+2. The rule for fillign the DP is similar to the recursive approach, that is, we first check whether or not an items is eligible to be used at the given moment. If eligible we choose the maximum between the twop options of using or not using that item, and if not eligible, we just move ahead to the next item without changing the value obtained so far.
+3. To process the DP table in a bottoms up manner, so that we can readily have previously calculated values available, we build the tables in the following manner:
+```
+For every item i (0 -> i):
+    For every weight possible j (0 -> W):
+        If not eligible for weight j:
+            // Previous value without this item
+            dp[i][j] = dp[i-1][j]
+        If item i is eligible for weight j:
+            // Max of choosing the item and not choosing
+            dp[i][j] = MaxOf(val[i] + dp[i-1][j-wt[i]], dp[i-1][j]);
+```
 <a href="#Contents">Back to contents</a>
 
 - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d]
