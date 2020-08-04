@@ -7403,6 +7403,35 @@ For every item i (0 -> i):
             // Max of choosing the item and not choosing
             dp[i][j] = MaxOf(val[i] + dp[i-1][j-wt[i]], dp[i-1][j]);
 ```
+4. Finally return the value for dp[Total number of Items][Maxium weight allowed].
+
+The enitre code is as follows:
+```java
+public static int knapSack(int W, int wt[], int val[], int n) 
+{
+    int dp[][] = new int[n + 1][W + 1];
+    for (i = 0; i <= n; i++)
+    {
+        for (j = 0; j <= W; j++)
+        { 
+            if (i == 0 || j == 0)
+            {
+                dp[i][j] = 0;
+                continue;
+            }
+            if (wt[i - 1] <= j)
+            {
+                dp[i][j] = max(val[i - 1] + dp[i - 1][j - wt[i - 1]], dp[i - 1][j]);
+            }
+            else
+            {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+    return dp[n][W];
+}
+```
 <a href="#Contents">Back to contents</a>
 
 - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d]
