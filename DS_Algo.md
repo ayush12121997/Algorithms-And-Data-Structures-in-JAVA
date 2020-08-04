@@ -287,7 +287,7 @@
     - [2 Dimensional DP - Grids](#DP_2DimensionalGrids)
     - [DP on Merging Intervals](#DP_MergeIntervals)
     - [DP on Strings](#DP_Strings)
-    - [DP for decision making (Knapsack)](#DP_Decision)
+    - [DP for decision making - Knapsack](#DP_Decision)
     - [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d]
 	- [Convert 2d to 1d see first discussion of coin change 2, extended knapsack]
     - [DP problems classification]
@@ -300,7 +300,8 @@
     - [Longest Palindromic Substring/Subarray](#DP_LPSs)
     - [Maximum Sum Subarray](#DP_MaxSumSubArr)
     - [Maximum Sum Subarray without adjacent elements](#DP_MaxSumSubArrWithoutAdjElem)
-    - [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
+	- [Buy and Sell Stock - K transactions allowed](#DP_BuyAndSellStock)
+	- [House Robber]
     - [Coin Change problem - cover both examples, and perfect squares and printing similar to combination sum, see first discussion of coin change 2]
 	- [Ones and zeroes]
     - [Partition into two equal subset problem]
@@ -7318,19 +7319,30 @@ for (int i = 1; i < n; i++)
 <a href="#Contents">Back to contents</a>
 
 <a name="DP_Decision"></a>
-### DP for decision making (Knapsack)
-The general statement for such type of problems is to decide the most optimal option from a given set. The task is to make an optimal choice from a given set at every instance or maybe just once.
+### DP for decision making - Knapsack
+The general problem statement for such type of problems is to decide the most optimal option from a given set. The task is to make an optimal choice from a given set at every instance or maybe just once.
 
-The general approach is that given a choice, we have two options, to either make that choice or to ignore it.
-1. If we make that choice, we calculate the best between the current option and the previous time where we ignored the choice
+The standard approach is that given a choice, we have two options, to either make that choice or to ignore it.
+1. If we make that choice, we calculate the best between the current option and the previous time where we ignored the given choice
 2. If we choose to ignore the choice now, we just choose the value from the previous time we made the choice.
 
-Sample problems can be Knapsack, Buy and Sell Stock, House Robber etc.
+The Knapsack problem is a very famous and standard example of a DP consisting of decision choices of including or including an option in the answer set.
 
-```java
-// KNAPSACK AND RELATED PROBLEMS TO BE ADDED HERE
-```
+#### The Knapsack Problem
+The standard problem statement of Knapsack problems is:<br>
+Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.
+
+The Knapsack problem can be divided into the following three categories parts:
+1. 0-1 Knapsack Problem: Each item can be selected at most once.
+2. Unbounded Knapsack Problem: Each item can be selected infinite number of times.
+3. Bounded Knapsack Problem: We can select at most K items.
+
+##### 0-1 Knapsack Problem:
+
+
 <a href="#Contents">Back to contents</a>
+
+- [Add knapsack description to the above link, 0/1 knapsack, unbounded knapsack, repititions allowed not allowed difference for converting 2d to 1d]
 
 <a name="DP_LIS"></a>
 ### Longest Integer Subsequence(LIS)
@@ -7915,7 +7927,7 @@ public class Solution
 The question is similar to Buy and Sell Stock I and II as covered in Arrays. The difference being that we are allowed at most 2 transactions. We generalise the concept for atmost k transactions. The question statement is as follows:<br>
 Say you have an array for which the ith element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete at most two transactions. You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
 
-The code has been explained in the comments itself:
+The code can be solved using the knapsack strategy of deciding to whether or not to sell the stock on a given day. The code has been explained in the comments itself:
 ```java
 class Solution
 {
