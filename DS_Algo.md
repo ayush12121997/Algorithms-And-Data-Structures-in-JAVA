@@ -289,6 +289,7 @@
     - [DP on Strings](#DP_Strings)
     - [DP for decision making - Knapsack](#DP_Decision)
     - [DP problems classification]
+	- [DP Table optimization - Convert 2D DP into 1D DP]
     - [Longest Integer Subsequence](#DP_LIS)
 	- [Unique Paths in a grid](#DP_UniquePaths)
     - [Minimum sum path in a grid](#DP_MinSumPath)
