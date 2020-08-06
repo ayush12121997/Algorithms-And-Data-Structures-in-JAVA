@@ -311,7 +311,7 @@
     - [Last stone weight II, normal knapsack(2D) and coin change 2(1D) as well, compare with how coin change front and back iteration of j loop makes a difference to count allowed]
     - [Flip array]
 	- [Edit Distance]
-    - [Word break - I, also add the version where you need to tell which words were selcted out of the dictionary]
+    - [Word break - I]
     - [Word Break - II]
     - [Decode ways and print all]
     - [Distinct Subsequences]
