@@ -312,7 +312,7 @@
     - [Flip array]
 	- [Edit Distance]
     - [Word break - I]
-    - [Word Break - II]
+    - [Word Break - II, Length optimization]
     - [Decode ways and print all]
     - [Distinct Subsequences]
     - [Longest Artihmetic Sequence]
