@@ -1081,11 +1081,11 @@ We combine these topics as a lot of String questions can be solved using the sli
 2. Two Pointer Technique
 3. String questions that can be solved using the above two technique
 #### Sliding Window Algorithm
-Sliding Window Algorith is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single resulting in a O(N) complexity instead of O(N^2).
+Sliding Window Algorithm is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single for loop, resulting in a O(N) complexity instead of O(N^2).
 
-The idea is to select a window of say size k. The window depicts the range of elements that we can have in access at a time for a particular operation. We then iterate this entire window of size k over the array by adding elements from the front and removing those form the back. This way in O(N) time in a single iteration elements in groups of k can be iterated over.
+The idea is to select a window of say size k. The window depicts the range of elements that we can have access at a time for a particular operation. We then iterate this entire window of size k over the array, that is move the window across the array, by adding elements from the right and removing from the left. The adding and removing can be reversed too but that depends from question to quetion. Using this technique in O(N) time, in a single iteration, elements in groups of k can be iterated over.
 
-For example if the task is to find the **maximum sum contigous subarray where the subarray size is atmost 3**. Once method to do it would be for every index i in the array, check if the array from i to i + k forms the answer we need.
+For example if the task is to find the **maximum sum contigous subarray where the subarray size is K**, what we are supposed to do is find the subarray of size K, with the maximum sum. One method to do it would be for every index i in the array, check if the array from i to i + k forms the answer we need.
 ```java
 int maxSum = 0;
 int currSum = 0;
@@ -1101,10 +1101,10 @@ for(int i = 0; i < n-k; i++)
 ```
 The above method sovles our problem in O(NK) time.
 
-We can potentially do better by instead of iterating over every element for k times, we can create a window of size k and calculate its sum by moving the window forward. Initialy the window lies from 0 to k. We clculate the sum in this. Now as we move forward, the window lies from 1 to k+1 and then from 2 to k+2 until we iterate till n-k to n. Now when moving forward we need not calculate the entire window sum from sratch in O(1) time. We can instead do this by adding the incoming index in the window and subtracting the first index of the window. For example when moving from 0->k to 1->(k+1), we can simply just add arr[k+1] and subtract arr[0] from current sum. This has been illustrated below:
+We can potentially do better by instead of iterating over every element for k times, we can create a window of size k and calculate it's sum by moving the window forward. Initialy the window lies from 0 to k. We calculate the sum in this. Now as we move forward, the window lies from 1 to k+1 and then from 2 to k+2 until we iterate till n-k to n. While moving forward we need not calculate the entire window sum from sratch in O(1) time, rather we can do this by adding the incoming index in the window and subtracting the first outgoing index of the window. For example when moving from 0->k to 1->(k+1), we can simply just add arr[k+1] and subtract arr[0] from current sum. This has been illustrated below:
 1. We compute the sum of first k elements out of n terms using a linear loop and store the sum in variable maxSum.
-2. Then we will iterate linearly over the array till it reaches the end and simultaneously keep track of maxSum.
-3. To get the current sum of block of k elements just subtract the first element from the previous currSum and add the next element to it.
+2. Then we will iterate linearly over the array till it reaches the end and simultaneously keep track of maxSum for every window.
+3. To get the current sum just subtract the first element from the previous currSum and add the next incoming element to it.
 ```java
 int maxSum = 0;
 int currSum = 0;
@@ -1122,28 +1122,28 @@ for(int i = k; i < n; i++)
 Hence, now we can solve our problem in O(N) time. This is known as the Sliding Window Technique.
 
 #### Two Pointer Technique
-Two pointers is really an easy and effective technique which is typically used for searching pairs in a sorted array or when we search in a window which can change length from either side. Let us consider an example. Given a sorted array A (sorted in ascending order), having N integers, find if there exists any pair of elements (A[i], A[j]) such that their sum is equal to X. A naive method would be two compare every pair in O(N^2) time.
+Two pointers is really an easy and effective technique which is typically used for searching pairs in a sorted array or when we search in a window which can change length from either side. This is more of a dynamically sized sliding window tehcnique. Let us consider an example. Given a sorted array A (sorted in ascending order), having N integers, find if there exists any pair of elements (A[i], A[j]) such that their sum is equal to X. A naive method would be two compare every pair in O(N^2) time.
 
-A faster way to achieve this is using two pointers. We take two pointers, one representing the first element and other representing the last element of the array, and then we add the values kept at both the pointers. If their sum is smaller than X then we shift the left pointer to right or if their sum is greater than X then we shift the right pointer to left, in order to get closer to the sum. We keep moving the pointers until we get the sum as X. The algorithm basically uses the fact that the input array is sorted. We start the sum of extreme values (smallest and largest) and conditionally move both pointers. We move left pointer i when the sum of A[i] and A[j] is less than X. We do not miss any pair because the sum is already smaller than X. Same logic applies for right pointer j.
+A faster way to achieve this is using two pointers. We take two pointers, one representing the first element and other representing the last element of the array, and then we add the values kept at both the pointers. If their sum is smaller than X then we shift the left pointer to right or if their sum is greater than X then we shift the right pointer to left, in order to get closer to the sum. We keep moving the pointers until we get the sum as X. The algorithm basically uses the fact that the input array is sorted. We start the sum of extreme values (smallest and largest) and conditionally move both pointers. We move left pointer i when the sum of A[i] and A[j] is less than X. We do not miss any pair because the sum is already smaller than X. Same logic applies for right pointer j oving only when sum is > X.
+
+Other than being used in sorted arrays, we use two pointers when we need to modify the size of a sliding window dynmically that is choose whether to decrease the size or increase it. An illustration is shown below in the next section.
 
 <a href="#Contents">Back to contents</a>
 
 <a name="SWTPS_StringTemplate"></a>
 ### Sliding Window Template - String pattern questions
-Many sliding window questions can involve strings. The questions regarding strings are generalyl related to finding contigous patterns under certain conditions in a parent string. In such type of questions the following pattern can be utilized to solve the questions. Let us assume that the question at hand is to find the starting indexes of all anagrams of a pattern in a string.
+Many sliding window questions can involve strings. The questions regarding strings are generally related to finding contigous patterns under certain conditions in a parent string. In such type of questions the following template can be utilized to solve the questions. Let us assume that the question at hand is to **Find the starting indexes of all anagrams of a pattern in a string**. We utilize the sliding window technique here but with two pointers.
 ```java
 public class Solution
 {
     public List<Integer> slidingWindowTemplateForStrings(String original, String pattern)
     {
-        // Create a result List to store the results
-        // This can be any object or data structure suitable
-        // for storng the results needed.
+        // List to store the answer
         List<Integer> result = new ArrayList<Integer>();
 
         // If pattern is longer than string itself,
         // then no answer exists so return empty result
-        if(pattern.length()> original.length())
+        if(pattern.length() > original.length())
         {
             return result;
         }
@@ -1151,10 +1151,11 @@ public class Solution
         // Create a HashMap to store the count of the characters
         // in the pattern.
         // Key: Character in pattern; Value: Count of character
-        Map<Character, Integer> patternMap = new HashMap<Character, Integer>();
-        // Character array for the String pattern
+		// This HashMap is for count of characters in this question,
+        // but can be varied according to the questions demands.
+		Map<Character, Integer> patternMap = new HashMap<Character, Integer>();
+		
         char[] patternArray = pattern.toCharArray();
-
         for(int i = 0; i < patternArray.length; i++)
         {
             char c = patternArray[i];
@@ -1172,15 +1173,16 @@ public class Solution
 
         // The size of the HashMap patternSize is the total number
         // of unique characters in the String pattern. It acts as a
-        // counter to remaining unmatched characters in the pattern.
+        // counter to how many unique unmatech characters we have.
         int counter = patternMap.size();
 
         // The begin pointer and end pointer to mark the range of
-        // the sliding window
+        // the sliding window on the original string
         int start = 0;
         int end = 0;
 
         // Current length of substring which matches the target
+		// As currently nothing matches so it is +INF
         int len = Integer.MAX_VALUE; 
 
         // Loop until the end of the original string is reached
@@ -1206,7 +1208,9 @@ public class Solution
                 // If the buffer size has reached 0, we mean we have
                 // completed matching the given character of the pattern
                 // and hence number of remaining uncompleted characters
-                // is reduced by 1. The condition to check for counter
+                // is reduced by 1.
+				// The remaining unmatched characters is the counter in
+                // this question. The condition to check for counter
                 // reduction might be different for different questions.
                 if(patternMap.get(c) == 0)
                 {
@@ -1217,9 +1221,10 @@ public class Solution
             // Move the window end to the next character
             end++;
 
-            // If all characters of the pattern have been matched so check
-            // if the condition according to the question are satisfied or
-            // not to modify the result.
+            // If all characters of the pattern have been matched, that is
+            // our counter has reached to 0, so check if the conditions
+            // according to the question are satisfied or not to modify
+            // the result.
             while(counter == 0)
             {
                 // First character of the sliding window
@@ -1228,18 +1233,20 @@ public class Solution
                 // IMPORTANT:
                 // CHECK FOR SATISFACTORY CONDITIONS ACCORDING TO THE
                 // QUESTION TO MODIFY THE RESULT HERE. AS OF NOW LET US
-                // ASSUME THAT TASK AT HAND IS TO FIND THE STARTING
+                // DO IT FOR THE TASK AT HAND THAT IS TO FIND THE STARTING
                 // INDEXES OF ALL ANAGRAMS OF THE PATTERN IN THE ORIGINAL
-                // STRING. SO WE CHECK IF THE PART THAT COMPLETELY MATACHES
-                // ALL CHARACTERS OF THE PATTERN IS OF THE SAME LENGTH AS
-                // PATTERN OR NOT. AS IF LENGTH IS NOT SAME IT WONT BE AN
+                // STRING. SO WE CHECK THAT AS THE COUNTER IS NOW 0, THAT
+                // WHETHER OR NOT THE PART THAT COMPLETELY MATCHES ALL OF
+                // THE CHARACTERS OF THE PATTERN IS OF THE SAME LENGTH AS
+                // PATTERN OR NOT. AS, IF LENGTH IS NOT SAME IT WONT BE AN
                 // ANAGRAM.
                 if(end - start == pattern.length())
                 {
+                    // As lengths are same, 'start' is one of the starting indexes
                     result.add(start);
                 }
 
-                // If the character is a part of the mathcing, that is
+                // If the starting character is a part of the mathcing, that is
                 // character is present in the pattern
                 if(patternMap.containsKey(tempc))
                 {
