@@ -1076,10 +1076,10 @@ class NumArray
 ## <p align="center"> Sliding Window, Two Pointers and Strings </p>
 <a name="SWTPS_Introduction"></a>
 ### Introduction
-We combine these topics as a lot of String questions can be solved using the sliding window and to pointers technique. String problems in general are not a particular subsection of programming but rather form sub sections of various different techinques such as DP based string problems, sliding window based string problems, backtracking based string problems and so on. In this section we cover:
+We combine these topics as a lot of String questions can be solved using the sliding window and two pointers technique. String problems in general are not a particular subsection of programming but rather form sub sections of various different techinques such as DP based string problems, sliding window based string problems, backtracking based string problems and so on. In this section we cover:
 1. Sliding Window Algorithm
 2. Two Pointer Technique
-3. String questions that can be solved using the above two technique and specific String based algorithms
+3. String questions that can be solved using the above two technique
 #### Sliding Window Algorithm
 Sliding Window Algorith is a very popular problem solving techinque used in questions generally involving contigous array/string operations. The algo can help convert nested for loops into a single resulting in a O(N) complexity instead of O(N^2).
 
