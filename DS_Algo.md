@@ -207,7 +207,7 @@
 	- [Sum of distances in tree]
 	- []
 9. [Graphs](#Graphs)
-    - [Representing a graph](#GP_Representaations)
+    - [Representing a graph](#GP_Representations)
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
     - [Reverse a graph](#GP_Reverse)
