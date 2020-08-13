@@ -85,7 +85,6 @@
 	- [Longest substring with at most K distinct characters]
 	- [Longest substring with at least K repeating characters]
 	- [Longest subarray with difference exactly K between any two distinct values]
-	- [Subarrays with atmost K different integers]
 	- [Subarrays with K different integers]
 	- [Subarrays with product less than K]
 	- [Remove duplicates from sorted array]
