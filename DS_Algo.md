@@ -4562,12 +4562,12 @@ class Graph
         boolean visited[] = new boolean[V];
         
         // For every node in the graph
-        for(int i = 0; i < adj.size(); i++)
+        for(int i = 0; i < V; i++)
         {
             // If node is unvisited only then call BFS
-            if(!visited[adj.get(i)])
+            if(!visited[i])
             {
-                BFS(adj.get(i), visited);
+                BFS(i, visited);
             }
         }
     }
@@ -4627,11 +4627,11 @@ class Graph
         Call the DFS function for every unvisted node
         present in the graph
         */
-        for(int i = 0; i < adj.size(); i++)
+        for(int i = 0; i < V; i++)
         {
-            if(!visited[adj.get(i)])
+            if(!visited[i])
             {
-                DFS(adj.get(i), visited);
+                DFS(i, visited);
             }
         }
     }
@@ -4709,13 +4709,13 @@ ArrayList<ArrayList<Integer>> adj;
 int V;
 
 boolean[] visited = new boolean[V];
-for(int i = 0; i < adj.size(); i++)
+for(int i = 0; i < V; i++)
 {
-    if(!visited[adj.get(i)])
+    if(!visited[i])
     {
 	    // Here either BFS or DFS is called and it gives us a new
 		// connected component.
-        DFS(adj.get(i), visited);
+        DFS(i, visited);
     }
 }
 ```
@@ -4737,8 +4737,9 @@ The steps for the algorithm to identify all the SCCs of a directed graph would b
 <div align="center">
 <img src="/Images/GP_SCC_1.png" width="300" height="200"/>
 </div>
-In the above graph, the three SCCs are marked in dotted circles. 4 and 5 cannot be put together as eventhough we can reach 5 from 4, we cannot reach 4 from 5. Now when we run DFS from a random vertex, say 2, the first vertex to be completed is 1, then 3, then 5, then 4 and then 2 at the end. Hence, the stack is:<br>
-[1, 3, 5, 4, 2] with 2 at the top and 1 at the bottom.<br>
+In the above graph, the three SCCs are marked in dotted circles. 4 and 5 cannot be put together as eventhough we can reach 5 from 4, we cannot reach 4 from 5. Now when we run DFS from a random vertex, say 2, the first vertex to be completed is 1, as 2 goes to 3, 3 goes to 1, 1 goes to 2 and 2 has already been visited so 1 is completed. Then 3 gets completed next, then 5, then 4 and then 2 at the end. Hence, the stack is:<br>
+[1, 3, 5, 4, 2] with 2 at the top and 1 at the bottom.
+
 Now if we reverse the graph we get the following:<br>
 <div align="center">
 <img src="/Images/GP_SCC_2.png" width="300" height="200"/>
@@ -4748,7 +4749,110 @@ Now on this reversed graph, when we run DFS on top of our stack, that is 2, we g
 
 The concepts needed for this question are DFS on graph, usage of stack and reversing a graph. As all of these concepts have been covered before, the code is trivial and hence not commented.
 ```java
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Graph g = new Graph(5);
+        g.addEdge(0,2);
+        g.addEdge(2,1);
+        g.addEdge(1,0);
+        g.addEdge(0,3);
+        g.addEdge(3,4);
+        g.DFS_Util();
+        g.printSCC();
+    }
+}
 
+class Graph
+{
+    ArrayList<ArrayList<Integer>> adj = null;
+    int V = 0;
+    Stack<Integer> stack = new Stack<Integer>();
+
+    public Graph(int v)
+    {
+        V = v;
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < v; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+    }
+
+    public void addEdge(int v, int u)
+    {
+        adj.get(v).add(u);
+    }
+
+    public void DFS_Util()
+    {
+        boolean visited[] = new boolean[V];
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i])
+            {
+                DFS(i, visited);
+            }
+        }
+    }
+
+    public void DFS(int start, boolean[] visited)
+    {
+        visited[start] = true;
+        for(int i = 0; i < adj.get(start).size(); i++)
+        {
+            int c = adj.get(start).get(i);
+            if(!visited[c])
+            {
+                DFS(c, visited);
+            }
+        }
+        stack.push(start);
+    }
+
+    public void DFS_SCC(int start, boolean[] visited)
+    {
+        visited[start] = true;
+        System.out.print(start + " ");
+        for(int i = 0; i < adj.get(start).size(); i++)
+        {
+            int c = adj.get(start).get(i);
+            if(!visited[c])
+            {
+                DFS_SCC(c, visited);
+            }
+        }
+    }
+
+    public Graph reverseGraph()
+    {
+        Graph g = new Graph(V);
+        for(int i = 0; i < adj.size(); i++)
+        {
+            for(int j = 0; j < adj.get(i).size(); j++)
+            {
+                g.addEdge(adj.get(i).get(j), i);
+            }
+        }
+        return g;
+    }
+
+    public void printSCC()
+    {
+        Graph g = reverseGraph();
+        boolean[] visited = new boolean[V];
+        while(!stack.isEmpty())
+        {
+            int src = stack.pop();
+            if(!visited[src])
+            {
+                g.DFS_SCC(src, visited);
+            }
+            System.out.println();
+        }
+    }
+}
 ```
 <a href="#Contents">Back to contents</a>
 
