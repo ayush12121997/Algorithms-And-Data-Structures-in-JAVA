@@ -35,6 +35,8 @@
     - [Range Sum Query](#Arrays_RSQuery)
     - [Scanline algorithm]
     - [Boyer-Moore Voting Algorithm (For majority, for n/3 and so on)]
+	- [Majority Element]
+	- [Majority Element II]
 	- [Two Sum - Random Array]
 	- [First Missing Positive Integer]
 	- [Game of Life]
