@@ -4405,25 +4405,38 @@ class Node
 ## <p align="center"> Graphs </p>
 A graph is a 2D data structure which consists of nodes and edges. The nodes are the vertices of the graph and the edges are the lines/path connecting these vertices. The nodes in can be classes in themselves, containting information more than simply a single vaue.
 
-Other than understanding concepts and solving questions based on graphs, we will also build a standard graph class which would support all the standard graph queries. We will build this class step by step as various subsections proceed.
-
 <a name ="GP_Representations"></a>
 ### Representing a graph
 A graph maybe represented as an adjaceny list or as an adjacency matrix.
 
 #### Adjacency Matrix
-The adjacency matrix represtation of the graph represetns the graph through a matrix. The matrix is of size V x V where V is the number of vertices. Each cell, (i,j) represents that whether a connection between the vertices, i and j exists or not. The adjacency matrix for an undirected graph will always be symmetrics. An undrected graph is a graph where movement on every edge is allowed in both directions. If the graph is weighted, the adjacency matrix, instead of keeping 1's and 0,s to denote presence or absence of edges, can instead use the weights of edges as entries to denote presence.
+The adjacency matrix represtation of the graph represents the graph through a 2D matrix of the form int[][]. The matrix is of size V x V where V is the number of vertices. Each cell, (i,j) represents that whether a connection exists between the vertices i and j or not. The cell would be marked 1 if the edge is present and 0 if it is not present. For example, for the following adjacency matrix:
+```java
+   1  2  3  4
+1 [0, 1, 0, 1]
+2 [1, 0, 1, 0]
+3 [0, 1, 0, 0]
+4 [1, 0, 0, 0]
+```
+Vertex 1 is connected to vertex 2, vertex 1 is also connected to vertex 4 and vertex 2 is connected to vertex 3.
 
-Adjacency matrix is used when the number of vertices are small and the task is related to identifying that whether or not an edge exists in a given graph. Seeing if an edge exists takes O(1) time, if the vertices to check between are known already.
+An **undirected graph** is a graph where movement on every edge is allowed in both directions. The adjacency matrix for an undirected graph will always be symmetric if an edge exists between 1-2 then it aslo exists between 2-1. If the graph is **weighted**, that is there is a cost for every edge, the adjacency matrix, instead of keeping 1's and 0,s to denote presence or absence of edges, can instead use the weights of edges as entries to denote presence.
 
-The graph is represented usign a 2D array like int[][] graph.
+Adjacency matrix is used when the number of vertices are small and the task is related to identifying that whether or not an edge exists in a given graph. Seeing if an edge exists or not takes O(1) time.
 
 #### Adjacency List
-The adjacency list concept is different from the adjacency matrix in the way that it only stores the edges present, and does not have any storage to represent a non existent edge. As the name suggests, we store a list of nodes that a node is connected to, formign a list of list. The outer list, also known as the parent list, represents the starting vertices, and the inner list at every index 'i' of the outer list, represesnts the nodes that the node 'i' is connected to.
+The adjacency list concept is different from the adjacency matrix in the way that it only stores the edges present in the graph, and does not have any storage to represent a non existent edge. For every node in the graph, we store a list of nodes it is connected to, eventually forming a list of lists. The outer list, also known as the parent list, represents the starting vertices, and the inner list at every index 'i' of the outer list, represesnts the nodes that the node 'i' is connected to. For example for the following adjacency list representation,
+```java
+[[2,4], [3], [], [1]]
+```
+Vertex 1 has an edge from 1 to 2, and from 1 to 4.<br>
+Vertex 2 has an edge from 2 to 3.<br>
+Vertex 3 does not have any outgoing edges.<br>
+Vertex 4 has an edge from 4 to 1.<br>
 
-The structure is represtend like a ArrayList<ArrayList<Integer>> adj, where adj.get(i) is list of nodes connected to node 'i'.
+An adjacency list is always a directed representation of the graph, hence for an undirected graph for any edge u-v, we would need a edge both from u to v and v to u. The graph is represtend like a ArrayList<ArrayList<Integer>> adj, where adj.get(i) is list of nodes connected to node 'i'.
 
-Most of the remaining concepts covered are bsed on the adjacency list representation of graphs and hence we will now look at how to build an adjacency list represtation from scratch:
+Most of the remaining concepts covered are based on the adjacency list representation of graphs and hence we look at how to build an adjacency list represtation from scratch:
 ```java
 class Graph
 {
@@ -4458,23 +4471,31 @@ class Graph
 
 <a name="GP_BFS"></a>
 ### Breadth First Traversal
-BFS is a searching technique which helps you search through various nodes of a tree or a graph, level by level. We begin with a starting index, root in case of trees, and then traverse all the nodes that can be reached from it in one step and and add them in a queue. Then for all the nodes present in the queue we repeat the process, until the queue becomes empty. Why use a queue? The aim of a BFS search is to first visit all direct children of the node and then proceed with each child seperately. This can be achieved by maintaining a queue which follows a FIFO order and hence only when the processing of parents at the starting of the queue is completed, the subequent children are proccessed.
+Breadth First Traversal(BFS) is a searching technique which helps you search through various nodes of a the graph, level by level. It works similar to how BFS works for trees. We begin with a starting node, root in case of trees, and then traverse all the nodes that can be reached from it directly and and add them in a queue. Then for all the nodes present in the queue we repeat the process, until the queue becomes empty.
 
-The difference between the BFS of a tree and that of a graph is that in graphs we need to maintain a visited array, to store the nodes which have been visited before. This is needed because unlike trees, graphs may contain cycles and without a visited array the search might end up in an infinite loop. We further build our graph class by adding the BFS functionality to it.
+**Why use a queue?**<br>
+The aim of a BFS search is to first visit all direct children of the node and then proceed with each child seperately. This can be achieved by maintaining a queue which follows a First-In-First-Out order and hence only when the processing of parent nodes at the starting of the queue is completed, the subsequent children nodes are proccessed.
+
+The difference between the BFS of a tree and that of a graph is that in graphs we need to maintain a visited array, to store the nodes which have been visited before. This is needed only in graphs and not in trees because unlike trees, graphs may contain cycles connecting children back to parents and without a visited array to keep track of already visited nodes, the search might end up in an infinite loop. The code for BFS is as following:
 ```java
 class Graph
 {
-    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
-        
+    // ASSUME WE HAVE THE FOLLOWING ALREADY AVAILABLE AN INITIALIZED
+    // Adjacency list which is list of list
+    ArrayList<ArrayList<Integer>> adj;
+    // Number of vertices in the graph
+    int V;
+	
     // Breadth first traversal
+	// Start is the node where we begin our BFS
     public void BFS(int start)
     {
         /*
-        Construct a visted array to avoid infinite loops
+        Construct a visted array to avoid infinite loops.
         Always remember to mark a node as visited as soon
         as you reach it.
         */
-        boolean visited[] = new boolean[visited];
+        boolean visited[] = new boolean[V];
         
         /*
         Construct a queue to store incoming
@@ -4490,7 +4511,8 @@ class Graph
         */
         queue.add(start);
         visited[start] = true;
-        int st = 0;
+        // st would store the node we are processing
+		int st;
         
         /*
         The following loop runs till the queue becomes empty,
@@ -4498,26 +4520,26 @@ class Graph
         */
         while(!queue.isEmpty())
         {
-            // Remove the queue top, i.e the node to process
+            // Remove the queue top, i.e. the node to be processed
             st = queue.poll();
-            
-            // Process the node as you like. Here we print.
+            // Process the node as you like. Here we simply print it.
             System.out.println(st + " ");
             
             /*
             For all the nodes connected to 'st' add them
             to the queue so that they can be proccessed in
-            the next level of te BFS iteration. Every node
-            added to the queue. necessarily needs them to
-            be marked as visited in the visited array. The
+            the next iteration. Every node added to the queue
+            necessarily needs it to be marked as visited. The
             adjacency list for node 'st' can be used to add
             the adjacent nodes of 'st' to queue.
             */
             for(int i = 0; i < adj.get(st).size(); i++)
             {
                 int c = adj.get(st).get(i);
+                // Check if node not already visited
                 if(!visited[c])
                 {
+                    // Mark as visited and add to queue
                     visited[c] = true;
                     queue.add(c);
                 }
@@ -4526,29 +4548,23 @@ class Graph
     }
 }
 ```
-The above code for BFS only works in the case when no disconnected components are present. Disconnected components of a graph exist, when the entire graph is not reachable from a vertex. For example, 1 -> 2 -> 3 and 4 -> 5 -> 6 are two disconnected components of the same graph and if we call BFS only on node 1 then we would never know about the existence of nodes 4,5 and 6. To tackle this problem, we modify our BFS function by making a wrapper function which calls our inner BFS function for every unvisited node yet. For this, we also need to move our visited array to the wrapper class and send it as an argument to the main BFS function as now we also need to check visted nodes outside the main BFS function to call BFS on remaining unvisted nodes. We add a BFS_Util function and modify the BFS function to accomodate these cahnges.
+The above code for BFS only works in the case when no disconnected components are present. **Disconnected components** of a graph exist, when the entire graph is not reachable from a vertex. For example, for the graph 1 -> 2 -> 3 and 4 -> 5 -> 6 are two disconnected components of the same graph and if we call BFS only on node 1 then we would never know about the existence of nodes 4,5 and 6. To tackle this problem, we modify our BFS function by making a wrapper function which calls our inner BFS function for every unvisited nodes yet. For this, we also need to move our visited array to the wrapper class and send it as an argument to the main BFS function as now we also need to check visited nodes outside the main BFS function to call BFS on remaining unvisited nodes. We add a BFS_Util function and modify the BFS function to accomodate these changes.
 ```java
 class Graph
 {
-    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    // ASSUME WE HAVE THE FOLLOWING ALREADY AVAILABLE AN INITIALIZED
+    ArrayList<ArrayList<Integer>> adj;
+    int V;
     
     // Wrapper function for BFS
     public void BFS_Util()
     {
-        /*
-        Construct a visted array to avoid infinite loops
-        and to accomodate for disconnected components of
-        the graph. Always remember to mark a node as
-        visited as soon as you reach it.
-        */
-        boolean visited[] = new boolean[visited];
+        boolean visited[] = new boolean[V];
         
-        /*
-        Call the BFS function for every unvisted node
-        present in the graph
-        */
+        // For every node in the graph
         for(int i = 0; i < adj.size(); i++)
         {
+            // If node is unvisited only then call BFS
             if(!visited[adj.get(i)])
             {
                 BFS(adj.get(i), visited);
@@ -4557,45 +4573,18 @@ class Graph
     }
     
     // Breadth first traversal
+    // We send the visited array as an argument so that we can check
+    // for visited nodes inside the function
     public void BFS(int start, boolean[] visited)
     {
-        /*
-        Construct a queue to store incoming
-        vertices for further processing
-        */
         Queue<Integer> queue = new LinkedList<Integer>();
-        
-        /*
-        We begin by adding the starting node
-        to the queue and process the queue
-        till it becomes empty, that is all nodes
-        have been exhausted.
-        */
         queue.add(start);
         visited[start] = true;
-        int st = 0;
-        
-        /*
-        The following loop runs till the queue becomes empty,
-        that is till all of the nodes have been visted.
-        */
+        int st;
         while(!queue.isEmpty())
         {
-            // Remove the queue top, i.e the node to process
             st = queue.poll();
-            
-            // Process the node as you like. Here we print.
             System.out.println(st);
-            
-            /*
-            For all the nodes connected to 'st' add them
-            to the queue so that they can be proccessed in
-            the next level of te BFS iteration. Every node
-            added to the queue. necessarily needs them to
-            be marked as visited in the visited array. The
-            adjacency list for node 'st' can be used to add
-            the adjacent nodes of 'st' to queue.
-            */
             for(int i = 0; i < adj.get(st).size(); i++)
             {
                 int c = adj.get(st).get(i);
@@ -4613,13 +4602,15 @@ class Graph
 
 <a name="GP_DFS"></a>
 ### Depth First Traversal
-DFS is also a searching algorithm which differs from BFS in the way that it searchs to the deepest level possible for a node first, before moving on to searching in the other children of the node. BFS searches all the children first and then proceeds to process children seperately. DFS instead processes the children to the deepst level first, then recurses back to proceed to other children.
+DFS is also a searching algorithm which differs from BFS in the way that it searches for a node to the deepest level possible first, before moving on to searching in other children of the node. BFS searches all the children first and then proceeds to process each child seperately. DFS instead processes the children to the deepst level first, then recurses back to proceed to other children.
 
-Just like BFS, we use a wrapper function with a visted array to accomodate for disconnected components of a graph.
+Just like BFS, we use a wrapper function with a visted array to accommodate for disconnected components of a graph.
 ```java
 class Graph
 {
-    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    // ASSUME WE HAVE THE FOLLOWING ALREADY AVAILABLE AN INITIALIZED
+    ArrayList<ArrayList<Integer>> adj;
+    int V;
     
     // Wrapper function for DFS
     public void DFS_Util()
@@ -4630,7 +4621,7 @@ class Graph
         the graph. Always remember to mark a node as
         visited as soon as you reach it.
         */
-        boolean visited[] = new boolean[visited];
+        boolean visited[] = new boolean[V];
         
         /*
         Call the DFS function for every unvisted node
@@ -4646,7 +4637,7 @@ class Graph
     }
     
     // Depth first traversal
-    public void BFS(int start, boolean[] visited)
+    public void DFS(int start, boolean[] visited)
     {
         /*
         We begin by marking the starting node as
@@ -4675,25 +4666,28 @@ class Graph
     }
 }
 ```
-***NOTE: A key point to remember can be that in DFS, the node is marked as visited when it has been reached and is being processed. On the other hand, in BFS, a node is marked as visited before it is processed, at the time of adding it to the queue itself.***
+***NOTE: A key point to remember can be that in DFS, the node is marked as visited when it has been reached and is being processed. On the other hand, in BFS, a node is marked as visited before it is processed, at the time of adding it to the queue itself, as once added to the queue, it is garaunteed that it will be processed.***
 
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_Reverse"></a>
 ### Reverse a graph
-Reversing a graph is simple. All you need to do is for every edge from u to v create an edge from v to u. Reversing a graph can be used to reverse the sinks of a graph. A sink is a point from where you cannot reach any other vertex of the graph.
+Reversing a graph is simple. All you need to do is to create a new graph, where for every edge from u to v create an edge from v to u.
 ```java
 class Graph
 {
-    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    // ASSUME WE HAVE THE FOLLOWING ALREADY AVAILABLE AN INITIALIZED
+    ArrayList<ArrayList<Integer>> adj;
+    int V;
     
     // Reverse a graph
     public Graph getReverse() 
     { 
-        Graph g = new Graph(V); 
-        for (int v = 0; v < V; v++) 
+        Graph g = new Graph(V);
+        // For all vertices in the graph
+		for (int v = 0; v < V; v++) 
         { 
-            // Recur for all the vertices adjacent to this vertex 
+            // Reverse all the vertices adjacent to this vertex 
             for(int i = 0; i < adj.get(v).size(); i++)
             {
                 int c = adj.get(v).get(i);
