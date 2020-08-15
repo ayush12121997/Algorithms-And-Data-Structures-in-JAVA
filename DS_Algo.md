@@ -1,5 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
+### Next Edit at : 4800
+
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
 1. [Reader class](#ReaderClass)
@@ -4993,24 +4995,28 @@ We can make the following observations from this and the previous three question
 ### Dijkstra's Algorithm
 Use Case:
 - Shortest distance from one source to all destinations
-- Weighted graph without negative weights
+- Use if it is a weighted graph without negative weights
 
-The algorithm for Dijkstra is a BFS inspired algorithm. The aim is to start BFS from the source vertex, and keep updating the distances of the nodes on each level. Instead of a normal queue, we use a priority queue in dijkstra BFS. The reason is that we always need the node with the shortest distance from the source at all time, as for the node at any level with the shortest distance, the distance from source would not change at any further levels. The distance is updated based on the formula:<br>
+The algorithm for Dijkstra is a BFS inspired algorithm. Instead of a normal queue, we use a priority queue in dijkstra BFS which is sorted on the basis of distance from source. When we add a node to the queue, we add it along with it's current distance from the source as well. The current distance of a node can be calculated using the parent's distance from source and the distance between the parent and the node. The distance is updated based on the formula:<br>
 Distance of node from source = Distance of parent from source + Distance of node from parent
 
-The time complexity is ((E+V)logV) = ElogV.
+Now when we run BFS, as the queue is sorted on basis of distance from the source, we always access the nearest node to soruce first. This nearest node cannot have a shorter distance than the current distance at which it is, as it has been calculated as a sum of shortest distances so far. The time complexity is ((E+V)logV) = ElogV.
 
-The distances are stored in a dist[] arrar. All the nodes with updated distances are added to the priority queue which is sorted on the basis of dstance from source, and their distances are updated in the dist[] arr. From the priority queue just like in BFS we pop the head and then do the same for the popped node. We update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by either keeping a visited array or by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source. Moreover, if the path to any vertex from the course needs to be stored, we can maintain a parent[] array. The parent array will hold the parent node of a vertex and to print the path, we may iterate the parent array until we hit the source. The parent array is updated along with the distance array. The parent of a neighbour who's distance is updated becomes the node that was popped out.
+The distances are stored in a dist[] array. During BFS, we update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source.
+
+Moreover, if the path to any vertex from the source needs to be stored, we can maintain a parent[] array. The parent array will hold the parent node of every vertex, that is parent[i] holds the parent of i in its shortest path from source. To print the path, we may iterate the parent array until we hit the source starting from the target. For example, if we need path from source to target, then the path can be made as following:<br>
+Source -> ..... parent[parent[parent[Target]]] -> parent[parent[Target]] -> parent[Target] -> Target<br>
+The parent array is updated along with the distance array, that is everytime we find a newer shorter distance.
 
 The steps of the algorithm would provide a better understanding of the funcitoning:
 1. Start with the source, and add it to the prioirty queue. The distance of source from source is 0.
-2. Now until the priority queue becomes empty, pop the head. If the head exists in the HashMap of completed elements, discard this element and move ahead. If it does not exist,  then use this popped node and also add it to the completed HashMap. This is done to ensure that once the distance of a node is finalized as mininimum distance till that vertex, no more further changes be allowed to it.
-3. For the popped node, for every neighbour not already in the completed HashMap, check if the distance needs to be updated or not. Distance is updated only in the following condition:<br>
+2. Now until the priority queue becomes empty, pop the head. If the head exists in the HashMap of completed elements, discard this element and move ahead. If it does not exist,  then use this popped node as source and also add it to the completed HashMap. This is done to ensure that once the distance of a node is finalized as mininimum, its distance does not change any further.
+3. For the popped node, for every neighbour not already in the completed HashMap, check if the distance needs to be updated or not. Distance is updated only in the following condition hold true:<br>
 Let popped node be 'p'<br>
 Let neighbour be 'n'<br>
 Let source be 's'<br>
 Distance updated only if dist[n] < dist[p] + Distance between 'p' and 'n', that is only if current distance of 'n' from 's' is less than sum of distance of 'n' from 'p' and distance of 'p' from 's'.<br>
-If the distance is updated then add this node to the priority queue. Moreover, as the distance has been updated, so this means that the shortest way to reach 'n' is now through 'p' and hence we update the parent aray as follows:<br>
+If the distance is updated then add this node to the priority queue. Moreover, as the distance has been updated, so this means that the shortest way to reach 'n' is now through 'p' and hence we update the parent array as follows:<br>
 parent[n] = p;
 4. Keep repeating the process until priority queue is empty. The final distance array would provide you with shortest distances and parent array would help in finding the path to a given vertex.
 
@@ -5188,7 +5194,7 @@ class Comparison implements Comparator<Node>
     }
 }
 ```
-**NOTE: As prioirity queue does not provide optimal time for deleting nodes, we used a hashmap to checks for duplicate values in the priority queue. We can alternatively use a TreeSet instead which has O(logN) complexity for both add and remove functionalities.**
+**NOTE: As prioirity queue does not provide optimal time for deleting nodes, does it in O(N), hence we used a hashmap to check for duplicate values in the priority queue instead of removing the previously added distances from it. We can alternatively use a TreeSet instead which has O(logN) complexity for both add and remove functionalities.**
 
 <a href="#Contents">Back to contents</a>
 
@@ -5196,21 +5202,30 @@ class Comparison implements Comparator<Node>
 ### Bellman–Ford Algorithm
 Use Case:
 - Shortest distance from one source to all destinations
-- Weighted graph with negative weights, no negative weight cycles
-- Detect negative weight cycles
+- Use when weighted graph with negative weights is present
+- No negative weight cycles allowed
+- Used to detect negative weight cycles
+- Can also be used when only a certain number of edges are allowed in the shortest path
 
 Dijkstra does not work in case of negative weights being present in the graph. In case of negative weights, we can use Bellman Ford Algorithm to get the shortest distance from a source to all vertices and check for the presence of a negative weight cycle.
 
-<ins>Fact-1</ins>: In a graph having v vertices, the maximum non cyclic path length can be v-1. Any path of length >= v, will definitely form a cycle.
+<ins>Fact-1</ins>: In a graph having v vertices, the maximum non cyclic path length can be of length v-1. Any path of length greater than equal to v, will definitely form a cycle.
 
-<ins>Fact-2</ins>: In case of a cycle consisting of poistive edges only, iterating the path again and again will increase the total to infinite, whereas in case of cycles having a negative weight sum the cost can continue to keep on descreasing till negative infinite.
+<ins>Fact-2</ins>: In case of a cycle consisting of poistive edges only, iterating the cycle again and again will increase the total path sum to infinite as the same positive edges are traversed again and again. On the other hand, in case of cycles having a negative weight sum, the cost of traversing the cycle can continue to keep on descreasing till negative infinite if we loop the cycle again and again.
 
-Using the above two facts we can visualize an algorithm, that builds all path lengths of paths upto length v-1, and when done, checks once again for shorter path lengths possible. If there is still a shorter path length possible, then a newgative weight cycle is present.
+Using the above two facts we can visualize an algorithm, that builds all shortest paths possible from the source, with lengths of paths varrying from 1 to v-1. While building paths, for paths of all varrying lengths, we update shortest diatances in the distance array accordingly. When paths of length upto v-1 have been created, at this point we can be assured that the distacne array contains shortest distances of all nodes from the source. We then check once again for an even shorter path if possible. If there is still a shorter path length possible, then a negative weight cycle exists in the graph, else no negative weight cycle and the shortest paths calculated are correct.
 
 Steps:
 1. Initialise distance and parent arrays.
-2. We start finding shortest distances for paths of length 1 to paths of length v - 1. For v-1 times, for all the edges present in the graph, for each edge we check that for the edge u - > v, is it possible to get a distance smaller than current dist[v]. That is, dist[v] < dist[u] + length of u-v. If yes, so we update dist[v] and parent[v] as well.<br>
-_The reason this step is done v-1 times is that, initially when all distances are infinite, the first iteration would confirm the shortest ditances of paths of length 1 from source. While other distances might have been updated too, but they may not necessarily be the shortest. On the second iteration, as paths of length 1 have already been finalized, so now paths of length 2 would be finalized, that is nodes which are just a single edge away from previously finalized nodes. Building up like this, in v-1 iterations, we can be sure that all non cyclic paths have been finalized to be the shortest possible paths._
+2. We start finding shortest distances for paths of length 1 to paths of length v - 1. Therefore, for v-1 times, for all the edges present in the graph, for each edge we check that for the edge u - > v, is it possible to get a distance smaller than current dist[v]. That is, dist[v] < dist[u] + length of u-v. If yes, so we update dist[v] and parent[v] as well.
+```java
+// for v-1 times
+//     for every edge in graph
+//         if dist[v] < dist[u] + length of u-v
+//             update dist[v] and parent[v]
+```
+***The reason this step is done v-1 times***<br>
+_Initially when all distances are infinite, the first iteration would confirm the shortest distances of paths of length 1 from source. In the second iteration, as paths of length 1 had already been finalized, so now paths of length 2 would be finalized, that is nodes which are just a single edge away from previously finalized nodes. Building up like this, in v-1 iterations, we can be sure that all non cyclic paths have been finalized to be the shortest possible paths._
 3. Once paths have been finalized, run a final loop over all edges once again, checking that is it still possible to get a smaller path sum than the already finalized values. If true, that means that there is a negative weight cycle present, else there is no negative weight cycle and the path lengths finalized so far are correct.
 
 Time complexity is O(EV).
