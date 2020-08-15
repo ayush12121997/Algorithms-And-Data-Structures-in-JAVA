@@ -1,4 +1,7 @@
-//
+// PLEASE TAKE A LOOK AT THE QUESTION HERE:
+// https://www.geeksforgeeks.org/strongly-connected-components/
+// AS THE QUESTION DOES NOT HAVE A SUBMISSION OPTION HENCE THE CODE HAS BEEN WRITTEN AND STORED HERE
+
 public class Main
 {
     public static void main(String[] args)
