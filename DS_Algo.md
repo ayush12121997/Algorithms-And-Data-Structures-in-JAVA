@@ -4976,16 +4976,16 @@ class Graph
 ### Check if a directed graph is strongly connected
 To check that whether a directed graph is strongly connected or not, we use the conecpt similar to Kosaraju's algorithm for finding all SCC. if we find all SCCs and the number of SCCs is just one, then the graph is strongly connected. But the task here is only different in the meaning that we need to confirm that whether a single SCC covers the entire graph or not and need not find more than one SCC. We can do this according to the following steps:
 1. Mark all nodes unvisited.
-2. Do DFS, if any node remains unvisited, then return false.
-3. If above step did not return false, so reverse the graph.
-4. Again do DFS from the same node. If if any node remains unvisited, then return false.
-5. If above step did not return false, so return true.
+2. Do DFS, if any node remains unvisited, then return false. This is because if we cannot reach all nodes from a given node then graph cannot be strongly connected.
+3. If above step did not return false, so reverse the graph. Now on reversing the graph, if it is a strongly connected graph, a DFS should still cover all vertices.
+4. Hence, again do DFS from the same node as the first time. If if any node remains unvisited now, then return false as eventhough that vertice could go to all nodes, not all nodes could reach that vertice.
+5. If above step did not return false, so return true as now we know that there exists a vertice that can go to all nodes and all ndoes can go to that vertice too. Hence every vertice can go to every other one.
 
 We can make the following observations from this and the previous three questions:
-1. Connected components can be found simply by doing a DFS on every unvisited node.
-2. Strongly connected componenets are found by reversing the graph and doing DFS on the original heads before the sinks. This way DFS for a head ends by forming a SCC for itself.
+1. Connected components of an undirected graph can be found simply by doing a DFS on every unvisited node.
+2. Strongly connected componenets are found by reversing the graph and doing DFS on the nodes that would be completed last in an original DFS. This way every DFS for a parent ends by forming a SCC for itself.
 3. For checking if entire graph is SCC or not, first check if a single DFS reaches all nodes. If yes, so reverse the graph and once again repeat the DFS on the same node. If true both times so graph is a SCC.
-4. Mother vertex cn be found by checking reachability of a vertex to all others. Instead of repeating it for every vertex, find the topmost head by DFS. Then rub DFS on this head. If this head is not the mother vertex then mother vertex does not exist.
+4. Mother vertex can be found by checking reachability of a vertex to all others. Instead of repeating it for every vertex, find the topmost parent by running a DFS. Then run DFS on this node. If this node can reach all the other nodes in its DFS, then it is the mother vertex, else mother vertex does not exist.
 
 <a href="#Contents">Back to contents</a>
 
