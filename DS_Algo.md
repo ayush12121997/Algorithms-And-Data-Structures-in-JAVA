@@ -4730,7 +4730,9 @@ The steps for the algorithm to identify all the SCCs of a directed graph would b
 <ins>Note</ins>: By a node getting completed we mean, DFS running for all its children.
 
 **Step 2:** Now we reverse the graph. Reversing it results in the children now becoming parents and parents becoming children. This is done because now for the reversed graph, when we would run DFS on it one by one starting from the nodes that were completed last in the first step, every time a DFS run would get over, we would have found a new strongly connected component. This is because all the nodes that are covered in the DFS iteration of the reversed graph suggest that there exists path from child to parent and parent to child both in the original graph. For example:<br>
-<img src="/Images/GP_SCC_1.png" width="100" height="100"/><br>
+<div align="center">
+<img src="/Images/GP_SCC_1.png" width="400" height="300"/>
+</div><br>
 **Step 3:** On the reversed graph, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
 
 As DFS and reversing a graph have been covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
