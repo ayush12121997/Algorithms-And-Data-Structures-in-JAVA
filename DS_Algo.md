@@ -5215,9 +5215,9 @@ Dijkstra does not work in case of negative weights being present in the graph. I
 
 Using the above two facts we can visualize an algorithm, that builds all shortest paths possible from the source, with lengths of paths varrying from 1 to v-1. While building paths, for paths of all varrying lengths, we update shortest diatances in the distance array accordingly. When paths of length upto v-1 have been created, at this point we can be assured that the distacne array contains shortest distances of all nodes from the source. We then check once again for an even shorter path if possible. If there is still a shorter path length possible, then a negative weight cycle exists in the graph, else no negative weight cycle and the shortest paths calculated are correct.
 
-Steps:
-1. Initialise distance and parent arrays.
-2. We start finding shortest distances for paths of length 1 to paths of length v - 1. Therefore, for v-1 times, for all the edges present in the graph, for each edge we check that for the edge u - > v, is it possible to get a distance smaller than current dist[v]. That is, dist[v] < dist[u] + length of u-v. If yes, so we update dist[v] and parent[v] as well.<br>
+**Step 1:** Initialise distance and parent arrays.
+
+**Step 2:** We start finding shortest distances for paths of length 1 to paths of length v - 1. Therefore, for v-1 times, for all the edges present in the graph, for each edge we check that for the edge u - > v, is it possible to get a distance smaller than current dist[v]. That is, dist[v] < dist[u] + length of u-v. If yes, so we update dist[v] and parent[v] as well.<br>
 ```java
 // for v-1 times
 //     for every edge in graph
@@ -5226,7 +5226,8 @@ Steps:
 ```
 ***The reason this step is done v-1 times:***<br>
 _Initially when all distances are infinite, the first iteration would confirm the shortest distances of paths of length 1 from source. In the second iteration, as paths of length 1 had already been finalized, so now paths of length 2 would be finalized, that is nodes which are just a single edge away from previously finalized nodes. Building up like this, in v-1 iterations, we can be sure that all non cyclic paths have been finalized to be the shortest possible paths._
-3. Once paths have been finalized, run a final loop over all edges once again, checking that is it still possible to get a smaller path sum than the already finalized values. If true, that means that there is a negative weight cycle present, else there is no negative weight cycle and the path lengths finalized so far are correct.
+
+**Step 3:** Once paths have been finalized, run a final loop over all edges once again, checking that is it still possible to get a smaller path sum than the already finalized values. If true, that means that there is a negative weight cycle present, else there is no negative weight cycle and the path lengths finalized so far are correct.
 
 Time complexity is O(EV).
 
