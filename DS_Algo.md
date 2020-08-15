@@ -1,8 +1,5 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next edit content - 304
-### Next edit content- 8170
-
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
 1. [Reader class](#ReaderClass)
@@ -4406,7 +4403,7 @@ class Node
 
 <a name="Graphs"></a>
 ## <p align="center"> Graphs </p>
-A graph is a 2D data structure which consists of nodes and edges. The nodes are the vertices of the graph and the edges are the lines/path connecting these vertices. The nodes in the graphs can be classes in themselves, containting information more than simply a single vaue, and the edges might represent connections between the structures.
+A graph is a 2D data structure which consists of nodes and edges. The nodes are the vertices of the graph and the edges are the lines/path connecting these vertices. The nodes in can be classes in themselves, containting information more than simply a single vaue.
 
 Other than understanding concepts and solving questions based on graphs, we will also build a standard graph class which would support all the standard graph queries. We will build this class step by step as various subsections proceed.
 
