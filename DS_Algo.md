@@ -4733,7 +4733,7 @@ The steps for the algorithm to identify all the SCCs of a directed graph would b
 <div align="center">
 <img src="/Images/GP_SCC_1.png" width="300" height="200"/>
 </div>
-
+In the above graph, the three SCCs are marked. Now if this graph is given and we run DFS on any random vertex, then it is upon luck 
 **Step 3:** On the reversed graph, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
 
 As DFS and reversing a graph have been covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
