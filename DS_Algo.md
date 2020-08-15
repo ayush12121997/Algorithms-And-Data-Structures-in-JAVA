@@ -214,8 +214,8 @@
     - [Breadth First Traversal](#GP_BFS)
     - [Depth First Traversal](#GP_DFS)
     - [Reverse a graph](#GP_Reverse)
-    - [Connected components in undirected graph](#GP_ConnectedComponents)
-    - [Strongly Connected Components in directed graph- Kosaraju’s algorithm](#GP_SCC)
+    - [Connected components in an undirected graph](#GP_ConnectedComponents)
+    - [Connected components in a directed graph - Kosaraju’s algorithm](#GP_SCC)
     - [Find a mother vertex](#GP_FindMother)
     - [Check if  graph is strongly connected](#GP_CheckIfSCC)
     - [Dijkstra's Algorithm](#GP_Dijkstra)
@@ -4701,20 +4701,43 @@ class Graph
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_ConnectedComponents"></a>
-### Connected Components in an Undirected Graph
-Connected components are those components in an undirected graph in which all vertices can be reached from every other vertex. Connected componnets task in an undirected graph is trivial and requires us to just simply perform a BFS/DFS traversal on the graph on every unvisted node, and every new iteration of BFS/DFS outputs a new connceted component. The code is trivial and thus has been omitted out of explanation.
+### Connected Components in an undirected graph
+Connected components are those subgraphs in which all vertices can be reached from every other vertex. To find connected componnets in an undirected graph is trivial and requires us to just simply perform a BFS/DFS traversal on the graph on every unvisted node, and every time a new BFS/DFS is performed, it outputs a new connceted component.
+```java
+// ASSUME WE HAVE THE FOLLOWING ALREADY AVAILABLE AN INITIALIZED
+ArrayList<ArrayList<Integer>> adj;
+int V;
 
+boolean[] visited = new boolean[V];
+for(int i = 0; i < adj.size(); i++)
+{
+    if(!visited[adj.get(i)])
+    {
+	    // Here either BFS or DFS is called and it gives us a new
+		// connected component.
+        DFS(adj.get(i), visited);
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_SCC"></a>
-### Strongly Connected Components - Kosaraju's Algorithm
-A directed graph is strongly connected if there is a path between all pairs of vertices. A strongly connected component (SCC) of a directed graph is a maximal strongly connected subgraph. This means that within a strongly connected directed graph, if we can partition the graph in such a way that every partition in itself is strongly connected and that adding even a single node to any of these component graphs would result in making it not strongly connected.
+### Connected components in a directed graph - Kosaraju’s algorithm
+A simple connected component for a directed graph is a subgraph in it where every vertex can be visited from every other vertex. Now, a **Strongly Connected Component(SCC)** is a <ins>maximal connected component</ins> which means that it is the <ins>largest possible connected component</ins> that can be made using the vertices in it. Hence, even if a single node is added to the SCC would result in making it not a connected anymore. This is because if adding a node would still have kept the subgraph as a connected component, then that means it was not the maximal connected component in the first place. Hencem for a SCC, adding even a sinle node to it would make result in making the graph not strongly connected.
 
-The steps for the algorithm would be as follows:
-1. Run DFS on the graph and as and when every node is completed, add it to a stack. When we do this, the node that gets completed first, gets added to the stack first. Hence, the node at the very bottom gets added first, that is all the sinks get added to stack first. 
-2. Now we have a stack, the bottom of which is the node which gets completed first, and top is the node which gets completed last. Note, by a node getting completed we mean, DFS running for all its children.
-3. Now we reverse the graph and create a transpose of the graph. Creating a transpose reverses the order of sinks and heads in the graph. The nodes that were sinks before, are now the heads and vice versa.
-4. On the graph reversed, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
+The steps for the algorithm to identify all the SCCs of a directed graph would be as follows:<br>
+**Step 1:** Run DFS on the graph and as and when every node is completed, add it to a stack. When we do this, the node that gets completed first, gets added to the stack first. Hence, the nodes that are completed late, that is the parent nodes are added after their children.<br>
+<ins>Note</ins>: By a node getting completed we mean, DFS running for all its children.<br>
+**Step 2:** Now we reverse the graph. Reversing it results in the children now becoming parents and parents becoming children. This is done because now for the reversed graph, when we would run DFS on it one by one starting from the nodes that were completed last in the first step, every time a DFS run would get over, we would have found a new strongly connected component. This is because all the nodes that are covered in the DFS iteration of the reversed graph suggest that there exists path from child to parent and parent to child both in the original graph. For example:
+```java
+// Let the graph be:
+//   1-->0
+//   |  /
+//   | /
+//   2 
+//
+```
+**Step 3:** On the reversed graph, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
 
 As DFS and reversing a graph have been covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
 
