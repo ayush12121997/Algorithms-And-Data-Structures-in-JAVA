@@ -4746,8 +4746,10 @@ Now if we reverse the graph we get the following:<br>
 Now on this reversed graph, when we run DFS on top of our stack, that is 2, we get the subgraph having {1,2,3} and the DFS ends. This is our first SCC. Next in stack is 4. When we run DFS on 4, we get {4} alone. This is our second SCC. Next we have 5 in the stack and our DFS yields {5}, which is our third SCC. Next we have 3 and then 1 but both of these have already been covered hence we do not run DFS on them. Finally we have three SCCs as asnwer:<br>
 {1,2,3}, {4} and {5}.
 
-As DFS and reversing a graph have been covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
+The concepts needed for this question are DFS on graph, usage of stack and reversing a graph. As all of these concepts have been covered before, the code is trivial and hence not commented.
+```java
 
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_FindMother"></a>
