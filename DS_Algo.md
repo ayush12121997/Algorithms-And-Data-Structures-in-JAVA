@@ -4871,9 +4871,104 @@ Using this concept, to check the existence of a mother vertex, we run DFS with s
 
 To check during DFS that all nodes have been visited or not, we can apply either of the following two methods:
 1. As a visted aray is maintained, once nodes are visited they are marked as true. Hence after one iteration of DFS from the top node in the stack, break and check whether or not all nodes are visited. If yes then it is the mother vertex, else it is not.
-2. As the visisted array prevents us from visiting the same node once again, we can keep count of every time we reach a new node. When we reach a new node we do count++. This way if end count equals number of vertices then it is the mother vertex else it is not.
+2. As we already have a visited array which prevents us from visiting the same node once again, we can keep count of every time we reach a new node. When we reach a new node we do count++. This way if end count after DFS equals total number of vertices in the graph then the source of DFS is the mother vertex else it is not.
+```java
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Graph g = new Graph(7);
+        g.addEdge(0,2);
+        g.addEdge(0,2);
+        g.addEdge(1,3);
+        g.addEdge(4,1);
+        g.addEdge(5,2);
+        g.addEdge(5,6);
+        g.addEdge(6,4);
+        g.addEdge(6,0);
+        g.DFS_Util();
+        g.DFS_Util_Mother();
+        if(g.count == 7)
+        {
+            System.out.println(g.stack.pop());
+        }
+        else
+        {
+            System.out.println(-1);
+        }
+    }
+}
 
-As the code requires just slight modifications to the code for the DFS traversal of a graph, we do not cover the code for this question here due to triviality.
+class Graph
+{
+    int V;
+    ArrayList<ArrayList<Integer>> adj;
+    Stack<Integer> stack;
+    int count;
+    
+    public Graph(int v)
+    {
+        V = v;
+        count = 0;
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < V; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+        stack = new Stack<Integer>();
+    }
+    
+    public void addEdge(int v, int u)
+    {
+        adj.get(v).add(u);
+    }
+    
+    public void DFS_Util()
+    {
+        boolean[] visited = new boolean[V];
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i])
+            {
+                DFS(i, visited);
+            }
+        }
+    }
+    
+    public void DFS(int src, boolean[] visited)
+    {
+        visited[src] = true;
+        for(int i = 0; i < adj.get(src).size(); i++)
+        {
+            int c = adj.get(src).get(i);
+            if(!visited[c])
+            {
+                DFS(c, visited);
+            }
+        }
+        stack.push(src);
+    }
+    public void DFS_Util_Mother()
+    {
+        boolean[] visited = new boolean[V];
+        DFS_Mother(stack.peek(), visited);
+    }
+    
+    public void DFS_Mother(int src, boolean[] visited)
+    {
+        visited[src] = true;
+        count++;
+        for(int i = 0; i < adj.get(src).size(); i++)
+        {
+            int c = adj.get(src).get(i);
+            if(!visited[c])
+            {
+                DFS_Mother(c, visited);
+            }
+        }
+    }
+}
+```
 
 <a href="#Contents">Back to contents</a>
 
