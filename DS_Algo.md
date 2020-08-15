@@ -4729,12 +4729,22 @@ The steps for the algorithm to identify all the SCCs of a directed graph would b
 **Step 1:** Run DFS on the graph and as and when every node is completed, add it to a stack. When we do this, the node that gets completed first, gets added to the stack first. Hence, the nodes that are completed late, that is the parent nodes are added after their children.<br>
 <ins>Note</ins>: By a node getting completed we mean, DFS running for all its children.
 
-**Step 2:** Now we reverse the graph. Reversing it results in the children now becoming parents and parents becoming children. This is done because now for the reversed graph, when we would run DFS on it one by one starting from the nodes that were completed last in the first step, every time a DFS run would get over, we would have found a new strongly connected component. This is because all the nodes that are covered in the DFS iteration of the reversed graph suggest that there exists path from child to parent and parent to child both in the original graph. For example:<br>
+**Step 2:** Now we reverse the graph. Reversing it results in the children now becoming parents and parents becoming children. This is done because now for the reversed graph, when we would run DFS on it one by one starting from the nodes that were completed last in the first step, every time a DFS run would get over, we would have found a new strongly connected component. This is because the group of nodes that are covered in the DFS iteration of the reversed graph point to the fact that there exists path from child to parent and parent to child both in the original graph within that group. 
+
+**Step 3:** So once the graph is reversed, we run DFS one by one on the elements in the stack, till the stack becomes empty. We pop element from the stack and if it hasnt been visited yet, we run DFS on it. Every new DFS run, we generate a new SCC.
+
+<ins>For example</ins>:<br>
 <div align="center">
 <img src="/Images/GP_SCC_1.png" width="300" height="200"/>
 </div>
-In the above graph, the three SCCs are marked. Now if this graph is given and we run DFS on any random vertex, then it is upon luck 
-**Step 3:** On the reversed graph, we run DFS one by one on the elements in the stack, till the stack is empty. For every time we run the DFS, we generate a new SCC.
+In the above graph, the three SCCs are marked in dotted circles. 4 and 5 cannot be put together as eventhough we can reach 5 from 4, we cannot reach 4 from 5. Now when we run DFS from a random vertex, say 2, the first vertex to be completed is 1, then 3, then 5, then 4 and then 2 at the end. Hence, the stack is:<br>
+[1, 3, 5, 4, 2] with 2 at the top and 1 at the bottom.<br>
+Now if we reverse the graph we get the following:<br>
+<div align="center">
+<img src="/Images/GP_SCC_2.png" width="300" height="200"/>
+</div>
+Now on this reversed graph, when we run DFS on top of our stack, that is 2, we get the subgraph having {1,2,3} and the DFS ends. This is our first SCC. Next in stack is 4. When we run DFS on 4, we get {4} alone. This is our second SCC. Next we have 5 in the stack and our DFS yields {5}, which is our third SCC. Next we have 3 and then 1 but both of these have already been covered hence we do not run DFS on them. Finally we have three SCCs as asnwer:<br>
+{1,2,3}, {4} and {5}.
 
 As DFS and reversing a graph have been covered before, writing the code for this algorithm is trivial and hence not being covered here. For details on the code please refer to: https://www.geeksforgeeks.org/strongly-connected-components/
 
