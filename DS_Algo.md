@@ -5346,7 +5346,7 @@ class Graph
 ### Floyd Warshall Algorithm
 Use Case:
 - Shortest distance between all pairs of vertices
-- A weighted graph with even negative weights is allowed
+- A weighted graph with negative weights is allowed too
 
 The task is to compute the shortest distances between every pair of vertices in the graph. The graph is directed and may contain negative weights as well. We calculate this using dp. The task is that for every vertice k, we calculate shortest path between i and j such that k is a vertex in the path. Hence, the steps would look like:
 ```
