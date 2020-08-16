@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 5515
+### Next Edit at : 5599
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -5523,7 +5523,7 @@ Topological Sorting is mainly used for scheduling jobs from the given dependenci
 
 Topological sort can be easily implemented using DFS. In DFS, we process a vertex and then recursively call DFS for its adjacent vertices. In topological sorting, we need to process a vertex only after its adjacent vertices have been processed. Hence, the only change in DFS needed would be to store a node after DFS has been called for its adjacent nodes. The complexity is the same as DFS, that is O(E+V).
 
-We achieve this by maintaint a stack and one by one add vertices when they have been completed. This way, all child vertices are added to stack before the parent vertex. Hence, when actually printing the stack the parents would be printed first followed by the children.
+We achieve this by maintaining a stack and one by one add vertices to the stack when they have been completed. The child nodes will obviously be completed before and added to the stack first. This way, all child vertices are added to stack before the parent vertex. Hence, when actually printing the stack by poppoing elements, the parents would be printed first followed by the children.
 
 The code is as follows:
 ```java
@@ -5591,16 +5591,18 @@ class Graph
 
 <a name="GP_ShortestPathDAG"></a>
 ### Shortest path in a Directed Acyclic Graph
-The shortest path in a DAG can be easily found using topological sort. We know that topological sort will give us an ordering where parents are necessarily placed before children. So as to say any graph is converted into the form of a linear ordering like A -> B -> C -> D. In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have the source in shortest distance path as some elemnt k, we would know that all elements, from 1 to (k-1) will be at a distance of infinity as they would not be reachable. Furthermore, moving from k to k+1 and so on till n, we can keep updating minimum distances, as we would know that if k goes to k+1 and k+1 goes to n, then minimum distance till n will necessarily be sum of distance from k to k+1 and from k+1 to n.
+The shortest path in a DAG can be easily found using topological sort. We know that topological sort will give us an ordering where parents are necessarily placed before children. So after topological sort, any DAG is converted into the form of a linear ordering like A -> B -> C -> D.
+
+In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have the source as say 'k', we would know that all elements, from 1 to (k-1) will be at a distance of infinity from 'k' as they would not be reachable from it, because they are the parent nodes. Furthermore, now when moving from k to k+1 and so on till n, we can keep updating minimum distances of nodes reachable from our current node. For example:
 
 A visual representation of the idea can be taken from the following link where in the source is the node s and the given graph is a topoligcal ordered graph: https://media.geeksforgeeks.org/wp-content/uploads/shortestpathsteps.png
 
 Hence the algortihm would be:
 1. Represent the graph as a topologically sorted graph.
 2. Mark distance of source index as 0 and all others as infinity.
-3. Begining from first vertex in topo sorted graph, move till the end, updating all adjacent vertexes for each node you are on.
+3. Begining from source vertex in the topologically sorted graph, move till the end, updating all adjacent vertices' shortest distances for each node you are on.
 
-The cod would be as follows:
+The code would be as follows:
 ```java
 class Graph
 {
