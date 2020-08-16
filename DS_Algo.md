@@ -5005,7 +5005,9 @@ Now when we run BFS, as the queue is sorted on basis of distance from the source
 The distances are stored in a dist[] array. During BFS, we update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source.
 
 Moreover, if the path to any vertex from the source needs to be stored, we can maintain a parent[] array. The parent array will hold the parent node of every vertex, that is parent[i] holds the parent of i in its shortest path from source. To print the path, we may iterate the parent array until we hit the source starting from the target. For example, if we need path from source to target, then the path can be made as following:<br>
-Source -> ..... parent[parent[parent[Target]]] -> parent[parent[Target]] -> parent[Target] -> Target<br>
+```java
+// Source -> ... -> ... -> parent[parent[parent[Target]]] -> parent[parent[Target]] -> parent[Target] -> Target
+```
 The parent array is updated along with the distance array, that is everytime we find a newer shorter distance.
 
 The steps of the algorithm would provide a better understanding of the funcitoning:
