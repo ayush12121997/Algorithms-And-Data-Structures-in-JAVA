@@ -5598,7 +5598,7 @@ In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have
 A run through of the algorithm at every step would look like:
 
 <div align="center">
-<img src="/Images/GP_ShortestPathDAG_1.png" width="550" height="250"/>
+<img src="/Images/GP_ShortestPathDAG_1.png" width="520" height="200"/>
 </div>
 
 **Step 0:** The original graph is as seen in picture (a). Let us say we have to find shortest distances to all nodes from s.
