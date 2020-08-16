@@ -5603,13 +5603,13 @@ A run through of the algorithm at every step would look like:
 
 **Step 0:** The original graph is as seen in picture (a). Let us say we have to find shortest distances to all nodes from s.
 
-**Step 1:** Now after running the topological sort the graph can be arranged as seen in picture (b). This denotes that which nodes can be reached from where. For example. it is garuanteed that r cannot be reached from s, as it comes before s in the topological sort. The distance of the source s from itself is marked as 0 and all the other distances are currently +INF. 
+**Step 1:** Now after running the topological sort the graph can be arranged as seen in picture (b). It shows which nodes can be reached from where. For example, it is guaranteed that 'r' cannot be reached from 's', as it comes before 's' in the topological sort. The distance of the source 's' from itself is marked as 0 and all the other distances are currently +INF. 
 
 <div align="center">
 <img src="/Images/GP_ShortestPathDAG_2.png" width="800" height="550"/>
 </div>
 
-**Step 2:** From pitcure (c) onwards, we start updating distances from the top of our stack. In (c) we update distances for adjacent nodes of r. As node r is itself at +INF, we do not update distances of its adjacent nodes as it cannot be reached from s. In the stack generated from the topological sort, we keep on popping elements and updating distances of their neighbours if the element that was popped is not at infinite distance. So next as seen in (d) we pop s from the stack of topoligcal sort and update shortest distances of its neighbours. Repeat the process for t, x, y and z in pictures (e), (f), (g) and (h) respectively.
+**Step 2:** From pitcure (c) onwards, we start updating distances from the top of our stack. In (c) we update distances for adjacent nodes of 'r'. As node 'r' is itself at +INF, we do not update distances of its adjacent nodes as it cannot be reached from 's'. In the stack generated from the topological sort, we keep on popping elements and updating distances of their neighbours if the element that was popped is not at infinite distance. So next as seen in (d) we pop 's' from the stack of topoligcal sort and update shortest distances of its neighbours. Repeat the process for 't', 'x', 'y' and 'z' in pictures (e), (f), (g) and (h) respectively.
 
 **Result:** Now as we can see in picture (h), the shortest distances of all nodes from s has been successfully marked.
 
@@ -8139,7 +8139,7 @@ class Solution
                 if(s1[i] == s1[j])
                 {
                     // If length of subsequence <= 3, we need not check for plaindrome
-                    // wihtin the string as it will garaunteed be a palindrome
+                    // wihtin the string as it will guaranteed be a palindrome
                     if(i - j < 3)
                     {
                         dp[i][j] = i - j + 1;
