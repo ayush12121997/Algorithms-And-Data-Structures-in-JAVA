@@ -5595,20 +5595,23 @@ The shortest path in a DAG can be easily found using topological sort. We know t
 
 In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have the source as say 'k', we would know that all elements, from 1 to (k-1) will be at a distance of infinity from 'k' as they would not be reachable from it, because they are the parent nodes. Furthermore, now when moving from k to k+1 and so on till n, we can keep updating minimum distances of nodes reachable from our current node.
 
-A run through of the algorithm would look like:
+A run through of the algorithm at every step would look like:
 
 <div align="center">
-<img src="/Images/GP_ShortestPathDAG_1.png" width="550" height="275"/>
+<img src="/Images/GP_ShortestPathDAG_1.png" width="550" height="250"/>
 </div>
+
+**Step 0:** The original graph is as seen in picture (a). Let us say we have to find shortest distances to all nodes from s.
+
+**Step 1:** Now after running the topological sort the graph can be arranged as seen in picture (b). This denotes that which nodes can be reached from where. For example. it is garuanteed that r cannot be reached from s, as it comes before s in the topological sort. The distance of the source s from itself is marked as 0 and all the other distances are currently +INF. 
 
 <div align="center">
 <img src="/Images/GP_ShortestPathDAG_2.png" width="800" height="550"/>
 </div>
 
-Hence the algortihm would be:
-1. Represent the graph as a topologically sorted graph.
-2. Mark distance of source index as 0 and all others as infinity.
-3. In the stack generated from the topological sort, keep on popping elements and updating distances of their neighbours if the element that was popped is not at infinite distance.
+**Step 2:** From pitcure (c) onwards, we start updating distances from the top of our stack. In (c) we update distances for adjacent nodes of r. As node r is itself at +INF, we do not update distances of its adjacent nodes as it cannot be reached from s. In the stack generated from the topological sort, we keep on popping elements and updating distances of their neighbours if the element that was popped is not at infinite distance. So next as seen in (d) we pop s from the stack of topoligcal sort and update shortest distances of its neighbours. Repeat the process for t, x, y and z in pictures (e), (f), (g) and (h) respectively.
+
+**Result:** Now as we can see in picture (h), the shortest distances of all nodes from s has been successfully marked.
 
 The code would be as follows:
 ```java
@@ -5641,7 +5644,7 @@ class Graph
         adj.get(u).add(new Node(v, d));
     }
 
-    public void topoSort()
+    public void topoSort_Util()
     {
         boolean[] visited = new boolean[V];
 
@@ -5649,12 +5652,12 @@ class Graph
         {
             if(!visited[i])
             {
-                topoSort_Util(visited, i);
+                topoSort(visited, i);
             }
         }
     }
 
-    public void topoSort_Util(boolean[] visited, int s)
+    public void topoSort(boolean[] visited, int s)
     {
         visited[s] = true;
         for(int i = 0; i < adj.get(s).size(); i++)
@@ -5671,6 +5674,7 @@ class Graph
     }
 
     // Function for shortest path in toposorted graph
+	// Assumption: Toposort has already been called
     public void calculateShortestPath(int src)
     {
         // Update distance of source
