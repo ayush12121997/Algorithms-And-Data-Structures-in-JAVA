@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 5599
+### Next Edit at : 5915
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -246,7 +246,7 @@
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
 	- [Rat in a maze - II (All 4 directions)](#GP_RatInMazeII)
 	- [Shortest path + Count all paths with exactly k edges in a graph](#GP_ShortestPathWithExactlyKEdges)
-	- [Shortest path with upto k edges in a graph - Djikstra and Bellman Ford]
+	- [Shortest path with upto k edges in a graph - Dijkstra and Bellman Ford]
 	- [Dungeon Game]
 	- [Unique Paths III]
 	- [Redundant Connection]
@@ -5407,7 +5407,7 @@ Use case:
 - Shortest path from one source to all destinations
 - Unweighted graph, can be cyclic/acyclic both
 
-The idea is to use a modified version of BFS instead of Dijkstra. As we do not have any weights attatched, the BFS can run in O(V + E) time as a priority queue won't be needed. The remaining basic steps are simialr to Djikstra for storing and updating distances and parents.
+The idea is to use a modified version of BFS instead of Dijkstra. As we do not have any weights attatched, the BFS can run in O(V + E) time as a priority queue won't be needed. The remaining basic steps are simialr to Dijkstra for storing and updating distances and parents.
 
 The code is as follows:
 ```java
@@ -5889,26 +5889,31 @@ class Graph
 
 <a name="GP_PrimsMST"></a>
 ### Prim's Minimum Spanning Tree
-Given a connected and undirected graph, a spanning tree of that graph is a subgraph that is a tree and connects all the vertices together. There can be multiple spanning trees for a single graph. A minimum spanning tree (MST) for a weighted, connected and undirected graph is a spanning tree with weight less than or equal to the weight of every other spanning tree. The eight of a spanning tree is defined as the sum of weights of all edges included in the spanning tree. A MST  will always have V-1 edges.
-
-Spannign trees can be used for finding the minimum cost of connecting various cities or points through roads such that every city is accessible from every other city and cost of building roads is minimum.
+Given a connected and undirected graph, a **spanning tree** of that graph is a subgraph that is a tree(does not have any cycles) and connects all the vertices together(therefore there are V-1 edges). There can be multiple spanning trees for a single graph. A **Minimum Spanning Tree(MST)** for a <ins>weighted, connected and undirected graph</ins> is a spanning tree with edge weight sum less than or equal to the edge weight sum of every other spanning tree. The edge weight sum of a spanning tree is defined as the sum of weights of all edges included in the spanning tree. A MST  will always have V-1 edges.
 
 The algorithm for calculating the MST is exactly similar to how we calculate the shortest path using djikstra. The steps are:
-1. Pick a source vertex and create a hashset to store finalized vertices and a priority queue sorted on the basis of distance from the source to store upcoming vertices.
-2. For the source vertex, select all adjacent vertices which are not already present in the hashset and update their distances. Add these vertices with updated shortest distances from course in the priority queue. Distance of a vertex = Math.min(Distance of vertex, Distance of parent from source + Distance of vertex from parent)
-3. Repeat step 2 until either the queue becomes empty or the hashset size is equal to V.
-4. During step 2, make sure to maintain a distance and parent array to store the final information regarding distances between two nodes in MST and the parent child connections for the tree.
+**Step 1:** Pick a source vertex and create a HashSet to store the finalized vertices and a priority queue sorted on the basis of distance from the source to store upcoming vertices.
 
-The code is exactly like Djikstra and hence wont be covered here. Time complexity is O(ElogV).
+**Step 2:** For the source vertex, select all adjacent vertices which are not already present in the HashSet and update their distances. Check if the distance of these vertices from the source needs to be updated or not.<br>
+Distance of a vertex = Math.min(Distance of vertex, Distance of parent from source + Distance of vertex from parent)<br>
+Add the vertices with updated shortest distances from source in the priority queue.
+
+**Step 3:** Repeat step 2 until either the queue becomes empty or the HashSet size is equal to V, that is all nodes have been covered.
+
+**Step 4:** During step 2, make sure to maintain a distance and parent array to store the final information regarding distances between two nodes in MST and the parent-child connections for the tree, just like we do in Dijkstra.
+
+An important point to note will be that this algorithm specifically works for undirected graphs and not for directed graphs. The reason is that for an undirected graph, running Dijkstra just once will not only result in shortest distances from the selected source to other vertices but from them to the source itself as well. This is because movement is allowed in both ways in an undirected graph. Hence, a MST is generated by a single run of Dijkstra. On the other hand for a directed graph, we would have to run Dijkstra for all the nodes as sources sperately. As the code is exactly like Dijkstra, it is not covered here and can be seen from <a href="#GP_Dijkstra">here</a>.
 
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_MinCostConnectCities"></a>
 ### Minimum cost to connect all cities
-The question is to find the minimum cost of connecting all cities with roads such that every city is reachable form every other city. This is a very straigh forward application of a MST and can easily be implemented using the Djikstra algorithm as discussed above in Prims MST section. As the code has been covered already and is trivial, it won't be repeated here. Please refer to Djikstra for the implementation.
+The question is to find the minimum cost of connecting all cities with roads such that every city is reachable form every other city. This is a very straight forward application of a MST and can easily be implemented using the Dijkstra algorithm as discussed above in Prim's MST section. Also as the task is to not only find the MST but calculate the minimum cost as well, once our parent array is ready, we need to add the weight of every edge in the MST to find the asnwer.
 
-Also as the task is to not only find the MST but calculate the minimum cost, once our parent array is ready, we need to check for every edge between, parent[i] to i and add the weight of the edge to the answer.
+As the topics for Prims MST and Dijkstra have been covered before. We directly move to the code:
+```java
 
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_DSU"></a>
@@ -6521,10 +6526,10 @@ class Solution
 ### Minimum cost path with Left, Right, Bottom and Up moves allowed
 The question is a modification of the min cost path in grid where movements allowed were bottom and right. Now all 4 directional movements are allowed. Hence, we cannot use DP here. Instead, we have following options:
 1. If the graph is unweighted, that one cell means cost of 1 then we use BFS to search for target and as soon as we find the target we return.
-2. If the graph is weighted, we can check if it has negative weights or not. If not, use Djikstra.
+2. If the graph is weighted, we can check if it has negative weights or not. If not, use Dijkstra.
 3. If graph is weighted and has negative weights, we may choose to use Bellman Ford.
 
-For our question, let us assume that the conditions for Djikstra are satisfactory. So in order to build our solution as the input is a grid and not a graph, we modify our algorithm to accomodate for this variation. In grid questions, requiring graph algorithms, we build a new class to represent the cell in a grid as a vertex in the graph. We generally need not build the entire graph using this new class, rather as and when the next cell of grid needs to be accessed, we build a new object of our class with required values. A demonstration can be seen in the following implementation for this question, where the class cell represents the cell in the grid, with x cordinate, y cordinate and the distance of the cell from source thus far.
+For our question, let us assume that the conditions for Dijkstra are satisfactory. So in order to build our solution as the input is a grid and not a graph, we modify our algorithm to accomodate for this variation. In grid questions, requiring graph algorithms, we build a new class to represent the cell in a grid as a vertex in the graph. We generally need not build the entire graph using this new class, rather as and when the next cell of grid needs to be accessed, we build a new object of our class with required values. A demonstration can be seen in the following implementation for this question, where the class cell represents the cell in the grid, with x cordinate, y cordinate and the distance of the cell from source thus far.
 ```java
 class Solution
 {
