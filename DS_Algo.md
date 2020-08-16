@@ -5598,11 +5598,11 @@ In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have
 A run through of the algorithm would look like:
 
 <div align="center">
-<img src="/Images/GP_ShortestPathDAG_1.png" width="500" height="300"/>
+<img src="/Images/GP_ShortestPathDAG_1.png" width="550" height="275"/>
 </div>
 
 <div align="center">
-<img src="/Images/GP_ShortestPathDAG_2.png" width="700" height="550"/>
+<img src="/Images/GP_ShortestPathDAG_2.png" width="800" height="550"/>
 </div>
 
 Hence the algortihm would be:
