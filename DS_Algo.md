@@ -5511,11 +5511,11 @@ class Graph
 
 <a name="GP_TopoSort"></a>
 ### Topological Sorting
-Topological sorting for a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge from u to v, vertex u comes before v in the ordering, that is it is a method of listing nodes of a graph such that all parents are listed before their children. Topological Sorting for a graph is not possible if the graph is not a DAG.<br>
+Topological sorting for a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge from u to v, vertex u comes before v in the ordering, that is it is a method of listing nodes of a graph such that all parents are listed before their children. Topological Sorting for a graph is not possible if the graph is not a DAG.
 <div align="center">
 <img src="/Images/GP_TopoSort_1.png" width="300" height="200"/>
-</div><br>
-For the above image, a valid topological sort output would be: 1 2 3 4 5 6
+</div>
+For the above image, a valid topological sort output would be: 1 2 3 4 5 6<br>
 
 Topological Sorting is mainly used for scheduling jobs from the given dependencies among jobs. This means that for example lets say job A needs job B to be finsihed first and job C needs job A to be finsished first so a topological sort of dependencies would print B A C, meaning that complete job B first, then A then C.
 
