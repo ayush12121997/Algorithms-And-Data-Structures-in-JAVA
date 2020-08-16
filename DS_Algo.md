@@ -5002,7 +5002,7 @@ Distance of node from source = Distance of parent from source + Distance of node
 
 Now when we run BFS, as the queue is sorted on basis of distance from the source, we always access the nearest node to soruce first. This nearest node cannot have a shorter distance than the current distance at which it is, as it has been calculated as a sum of shortest distances so far. The time complexity is ((E+V)logV) = ElogV.
 
-The distances are stored in a dist[] array. During BFS, we update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by maintaining a HashMap of completed nodes. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source.
+The distances are stored in a dist[] array. During BFS, we update the distances of the nodes adjacent to the popped node on the basis of the distance of the popped node and add them to the priority queue. Once distance of all adjacent nodes of a popped node have been updated, the popped node is marked as complete. This can be done by maintaining a HashMap of completed nodes. Also note that unlike a normal BFS where we mark items visited while adding them to queue, here we mark them visited when removing them from queue, that is when we have finalized their shortest distance. The process continues till the priority queue becomes empty. At the end, the dist[] arr would hold the distance of each node from the source.
 
 Moreover, if the path to any vertex from the source needs to be stored, we can maintain a parent[] array. The parent array will hold the parent node of every vertex, that is parent[i] holds the parent of i in its shortest path from source. To print the path, we may iterate the parent array until we hit the source starting from the target. For example, if we need path from source to target, then the path can be made as following:<br>
 ```java
@@ -5010,7 +5010,7 @@ Moreover, if the path to any vertex from the source needs to be stored, we can m
 ```
 The parent array is updated along with the distance array, that is everytime we find a newer shorter distance.
 
-The steps of the algorithm would provide a better understanding of the funcitoning:
+The steps of the algorithm would provide a better understanding of the functioning:
 1. Start with the source, and add it to the prioirty queue. The distance of source from source is 0.
 2. Now until the priority queue becomes empty, pop the head. If the head exists in the HashMap of completed elements, discard this element and move ahead. If it does not exist,  then use this popped node as source and also add it to the completed HashMap. This is done to ensure that once the distance of a node is finalized as mininimum, its distance does not change any further.
 3. For the popped node, for every neighbour not already in the completed HashMap, check if the distance needs to be updated or not. Distance is updated only in the following condition hold true:<br>
