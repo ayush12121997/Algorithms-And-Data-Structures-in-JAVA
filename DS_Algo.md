@@ -5593,14 +5593,22 @@ class Graph
 ### Shortest path in a Directed Acyclic Graph
 The shortest path in a DAG can be easily found using topological sort. We know that topological sort will give us an ordering where parents are necessarily placed before children. So after topological sort, any DAG is converted into the form of a linear ordering like A -> B -> C -> D.
 
-In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have the source as say 'k', we would know that all elements, from 1 to (k-1) will be at a distance of infinity from 'k' as they would not be reachable from it, because they are the parent nodes. Furthermore, now when moving from k to k+1 and so on till n, we can keep updating minimum distances of nodes reachable from our current node. For example:
+In such an ordering of say n elements, 1 -> 2 -> .. k .. -> n-1 -> n, if we have the source as say 'k', we would know that all elements, from 1 to (k-1) will be at a distance of infinity from 'k' as they would not be reachable from it, because they are the parent nodes. Furthermore, now when moving from k to k+1 and so on till n, we can keep updating minimum distances of nodes reachable from our current node.
 
-A visual representation of the idea can be taken from the following link where in the source is the node s and the given graph is a topoligcal ordered graph: https://media.geeksforgeeks.org/wp-content/uploads/shortestpathsteps.png
+A run through of the algorithm would look like:
+
+<div align="center">
+<img src="/Images/GP_ShortestPathDAG_1.png" width="500" height="300"/>
+</div>
+
+<div align="center">
+<img src="/Images/GP_ShortestPathDAG_2.png" width="700" height="550"/>
+</div>
 
 Hence the algortihm would be:
 1. Represent the graph as a topologically sorted graph.
 2. Mark distance of source index as 0 and all others as infinity.
-3. Begining from source vertex in the topologically sorted graph, move till the end, updating all adjacent vertices' shortest distances for each node you are on.
+3. In the stack generated from the topological sort, keep on popping elements and updating distances of their neighbours if the element that was popped is not at infinite distance.
 
 The code would be as follows:
 ```java
