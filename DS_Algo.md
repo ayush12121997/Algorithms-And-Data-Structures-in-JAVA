@@ -5515,7 +5515,8 @@ Topological sorting for a Directed Acyclic Graph (DAG) is a linear ordering of v
 <div align="center">
 <img src="/Images/GP_TopoSort_1.png" width="300" height="200"/>
 </div>
-For the above image, a valid topological sort output would be: 1 2 3 4 5 6<br>
+For the above image, a valid topological sort output would be: 1 2 3 4 5 6
+
 
 Topological Sorting is mainly used for scheduling jobs from the given dependencies among jobs. This means that for example lets say job A needs job B to be finsihed first and job C needs job A to be finsished first so a topological sort of dependencies would print B A C, meaning that complete job B first, then A then C.
 
