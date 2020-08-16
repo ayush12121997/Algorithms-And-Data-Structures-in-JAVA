@@ -5718,9 +5718,15 @@ class Node
 
 <a name="GP_GraphColoring"></a>
 ### Graph coloring - Chromatic Number
-Graph coloring is a technique in which you are needed to color the vertices of a graph in such a way that no two adjacent vertices have the same color. The minimum number of colors needed to achieve this is called the chromatic number of the graph. The basic greedy algo to get to an answer can suggest the upperbound on the number of colors needed. The algo is:
-1. Color first vertex with color A.
-2. For the remaining vertices: Choose the lowest numbered color available that hasn't been used in the adjacent vertices. In case no such already available color is present, so add a new color to the list of colors.
+Graph coloring is a technique in which you are needed to color the vertices of a graph in such a way that no two adjacent vertices have the same color. The minimum number of colors needed to achieve this is called the chromatic number of the graph. The basic greedy algorithm to know that how many colors would be needed to color the graph would be:<br>
+**Step 0:** Make 2 arrays to sotre colors. One array will sotre the color used for each index. Let us call this array color_matching[]. The other array would hold boolean values denoting whether a color is available to use at any moment of time or not. Let us call this array colors[].
+
+**Step 1:** Color the first vertex with the first available color. To check the first available color, simply loop through the colors[] array and check for availablity. Add this color to color_mathcing[] for the first vertex.
+
+**Step 2:** Now for every other vertex we do the following:
+1. Mark all the colors as available intitially.
+2. For every adjacent node of the vertex, mark the colors used by adjacent nodes as not available anymore. 
+3. Now search for the first available color in the colors[] array and use it for this node. Add this color to color_mathcing[] for this vertex.
 
 The code would be as follows:
 ```java
@@ -5794,17 +5800,21 @@ class Graph
     }
 }
 ```
-A very common application of coloring can be when similar related people/items have to be sought into different groups. For example, course scheduling such that courses with common students do not have classes at the same time, or exam scheduling, or where say people are to be divided into two groups on the basis of people liking/hating each other and so on. The process is to connect the related items and then try to color the graph in different adjacent colors.
+A very common application of coloring can be when similar people/items have to be sought into different groups. For example, course scheduling such that courses with common students do not have classes at the same time, or exam scheduling, or where people are to be divided into two groups on the basis of people liking/hating each other and so on. The process is to connect the related items together and then try to color the graph with different adjacent colors.
 
-We may also use it to check if a graph is bipartite or not. If graph is 2 colorable it is bipartite.
+We may also use it to check if a graph is bipartite or not. If graph is 2 colorable it is bipartite. To check whether a graph is m-colorable or not we use the conecpt in the next section.
 
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_mColoring"></a>
 ### m-Coloring Problem
-The m coloring problem is similar to finding the chromatic number of a graph in terms of the way it is formulated in code. The question asks you to tell whether or not a graph can be colored using m colors at most such that no two adjacent vertices have the same color. If yes, then also output the coloring selected.
+The m coloring problem is similar to finding the number of colors needed to color a graph. The difference being that instead of telling how many colors are needed, the task it to tell that whether or not a valid coloring can be achieved using m colors. The question asks you to tell whether or not a graph can be colored using m colors at most such that no two adjacent vertices have the same color. If yes, then also output the coloring selected.
 
-We can apply a simple standard backtracking approach here, that is, assign the smallest numbered color available to a node such that it doesn't clash with colors of neighbours. If with this assignment of color, the remaining graph can be properly colored as well, then return true, else backtrack and retry with a different available color. If in any of the permutations the entire graph has been colored, so return true and end, else return false when all options have been exhausted without a suitable permutation. The code is as follows:
+We can apply a simple standard backtracking approach here, that is:
+1. Assign the smallest numbered color available to a node such that it doesn't clash with colors of neighbours
+2. If with the above color selection for the current node, the remaining graph can be properly colored as well, then return true as we have found a perfect color matching. Otherwise if the remaining graph cannot be colored properly, then backtrack and retry with a different available color for the node in step 1. When all options have been exhausted without a suitable permutation to color the entire graph, return false.
+
+The code is as follows:
 ```java
 class Graph
 {
