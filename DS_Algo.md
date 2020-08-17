@@ -5910,7 +5910,7 @@ An important point to note will be that this algorithm specifically works for un
 ### Minimum cost to connect all cities
 The question is to find the minimum cost of connecting all cities with roads such that every city is reachable form every other city. This is a very straight forward application of a MST and can easily be implemented using the Dijkstra algorithm as discussed above in Prim's MST section. Also as the task is to not only find the MST but calculate the minimum cost as well, once our parent array is ready, we need to add the weight of every edge in the MST to find the asnwer.
 
-As the topics for Prims MST and Dijkstra have been covered before, ee directly move to the code without further explanations. To get an understanding of how these topics are coded refer to the sections covered above.
+As the topics for Prims MST and Dijkstra have been covered before, we directly move to the code without further explanations. To get an understanding of how these topics are coded, refer to the sections covered above.
 ```java
 class Graph
 {
@@ -6127,8 +6127,17 @@ class Subset
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_CycleDirected"></a>
-### Detect a cycle in an directed graph
-Detecting a cycle in a directed graph is easy. All it requires you to do is to run DFS on the graph and if you ever encounter a visited node in a DFS run then return true as it forms a cycle. Look into "Course Scheduling I and II" for a cycle checking directed graph implementation within topological sorting code.
+### Detect a cycle in a directed graph
+Detecting a cycle in a directed graph is easy. All it requires you to do is to check that whether or not in a single run of DFS from parent to child, a loop is formed. Remember that a cycle exists if and only if in the same run from child to parent an already visited node is found. For example:
+
+<div align="center">
+<img src="/Images/GP_CycleDirected_1.png" width="125" height="300"/>
+</div>
+
+In the above graph, when the DFS first runs for 1 -> 2 -> 4 -> 5 -> 6 and then for 1 -> 3 -> 5, it would actually see the node 5 as already have been visited in the first DFS run but it would still not count it as a cycle as for detecting a cycle we are required to refresh/renew the visited array for every new iteration of the DFS.
+
+The code is as follows:
+
 
 <a href="#Contents">Back to contents</a>
 
