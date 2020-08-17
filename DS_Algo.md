@@ -6906,7 +6906,7 @@ For int i (0 to V)
 Now, the other task is to actually count a triangle only once. In both directed and undirected graphs, multiple triangles can be formed using the same set of triplets.
 
 <div align="center">
-<img src="/Images/GP_NumTriangles_1.png" width="250" height="250"/>
+<img src="/Images/GP_NumTriangles_1.png" width="200" height="200"/>
 </div>
 
 In undirected graphs, every triangle will be counted 6 times, like say triangle name is ABC, so it will be counted as:
@@ -6918,10 +6918,10 @@ In undirected graphs, every triangle will be counted 6 times, like say triangle 
 6. CAB
 
 <div align="center">
-<img src="/Images/GP_NumTriangles_2.png" width="250" height="250"/>
+<img src="/Images/GP_NumTriangles_2.png" width="200" height="200"/>
 </div>
 
-In directed graphs, a triangle say ABC, will be counted only three times as it has the following variations becaus of the direction of edges mattering:
+In directed graphs, a triangle say ABC, will be counted only three times as it has the following variations because of the fixed direction of edges:
 1. ABC
 2. BCA
 3. CAB
