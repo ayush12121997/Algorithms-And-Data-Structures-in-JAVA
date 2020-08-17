@@ -6545,7 +6545,7 @@ Sorted Array:<br>
 0 1 4 5 7
 
 <div align="center">
-<img src="/Images/GP_MinSwapsToSort_1.png" width="300" height="200"/>
+<img src="/Images/GP_MinSwapsToSort_1.png" width="275" height="100"/>
 </div>
 
 We can notice that the minimum number of swaps needed would be 2. We may swap 7-4 and then 4-0, or we may swap 0-4 and then 7-0 or we may swap 7-0 and then 7-4. In all three possibilities, the maximum number of swaps needed is 2. To put this visualization on pen and paper, we can see the in the actual sorted array, the following connections are needed:
@@ -6562,7 +6562,7 @@ Sorted Array:<br>
 1 2 3 4 5 8
 
 <div align="center">
-<img src="/Images/GP_MinSwapsToSort_2.png" width="300" height="200"/>
+<img src="/Images/GP_MinSwapsToSort_2.png" width="300" height="180"/>
 </div>
 
 Cycle 1:
