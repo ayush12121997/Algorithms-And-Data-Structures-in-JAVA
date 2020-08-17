@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 5915
+### Next Edit at : 6400
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -6289,7 +6289,10 @@ class Graph
             if(!visited[c])
             {
                 // Check for cycle further
-                return checkCycleUtil(visited, c, i);
+                if(checkCycleUtil(visited, c, i))
+                {
+                    return true;
+                }
             }
             else
             {
@@ -6310,19 +6313,19 @@ class Graph
 ### Count all paths from source to destination in a graph
 Counting all paths between two vertices is a backtracking problem on graphs. The methodoly is to follow the DFS pattern to reach the destination vertex, and every time you reach the destination, increase the count of number of ways.
 
-Please note that this method works only for graphs which do not have cycles. If a graph has a cycle then infinite number of paths can be formed from source to destination as the cycle can be looped around infinite number of times. Hence, the input is valid only if it does not have any cycles, and hence this method of a modified DFS, does not require you to make checks for visited.
+Please note that this method works only for graphs which do not have cycles. If a graph has a cycle then infinite number of paths can be formed from source to destination as the cycle can be looped around infinite number of times.
 
 The code is as follows:
 ```java
 class Graph
 {
-    // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
+    // ASSUME INITIALIZATION CODE OF GRAPH CLASS REMAINS UNCHANGED
     
     // Consider a global variable count to maintain count of paths
     int count = 0;
     
     // The wrapper function to call the recursive function
-    public int countAll(int start, int dest)
+    public int countAll(int s, int d)
     {
         countAll_Util(int s, int d);
         return count;
@@ -6350,6 +6353,7 @@ class Graph
 }
 ```
 For a graph containing a cycle, a modification can be that count all the paths to reach the destination, such that in a path, a node is encountered at most once. In this scenario, even after the presence of cycles, the question can be solved by maintaining a simple visited array to check when a node has been visited in a path. We illustrate this concept through the next question.
+
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_PrintAllSourceDestination"></a>
@@ -6361,7 +6365,7 @@ class Graph
     // ASSUME PREVIOUS CODE OF GRAPH CLASS REMAINS UNCHANGED
     
     // The wrapper function to call the recursive function
-    public List<List<Integer>> countAll(int start, int dest)
+    public List<List<Integer>> countAll(int s, int d)
     {
         // The list that will hold the final asnwer
         List<List<Integer>> ans = new ArrayList<>();
