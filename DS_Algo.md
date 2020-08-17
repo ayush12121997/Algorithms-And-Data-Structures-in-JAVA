@@ -6553,7 +6553,7 @@ We can notice that the minimum number of swaps needed would be 2. We may swap 7-
 2. Element at index 4, goes to element at index 2.
 3. Element at index 2, goes to element at index 0.
 
-This forms a cycle of swaps. It can be noticed that in a cycle of swaps of length k, the actual number of swaps needed will always be k-1, because as the swaps are cyclic, the last swap would have been performed in within the previous k-1 swaps.
+***This forms a cycle of swaps. It can be noticed that in a cycle of swaps of length k, the actual number of swaps needed will always be k-1, because as the swaps are cyclic, the last swap would have been performed in within the previous k-1 swaps.***
 
 **Example 2:**<br>
 Original Array:<br>
@@ -6577,9 +6577,7 @@ Cycle 3:
 1. Element at index 4, goes to element at index 5.
 2. Element at index 5, goes to element at index 4.
 
-Hence there are three cycles, which make (3-1) + (1-1) + (2-1) total swaps, that is 3 total swaps are needed.
-
-To apply this idea we create a graph between the indexes where the elements are currently and the index where they should be at. And then calculate the summation of (cycle lengths - 1). The code is as follows:
+Hence there are three cycles, which make (3-1) + (1-1) + (2-1) total swaps, that is 3 total swaps are needed. To apply this idea we create a graph between the indexes where the elements are currently and the index where they should be at. And then calculate the summation of (cycle lengths - 1). The code is as follows:
 ```java
 class Solution
 {
