@@ -5550,7 +5550,7 @@ class Graph
         adj.get(u).add(v);
     }
 
-    public void topoSort()
+    public void topoSort_Util()
     {
         Stack<Integer> stack = new Stack<Integer>();
         boolean[] visited = new boolean[V];
@@ -5559,7 +5559,7 @@ class Graph
         {
             if(!visited[i])
             {
-                topoSort_Util(stack, visited, i);
+                topoSort(stack, visited, i);
             }
         }
 
@@ -5570,7 +5570,7 @@ class Graph
         }
     }
 
-    public void topoSort_Util(Stack<Integer> stack, boolean[] visited, int s)
+    public void topoSort(Stack<Integer> stack, boolean[] visited, int s)
     {
         visited[s] = true;
         for(int i = 0; i < adj.get(s).size(); i++)
@@ -5578,7 +5578,7 @@ class Graph
             int c = adj.get(s).get(i);
             if(!visited[c])
             {
-                topoSort_Util(stack, visited, c);
+                topoSort(stack, visited, c);
             }
         }
         // Add node to stack only when all adjacent nodes have
