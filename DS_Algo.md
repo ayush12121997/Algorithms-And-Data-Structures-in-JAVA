@@ -6577,26 +6577,26 @@ class Solution
 {
     // The input is an array of length N
     public int minSwaps(int[] arr, int N)
-	{
+    {
         // Construct a Graph, usign class similar to one learned above
-	    Graph g = new Graph(N);
+        Graph g = new Graph(N);
         // HashMap is used to store the original indexes of the values
-	    HashMap<Integer, Integer> hMap = new HashMap<Integer, Integer>();
-	    for(int i = 0; i < N; i++)
-	    {
+        HashMap<Integer, Integer> hMap = new HashMap<Integer, Integer>();
+        for(int i = 0; i < N; i++)
+        {
             // Add (element, original index) to HashMap
-	        hMap.put(arr[i], i);
-	    }
+            hMap.put(arr[i], i);
+        }
         // Sort the array to know the correct final indexes
-	    Arrays.sort(arr);
-	    for(int i = 0; i < N; i++)
-	    {
+        Arrays.sort(arr);
+        for(int i = 0; i < N; i++)
+        {
             // Add an edge between the correct index and original index of an element.
-	        g.addEdge(i, hMap.get(arr[i]));
-	    }
+            g.addEdge(i, hMap.get(arr[i]));
+        }
         // Call the function to get the value of min swaps.
-	    return g.minSwapsNeeded();
-	}
+        return g.minSwapsNeeded();
+    }
 }
 
 class Graph
