@@ -6898,6 +6898,10 @@ class Comparison implements Comparator<Cell>
 ### Number of triangles in a graph
 The task is to find the number of traingles in a directed/undirected graph. It is simple to do so by taking all pairs of three vertices present in the graph and checking them for forming triangles.
 
+<div align="center">
+<img src="/Images/GP_NumTriangles_1.png" width="300" height="200"/>
+</div>
+
 In undirected graphs, every triangle will be counted 6 times, like say triangle name is ABC, so it will be counted as:
 1. ABC
 2. ACB
@@ -6905,6 +6909,10 @@ In undirected graphs, every triangle will be counted 6 times, like say triangle 
 4. BAC
 5. CBA
 6. CAB
+
+<div align="center">
+<img src="/Images/GP_NumTriangles_2.png" width="300" height="200"/>
+</div>
 
 In directed graphs, a triangle say ABC, will be counted only three times as it has the following variations becaus of the direction of edges mattering:
 1. ABC
