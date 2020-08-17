@@ -6896,7 +6896,14 @@ class Comparison implements Comparator<Cell>
 
 <a name="GP_NumTriangles"></a>
 ### Number of triangles in a graph
-The task is to find the number of traingles in a directed/undirected graph. It is simple to do so by taking all pairs of three vertices present in the graph and checking them for forming triangles.
+The task is to find the number of traingles in a directed/undirected graph. It is simple to do so by taking all pairs of three vertices present in the graph and checking them for forming triangles. This can be achieved simply through a triple for loop consdiering every triplet of vertices present.
+```java
+For int i (0 to V)
+    For int j (0 to V)
+        For int k (0 to V)
+            Check if (i,j,k) forms a triangle
+```
+Now, the other task is to actually count a triangle only once. In both directed and undirected graphs, multiple triangles can be formed using the same set of triplets.
 
 <div align="center">
 <img src="/Images/GP_NumTriangles_1.png" width="250" height="250"/>
@@ -6919,61 +6926,59 @@ In directed graphs, a triangle say ABC, will be counted only three times as it h
 2. BCA
 3. CAB
 
-Hence, the final count in case of undirected graph is total triangles/6 and that for directed graphs is total triangles/3.
+Hence, the final count in case of undirected graph is (Total number of triangles)/6 and that for directed graphs is (Total number of triangles)/3.
 ```java
 class Graph
 {
-    int V = 0;
-    // Use hashmap as we just want to know whether an
-    // edge exists or not. Can preferable use adjacency
-    // matrix as well. 
-    ArrayList<HashMap<Integer, Integer>> adj = null;
-
+    int V;
+    // HashSet helps us save time when all that is required is to just check that
+    // whether or not an edge exists from a given starting vertex to an ending
+    // vertex. 
+    // We could have alternatively used an adjacency matrix as well for this purpose.
+    ArrayList<HashSet<Integer>> adj;
+    
     public Graph(int v)
     {
         V = v;
-        adj = new ArrayList<HashMap<Integer, Integer>>();
-        for(int i = 0; i < V, i++)
+        adj = new ArrayList<HashSet<Integer>>();
+        for(int i = 0; i < V; i++)
         {
-            adj.add(new HashMap<Integer, Integer>());
+            adj.add(new HashSet<Integer>());
         }
     }
-
+    
     public void addEdge(int u, int v)
     {
-        adj.get(u).put(v,v);
-        // For undirected only
-        adj.get(v).put(u,u);
+        adj.get(u).add(v);
+        // Bidirectional edges for undirected graphs only
+        adj.get(v).add(u);
     }
-
+    
     public int countTriangles()
     {
         int count = 0;
-        // Check for all pairs of three vertices
-        // We may run loops like
-        // i : (0, n)
-        // j : (i + 1, n)
-        // k : (j + 1, n)
-        // for undirected graphs only and then not return
-        // count divided 6. This is because in undirected
-        // graphs, order does not matter for checking. 
+        // For first vertex of triangle - A
         for(int i = 0; i < V; i++)
         {
+            // For second vertex of triangle - B
             for(int j = 0; j < V; j++)
             {
+                // For third vertex of triangle - C
                 for(int k = 0; k < V; k++)
                 {
-                    if(adj.get(i).containsKey(j) && adj.get(j).containsKey(k) && adj.get(k).containsKey(i))
+                    // Check if the edges AB, BC and AC can be formed or not
+                    // That is check if i-j, j-k and k-1 can be formed or not
+                    if(adj.get(i).contains(j) && adj.get(j).contains(k) && adj.get(k).contains(i))
                     {
+                        // If yes so new triangle found
                         count++;
                     }
                 }
             }
         }
-        // For undirected graphs:
+        // If undirected so return count/6
+        // If directed so return count/3
         return count/6;
-        // For directed graphs:
-        // return count/3;
     }
 }
 ```
