@@ -231,7 +231,7 @@
 	- [Prim's Minimum Spanning Tree](#GP_PrimsMST)
     - [Minimum cost to connect all cities](#GP_MinCostConnectCities)
     - [Disjoint Union Find - Rank and Path Compression](#GP_DSU)
-    - [Detect a cycle in an directed graph](#GP_CycleDirected)
+    - [Detect a cycle in a directed graph](#GP_CycleDirected)
 	- [Detect a cycle in an undirected graph](#GP_CycleUndirected)
     - [Count all paths between a source and destination in a graph](#GP_CountAllSourceDestination)
     - [Print all paths between a source and destination in a graph](#GP_PrintAllSourceDestination)
@@ -6131,14 +6131,101 @@ class Subset
 Detecting a cycle in a directed graph is easy. All it requires you to do is to check that whether or not in a single run of DFS from parent to child, a loop is formed. Remember that a cycle exists if and only if in the same run from child to parent an already visited node is found. For example:
 
 <div align="center">
-<img src="/Images/GP_CycleDirected_1.png" width="125" height="300"/>
+<img src="/Images/GP_CycleDirected_1.png" width="150" height="300"/>
 </div>
 
-In the above graph, when the DFS first runs for 1 -> 2 -> 4 -> 5 -> 6 and then for 1 -> 3 -> 5, it would actually see the node 5 as already have been visited in the first DFS run but it would still not count it as a cycle as for detecting a cycle we are required to refresh/renew the visited array for every new iteration of the DFS.
+In the above graph, when the DFS first runs for 1 -> 2 -> 4 -> 5 -> 6 and then for 1 -> 3 -> 5, it would actually see the node 5 as already have been visited in the first DFS run but it would still not count it as a cycle as for detecting a cycle we are required to refresh/renew the visited array for every new iteration of the DFS. WeNext, when we exit the node after completing DFS for it, we mark it as not visited again.
 
 The code is as follows:
-
-
+```java
+class Graph
+{
+    int V;
+    ArrayList<ArrayList<Integer>> adj;
+    // HashSet helps us save time by avoiding checking for same nodes
+    // again and again. If a node has been checked once and did not
+    // return a cycle in previous DFS itersations it would not produce
+    // a cycle now either. So to check nodes that have been completed
+    // before we maintain a hashSet as the visited[] array would be 
+    // refreshed every new iteration and hence cannot be used for this.
+    HashSet<Integer> hashSet;
+    
+    public Graph(int v)
+    {
+        V = v;
+        adj = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i < V; i++)
+        {
+            adj.add(new ArrayList<Integer>());
+        }
+        hashSet = new HashSet<Integer>();
+    }
+    
+    public void addEdge(int u, int v)
+    {
+        adj.get(u).add(v);
+    }
+    
+    public boolean DFS_Util()
+    {
+        boolean[] visited = new boolean[V];
+        for(int i = 0; i < V; i++)
+        {
+            // If node not already completed
+            if(!hashSet.contains(i))
+            {
+                // If there is a cycle in this DFS run itself 
+                if(DFS(i, visited))
+                {
+                    // Return true
+                    return true;
+                }
+            }
+        }
+        // If no cycles were found so return false
+        return false;
+    }
+    
+    public boolean DFS(int src, boolean[] visited)
+    {
+        // If node has been covered before, therefore this node would
+        // not create a cycle. This is because if it would have created
+        // a cycle it would have return true already before reaching
+        // this point again.
+        if(hashSet.contains(src))
+        {
+            return false;
+        }
+        // Mark node as visited for this DFS run.
+        visited[src] = true;
+        // For all adjacent nodes
+        for(int i = 0; i < adj.get(src).size(); i++)
+        {
+            int c = adj.get(src).get(i);
+            // If node was visited in the same run earlier then a
+            // cycle has been detected. Return true.
+            if(visited[c])
+            {
+                return true;
+            }
+            // If a cycle is detected further ahead in the children of
+            // this ndoe then also return true
+            else if(DFS(c, visited))
+            {
+                return true;
+            }
+        }
+        // Once all adjacent nodes have been comepleted and none of them
+        // returned a cycle so you can mark this node as completed.
+        hashSet.add(src);
+        // Mark the node as unvisited as it may be a part of some other
+        // DFS iteration as well.
+        visited[src] = false;
+        // Return false as no cycles detected
+        return false;
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_CycleUndirected"></a>
