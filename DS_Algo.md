@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 6550
+### Next Edit at : 6700
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -6666,6 +6666,7 @@ class Graph
 }
 ```
 _**NOTE:** We do not use the recursive DFS method to check cycle length as here it is possible that all the nodes might come under a single DFS call resulting in a stack overflow error. In general, the stack can sustain upto a maximum of 10000 recursive calls. Hence as we need to access only a single child here, we use the while loop instead of recursive calls._
+
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_MinOpsToConvert"></a>
