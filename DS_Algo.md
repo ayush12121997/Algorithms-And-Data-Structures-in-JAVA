@@ -6899,7 +6899,7 @@ class Comparison implements Comparator<Cell>
 The task is to find the number of traingles in a directed/undirected graph. It is simple to do so by taking all pairs of three vertices present in the graph and checking them for forming triangles.
 
 <div align="center">
-<img src="/Images/GP_NumTriangles_1.png" width="300" height="200"/>
+<img src="/Images/GP_NumTriangles_1.png" width="250" height="250"/>
 </div>
 
 In undirected graphs, every triangle will be counted 6 times, like say triangle name is ABC, so it will be counted as:
@@ -6911,7 +6911,7 @@ In undirected graphs, every triangle will be counted 6 times, like say triangle 
 6. CAB
 
 <div align="center">
-<img src="/Images/GP_NumTriangles_2.png" width="300" height="200"/>
+<img src="/Images/GP_NumTriangles_2.png" width="250" height="250"/>
 </div>
 
 In directed graphs, a triangle say ABC, will be counted only three times as it has the following variations becaus of the direction of edges mattering:
