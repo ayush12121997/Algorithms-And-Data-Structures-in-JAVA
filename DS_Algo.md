@@ -6536,12 +6536,17 @@ class Solution
 
 <a name="GP_MinSwapsToSort"></a>
 ### Minimum swaps required to sort an array
-The question requires you to find the minimum number of swaps needed to sort a given array. We use the process of cyclic swapping here. Let us look at the following example:
+The question requires you to find the minimum number of swaps needed to sort a given array. We use the process of cyclic swapping here.
 
+**Example 1:**<br>
 Original Array:<br>
 7 1 0 5 4<br>
 Sorted Array:<br>
 0 1 4 5 7
+
+<div align="center">
+<img src="/Images/GP_MinSwapsToSort_1.png" width="300" height="200"/>
+</div>
 
 We can notice that the minimum number of swaps needed would be 2. We may swap 7-4 and then 4-0, or we may swap 0-4 and then 7-0 or we may swap 7-0 and then 7-4. In all three possibilities, the maximum number of swaps needed is 2. To put this visualization on pen and paper, we can see the in the actual sorted array, the following connections are needed:
 1. Element at index 0, goes to element at index 4.
@@ -6550,12 +6555,15 @@ We can notice that the minimum number of swaps needed would be 2. We may swap 7-
 
 This forms a cycle of swaps. It can be noticed that in a cycle of swaps of length k, the actual number of swaps needed will always be k-1, because as the swaps are cyclic, the last swap would have been performed in within the previous k-1 swaps.
 
-Another example to illustrate the idea would be:
-
+**Example 2:**<br>
 Original Array:<br>
 2 4 3 1 8 5<br>
 Sorted Array:<br>
 1 2 3 4 5 8
+
+<div align="center">
+<img src="/Images/GP_MinSwapsToSort_2.png" width="300" height="200"/>
+</div>
 
 Cycle 1:
 1. Element at index 0, goes to element at index 1.
