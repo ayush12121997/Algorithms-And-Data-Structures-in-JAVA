@@ -6538,7 +6538,7 @@ class Solution
 ### Minimum swaps required to sort an array
 The question requires you to find the minimum number of swaps needed to sort a given array. We use the process of cyclic swapping here.
 
-**Example 1:**<br>
+**<ins>Example 1</ins>:**<br>
 Original Array:<br>
 7 1 0 5 4<br>
 Sorted Array:<br>
@@ -6555,7 +6555,7 @@ We can notice that the minimum number of swaps needed would be 2. We may swap 7-
 
 ***This forms a cycle of swaps. It can be noticed that in a cycle of swaps of length k, the actual number of swaps needed will always be k-1, because as the swaps are cyclic, the last swap would have been performed in within the previous k-1 swaps.***
 
-**Example 2:**<br>
+**<ins>Example 2</ins>:**<br>
 Original Array:<br>
 2 4 3 1 8 5<br>
 Sorted Array:<br>
@@ -6665,6 +6665,7 @@ class Graph
     }
 }
 ```
+_**NOTE:** We do not use the recursive DFS method to check cycle length as here it is possible that all the nodes might come under a single DFS call resulting in a stack overflow error. In general, the stack can sustain upto a maximum of 10000 recursive calls. Hence as we need to access only a single child here, we use the while loop instead of recursive calls._
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_MinOpsToConvert"></a>
