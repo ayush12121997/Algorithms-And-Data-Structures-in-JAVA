@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 6700
+### Next Edit at : 6900
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -6890,6 +6890,8 @@ class Comparison implements Comparator<Cell>
     }
 }
 ```
+**NOTE:** Also, instead of checking for every possible move seperately, we could have made x and y arrays for all the moves possible and then checkec them within a single loop. Is would be similar to what we did in the <a href="#GP_KnightProblem">Knight Problem</a> for the 8 available moves of a Knight.
+
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_NumTriangles"></a>
