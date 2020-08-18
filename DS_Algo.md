@@ -353,6 +353,7 @@
 	- [Inbuilt str.compareTo() and integer.compareTo() methods]
 	- [Clone, shallow copy, deep copy]
 	- [Arrays.binarySearch() and Collections.binarySearch()]
+	- [Creating max/min Heaps - https://leetcode.com/problems/sliding-window-median/discuss/96352/Never-create-max-heap-in-java-like-this...]
 14. [Others]
     - [Square root decomposition]
     - [Segment trees]
