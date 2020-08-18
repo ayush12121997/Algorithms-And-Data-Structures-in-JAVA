@@ -6990,22 +6990,144 @@ class Graph
 ### Minimize Cash Flow among a given set of friends
 The questions statement is that "Given a number of friends who have to give or take some amount of money from one another. Design an algorithm by which the total cash flow among all the friends is minimized."
 
-We can approach the question by thinking about money lending among friends. If freind A owes friend B and C, 200 rupees each, and friend B owes friend C 400 rupees, and we may directly ask A to pay 400 rupees to C and B pays C only 200 rupees. This way instead of 3 transacions, we need only two transactions. The same idea needs to be implemented for n number of friends.
-
-Another exmaple can be seen in the images below:
+We can approach the question by thinking about money lending among friends. For example in the image below, we see how a 3-transaction graph cpuld be more efficiently converted to a 2-trnsaction graph.
 
 <div align="center">
 <img src="/Images/GP_MinCashFlow_1.png" width="200" height="200"/>
 <img src="/Images/GP_MinCashFlow_2.png" width="200" height="200"/>
 </div>
 
-We can develop a greedy approach for this quetion. Among the group of friends, there will always be a person with maximum prfit and one with minimum profit, which means that, there will always be someone who is getting the maximum amount of money and someone who has to pay the maximum amount of money at a given point of time. We select these two people, and transfer the minimum of (MaxProfit, MaxDebt) from person with maximum debt to person with maximum profit. Doing so, either of the two would have been freed from the remaining transactions. For exmaple if the debt was more than the profit, then we transferred MaxProfit amount from person in debt to person in profit and now the person in profit need not participate in further transactions. We then recur the same process for remaining people. So in short, all we need to do is:
-1. Maintain a list at all times having the current maximum and minimum profit.
-2. Pay Min(MaxProft, MinProfit) from guy with MinProfit to guy with MaxProfit.
-3. Repeat the process until onle one person is left.
+We can develop a greedy approach for this question based on the following few facts:<br>
+**Fact 1:**<br>
+Among the group of friends, there will always be a person with maximum profit and one with minimum profit, which means that, if we were to calculate the net profit for everyone after all transactions are done, there will always be someone with maximum amount of money earned and someone with maximum amount of money spent. For example in the case above, the friend who gets the maximum amount of money is P2, who gets 7000. And the friend who pays net maximum amount of money is P1, who paid 4000, that is had a -ve profit. This disparity is always and always bound to exist because if at all it wasnt the case and everyone was supposed to end up with the same net profit, then no transactions would have been needed at all as the net profit for everyone would be the same.
 
-This can be achieved using TreeSet in java, to maintain a two ended priority queue and using graphs to store the input and output. The code being trivial has been opted out. For further details on topic understanding, please refer to: https://www.geeksforgeeks.org/minimize-cash-flow-among-given-set-friends-borrowed-money/. Do note that the implementation on GFG is different from the one advised above in terms of code, but has the same algorithm.
+**Fact 2:**<br>
+As seen from fact 1, if the net profits for everyone is same, it means that the transaction has settled. Now further building up upon this fact, we can notice, that for this scenario to arise, that is, for net profits to be same, the only valid net profit value is 0. This is because, let us say if net profit for everyone is +10, then that means no one is loosing money, and hence there definitely would not be any way possible for everyone to make a profit of +10. This is because for a transaction to take place, there necessarily has to be the same amont of money spent as the amount of money earned. Similarly, if the net profit was say -10 for everyone, this would again be invalid as everyone is loosing money, so that money has to go somewhere or to someone who makes a net +ve profit but that isn't the case either. Hence, we can conclude that the only way for everyone to have the same net profit is for their net profits to be 0.
 
+**Fact 3:**<br>
+Building further from the concept of fact 2, we can also conclude that if all net profits are not 0, then there will be necesasrily be atleast one negative and one positive net profit. This is because if we assume all profits to be net positive, say +100, +50 and +30, once again, we can notice that there is no one who is spending the money and hence these transactions could not take place. Similarly, because of the same reason, all net transactions cannot be negative either. For example if we have the following situation:
+
+<div align="center">
+<img src="/Images/GP_MinCashFlow_3.png" width="200" height="200"/>
+</div>
+
+The net profit for 1 is as of now +100, and for 2 is +50. Now in order to make the net profit of 3 as any positive value, any change that we would make would necessarily result in atleast one of 1 and 2 having a net negative value.
+
+**Fact 4:**<br>
+To reduce the number of transactions in such a way that we have to be guaranteed that atleast one person would be out of the cash flow process after every transaction, the best possible way out is to select the two candidates according to fact 1, that is one who is supposed to end with maximum profit(will necessarily be +ve), and one who is supposed to end with minimum proift(will necessarily be -ve). We select these two people, and transfer the minimum of (MaxProfit, -MinProfit) from person with maximum debt to person with maximum profit. The reason we write -MinProfit instead of simply MinProfit is because as we saw in fact 3, MinProfit would necessarily be negative, and hence to check for the magnitude of MinProfit vs MaxProfit we need to make it postivie. We would refer MaxDebt as -MinProfit ahead. Now after this transaction from person in debt to person in profit, either of the two would have been removed from the remaining transactions. For exmaple if the MaxDebt was more than the MaxProfit, then we transfer MaxProfit amount from person in debt to person in profit, and now the person in profit need not participate in further transactions as his account is settled. Similarly, if say MaxProfit to be earned was more than MaxDebt to be payed, then we pay the amount equal to MaxDebt from person in debt to person supposed to get the profit. This way the person in debt would not need to participate in further transactions as his account is now settled to 0.
+
+Using these 4 facts we develop the following greedy algorithm:
+1. Maintain a list at all times having the current new profits of people. The maximum of this list is the MaxProfit and the minimum of this list is the MaxDebt. _Always remember that MaxDebt would be <= to 0 and that MaxProfit would be >= 0.
+2. Pay Math.min(MaxProfit, MaxDebt) from guy with MaxDebt to guy with MaxProfit. Update the remaining balance for both the people.
+3. Repeat the process until we reach the scenario where both MaxProfit and MaxDebt are 0, that is all transactions have been settled.
+```java
+class Graph
+{
+    int V;
+    // graph[i][j] would hold the value that person i had to
+    // pay to person j initially
+    int[][] graph;
+    // ans[i][j] would hold the value that person i had to
+    // pay to person j after minimizing cash flow
+    int[][] ans;
+    
+    public Graph(int v)
+    {
+        V = v;
+        graph = new int[V][V];
+        ans = new int[V][V];
+    }
+    
+    public void addEdge(int u, int v, int a)
+    {
+        // u pays v amount equal to a
+        graph[u][v] = a;
+    }
+    
+    public void minCashFlow()
+    {
+        // amount[i] would hold the net profit for every person i
+        // Net profit of i:
+        // (Amount i gets from j - Amount i pays to j) for all j
+        int[] amount = new int[V];
+        
+        // For every person i
+        for(int i = 0; i < V; i++)
+        {
+            // For every person j
+            for(int j = 0; j < V; j++)
+            {
+                amount[i] += (graph[j][i] - graph[i][j]);
+            }
+        }
+        minCashFlow_Util(amount);
+        displayAnswer();
+    }
+    
+    public void minCashFlow_Util(int[] amount)
+    {
+        // Find the index of maximum profit
+        int max = 0;
+        for(int i = 0; i < V; i++)
+        {
+            if(amount[i] > amount[max])
+            {
+                max = i;
+            }
+        }
+        // Find the index of minimum profit, that is maximum debt
+        int min = 0;
+        for(int i = 0; i < V; i++)
+        {
+            if(amount[i] < amount[min])
+            {
+                min = i;
+            }
+        }
+        // If both profit and debt are 0, then it means that transactions
+        // have been settled
+        if(amount[max] == 0 && amount[min] == 0)
+        {
+            return;
+        }
+        // As MinProfit will always be a -ve value, we have to convert it
+        // to positive to consider it as MaxDebt. 
+        int MaxDebt = -amount[min];
+        int MaxProfit = amount[max];
+        // If MaxDebt to be paid is less than MaxProfit to be earned
+        if(MaxProfit > MaxDebt)
+        {
+            // Transfer MaxDebt amount from person in debt to person in profit
+            amount[min] += MaxDebt;
+            amount[max] -= MaxDebt;
+            // Add this transaction to answer graph
+            ans[min][max] = MaxDebt;
+        }
+        // If MaxDebt to be paid is more than MaxProfit to be earned
+        else
+        {
+            // Transfer MaxProfit amount from person in debt to person in profit
+            amount[min] += MaxProfit;
+            amount[max] -= MaxProfit;
+            // Add this transaction to answer graph
+            ans[min][max] = MaxProfit;
+        }
+        minCashFlow_Util(amount);
+    }
+    
+    public void displayAnswer()
+    {
+        for(int i = 0; i < V; i++)
+        {
+            for(int j = 0; j < V; j++)
+            {
+                System.out.print(ans[i][j] + ", ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_RottingOranges"></a>
