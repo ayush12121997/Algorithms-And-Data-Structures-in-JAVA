@@ -354,6 +354,7 @@
 	- [Clone, shallow copy, deep copy]
 	- [Arrays.binarySearch() and Collections.binarySearch()]
 	- [Creating max/min Heaps - https://leetcode.com/problems/sliding-window-median/discuss/96352/Never-create-max-heap-in-java-like-this...]
+	- [Flloyd tortoise hare algorithm]
 14. [Others]
     - [Square root decomposition]
     - [Segment trees]
