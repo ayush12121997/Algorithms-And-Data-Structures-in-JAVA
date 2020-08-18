@@ -6890,7 +6890,7 @@ class Comparison implements Comparator<Cell>
     }
 }
 ```
-**NOTE:** Also, instead of checking for every possible move seperately, we could have made x and y arrays for all the moves possible and then checkec them within a single loop. Is would be similar to what we did in the <a href="#GP_KnightProblem">Knight Problem</a> for the 8 available moves of a Knight.
+**NOTE:** Also, instead of checking for every possible move seperately, we could have made x and y arrays for all the moves possible and then checked them in a loop. It would be similar to what we did in the <a href="#GP_KnightProblem">Knight Problem</a> question above for the 8 available moves of a Knight.
 
 <a href="#Contents">Back to contents</a>
 
