@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 6900
+### Next Edit at : 7000
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -6997,10 +6997,10 @@ Another exmaple can be seen in the images below:
 <img src="/Images/GP_MinCashFlow_2.png" width="200" height="200"/>
 </div>
 
-We can develop a greedy approach for this quetion. Among the group of friends, there will always be a person with the maximum and minimum profit. Indirectly, there will always be someone who gets the maximum money and someone who pays the most. We select these two people, and transfer Min(MaxProfit, MaxDebt) from person with maximum dept to person with maximum profit. This ways, either of the two would have been freed from the remaining transactions. We then recur for remaining people. So in short, all we need to do is:
-1. Maintain a list at all times having the current maximum profit and minimum profit.
+We can develop a greedy approach for this quetion. Among the group of friends, there will always be a person with maximum prfit and one with minimum profit, which means that, there will always be someone who is getting the maximum amount of money and someone who has to pay the maximum amount of money at a given point of time. We select these two people, and transfer the minimum of (MaxProfit, MaxDebt) from person with maximum debt to person with maximum profit. Doing so, either of the two would have been freed from the remaining transactions. For exmaple if the debt was more than the profit, then we transferred MaxProfit amount from person in debt to person in profit and now the person in profit need not participate in further transactions. We then recur the same process for remaining people. So in short, all we need to do is:
+1. Maintain a list at all times having the current maximum and minimum profit.
 2. Pay Min(MaxProft, MinProfit) from guy with MinProfit to guy with MaxProfit.
-3. Repeat the process.
+3. Repeat the process until onle one person is left.
 
 This can be achieved using TreeSet in java, to maintain a two ended priority queue and using graphs to store the input and output. The code being trivial has been opted out. For further details on topic understanding, please refer to: https://www.geeksforgeeks.org/minimize-cash-flow-among-given-set-friends-borrowed-money/. Do note that the implementation on GFG is different from the one advised above in terms of code, but has the same algorithm.
 
