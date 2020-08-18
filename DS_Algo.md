@@ -6990,6 +6990,13 @@ The questions statement is that "Given a number of friends who have to give or t
 
 We can approach the question by thinking about money lending among friends. If freind A owes friend B and C, 200 rupees each, and friend B owes friend C 400 rupees, and we may directly ask A to pay 400 rupees to C and B pays C only 200 rupees. This way instead of 3 transacions, we need only two transactions. The same idea needs to be implemented for n number of friends.
 
+Another exmaple can be seen in the images below:
+
+<div align="center">
+<img src="/Images/GP_MinCashFlow_1.png" width="200" height="200"/>
+<img src="/Images/GP_MinCashFlow_2.png" width="200" height="200"/>
+</div>
+
 We can develop a greedy approach for this quetion. Among the group of friends, there will always be a person with the maximum and minimum profit. Indirectly, there will always be someone who gets the maximum money and someone who pays the most. We select these two people, and transfer Min(MaxProfit, MaxDebt) from person with maximum dept to person with maximum profit. This ways, either of the two would have been freed from the remaining transactions. We then recur for remaining people. So in short, all we need to do is:
 1. Maintain a list at all times having the current maximum profit and minimum profit.
 2. Pay Min(MaxProft, MinProfit) from guy with MinProfit to guy with MaxProfit.
