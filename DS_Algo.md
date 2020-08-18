@@ -7141,7 +7141,7 @@ In a given grid, each cell can have one of three values:
 Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten.
 Return the minimum number of minutes that must elapse until no cell has a fresh orange.  If this is impossible, return -1 instead.
 
-Now to solve this problem, this can be seen as a modification of the shortest distance in unweighted graph problem. The reason this is considered an unweighted graph is because the cost of moving to a moveable cell is jsut 1, that is 1 minute.
+Now to solve this problem, this can be seen as a modification of the shortest distance in unweighted graph problem. The reason this is considered an unweighted graph is because the cost of moving to a moveable cell is just 1, that is 1 minute.
 
 The modification that we make to our BFS call would be that in case we encounter a cell with value 0, we do not proceed any further, and in case we encounter a cell with value 1, we plus the distance so far(time taken to rot) by 1.
 
