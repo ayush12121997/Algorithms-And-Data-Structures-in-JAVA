@@ -7133,17 +7133,26 @@ class Graph
 <a name="GP_RottingOranges"></a>
 ### Rotting oranges
 The questions is as follows:
-In a given grid, each cell can have one of three values:
-1. The value 0 representing an empty cell;
-2. The value 1 representing a fresh orange;
-3. The value 2 representing a rotten orange.<
+In a given grid, each cell can have one of the following three values:
+1. The value 0 representing an empty cell.
+2. The value 1 representing a fresh orange.
+3. The value 2 representing a rotten orange.
 
-Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten.
-Return the minimum number of minutes that must elapse until no cell has a fresh orange.  If this is impossible, return -1 instead.
+Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten. Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1 instead. For example:
 
-Now to solve this problem, this can be seen as a modification of the shortest distance in unweighted graph problem. The reason this is considered an unweighted graph is because the cost of moving to a moveable cell is just 1, that is 1 minute.
+<div align="center">
+<img src="/Images/GP_RottingOranges_1.png" width="800" height="200"/>
+</div>
 
-The modification that we make to our BFS call would be that in case we encounter a cell with value 0, we do not proceed any further, and in case we encounter a cell with value 1, we plus the distance so far(time taken to rot) by 1.
+**Input: [[2,1,1],[1,1,0],[0,1,1]]**<br>
+For the input in the above format, we can see that originally we would be at minute 0. Every minute, if there is a fresh orange in a cell above, below, left or right to any rotten orange, then that orange also becomes rotten. All we need to do is to check the time it would take to rot all oranges.
+
+The question can be seen as a modification of the shortest distance in unweighted graph problem. The reason this is considered an unweighted graph is because the cost of moving to a moveable cell is always 1, that is 1 unit of time. The algorithm is very straight forward where we keep the following in mind while writing our BFS function:
+1. Initially, we can move from a rotten orange cell, that is cell with value 2, to a non-rotten orange cell only, that is cells with value 1. These movements can take place without any waiting time as we are moving from cells which already had rotten oranges in them. The situation can be considered as if a 0-weight edge connects the cells.
+2. When we reach a cell with a non-rotten orange, before moving to adjacent non-rotten orange cells, we have to wait a minute for it to rot first. This waiting time can be visualized as an edge of distance 1 between the two adjacent cells.
+3. No movements are allowed to empty cells.
+
+Hence the modification that we make to our BFS call would be that in case we encounter a cell with value 0, we do not proceed any further, and in case we encounter a cell with value 1, we plus the distance so far(time taken to rot) by 1.
 
 The code is as follows:
 ```java
@@ -7151,69 +7160,89 @@ class Solution
 {
     public int orangesRotting(int[][] grid)
     {
+        int count = 0;
         int n = grid.length;
-        if(n == 0)
-        {
-            return 0;
-        }
         int m = grid[0].length;
-        int freshCount = 0;
-        Queue<Cell> queue = new LinkedList<Cell>();
+        // Visited array to avoid visiting same cells again
         boolean[][] visited = new boolean[n][m];
+        // Queue to maintain set of next cells to be visited
+        // As it is unweighted graph, we need not maintain a Priority Queue
+        Queue<Node> queue = new LinkedList<Node>();
+        // We would need to know the following before beginning our BFS loop:
+        // 1. The nodes from where to begin the BFS. These would be all nodes
+        // with rotten oranges already present in the initial graph.
+        // 2. The number of nodes we need to convert, to check that whether or
+        // not we have met our target conversions.
         for(int i = 0; i < n; i++)
         {
             for(int j = 0; j < m; j++)
             {
+                // Check for number of oranges to be rotten
                 if(grid[i][j] == 1)
                 {
-                    freshCount++;
+                    count++;
                 }
+                // Adding initial cells to queue
                 else if(grid[i][j] == 2)
                 {
-                    queue.add(new Cell(i, j, 2, 0));
+                    queue.add(new Node(i,j,2,0));
                     visited[i][j] = true;
                 }
             }
         }
-        if(freshCount == 0)
+        // If no cells need to be covnerted
+        if(count == 0)
         {
             return 0;
         }
-        Cell cell = null;
-        int[] move_x = { 1, -1, 0 ,0 };
-        int[] move_y = { 0, 0, 1, -1 };
+        Node curr = null;
+        // The valid movable distance in 4 directions
+        int[] move_x = {0, 0, 1, -1};
+        int[] move_y = {1, -1, 0, 0};
         while(!queue.isEmpty())
         {
-            cell = queue.poll();
-            int x = cell.x;
-            int y = cell.y;
-            int type = cell.type;
-            int time = cell.time;
-            if(type == 1)
+            // Current head of queue
+            curr = queue.poll();
+            // Current cell is at (x,y), with v value and t
+            // time has elapsed.
+            int x = curr.x;
+            int y = curr.y;
+            int v = curr.v;
+            int t = curr.t;
+            // If value is 1, then it will be converted to a rotten
+            // orange hence reduce count of remaining non rotten oranges
+            if(v == 1)
             {
-                freshCount--;
+                count--;
             }
-            if(freshCount == 0)
+            // If all non rotten oranges have been rotten so return the time
+            // elapsed so far
+            if(count == 0)
             {
-                return time;
+                return t;
             }
+            // For all adjacent nodes of current node
             for(int i = 0; i < 4; i++)
             {
-                int x_new = x + move_x[i];
-                int y_new = y + move_y[i];
-                if((type == 1 || type == 2) && isInside(x_new, y_new, n, m) && !visited[x_new][y_new])
+                // (new_x, new_y) are the cordinate we intend to move to
+                int new_x = x + move_x[i];
+                int new_y = y + move_y[i];
+                // Check if cordinate is inside grid, has a non rotten orange, isnt
+                // empty and has not been visited already
+                if(isInside(new_x, new_y, n, m) && !visited[new_x][new_y] && grid[new_x][new_y] == 1)
                 {
-                    if(grid[x_new][y_new] == 1)
-                    {
-                        queue.add(new Cell(x_new, y_new, 1, time + 1));
-                        visited[x_new][y_new] = true;
-                    }
+                    // If yes so add to queue of nodes to be visited
+                    queue.add(new Node(new_x, new_y, 1, t+1));
+                    visited[new_x][new_y] = true;
                 }
             }
         }
+        // If count never reached 0 above, hence some oranges are still fresh and not
+        // visitable so return 1
         return -1;
     }
     
+    // Check validity of new cell
     public boolean isInside(int x, int y, int n, int m)
     {
         if(x < 0 || x >= n || y < 0 || y >= m)
@@ -7224,19 +7253,20 @@ class Solution
     }
 }
 
-class Cell
+// Node class to denote a cell
+class Node
 {
-    int x = 0;
-    int y = 0;
-    int type = 0;
-    int time = 0;
+    int x;
+    int y;
+    int v;
+    int t;
     
-    public Cell(int a, int b, int ty, int ti)
+    public Node(int X, int Y, int V, int T)
     {
-        x = a;
-        y = b;
-        type = ty;
-        time = ti;
+        x = X;
+        y = Y;
+        v = V;
+        t = T;
     }
 }
 ```
