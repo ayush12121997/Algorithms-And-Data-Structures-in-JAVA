@@ -7414,7 +7414,7 @@ The problem asks you to check that is it possible that a Knight placed on a boar
 
 This can be solved easily using backtracking. The idea is to use a DFS based approach in backtracking. For every cell we are own we try all the possibilities till we get the corect final answer. If a possibility is wrong we reverse back and change the possibility. If the cell we are on runs out of possibilities we directly return false.
 
-The algorithm is the basic backtracking approach that from the starting cell (0,0) we try to move in all possible valid Knight movement directions and increase the total cell's filled count by 1. We then repeat the process, until we reach the totoal count to be N x N (positive base case) or if we run out of options for a particular cell (negative base case). The code is as follows:
+The algorithm is the basic backtracking approach that from the starting cell (0,0) we try to move in all possible valid Knight movement directions and increase the total cell's filled count by 1. We then repeat the process, until we reach the totoal count to be N x N (positive base case, that is where we return true) or if we run out of options for a particular cell (negative base case, that is where we return false). The code is as follows:
 ```java
 class Solution
 {
