@@ -7141,7 +7141,7 @@ In a given grid, each cell can have one of the following three values:
 Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten. Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1 instead. For example:
 
 <div align="center">
-<img src="/Images/GP_RottingOranges_1.png" width="800" height="200"/>
+<img src="/Images/GP_RottingOranges_1.png" width="840" height="200"/>
 </div>
 
 **Input: [[2,1,1],[1,1,0],[0,1,1]]**<br>
@@ -7273,30 +7273,31 @@ class Node
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_SimilarContacts"></a>
-### Find similar contacts in contact list (Accounts Merge)
-The question gives us a list of lists. Each inner list, is of the following format:<br>
-<Name, Email1, Email2 .... Emailn><br>
+### Accounts Merge - Find similar contacts in list
+The question gives us a list of lists. Each list in the main list, is of the following format:<br>
+<Name, Email-1, Email-2 .... Email-n><br>
 Note: The number of values in each inner list might varry, the only constant is atleast one email ID and necessarily the name.<br>
 
-The task is that given such a list of list, merge all contacts having common Email IDS and output a joined list with merged contacts. In the list of merged contacts for every inner list, make sure the emails are in lexographically sorted order.<br>
-Note: Two people with the same name might not necessarily have the same emails, whereas two people with same emails will necessarily have the same names.
+The task is that given such a list of list, merge all contacts having common Email-IDS and output a joined list with merged contacts. In the list of merged contacts for every inner list, make sure the emails are in lexographically sorted order.<br>
+Note: Two people with the same name might not necessarily have the same emails, but two people with same emails will necessarily have the same names.
 
-To get a better look at the question description, refer to: https://leetcode.com/problems/accounts-merge/
+Refer to https://leetcode.com/problems/accounts-merge/ for better question description.
 
-We can solve this problem using the union find algorithm. As we are required to merge similar contacts together, union find using DSU seems a perfect fit over here. Now, we shall see the requirements for the DSU union find algorithm:
-1. We should be able to define individual subsets, preferable using integers.
-2. The task should to be merge these subsets.
+We can solve this problem using the union find algorithm. As we are required to merge similar contacts together, union find using path compression and find by rank seems a perfect fit over here. Now, we shall see the requirements for the DSU union find algorithm:
+1. We should be able to define individual subsets, preferably using integers.
+2. The task should involving either merging the subsets together or checking for existence of elements in already merged subsets.
 
-The second requirement is met as seen in question description. For the first requirement, we can modify the input taken. For every email ID that we read, we can assign a unique ID to ech new Email using a hashMap and then combine IDs of the same person together. This way all Email names would be converted into integers and the union and find methods of DSU would work on integers instead of working on strings.
+The second requirement is met as seen in the question description, that we need to combine similar contacts together. For the first requirement, we can modify the input taken. For every email ID that we read, we can assign a unique ID to each new Email using a hashMap. So instead of forming subsets of emails as strings, we can denote each email uniquely through an integer. We then would be needed to combine IDs of the same person together.
 
 So now let us look at the final algorithm:
 1. For the input, create two hashmaps.
-	- <ins>Email to Name</ins>: Maps the email to the name of the person. Do not need to check for overlapping insertions, as if the same email repeats, from the qeustion description we know the same name will be used.
-	- <ins>Email to ID</ins>: ID here is an integer ID. Maps email to integer ID. This is needed so that we can use these IDs in our DSU instead strings. Ensure not to overwrite already included emails, as an ID assigned to an email once should remain the same. Also, for every email in the same list, that is for every email beloning to the same person in the initial list, we call union on the first email for that person and all the others. This way, say a person has 5 emails, two in one list and three in another, in which there is one common one. So we get the following scenario:<br>
-	For 1st list of the person, EMail A and Email B are unioned. [A, B]<br>
-	For the 2nd list, lets say Email A is common so now the unions would for the set [A, B, C]<br>
-2. So using this process, we are able to form a DSU for the emails and their owners. Now for every email in our second hashmap(Email to integer ID), we find the parent of that email and form a list of emails for vvery parent. Sort each of these list lexographically.
-3. Once we have got a list for every parent emailid, we use the first element of every list to find the name of the owner of the email from our frist hashmap(email to name) and add the name to their respective email lists.
+	- <ins>Email to Name</ins>: Maps the email to the name of the person. Do not need to check for overlapping insertions, as if the same email repeats, from the qeustion description we know the same name will be used necessarily.
+	- <ins>Email to ID</ins>: ID here is an integer ID. Maps email to integer ID. This is needed so that we can use these IDs in our DSU instead strings. Ensure not to overwrite already included emails, as an ID assigned to an email once should remain the same.
+2. Now, for every email in the same list, that is for every email belonging to the same person in the initial list, we call union on the first Email for that person and all the others. This way, say a person has 5 emails, two in one list and three in another, in which there is one common one. So we get the following scenario:<br>
+	- For 1st list of the person, EMail-A and Email-B are unioned forming a set -> [A, B]
+	- For the 2nd list, lets say Email-A is common and others are Email-C and Email-D. So now when Email-C is unioned with A it forms the set [A,B,C] and similarly union with D forms [A, B, C, D]. So using this process, we are able to form a union set of all emails belonging to same contact combined together.
+3. Create a new HashMap for our answer which will have the unique ID assigned to an email as the key, and the value would be the list of all emails that belong to the set of that ID in the DSU. Now for every email in our second hashmap(Email to ID), using the unique ID of every mail and find the set to which that Email belongs to and add it to the respective set in the final asnwer HashMap.
+4. Once done with the above step we now have a HashMap with different sets of Emails as values. TO produce the final answer we need to add the names of the owners to those sets. For this purpose we use the first email of every list to find the name of the owner of the emails in that list, using our frist hashmap(Email to Name) and add the name to their respective email lists.
 
 Here is the code:
 ```java
@@ -7304,46 +7305,44 @@ class Solution
 {
     public List<List<String>> accountsMerge(List<List<String>> accounts)
     {
-        DSU dsu = new DSU();
-        HashMap<String, String> emailToName = new HashMap<String, String>();
         HashMap<String, Integer> emailToID = new HashMap<String, Integer>();
+        HashMap<String, String> emailToName = new HashMap<String, String>();
         int id = 0;
         int n = accounts.size();
-        for (int i = 0; i < n; i++)
+        DSU dsu = new DSU(10000);
+        for(List<String> personList : accounts)
         {
-            List<String> innerAccount = accounts.get(i);
-            String name = innerAccount.get(0);
-            for(int j = 1; j < innerAccount.size(); j++)
+            String personName = personList.get(0);
+            for(int i = 1; i < personList.size(); i++)
             {
-                String email = innerAccount.get(j);
-                emailToName.put(email, name);
-                if(!emailToID.containsKey(email))
+                String eMail = personList.get(i);
+                emailToName.put(eMail, personName);
+                if(!emailToID.containsKey(eMail))
                 {
-                    emailToID.put(email, id);
+                    emailToID.put(eMail, id);
                     id++;
                 }
-                dsu.union(emailToID.get(innerAccount.get(1)), emailToID.get(email));
+                dsu.union(emailToID.get(personList.get(1)), emailToID.get(eMail));
             }
         }
-
-        HashMap<Integer, List<String>> ans = new HashMap();
-        for (String email: emailToID.keySet())
+        HashMap<Integer, List<String>> ans = new HashMap<Integer, List<String>>();
+        for(String eMail : emailToID.keySet())
         {
-            int index = dsu.find(emailToID.get(email));
-            if(ans.containsKey(index))
+            int id2 = dsu.find(emailToID.get(eMail));
+            if(ans.containsKey(id2))
             {
-                ans.get(index).add(email);
+                ans.get(id2).add(eMail);
             }
             else
             {
-                ans.put(index, new ArrayList<String>());
-                ans.get(index).add(email);
+                ans.put(id2, new ArrayList<String>());
+                ans.get(id2).add(eMail);
             }
         }
-        for(List<String> joinedEmails: ans.values())
+        for(List<String> finalList : ans.values())
         {
-            Collections.sort(joinedEmails);
-            joinedEmails.add(0, emailToName.get(joinedEmails.get(0)));
+            Collections.sort(finalList);
+            finalList.add(0, emailToName.get(finalList.get(0)));
         }
         return new ArrayList(ans.values());
     }
@@ -7352,18 +7351,19 @@ class Solution
 class DSU
 {
     Subset[] subsets;
-    public DSU()
+    
+    public DSU(int N)
     {
-        subsets = new Subset[10001];
-        for (int i = 0; i <= 10000; i++)
+        subsets = new Subset[N];
+        for(int i = 0; i < N; i++)
         {
-            subsets[i] = new Subset(i);
+            subsets[i] =  new Subset(i);
         }
     }
     
     public int find(int x)
     {
-        if (subsets[x].parent != x)
+        if(subsets[x].parent != x)
         {
             subsets[x].parent = find(subsets[x].parent);
         }
@@ -7374,7 +7374,11 @@ class DSU
     {
         int xRoot = find(x);
         int yRoot = find(y);
-        if(subsets[xRoot].rank > subsets[yRoot].rank)
+        if(xRoot == yRoot)
+        {
+            return;
+        }
+        else if(subsets[xRoot].rank > subsets[yRoot].rank)
         {
             subsets[yRoot].parent = xRoot;
         }
@@ -7392,12 +7396,13 @@ class DSU
 
 class Subset
 {
-    int parent = 0;
-    int rank = 0;
+    int parent;
+    int rank;
     
     public Subset(int p)
     {
         parent = p;
+        rank = 0;
     }
 }
 ```
