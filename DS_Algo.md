@@ -7492,7 +7492,7 @@ class Solution
 
 <a name="GP_RatInMazeII"></a>
 ### Rat in a maze - II (All 4 directions)
-Rat in a Maze - I problem is very basic. It is exactly similar to the DP problem involving a grid with some obstacles and you are needed to find the minimum cost path from the top left to the bottom right of the grid. This problem is covered in the section <a href="#DP_2DimensionalGrids">DP for 2D grids</a>.
+Rat in a Maze - I problem is very basic. It is exactly similar to the DP problem involving a grid with some obstacles and you are needed to find the minimum cost path from the top left to the bottom right of the grid. That problem is covered in the section <a href="#DP_2DimensionalGrids">DP for 2D grids</a>.
 
 We tackle an advanced version of the problem here. We say that movement is allowed in all four directions Up(U), Down(D), Left(L) and Right(R). The gird has certain cells that can be visited marked by 1 and certain cells that are blocked, marked by 0. The task is to output a sorted list of all possible paths to reach the bottom right of the grid from the top left.
 
@@ -7504,55 +7504,68 @@ If we imagine the grid as a graph where all the visitable cells are connected wi
 3. <ins>Why backtracking?</ins><br>
 As we are needed to find all paths till the destination, we do not stop at finding the first path, which is what the DFS normally does, that as soon as we reach the target, we stop. Instead, when we reach the end, we add the current path to answer and then recurse/travel back to the previous node and try the next available option and check if a new path can be formed. This way after every path found, until newer options are available to traverse we keep on looking for more.
 
-The algortithm is a very trivial backtracking algorithm and has been implemented below.
+<ins>A trick to print the path in sorted order</ins>:<br>
+One straight forward method would be to first create a list of all valid paths and then sort the list. This would take O(NlogN) time more than the time already taken to create the list. A way faster and smarter method would be to create the list in the sorted manner in the first place. We know that every string in the asnwer list would have only 4 characters which are 'D', 'U', 'L' and 'R'. To create the answer in a sorted manner, at every cell when we check our options to move to different adjoining cells, we search are options in the alphabetical order that is, 'D', 'L', 'R, and then 'U'. This way the answer is automatically generated in a sortd manner from the beginning itself.
 ```java
 class Solution
 {
     public static ArrayList<String> printPath(int[][] m, int n)
     {
+        // Answer list
         ArrayList<String> ans = new ArrayList<String>();
-        int[] di_x = { 1, -1, 0, 0 };
-        int[] di_y = { 0, 0, 1, -1 };
-        String[] di_s = { "D", "U", "R", "L"};
-        boolean[][] visited = new boolean[n][n];
-        visited[0][0] = true;
-        if(m[0][0] == 0)
+        // If first or the last cell themselves are non reachable
+        if(m[0][0] == 0 || m[n-1][n-1] == 0)
         {
             return ans;
         }
-        ratInMazeUtil(m, 0, 0, "", ans, di_x, di_y, di_s, visited);
-        Collections.sort(ans);
+        
+        // Visited array to avoid visiting same cell again and again
+        boolean[][] visited = new boolean[n][n];
+        printPath_Util(visited, m, 0, 0, n, ans, "");
         return ans;
     }
-
-    public static void ratInMazeUtil(int[][] grid, int x, int y, String directions, ArrayList<String> ans, int[] di_x, int[] di_y, String[] di_s, boolean[][] visited)
+    
+    // printPath_Util(Visited array, Input grid, Current x corddinate, Current y cordinate, Row/Column size, Answer list, Current path string)   
+    public static void printPath_Util(boolean[][] visited, int[][] m, int x, int y, int n, ArrayList<String> ans, String str)
     {
-        int N = grid.length;
-        if(x == N - 1 && y == N - 1)
+        // If reached the last cell
+        if(x == n-1 && y == n-1)
         {
-            ans.add(directions);
+            // Add path to asnwer
+            ans.add(str);
         }
         else
         {
+            // Mark current cell as visited
+            visited[x][y] = true;
+            // Array for movements allowed
+            // Remember to keep them in sorted order
+            int[] move_x = {1,0,0,-1};
+            int[] move_y = {0,-1,1,0};
+            String[] move_s = {"D","L","R","U"};
+            // For all movements allowed
             for(int i = 0; i < 4; i++)
             {
-                int next_x = x + di_x[i];
-                int next_y = y + di_y[i];
-                String next_s = di_s[i];
-                if(isInside(next_x, next_y, grid) && !visited[next_x][next_y])
+                int new_x = x + move_x[i];
+                int new_y = y + move_y[i];
+                // If new cell is valid:
+                // 1. Should be within the grid
+                // 2. Should not be blocked
+                // 3. Should not be already visited
+                if(isInside(new_x, new_y, n) && !visited[new_x][new_y] && m[new_x][new_y] == 1)
                 {
-                    visited[next_x][next_y] = true;
-                    ratInMazeUtil(grid, next_x, next_y, directions + next_s, ans, di_x, di_y, di_s, visited);
-                    visited[next_x][next_y] = false;
+                    // Add this movement to current path and move to the new cell
+                    printPath_Util(visited, m, new_x, new_y, n, ans, str + move_s[i]);
                 }
             }
+            // Once one path is complete, mark node unvisited for future paths
+            visited[x][y] = false;
         }
     }
-
-    public static boolean isInside(int x, int y, int[][] grid)
+    
+    public static boolean isInside(int x, int y, int n)
     {
-        int N = grid.length;
-        if(x < 0 || x >= N || y < 0 || y >= N || grid[x][y] == 0)
+        if(x < 0 || x >= n || y < 0 || y >= n)
         {
             return false;
         }
