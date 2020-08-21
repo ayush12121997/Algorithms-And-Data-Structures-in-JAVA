@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 7000
+### Next Edit at : 7500
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -244,7 +244,7 @@
 	- [Rotting oranges](#GP_RottingOranges)
 	- [Find similar contacts in contact list (Accounts Merge)](#GP_SimilarContacts)
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
-	- [Rat in a maze - II (All 4 directions)](#GP_RatInMazeII)
+	- [Rat in a maze - All 4 directions](#GP_RatInMazeII)
 	- [Shortest path + Count all paths with exactly k edges in a graph](#GP_ShortestPathWithExactlyKEdges)
 	- [Shortest path with upto k edges in a graph - Dijkstra and Bellman Ford]
 	- [Dungeon Game]
@@ -7491,7 +7491,7 @@ class Solution
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_RatInMazeII"></a>
-### Rat in a maze - II (All 4 directions)
+### Rat in a maze - All 4 directions movement allowed
 Rat in a Maze - I problem is very basic. It is exactly similar to the DP problem involving a grid with some obstacles and you are needed to find the minimum cost path from the top left to the bottom right of the grid. That problem is covered in the section <a href="#DP_2DimensionalGrids">DP for 2D grids</a>.
 
 We tackle an advanced version of the problem here. We say that movement is allowed in all four directions Up(U), Down(D), Left(L) and Right(R). The gird has certain cells that can be visited marked by 1 and certain cells that are blocked, marked by 0. The task is to output a sorted list of all possible paths to reach the bottom right of the grid from the top left.
@@ -7576,7 +7576,7 @@ class Solution
 <a href="#Contents">Back to contents</a>
 
 <a name="GP_ShortestPathWithExactlyKEdges"></a>
-### Shortest path + Count all paths with exactly k edges in a graph
+### Count all paths + Find shortest path from source to destination with exactly k edges in a graph
 **<ins>For count of paths</ins>:**<br>
 The question states that in a given graph/grid, count all the paths with exactly k edges from a given source to a destination. The approach one mght immediately think of is backtracking. Yes, the question is solvable using backtracking but with an exponential complexity of O(V^k).
 
