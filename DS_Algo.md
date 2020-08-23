@@ -1,6 +1,6 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 7500
+### Next Edit at : 7667
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -245,7 +245,8 @@
 	- [Find similar contacts in contact list (Accounts Merge)](#GP_SimilarContacts)
 	- [Knight's tour problem - Visit each cell in a grid atleast once](#GP_KnightsTour)
 	- [Rat in a maze - All 4 directions](#GP_RatInMazeII)
-	- [Shortest path + Count all paths with exactly k edges in a graph](#GP_ShortestPathWithExactlyKEdges)
+	- [Count all paths with exactly/upto k edges in a graph](#GP_CountPathsWithKEdges)
+	- [Shortest path with exactly/upto k edges in a graph](#GP_ShortestPathWithKEdges)
 	- [Shortest path with upto k edges in a graph - Dijkstra and Bellman Ford]
 	- [Dungeon Game]
 	- [Unique Paths III]
@@ -7575,23 +7576,34 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
-<a name="GP_ShortestPathWithExactlyKEdges"></a>
-### Count all paths + Find shortest path from source to destination with exactly k edges in a graph
-**<ins>For count of paths</ins>:**<br>
-The question states that in a given graph/grid, count all the paths with exactly k edges from a given source to a destination. The approach one mght immediately think of is backtracking. Yes, the question is solvable using backtracking but with an exponential complexity of O(V^k).
+- [Count all paths with exactly/upto k edges in a graph](#GP_CountPathsWithKEdges)
+	- [Shortest path with exactly/upto k edges in a graph](#GP_ShortestPathWithKEdges)
 
-Instead, we may choose to use dynamic programming. Using a 3D array, the dynamic programming solution becomes very easy and intuitive. We try to build all paths from length 0 to k, in the input graph in a bottom's up manner. We follow the following process:
+<a name="GP_CountPathsWithKEdges"></a>
+### Count all paths with exactly/upto k edges in a graph
+**<ins>For count of paths with exactly K edges</ins>:**<br>
+The question states that in a given graph/grid, count all the paths with exactly k edges from a given source to a destination. The approach one might immediately think of is backtracking. Yes, the question is solvable using backtracking but with an exponential complexity of O(V^k).
+
+Instead, we may choose to use dynamic programming. Using a 3D array, the dynamic programming solution becomes very easy and intuitive. As we need paths of length k, we use a bottom up manner to build our table, where we start from counting paths of length 0 and move on to paths of length k.
 ```java
 // The dp array will be of the form [Source][Destination][NumEdges] storing the count
 // of total paths from 'Source' vertex to 'Destination' vertex with 'NumEdges' edges
 
 // For number of edges 'e' in the path (from 0 to k)
-//   For every vertex 'u' marking start of path (from 0 to V)
-//     For every vertex 'v' marking end of path (from 0 to V)
-//       For every vertex 'a' adjacent to source 'u' (from 0 to V)
-//         num paths from 'u' to 'v' with 'e' edges += num paths from 'a' to 'v' with 'e-1' edges 
+//   For every vertex 'u' marking start of the path (from 0 to V)
+//     For every vertex 'v' marking the end of the path (from 0 to V)
+//       For every vertex 'a' adjacent to starting source 'u' (from 0 to V)
+//         Num paths from 'u' to 'v' with 'e' edges += Num paths from 'a' to 'v' with 'e-1' edges
+
+// The above algorithm works because for any given pair of vertices say u-v, where u is the starting point and
+// v is the ending point, let us say we need all paths between u and v of length k. So now, if we have already
+// calculated all paths of length k-1, we can simply find all adajcent vertices of u, which are at a distance 1
+// from u and then check that whether or not a path of length k-1 exists from these adjacent vertices to the
+// destination v. As we have already calculated the count for k-1 edges paths, so the number of paths of length
+// k-1 that go from an adajcent vertex of u to v, are the same as the number of paths of length k which go from
+// u to v.
 ```
-As we can see there are three loops for length V and one loop for length k. Hence the time complexity becomes O(V^3 x k). This is significantly faster than the backtracking solution. The code has been commented for further explanation.
+The time complexity for the above method is O(V^3 x k). This is significantly faster than the backtracking solution. The code has been commented for further explanation.
 ```java
 class Solution 
 {
@@ -7617,7 +7629,7 @@ class Solution
                         count[i][j][e] = 1;
                     }
                     // If number of edges is 1
-                    // Path exists if a direct edge exists
+                    // Then path exists only if a direct edge exists
                     if (e == 1 && graph[i][j]!=0)
                     {
                         count[i][j][e] = 1;
@@ -7649,85 +7661,9 @@ class Solution
     }
 }
 ```
-**<ins>For shortest path</ins>:**<br>
-The above part can have a variation to find the shortest path from the source to the destination with exactly k edges instead of counts of all paths. We use the similar dp approach with just defining a new value to be represented by the dp array.
-```java
-// The dp array will be of the form [Source][Destination][NumEdges] storing the min
-// length of path from 'Source' vertex to 'Destination' vertex with 'NumEdges' edges
+**<ins>For count of paths with exactly K edges</ins>:**<br>
+The working of the algorithm remains the same with the only difference being that instead of returning just the answer of exactly k edges we return the sum for count of paths with 0,1,2,....,k-2,k-1,k edges, that is count[u][v][0] + count[u][v][1]  + count[u][v][2] + ... + count[u][v][k-1] +  + count[u][v][k].
 
-// For number of edges 'e' in the path (from 0 to k)
-//   For every vertex 'u' marking start of path (from 0 to V)
-//     For every vertex 'v' marking end of path (from 0 to V)
-//       For every vertex 'a' adjacent to source 'u' (from 0 to V)
-//         if there is a path from 'a' to 'v' using 'e-1' edges
-//           path from 'u' to 'v' with 'e' edges = Min of (previous path, path from 'a' to 'v' with 'e-1' edges) 
-```
-The code is as follows:
-```java
-class Solution 
-{
-    // Function to calculate and return the minimum distance
-    // Input is graph[][], source u, destination v, max edges k, vertices v
-    public int shortestPath(int graph[][], int u, int v, int k, int V)
-    {
-        // DP array to store the distance of path belong ing to
-        // [Source][Destination][Max edges used]
-        int dist[][][] = new int[V][V][k+1];
-        // For number of edges ranging from 0 to k
-        for (int e = 0; e <= k; e++)
-        {
-            // For source from 0 to V-1
-            for (int i = 0; i < V; i++)
-            {
-                // For destination from 0 to V-1
-                for (int j = 0; j < V; j++)
-                {
-                    // Initial distance before calculationg is infinite
-                    dist[i][j][e] = Integer.MAX_VALUE;
-                    // If number of edges is 0
-                    // Then path exists if source = destination
-                    // And as source = destination, min path is 0
-                    if (e == 0 && i == j)
-                    {
-                        dist[i][j][e] = 0;
-                    }
-                    // If number of edges is 1
-                    // Path exists if a direct edge exists
-                    // If yes, so path length is 1 as 1 edge
-                    if (e == 1 && graph[i][j]!=-1)
-                    {
-                        dist[i][j][e] = 1;
-                    }
-                    // If number of edges is more than 1
-                    if (e > 1)
-                    {
-                        // For all vertices from 0 to V-1
-                        for (int a = 0; a < V; a++)
-                        {
-                            // 1. Check adjacent vertice of i by checking for edge
-                            // 2. Check that it should not be a self loop, that is i != a
-                            // 3. Check a should not be j itself as that is base case
-                            // 4. Check there exists a path from a to j
-                            if (graph[i][a]!=-1 && i != a && j!=a && dist[a][j][e-1] != Integer.MAX_VALUE)
-                            {
-                                // New distance of path from i to j with
-                                // atmost k edges is minimum of distance
-                                // before and the sum of (distance from i to a)
-                                // and (distance from a to j using one less edge)
-                                // Hence,
-                                // dist(i,j,e) = Min(dist(i,j,e), dist(i,j,e) + dist(a,j,e-1))
-                                dist[i][j][e] = Math.min(dist[i][j][e], dist[a][j][e-1] + graph[i][a]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        // return distance from vertex u to vertex v with atmost k edges
-        return dist[u][v][k];
-    }
-}
-```
 <a href="#Contents">Back to contents</a>
 
 <a name="Backtracking"></a>
