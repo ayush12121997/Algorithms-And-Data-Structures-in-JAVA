@@ -7665,7 +7665,94 @@ The working of the algorithm remains the same with the only difference being tha
 
 <a name="GP_ShortestPathWithKEdges"></a>
 ### Shortest path with exactly/upto k edges in a graph
+**<ins>For shortest path with upto K edges</ins>:**<br>
+Given a graph, our task is to find the shortest path in that graph from a source to a destination with atmost k edges used in the path.
 
+We can apply the Bellman Ford algorithm here to get the shortest path of length upto k edges. Revisit Bellman Ford algorithm <a href="#GP_BellmanFord">here</a>. So now using the concept of Bellman Ford, rather than building paths of length upto maximum V-1, we instead build paths of length maximum K. So our outer loop goes from 1 -> K, instead of 1 -> V-1. 
+```java
+public class Main
+{
+    public static void main(String[] args)
+    {
+        // Number of vertices
+        int n = 7;
+        // Array of edges, where every edge is denoted as:
+        // [Starting, ending, distance]
+        // [u, v, d]
+        int[][] edges =  {  { 0, 1, 1 },
+        { 0, 2, 1 }, 
+        { 0, 4, 1 }, 
+        { 1, 3, 1 }, 
+        { 1, 4, 1 },
+        { 2, 5, 1 },
+        { 2, 6, 1 },
+        { 3, 4, 1 },
+        { 4, 6, 1 },
+        { 6, 5, 1 },  };
+        // Path source
+        int src = 0;
+        // Path destination
+        int dest = 5;
+        // Maximum edges allowed
+        int k = 4;
+        // Distance array
+        int[] dist = new int[n];
+        // Fill distacne array with +INF as initially all distances
+        // are +INF when 0 edges are allowed
+        for(int i = 0; i < n; i++)
+        {
+            dist[i] = Integer.MAX_VALUE;
+        }
+        // Source is at 0 distance
+        dist[src] = 0;
+        // For the number of edges allowed
+        for(int i = 1; i <= k; i++)
+        {
+            // The new distance array for the updated
+            // path with at most i edges allowed
+            int[] newDist = new int[n];
+            // Carryforward vales with previous number of
+            // edges allowed as it might be possible that
+            // minimum distance may be formed with less than
+            // k edges.
+            for(int j = 0; j < n; j++)
+            {
+                newDist[j] = dist[j];
+            }
+            // So at this point both newDist and dist hold the
+            // same values, but eventualy we update newDist to
+            // hold shortest distances of upto length i and dist
+            // would hold distances of length upto i-1.
+
+            // For all edges in the graph
+            for(int j = 0; j < edges.length; j++)
+            {
+                // u is start, v is end, d is dist of edge u-v
+                int u = edges[j][0];
+                int v = edges[j][1];
+                int d = edges[j][2];
+                // The new distance uptill point v, with at most
+                // i edges allowed would be the minimum of distance
+                // so far with i-1 edges allowed, or the sum of length
+                // of edge u-v and distcne of u by using atmost i-1
+                // edges. This situation is same as the Knapsack where
+                // we decide to whether or not incude an edge in the path.
+
+                // If u is reachable from source
+                if(dist[u] != Integer.MAX_VALUE)
+                {
+                    newDist[v] = Math.min(dist[v], dist[u] + d); 
+                }
+            }
+            // Update the distance array for atmost i edges allowed
+            dist = newDist;
+        }
+        System.out.println(dist[dest]);
+    }
+}
+```
+**<ins>For shortest path with exactly K edges</ins>:**<br>
+The difference from the above approach would be that instead of carrying forward values from the previous iteration of k-1 edges, for the iteration for k edges allowed, we reinitialise the distance array everytime. This is done because we need necessarily the exact number of edges in our path and not less.
 
 <a href="#Contents">Back to contents</a>
 
