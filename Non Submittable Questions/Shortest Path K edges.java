@@ -25,7 +25,7 @@ public class Main
         int src = 0;
         // Path destination
         int dest = 5;
-        // Maximum edges allowed
+        // Exact edges allowed
         int k = 4;
         // Distance array
         int[] dist = new int[n];
@@ -41,20 +41,16 @@ public class Main
         for(int i = 1; i <= k; i++)
         {
             // The new distance array for the updated
-            // path with at most i edges allowed
+            // path with exactly i edges allowed
             int[] newDist = new int[n];
-            // Carryforward vales with previous number of
-            // edges allowed as it might be possible that
-            // minimum distance may be formed with less than
-            // k edges.
+            // Initialise all values with +INF as no path
+            // with i edges exists until now
             for(int j = 0; j < n; j++)
             {
-                newDist[j] = dist[j];
+                newDist[j] = Integer.MAX_VALUE;
             }
-            // So at this point both newDist and dist hold the
-            // same values, but eventualy we update newDist to
-            // hold shortest distances of upto length i and dist
-            // would hold distances of length upto i-1.
+            // So at this point newDist holds values for i edges,
+            // and dist holds the values for i-1 edges allowed
 
             // For all edges in the graph
             for(int j = 0; j < edges.length; j++)
@@ -65,15 +61,15 @@ public class Main
                 int d = edges[j][2];
                 // The new distance uptill point v, with at most
                 // i edges allowed would be the minimum of distance
-                // so far with i-1 edges allowed, or the sum of length
-                // of edge u-v and distcne of u by using atmost i-1
+                // so far with i edges used, or the sum of length
+                // of edge u-v and distance of u by using atmost i-1
                 // edges. This situation is same as the Knapsack where
                 // we decide to whether or not incude an edge in the path.
 
                 // If u is reachable from source
                 if(dist[u] != Integer.MAX_VALUE)
                 {
-                    newDist[v] = Math.min(dist[v], dist[u] + d); 
+                    newDist[v] = Math.min(newDist[v], dist[u] + d); 
                 }
             }
             // Update the distance array for atmost i edges allowed
