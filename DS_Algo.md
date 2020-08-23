@@ -7576,9 +7576,6 @@ class Solution
 ```
 <a href="#Contents">Back to contents</a>
 
-- [Count all paths with exactly/upto k edges in a graph](#GP_CountPathsWithKEdges)
-	- [Shortest path with exactly/upto k edges in a graph](#GP_ShortestPathWithKEdges)
-
 <a name="GP_CountPathsWithKEdges"></a>
 ### Count all paths with exactly/upto k edges in a graph
 **<ins>For count of paths with exactly K edges</ins>:**<br>
@@ -7661,8 +7658,14 @@ class Solution
     }
 }
 ```
-**<ins>For count of paths with exactly K edges</ins>:**<br>
-The working of the algorithm remains the same with the only difference being that instead of returning just the answer of exactly k edges we return the sum for count of paths with 0,1,2,....,k-2,k-1,k edges, that is count[u][v][0] + count[u][v][1]  + count[u][v][2] + ... + count[u][v][k-1] +  + count[u][v][k].
+**<ins>For count of paths with upto K edges</ins>:**<br>
+The working of the algorithm remains the same with the only difference being that instead of returning just the answer of exactly k edges we return the sum for count of paths with 0, 1, 2, .... , k-2, k-1, k edges, that is count[u][v][0] + count[u][v][1]  + count[u][v][2] + ... + count[u][v][k-1] +  + count[u][v][k].
+
+<a href="#Contents">Back to contents</a>
+
+<a name="GP_ShortestPathWithKEdges"></a>
+### Shortest path with exactly/upto k edges in a graph
+
 
 <a href="#Contents">Back to contents</a>
 
