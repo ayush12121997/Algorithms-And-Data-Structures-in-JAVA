@@ -1,6 +1,7 @@
 # <p align="center"> Data Structures and Algorithms (JAVA) </p>
 
-### Next Edit at : 7667
+### Next content at : 250
+### Next edit at : 7835
 
 <a name="Contents"></a>
 ## <p align="center"> Table of contents </p>
@@ -247,7 +248,6 @@
 	- [Rat in a maze - All 4 directions](#GP_RatInMazeII)
 	- [Count all paths with exactly/upto k edges in a graph](#GP_CountPathsWithKEdges)
 	- [Shortest path with exactly/upto k edges in a graph](#GP_ShortestPathWithKEdges)
-	- [Shortest path with upto k edges in a graph - Dijkstra and Bellman Ford]
 	- [Dungeon Game]
 	- [Unique Paths III]
 	- [Redundant Connection]
