@@ -187,8 +187,7 @@
 	- [Convert a Binary Tree to DLL](#TR_BTToDLL)
 	- [Lowest Common Ancestor in a Binary Tree](#TR_LCAInBT)
 	- [Diameter of Binary Tree](#TR_DiameterTree)
-	- [Diameter of a nary tree]
-	- [Minimum height trees]
+	- [Diameter of a N-ary tree]
 	- [Height of Binary Tree](#TR_HeightTree)
 	- [Serialize and Deserialize a Binary Tree](#TR_SerializeDeserializeBT)
 	- [Symmetric Tree](#TR_SymetricTree)
@@ -259,6 +258,7 @@
 	- [Critical Connections in a Network - Can also be used to group cycles together with same numbers]
 	- [Longest increasing path in a matrix]
 	- [Course Schedule I and II]
+	- [Minimum height trees]
 	- [Time needed to inform all employees]
 	- [Friend Circles]
 	- [Flood fill algorithm]
